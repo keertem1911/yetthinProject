@@ -10,7 +10,6 @@
 		<config>config/spring-servlet.xml</config>
 		<config>config/applicationContext.xml</config>
 		<config>config/applicationContextdb.xml</config>
-		<config>config/applicationContextBean.xml</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>

@@ -18,6 +18,7 @@
 	 <mvc:resources location="/js/" mapping="/js/**"/>
 	 <mvc:resources location="/" mapping="/*.html"/>
 	 <mvc:resources location="/css/" mapping="/css/**"/>
+	 <mvc:resources location="/" mapping="/*.jsp"/>
 	<!-- 文件上传下载  -->
 	<bean id="multipartResoler" class="org.springframework.web.multipart.support.StandardServletMultipartResolver">
 		
