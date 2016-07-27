@@ -13,7 +13,7 @@
 <generatorConfiguration>
 	<!-- 数据库驱动包的位置 -->
 	<classPathEntry
-		location="E:/java_ap/workspace/yetThin//WebRoot/WEB-INF/lib/mysql-connector-java-5.1.33-bin.jar" />
+		location="E:/java_ap/workspace/yetThinTest1/WebRoot/WEB-INF/lib/mysql-connector-java-5.1.33-bin.jar" />
 
 	<context id="tables" targetRuntime="MyBatis3">
 		<commentGenerator>
@@ -30,7 +30,7 @@
 		</javaTypeResolver>
 		<!-- 生成实体类的包名和位置，路径为  com.yetthin.web.domain -->
 		<javaModelGenerator targetPackage="com.yetthin.web.domain"
-			targetProject="yetThin/src">
+			targetProject="yetThinTest1/src">
 			<property name="enableSubPackages" value="true" />
 			<property name="trimStrings" value="false" />
 		</javaModelGenerator>
@@ -38,20 +38,37 @@
 
 		<!-- 生成的sql映射文件包名和位置，映射文件的位置为 com.yetthin.web.persistence -->
 		<sqlMapGenerator targetPackage="com.yetthin.web.persistence"
-			targetProject="yetThin/src">
+			targetProject="yetThinTest1/src">
 			<property name="enableSubPackages" value="true" />
 		</sqlMapGenerator>
 		<!-- 生成DAO的包名和位置 dao类位置为 com.yetthin.web.persistence  -->
 		<javaClientGenerator type="XMLMAPPER"
-			targetPackage="com.yetthin.web.persistence" targetProject="yetThin/src">
+			targetPackage="com.yetthin.web.persistence" targetProject="yetThinTest1/src">
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 
 
+		
 		<!-- 要生成的表   -->
-		<table schema="yetthin" tableName="" domainObjectName=""
-			enableDeleteByExample="false" enableUpdateByExample="false">
+		<table schema="yetthin" tableName="user" domainObjectName="User"
+			enableDeleteByExample="false" enableUpdateByExample="false" enableSelectByExample="false" enableCountByExample="false">
 			<property name="ignoreQualifiersAtRuntime" value="true" />
+			<generatedKey column="user_id" sqlStatement="Mysql"/>
 		</table>
+		<table schema="yetthin" tableName="group" domainObjectName="Group"
+			enableDeleteByExample="false" enableUpdateByExample="false"  enableSelectByExample="false" enableCountByExample="false" >
+			<property name="ignoreQualifiersAtRuntime" value="true" />
+			<generatedKey column="group_id" sqlStatement="Mysql"/>
+		</table>
+		<table schema="yetthin" tableName="group_user" domainObjectName="Group_User"
+			enableDeleteByExample="false" enableUpdateByExample="false" enableSelectByExample="false"  enableCountByExample="false">
+			<property name="ignoreQualifiersAtRuntime" value="true" />
+			<generatedKey column="id" sqlStatement="Mysql"/>
+		</table>
+		
+		
+		
+		
+		
 	</context>
 </generatorConfiguration>
