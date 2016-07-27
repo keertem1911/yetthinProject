@@ -13,7 +13,7 @@
 <generatorConfiguration>
 	<!-- 数据库驱动包的位置 -->
 	<classPathEntry
-		location="E:/java_ap/workspace/yetThin/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.2.jar" />
+		location="E:/java_ap/workspace/yetThin//WebRoot/WEB-INF/lib/mysql-connector-java-5.1.33-bin.jar" />
 
 	<context id="tables" targetRuntime="MyBatis3">
 		<commentGenerator>
@@ -30,7 +30,7 @@
 		</javaTypeResolver>
 		<!-- 生成实体类的包名和位置，路径为  com.yetthin.web.domain -->
 		<javaModelGenerator targetPackage="com.yetthin.web.domain"
-			targetProject="E:/java_ap/workspace/yetThin/src">
+			targetProject="yetThin/src">
 			<property name="enableSubPackages" value="true" />
 			<property name="trimStrings" value="false" />
 		</javaModelGenerator>
@@ -38,12 +38,12 @@
 
 		<!-- 生成的sql映射文件包名和位置，映射文件的位置为 com.yetthin.web.persistence -->
 		<sqlMapGenerator targetPackage="com.yetthin.web.persistence"
-			targetProject="E:/java_ap/workspace/yetThin/src">
+			targetProject="yetThin/src">
 			<property name="enableSubPackages" value="true" />
 		</sqlMapGenerator>
 		<!-- 生成DAO的包名和位置 dao类位置为 com.yetthin.web.persistence  -->
 		<javaClientGenerator type="XMLMAPPER"
-			targetPackage="com.yetthin.web.persistence" targetProject="C:/workspace/cktime/src">
+			targetPackage="com.yetthin.web.persistence" targetProject="yetThin/src">
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 
