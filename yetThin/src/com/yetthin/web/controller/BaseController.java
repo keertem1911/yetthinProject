@@ -1,8 +1,13 @@
 package com.yetthin.web.controller;
 
  
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+
+import com.yetthin.web.common.Md5UnitTool;
  
  
 
@@ -22,5 +27,21 @@ public class BaseController {
 	private String userId=null;
 //	@Resource(name="userService")
 //	private UserService userService;
+	private Md5UnitTool md5Tool=Md5UnitTool.getInstance();
+	
+	protected Map<String, Object> status=new HashMap<>();
+	
+	 
+	/**
+	 * 用户名及密码 MD5加密存储
+	 * @param plainText
+	 * @return
+	 */
+	protected String getEncrty(String plainText){
+		
+		String res=md5Tool.encrypt(plainText, ENCRYPT_SALT);
+		
+		return res;
+	}
 	
 }

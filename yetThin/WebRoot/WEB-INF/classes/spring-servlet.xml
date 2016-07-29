@@ -7,7 +7,7 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 
-	<context:component-scan base-package="con.yetthin.web.controller"></context:component-scan>
+	<context:component-scan base-package="com.yetthin.web.controller"></context:component-scan>
 	 <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 	 	<property name="prefix" value="/WEB-INF/jsp/"></property>
 	 	<property name="suffix" value=".jsp"></property>
@@ -23,4 +23,9 @@
 	<bean id="multipartResoler" class="org.springframework.web.multipart.support.StandardServletMultipartResolver">
 		
 	</bean>
+	
+	<!-- 配置 RESTFUL 风格处理 Bean -->
+	<!-- <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"></bean>
+	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"></bean>
+ -->
 </beans>
