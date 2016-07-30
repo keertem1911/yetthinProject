@@ -9,26 +9,21 @@
 	href="${pageContext.request.contextPath }/css/bootstrap.css">
 <style type="text/css">
 body{
-	background-color:  #00CCFF;
+	background-color:  #333333;
 }
 .header {
-	position:absolute;
-	background-color:#0099CC;
 	margin-top: 0px;
-	margin-left: auto;
-	margin-right: auto;
-	width: 100%;
 	text-align: center;
 }
 
 .login {
 	position: absolute;
-	top: 40%;
+	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	width: 40%;
 	height: 60%;
-	background-color: #66CCFF;
+	background-color: #666666 ;
 }
 .form{
 	margin-top: 20px;
@@ -52,6 +47,9 @@ position:absolute;
 	margin-top: 10px;
 	text-align: center;
 }
+ .navbar-text{
+ 	font-size: x-large;
+ }
 </style>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath }/js/jquery-3.1.0.min.js"></script>
@@ -62,11 +60,12 @@ position:absolute;
 </script>
 </head>
 <body>
-	<div class="page-header   header">
-		<h1>
-			后台登陆中心 <small >----------------<span style="color:black;">yetthin</span></small>
-		</h1>
-	</div>
+ 
+	<nav class="navbar navbar-inverse">
+		 
+		<p class="navbar-text">后台登陆中心</p>
+		</nav>
+	 
 	<div class="containe row   login">
 	<div class="form">
 		<h1 class="formheader">Login</h1>

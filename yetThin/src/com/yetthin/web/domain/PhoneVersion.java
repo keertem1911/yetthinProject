@@ -1,14 +1,15 @@
 package com.yetthin.web.domain;
 
 public class PhoneVersion {
-    private Integer id;
-
+    // id
+	private Integer id;
+    //版本号
     private String versionCode;
-
+    //版本名称
     private String versionName;
-
+    //  下载url 
     private String apkUrl;
-
+    // 说明
     private String explain;
 
     public Integer getId() {
