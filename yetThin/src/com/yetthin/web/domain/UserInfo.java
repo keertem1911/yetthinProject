@@ -13,7 +13,7 @@ public class UserInfo {
 
     private String jpushId;
 
-    private Boolean status;
+    private int status;
 
     private String ideaText;
 
@@ -65,15 +65,17 @@ public class UserInfo {
         this.jpushId = jpushId;
     }
 
-    public Boolean getStatus() {
-        return status;
-    }
+    
 
-    public void setStatus(Boolean status) {
-        this.status = status;
-    }
+    public int getStatus() {
+		return status;
+	}
 
-    public String getIdeaText() {
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
+	public String getIdeaText() {
         return ideaText;
     }
 

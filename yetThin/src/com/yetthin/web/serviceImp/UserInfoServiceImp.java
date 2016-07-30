@@ -4,25 +4,29 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.omg.CORBA.INTERNAL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.yetthin.web.domain.PhoneVersion;
 import com.yetthin.web.domain.UserInfo;
 import com.yetthin.web.persistence.UserInfoMapper;
 import com.yetthin.web.service.UserInfoService;
 
 @Service("UserInfoService")
-public class UserInfoServiceImp implements UserInfoService{
+public class UserInfoServiceImp extends BaseService implements UserInfoService{
 
 	@Autowired
 	private UserInfoMapper userInfoMapper;
+	@Transactional(propagation=Propagation.REQUIRED,isolation=Isolation.READ_UNCOMMITTED)
 	@Override
 	public UserInfo get(String id) {
 		// TODO Auto-generated method stub
-		return null;
+		int userId=Integer.parseInt(id);
+		return userInfoMapper.selectByPrimaryKey(userId);
 	}
 	@Override
 	public UserInfo get(String phoneNum,String password){
@@ -45,14 +49,105 @@ public class UserInfoServiceImp implements UserInfoService{
 		return 0;
 	}
 	
+ 
 	@Override
-	public List<UserInfo> getListByEntity() {
+	public String getRegisterVerify(String phoneNum) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 	@Override
-	public int countByExample(UserInfo entity) {
+	public String forgetPwd(String phoneNum, String verifyCode, String password) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public String getforgetPwdVerify(String phoneNum) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public String updateJpushId(String userId, String JpushID) {
+		// TODO Auto-generated method stub
+		String status="200";
+		UserInfo ui=userInfoMapper.selectByPrimaryKey(Integer.parseInt(userId));
+		if(ui==null){
+			status="用户不存在";
+		}else{
+			ui.setJpushId(JpushID);
+			int i=userInfoMapper.updateByPrimaryKeySelective(ui);
+			if(i==0)
+				status="更新失败";
+		}
+		return status;
+	}
+	@Override
+	public String updateJpushStatus(String userId, String status) {
+		// TODO Auto-generated method stub
+		String status1="200";
+		UserInfo ui=userInfoMapper.selectByPrimaryKey(Integer.parseInt(userId));
+		if(ui==null){
+			status1="用户不存在";
+		}else{
+		
+			ui.setStatus(Integer.parseInt(status));
+			int i=userInfoMapper.updateByPrimaryKeySelective(ui);
+			if(i==0)
+				status1="更新失败";
+		}
+		return status1;
+		 
+	}
+	@Override
+	public String bindingEmail(String userID, String email) {
+		// TODO Auto-generated method stub
+		String status1="200";
+		UserInfo ui=userInfoMapper.selectByPrimaryKey(Integer.parseInt(userID));
+		if(ui==null){
+			status1="用户不存在";
+		}else{
+		
+			ui.setEmail(email);
+			int i=userInfoMapper.updateByPrimaryKeySelective(ui);
+			if(i==0)
+				status1="更新失败";
+		}
+		return status1;
+	}
+	@Override
+	public String changePwd(UserInfo u) {
+		// TODO Auto-generated method stub
+		int i=userInfoMapper.updateByPrimaryKey(u);
+		return i==0?"更新失败":"200";
+	}
+	@Override
+	public PhoneVersion checkNewVersion() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public String feedBack(String userId, String ideaText) {
+		// TODO Auto-generated method stub
+		String status1="200";
+		UserInfo ui=userInfoMapper.selectByPrimaryKey(Integer.parseInt(userId));
+		if(ui==null){
+			status1="用户不存在";
+		}else{
+		
+			ui.setIdeaText(ideaText);
+			int i=userInfoMapper.updateByPrimaryKeySelective(ui);
+			if(i==0)
+				status1="更新失败";
+		}
+		return status1;
+		 
+	}
+	@Override
+	public List<UserInfo> getListAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public int countByExample() {
 		// TODO Auto-generated method stub
 		return 0;
 	}

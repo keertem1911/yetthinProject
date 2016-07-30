@@ -33,14 +33,17 @@ public class PhoneVersionServiceImp implements PhoneVersionService{
 		return 0;
 	}
 
+	 
+
+	 
 	@Override
-	public List<PhoneVersion> getListByEntity() {
+	public List<PhoneVersion> getListAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public int countByExample(PhoneVersion entity) {
+	public int countByExample() {
 		// TODO Auto-generated method stub
 		return 0;
 	}

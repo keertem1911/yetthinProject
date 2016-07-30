@@ -10,7 +10,7 @@ public interface BaseService <IdEntity>{
 
 	public abstract int delete(String id) throws Exception;
 
-	public abstract List<IdEntity> getListByEntity();
+	public abstract List<IdEntity> getListAll();
 
-	public abstract int countByExample(IdEntity entity);
+	public abstract int countByExample();
 }

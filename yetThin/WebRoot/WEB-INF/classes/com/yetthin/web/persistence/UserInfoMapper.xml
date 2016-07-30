@@ -8,7 +8,7 @@
     <result column="email" property="email" jdbcType="VARCHAR" />
     <result column="password" property="password" jdbcType="VARCHAR" />
     <result column="Jpush_id" property="jpushId" jdbcType="VARCHAR" />
-    <result column="status" property="status" jdbcType="BIT" />
+    <result column="status" property="status" jdbcType="INTEGER" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.yetthin.web.domain.UserInfo" extends="BaseResultMap" >
     <result column="idea_text" property="ideaText" jdbcType="LONGVARCHAR" />
@@ -19,11 +19,9 @@
   <sql id="Blob_Column_List" >
     idea_text
   </sql>
-  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
     from userinfo
     where user_id = #{userId,jdbcType=INTEGER}
   </select>
@@ -40,7 +38,7 @@
       status, idea_text)
     values (#{userId,jdbcType=INTEGER}, #{phoneNum,jdbcType=VARCHAR}, #{myMoney,jdbcType=DOUBLE}, 
       #{email,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{jpushId,jdbcType=VARCHAR}, 
-      #{status,jdbcType=BIT}, #{ideaText,jdbcType=LONGVARCHAR})
+      #{status,jdbcType=INTEGER}, #{ideaText,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.yetthin.web.domain.UserInfo" >
     <selectKey resultType="java.lang.Integer" keyProperty="userId" order="BEFORE" >
@@ -89,7 +87,7 @@
         #{jpushId,jdbcType=VARCHAR},
       </if>
       <if test="status != null" >
-        #{status,jdbcType=BIT},
+        #{status,jdbcType=INTEGER},
       </if>
       <if test="ideaText != null" >
         #{ideaText,jdbcType=LONGVARCHAR},
@@ -115,7 +113,7 @@
         Jpush_id = #{jpushId,jdbcType=VARCHAR},
       </if>
       <if test="status != null" >
-        status = #{status,jdbcType=BIT},
+        status = #{status,jdbcType=INTEGER},
       </if>
       <if test="ideaText != null" >
         idea_text = #{ideaText,jdbcType=LONGVARCHAR},
@@ -130,7 +128,7 @@
       email = #{email,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
       Jpush_id = #{jpushId,jdbcType=VARCHAR},
-      status = #{status,jdbcType=BIT},
+      status = #{status,jdbcType=INTEGER},
       idea_text = #{ideaText,jdbcType=LONGVARCHAR}
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
@@ -141,7 +139,7 @@
       email = #{email,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
       Jpush_id = #{jpushId,jdbcType=VARCHAR},
-      status = #{status,jdbcType=BIT}
+      status = #{status,jdbcType=INTEGER}
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
   

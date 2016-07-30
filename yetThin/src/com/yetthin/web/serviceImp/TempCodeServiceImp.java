@@ -34,15 +34,17 @@ public class TempCodeServiceImp implements TempCodeService{
 	}
 
 	@Override
-	public List<TempCode> getListByEntity() {
+	public List<TempCode> getListAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public int countByExample(TempCode entity) {
+	public int countByExample() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+ 
 
 }
