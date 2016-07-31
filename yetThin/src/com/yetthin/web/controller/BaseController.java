@@ -25,16 +25,11 @@ public class BaseController {
 	// private UserService userService;
 	protected Map<String, Object> status = new HashMap<>();
 	// 设置MD5 加盐参数
-	protected final String ENCRYPT_SALT;
+	protected static final String ENCRYPT_SALT="34d4yf73s!23fd";
 	
 	 
-	public BaseController(String salt) {
-		// TODO Auto-generated constructor stub
-		ENCRYPT_SALT=salt;
-	}
-	public BaseController() {
-		 ENCRYPT_SALT="8787i1sw";
-	}
+	 
+	 
 	private Md5UnitTool md5Tool = Md5UnitTool.getInstance();
 
 	/**

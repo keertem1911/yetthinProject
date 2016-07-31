@@ -56,7 +56,48 @@ position:absolute;
 <script type="text/javascript"
 	src="${pageContext.request.contextPath }/js/bootstrap.js"></script>
 <script type="text/javascript">
-	
+	$(function(){
+		function init(){
+			var status=<%=session.getAttribute("status")%>
+			 
+			if(status!=null&&status<1){
+				<% session.setAttribute("status", null); %>
+				if(status==-1)
+				alert("密码错误");
+				else
+					alert("登陆错误");
+			}
+			}
+		init();
+		$(".formsubmit").click(function(){
+			var data={};
+			var url=$(".formtalbe1").attr("action");
+			var obj=$(".formtalbe1").find(":input");
+			 
+			for(var i=0;i<obj.length;++i){
+				var types=obj[i].type;
+				 
+				  if(types!="submit"){
+				// console.log(obj[i].name+"="+obj[i].value);
+					  if(obj[i].name!="")
+				 	data[obj[i].name]=obj[i].value.trim();
+				}  
+			}
+		 	  $.post(url,data,function(msg){ 
+		 		 	var json=JSON.parse(msg);
+				 
+		 		  if(json["status"]==200){
+						alert("注册成功");
+		 		 $('#myModal').modal('hide');
+		 		  }
+		 		  else{
+		 			  alert(json["status"]);
+		 		  }
+					
+		 	  });
+			
+		});
+	})
 </script>
 </head>
 <body>
@@ -69,7 +110,7 @@ position:absolute;
 	<div class="containe row   login">
 	<div class="form">
 		<h1 class="formheader">Login</h1>
-		<form class="formtalbe" action="${pageContext.request.contextPath }/admin/login" method="post">
+		<form class="formtalbe"  action="${pageContext.request.contextPath }/admin/login" method="post">
 			<div class="form-group">
 				 <label>Admin Name</label><br/> 
    				 <input type="text" name="adminName" placeholder=" 请输入用户名"/>
@@ -80,7 +121,7 @@ position:absolute;
 			</div>
 			<div class="form-group">
 				 <label>Password</label><br/>
-   				 <input type="password" name="password" placeholder=" 请输入密码"/>
+   				 <input type="password" name="adminPassword" placeholder=" 请输入密码"/>
 			</div>
 			<!-- <div class="form-group">
 				<label for="exampleInputFile">File input</label> <input type="file"
@@ -88,10 +129,54 @@ position:absolute;
 				<p class="help-block">Example block-level help text here.</p>
 			</div> -->
 			 
-			<button type="submit" class="btn btn-default">Submit</button>
+			<button type="submit" class="btn btn-default ">Submit</button> 
+				<!-- Button trigger modal -->
+				<button type="button" class="btn btn-primary btn-lg" data-whatever="@mdo" data-toggle="modal"
+				 data-target="#myModal">
+ 					 Register
+				</button>
 		</form>
-		
-		</div>
+</div>
 	</div>
+
+
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content col-md-6 col-md-offset-3">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+         
+      </div>
+      <div class="modal-body ">
+         <h3>Register</h3>
+		<form class="formtalbe1" action="${pageContext.request.contextPath }/admin/register" method="post">
+			
+			<div class="form-group">
+				 <label>Admin Name</label><br/> 
+   				 <input type="text" name="adminName" placeholder=" 请输入用户名"/>
+			</div>
+			<div class="form-group">
+				 <label>Password</label><br/>
+   				 <input type="password" name="adminPassword" placeholder=" 请输入密码"/>
+			</div>
+			<!-- <div class="form-group">
+				 <label>Rept Password</label><br/>
+   				 <input type="password" name="reptadminPassword" placeholder=" 请输入密码"/>
+			</div> -->
+			<!-- <div class="form-group">
+				<label for="exampleInputFile">File input</label> <input type="file"
+					id="exampleInputFile">
+				<p class="help-block">Example block-level help text here.</p>
+			</div> -->
+			 <input type="hidden" name="_method" value="put"/>
+			<button type="button" class="btn btn-default formsubmit">Submit</button>
+		</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
 </body>
 </html>

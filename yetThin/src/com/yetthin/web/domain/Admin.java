@@ -40,4 +40,11 @@ public class Admin {
     public void setAdminPower(Integer adminPower) {
         this.adminPower = adminPower;
     }
+
+	@Override
+	public String toString() {
+		return "Admin [id=" + id + ", adminName=" + adminName + ", adminPassword=" + adminPassword + ", adminPower="
+				+ adminPower + "]";
+	}
+    
 }

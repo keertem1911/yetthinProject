@@ -20,4 +20,6 @@ public interface AdminMapper {
     List<Admin> getAll();
     
     int countById();
+    
+    Admin selectByName(String name);
 }

@@ -1,6 +1,8 @@
 package com.yetthin.web.serviceImp;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -47,6 +49,36 @@ public class AdminServiceImp implements AdminService{
 	public int countByExample() {
 		// TODO Auto-generated method stub
 		return adminMapper.countById();
+	}
+	
+	@Override
+	public int login(Admin admin) {
+		Admin adminNew =this.getByName(admin.getAdminName());
+		int i=0;
+		if(adminNew==null){
+			i=-1;
+		}else if(!adminNew.getAdminPassword().equals(admin.getAdminPassword())){
+			i=-2;
+		}else{
+			i=adminNew.getId();
+		}
+		
+		return i;
+	}
+
+	@Override
+	public Admin getByName(String name) {
+		// TODO Auto-generated method stub
+		return adminMapper.selectByName(name);
+	}
+
+	@Override
+	public String changePwd(Integer id, String newPwd) {
+		// TODO Auto-generated method stub
+		Admin admin =adminMapper.selectByPrimaryKey(id);
+		admin.setAdminPassword(newPwd);
+		int i=adminMapper.updateByPrimaryKey(admin);
+		return i>0?"200":"error";
 	}
 
 }

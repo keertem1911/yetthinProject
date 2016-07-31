@@ -14,8 +14,21 @@
     select 
     <include refid="Base_Column_List" />
     from admin
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER} limit 1
   </select>
+  <select id="selectByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from admin
+    where admin_name = #{name,jdbcType=VARCHAR} limit 1
+  </select>
+   <select id="getAll" resultMap="BaseResultMap"  >
+    select 
+    <include refid="Base_Column_List" />
+    from admin
+  
+  </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from admin
     where id = #{id,jdbcType=INTEGER}

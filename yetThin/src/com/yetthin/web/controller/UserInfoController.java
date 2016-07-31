@@ -1,15 +1,13 @@
 package com.yetthin.web.controller;
 
-import java.io.PrintWriter;
-import java.util.Arrays;
+ 
+ 
 import java.util.Map;
 
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -34,11 +32,7 @@ public class UserInfoController extends BaseController{
 	@Resource(name="TempCodeSerivce")
 	private TempCodeService tempCodeService;
 	
-	public UserInfoController() {
-		// TODO Auto-generated constructor stub
-		//"34d4yf73s!23fd"
-		super(ProductRandomSalt.getSalt());
-	}
+	 
 	/**
 	 * 注册
 	 * @param userInfo
@@ -77,8 +71,9 @@ public class UserInfoController extends BaseController{
 	 */
 	@ResponseBody
 	@RequestMapping(value="/getRegisterVerify",method=RequestMethod.GET,produces = {"application/json;charset=UTF-8"})
-	public void getRegisterVerify(@RequestParam(value="phoneNum",required=true)String phone,PrintWriter pw){
+	public Map<String, Object> getRegisterVerify(@RequestParam(value="phoneNum",required=true)String phone){
 		System.out.println("come into getRegisterVerify $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+		return null;
 		
 	}
 	/**

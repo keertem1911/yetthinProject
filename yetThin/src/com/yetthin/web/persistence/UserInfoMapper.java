@@ -1,5 +1,7 @@
 package com.yetthin.web.persistence;
 
+import java.util.List;
+
 import com.yetthin.web.domain.UserInfo;
 
 public interface UserInfoMapper {
@@ -17,6 +19,11 @@ public interface UserInfoMapper {
 
     int updateByPrimaryKey(UserInfo record);
     
-    
+
     UserInfo selectByPhoneNumAndPassWord(UserInfo record);
+    List<UserInfo> getAllUser();
+    UserInfo selectByPhoneNum(String phoneNum);
+    UserInfo selectByEmail(String email);
+    
+    List<UserInfo> lookIdeaText();
 }

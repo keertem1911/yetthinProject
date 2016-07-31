@@ -13,17 +13,49 @@
   <resultMap id="ResultMapWithBLOBs" type="com.yetthin.web.domain.UserInfo" extends="BaseResultMap" >
     <result column="idea_text" property="ideaText" jdbcType="LONGVARCHAR" />
   </resultMap>
+  
+   <resultMap id="ideaTextMap" type="com.yetthin.web.domain.UserInfo" extends="ResultMapWithBLOBs">
+    <id column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="phone_num" property="phoneNum" jdbcType="VARCHAR" />
+		
+  </resultMap>
   <sql id="Base_Column_List" >
     user_id, phone_num, my_money, email, password, Jpush_id, status
+  </sql>
+  <sql id="ideaText_List">
+  	user_id,phone_num,idea_text
   </sql>
   <sql id="Blob_Column_List" >
     idea_text
   </sql>
+  <select id="lookIdeaText" resultMap="ideaTextMap">
+  	select
+  	<include refid="ideaText_List"></include>
+  	from userinfo
+  </select>
+   <select id="getAllUser" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from userinfo
+    
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from userinfo
     where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <select id="selectByPhoneNum" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from userinfo
+    where phone_num = #{phoneNum,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByEmail" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from userinfo
+    where email = #{email,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from userinfo

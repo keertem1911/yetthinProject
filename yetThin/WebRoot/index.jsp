@@ -7,6 +7,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here jsp</title>
 <script type="text/javascript" src="js/jquery-3.1.0.min.js"></script>
+<script type="text/javascript" src="js/jquery-form.js"></script>
+
 <script type="text/javascript">
  	$(function(){
  		function init(){
@@ -27,6 +29,18 @@
  		}
  		 $(".mybtn").click(function(){
  			 init();
+ 		 })
+ 		 $("#btnupdate").click(function(){
+ 			 
+ 			var url =window.location.href;
+			 url=url.substr(0, url.lastIndexOf("/")+1);
+ 		$("#updateForm").ajaxSubmit({
+			url: url+'admin/updateNewVersion2',
+			success: function(data) {
+				 			console.log(data); 
+			},
+			});
+ 			 
  		 })
  	})
 </script>
@@ -114,6 +128,13 @@
  		<input name="ideaText" type="text" />
  		<input name="_method" type="hidden" value="put" />
  		<input type="submit" value="submit"/>
+ 	</form>
+ 	<form action="admin/updateNewVersion2" id="updateForm"
+ 	 method="post" enctype="multipart/form-data">
+ 	 	<label>upload</label>
+ 		 
+ 		<input name="file" type="file" />
+ 		<input type="button" id="btnupdate" value="submit"/>
  	</form>
  	<br/>
  	<input type="button" class="mybtn" value="click"/>

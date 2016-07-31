@@ -24,7 +24,7 @@ public class PhoneVersionServiceImp implements PhoneVersionService{
 	@Override
 	public int save(PhoneVersion entity) throws Exception {
 		// TODO Auto-generated method stub
-		return 0;
+		return phoneVersionMapper.insert(entity);
 	}
 
 	@Override

@@ -144,12 +144,27 @@ public class UserInfoServiceImp extends BaseService implements UserInfoService{
 	@Override
 	public List<UserInfo> getListAll() {
 		// TODO Auto-generated method stub
-		return null;
+		return userInfoMapper.getAllUser();
 	}
 	@Override
 	public int countByExample() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+	@Override
+	public UserInfo selectByPhoneNum(String phoneNum) {
+		// TODO Auto-generated method stub
+		return userInfoMapper.selectByPhoneNum(phoneNum);
+	}
+	@Override
+	public UserInfo selectByEmail(String email) {
+		// TODO Auto-generated method stub
+		return userInfoMapper.selectByEmail(email);
+	}
+	@Override
+	public List<UserInfo> lookIdeaText() {
+		// TODO Auto-generated method stub
+		return userInfoMapper.lookIdeaText();
 	}
 
 }

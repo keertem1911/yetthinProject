@@ -6,10 +6,10 @@
     <result column="version_code" property="versionCode" jdbcType="VARCHAR" />
     <result column="version_name" property="versionName" jdbcType="VARCHAR" />
     <result column="apk_url" property="apkUrl" jdbcType="VARCHAR" />
-    <result column="explain" property="explain" jdbcType="VARCHAR" />
+    <result column="Eexplain" property="explain" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    ID, version_code, version_name, apk_url, explain
+    ID, version_code, version_name, apk_url, Eexplain
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -22,12 +22,10 @@
     where ID = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.yetthin.web.domain.PhoneVersion" >
-    <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into phoneversion (ID, version_code, version_name, 
-      apk_url, explain)
-    values (#{id,jdbcType=INTEGER}, #{versionCode,jdbcType=VARCHAR}, #{versionName,jdbcType=VARCHAR}, 
+    
+    insert into phoneversion (version_code, version_name, 
+      apk_url, Eexplain)
+    values (#{versionCode,jdbcType=VARCHAR}, #{versionName,jdbcType=VARCHAR}, 
       #{apkUrl,jdbcType=VARCHAR}, #{explain,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.yetthin.web.domain.PhoneVersion" >
@@ -47,7 +45,7 @@
         apk_url,
       </if>
       <if test="explain != null" >
-        explain,
+        Eexplain,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -79,7 +77,7 @@
         apk_url = #{apkUrl,jdbcType=VARCHAR},
       </if>
       <if test="explain != null" >
-        explain = #{explain,jdbcType=VARCHAR},
+        Eexplain = #{explain,jdbcType=VARCHAR},
       </if>
     </set>
     where ID = #{id,jdbcType=INTEGER}
@@ -89,7 +87,7 @@
     set version_code = #{versionCode,jdbcType=VARCHAR},
       version_name = #{versionName,jdbcType=VARCHAR},
       apk_url = #{apkUrl,jdbcType=VARCHAR},
-      explain = #{explain,jdbcType=VARCHAR}
+      Eexplain = #{explain,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
