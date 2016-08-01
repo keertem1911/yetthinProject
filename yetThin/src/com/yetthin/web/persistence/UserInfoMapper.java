@@ -1,6 +1,7 @@
 package com.yetthin.web.persistence;
 
 import java.util.List;
+import java.util.Map;
 
 import com.yetthin.web.domain.UserInfo;
 
@@ -26,4 +27,6 @@ public interface UserInfoMapper {
     UserInfo selectByEmail(String email);
     
     List<UserInfo> lookIdeaText();
+
+	UserInfo selectByPhoneNumAndPassWord(Map<String, String> map);
 }

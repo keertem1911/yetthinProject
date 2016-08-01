@@ -1,10 +1,9 @@
 package com.yetthin.web.serviceImp;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import javax.annotation.Resource;
-
-import org.omg.CORBA.INTERNAL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -28,13 +27,7 @@ public class UserInfoServiceImp extends BaseService implements UserInfoService{
 		int userId=Integer.parseInt(id);
 		return userInfoMapper.selectByPrimaryKey(userId);
 	}
-	@Override
-	public UserInfo get(String phoneNum,String password){
-		UserInfo u=new UserInfo();
-		u.setPassword(password);
-		u.setPhoneNum(phoneNum);
-		return userInfoMapper.selectByPhoneNumAndPassWord(u);
-	}
+	 
 	@Transactional(propagation=Propagation.REQUIRED,isolation=Isolation.READ_COMMITTED)
 	@Override
 	public int save(UserInfo entity) throws Exception {
@@ -46,7 +39,7 @@ public class UserInfoServiceImp extends BaseService implements UserInfoService{
 	@Override
 	public int delete(String id) throws Exception {
 		// TODO Auto-generated method stub
-		return 0;
+		return userInfoMapper.deleteByPrimaryKey(Integer.parseInt(id));
 	}
 	
  
@@ -166,5 +159,15 @@ public class UserInfoServiceImp extends BaseService implements UserInfoService{
 		// TODO Auto-generated method stub
 		return userInfoMapper.lookIdeaText();
 	}
+	@Override
+	public UserInfo getByPhoneAndPassword(String phone, String password) {
+		// TODO Auto-generated method stub
+		Map<String, String> map=new HashMap<>();
+		map.put("phone", phone);
+		map.put("password", password);
+		UserInfo ui=userInfoMapper.selectByPhoneNumAndPassWord(map);
+		return null;
+	}
+	
 
 }

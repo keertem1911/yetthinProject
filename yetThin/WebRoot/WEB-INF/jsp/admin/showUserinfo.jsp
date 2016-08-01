@@ -31,13 +31,25 @@
 				 url=url.substr(0, url.lastIndexOf("/"));
 				 url=url.substr(0, url.lastIndexOf("/")+1);
 				  
-				  
+				  $("a").click(function(){
+					  var url=$(this).attr("href");
+					  var thiz=this;
+					$.post(url,{"_method":"delete"},function(msg){
+						if(msg!=0){
+							alert("删除成功");
+							$(thiz).parent().parent().remove();
+						}
+						
+					});
+					  return false;
+				  });
 			 
 			})
 			
 	</script>
 </head>
 <body>
+	<form method="post"><input type="hidden" name="_method" value="delete"/></form>
 <table class=" table table-hover" border="1" bordercolor="black" cellpadding="1" cellspacing="1">
 				<thead>
 				<tr>
@@ -61,7 +73,7 @@
 					<td><span>${user.password }</span></td>
 					<td><span>${user.jpushId }</span></td>
 					<td><span>${user.status }</span></td>
-					<td><a href="#"><span class="label label-warning">delete</span></a></td>
+					<td><a href="${pageContext.request.contextPath }/admin/deleteUserById/${user.userId}"><span class="label label-warning">delete</span></a></td>
 				</tr>
 				 
 				</c:forEach>

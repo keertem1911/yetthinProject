@@ -2,6 +2,8 @@ package com.yetthin.web.controller;
 
  
  
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -14,9 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.yetthin.web.common.Md5UnitTool;
-import com.yetthin.web.common.ProductRandomSalt;
-import com.yetthin.web.domain.PhoneVersion;
+import com.alibaba.fastjson.JSON;
 import com.yetthin.web.domain.UserInfo;
  
 import com.yetthin.web.service.TempCodeService;
@@ -41,11 +41,23 @@ public class UserInfoController extends BaseController{
 	@ResponseBody
 	@RequestMapping(value="/register",method=RequestMethod.POST,
 			produces = {"application/json;charset=UTF-8"})
-	public Map<String, Object> Rigister(UserInfo u,
-			@RequestParam(value="verifyCode")String verifyCodes){
+	public String Rigister(UserInfo u,
+			@RequestParam(value="verifyCode",required=false)String verifyCodes){
+		u.setPhoneNum(u.getPhoneNum().trim());
+		u.setPassword(u.getPassword().trim());
+		String msg="200";
+		if(!"".equals(u.getPassword().trim())&&!"".equals(u.getPhoneNum().trim())){
+		List<UserInfo> users=userInfoService.getListAll();
+		boolean same=false;
 		System.out.println("come into register $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
 		System.out.println("verifyCode= "+verifyCodes);
-		
+		for (UserInfo userInfo : users) {
+			if(userInfo.getPhoneNum().equals(u.getPhoneNum())){
+				same=true;
+				break;
+			}
+		}
+		if(!same){
 		String password=getEncrty(u.getPhoneNum()+","+u.getPassword());
 		System.out.println("MD5 done password   "+password+"-------------------");
 		u.setPassword(password);
@@ -58,11 +70,18 @@ public class UserInfoController extends BaseController{
 			e.printStackTrace();
 			flag=0;
 		}
-		String msg="200";
+		
 		if(flag!=1)
 			msg="添加失败";
-			status.put("status", msg);
-			return status;
+		}else{
+			msg="电话号码已注册";
+		}
+		}else{
+			msg="用户名或密码不能为空";
+		}
+		status.put("status", msg);
+		
+			return JSON.toJSONString(status);
 	}
 	/**
 	 * 注册验证码
@@ -86,22 +105,25 @@ public class UserInfoController extends BaseController{
 	@RequestMapping(value="/login",method=RequestMethod.POST,produces = {"application/json;charset=UTF-8"})
 	public Map<String, Object> login(@RequestParam("phoneNum")String phone,
 			@RequestParam("password")String password,Model model){
-		
+		phone=phone.trim();
+		password=password.trim();
 		System.out.println("come into login $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
 		password=getEncrty(phone+","+password);
 		
-		UserInfo u = userInfoService.get(phone,password);
+		UserInfo u = userInfoService.selectByPhoneNum(phone);
 
 		String msg="200";
 
 		if(u==null)
 			msg="用户不存在";
-		else{
+		else if(u.getPassword().trim().equals(password.trim())){
 			String auth_id=phone+"="+getEncrty(u.getPhoneNum());
 			model.addAttribute("auth_id", auth_id);
 			model.addAttribute("userID",u.getUserId());
+			status.put("user", u);
+		}else{
+			msg="密码错误";
 		}
-			
 			status.put("status", msg);
 			return status;
 	}
@@ -116,13 +138,16 @@ public class UserInfoController extends BaseController{
 	@ResponseBody
 	@RequestMapping(value="/forgetPwd",method=RequestMethod.POST,
 			produces = {"application/json;charset=UTF-8"})
-	public String  forgetPwd(@RequestParam(value="phoneNum")String phoneNum,
+	public Map<String, Object>  forgetPwd(@RequestParam(value="phoneNum")String phoneNum,
 			@RequestParam(value="verifyCode")String verifyCode,
 			@RequestParam(value="password")String password){
 		System.out.println("come into forgetPwd $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
 		System.out.println("phoneNum="+phoneNum+",verifyCode="+verifyCode+",password="+password);
 		String flag="200";
-		return "{status:"+flag+"}";
+		Map<String, Object> map=new HashMap<>();
+		map.put("status", flag);
+		return map;
+	
 	}
 	/**
 	 * 忘记密码的验证码
@@ -132,11 +157,13 @@ public class UserInfoController extends BaseController{
 	@ResponseBody
 	@RequestMapping(value="/getforgetPwdVerify",method=RequestMethod.PUT,
 			produces = {"application/json;charset=UTF-8"})
-	public String getForgetPwdVerify(@RequestParam(value="phoneNum",required=true)String phoneNum){
+	public Map<String, Object> getForgetPwdVerify(@RequestParam(value="phoneNum",required=true)String phoneNum){
 		String flag="200";
 		System.out.println("come into getForgetPwdVerify $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
 		System.out.println("phoneNum="+phoneNum);
-		return "{status:"+flag+"}";
+		Map<String, Object> map=new HashMap<>();
+		map.put("status", flag);
+		return map;
 	}
 	/**
 	 * 更新极光id
@@ -147,13 +174,23 @@ public class UserInfoController extends BaseController{
 	@ResponseBody
 	@RequestMapping(value="/updateJpushID",method=RequestMethod.PUT,
 			produces = {"application/json;charset=UTF-8"})
-	public String updateJpushID(@RequestParam("userID")String userId,
+	public Map<String , Object> updateJpushID(@RequestParam("userID")String userId,
 			@RequestParam(value="JpushID")String JpushID){
 		String flag=null;
+		userId=userId.trim();
+		JpushID =JpushID.trim();
+		if(!"".equals(userId)&&!"".equals(JpushID)){
+			 
 		System.out.println("come into updateJpushID $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
 		System.out.println(userId+"="+JpushID);
 		flag=userInfoService.updateJpushId(userId, JpushID);
-		return "{status:"+flag+"}";
+			 
+		}else{
+			flag="用户名或极光ID不能为空";
+		}
+		Map<String, Object> map=new HashMap<>();
+		map.put("status", flag);
+		return map;
 	}
 	/**
 	 * 更新本机推送开关
@@ -164,15 +201,43 @@ public class UserInfoController extends BaseController{
 	@ResponseBody()
 	@RequestMapping(value="/updateJpushStatus",method=RequestMethod.POST,
 			produces = {"application/json;charset=UTF-8"})
-	public String updateJpushStatus(@RequestParam(value="userID")String userId,
+	public Map<String, Object> updateJpushStatus(@RequestParam(value="userID")String userId,
 			@RequestParam(value="status")String status){
-		
-		System.out.println("come into updateJpushStatus $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+		userId =userId.trim();
+		status=status.trim();
 		String flag=null;
+		if(!"".equals(userId)&&!"".equals(status)){
+			if(status.equals("1")||status.equals("0")){
+			System.out.println("come into updateJpushStatus $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
 		flag=userInfoService.updateJpushStatus(userId, status);
 		System.out.println(userId+"="+status);
-		return "{status:"+flag+"}";
+			}else{
+				flag="开关值只能为1或0";
+			}
+		}else{
+			flag="id不能为空或开关为空";
+		}
+		Map<String, Object> map=new HashMap<>();
+		map.put("status", flag);
+		return map;
 	}
+	public boolean checkEmail(String email){
+		boolean flag=true;
+		int i=email.indexOf("@");
+		int j=email.lastIndexOf(".");
+		if(i==0&&i>=(email.length())){
+			flag=false;
+		}else{
+			if(j>email.length()){
+				flag=false;
+			}else{
+				if(i>j)
+					flag=false;
+			}
+		}
+		return flag;
+	}
+	 
 	/**
 	 * 绑定邮箱   
 	 * @param userId
@@ -181,13 +246,20 @@ public class UserInfoController extends BaseController{
 	 */
 	@ResponseBody
 	@RequestMapping(value="/bindingEmail",method=RequestMethod.PUT,produces = {"application/json;charset=UTF-8"})
-	public String bindingEmail(@RequestParam(value="userID")String userId,@RequestParam(value="email")String email){
+	public Map<String, Object> bindingEmail(@RequestParam(value="userID")String userId,@RequestParam(value="email")String email){
 		String flag="200";
-		
+		userId=userId.trim();
+		email=email.trim();
+		if(checkEmail(email)){
 		System.out.println("come into updateJpushStatus bindingEmail $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
 		System.out.println("userID="+userId+",email="+email);
 		flag=userInfoService.bindingEmail(userId, email);
-		return "{status:"+flag+"}";
+		}else{
+			flag="邮箱格式错误";
+		}
+		Map<String, Object> map=new HashMap<>();
+		map.put("status", flag);
+		return map;
 	}
 	/**
 	 * 更改密码
@@ -198,11 +270,15 @@ public class UserInfoController extends BaseController{
 	 */
 	@ResponseBody
 	@RequestMapping(value="/changePwd",method=RequestMethod.PUT,produces = {"application/json;charset=UTF-8"})
-	public String changePwd(@RequestParam(value="userID")String userId,
+	public Map<String, Object> changePwd(@RequestParam(value="userID")String userId,
 			@RequestParam(value="oldPwd")String oldPassword,
 			@RequestParam(value="newPwd")String newPassword){
 		System.out.println("come into  changePwd $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
 		String flag="200";
+		if(!"".equals(userId)&&!"".equals(newPassword)&&!"".equals(oldPassword)){
+		userId =userId.trim();
+		oldPassword=oldPassword.trim();
+		newPassword=newPassword.trim();
 		UserInfo u=userInfoService.get(userId);
 		if(u==null){
 			flag="用户不存在";
@@ -218,7 +294,17 @@ public class UserInfoController extends BaseController{
 			}
 		}
 		System.out.println(userId+"="+oldPassword+"="+newPassword);
-		return "{status:"+flag+"}";
+		}else{
+			if("".equals(userId))
+			flag="用户名为空";
+			else if("".equals(oldPassword))
+			flag="旧为空";
+			else
+			flag="新为空";
+		}
+		Map<String, Object> map=new HashMap<>();
+		map.put("status", flag);
+		return map;
 		
 	}
 	
@@ -230,12 +316,20 @@ public class UserInfoController extends BaseController{
 	 */
 	@ResponseBody
 	@RequestMapping(value="/feedback",method=RequestMethod.PUT,produces = {"application/json;charset=UTF-8"})
-	public String feedBack(@RequestParam(value="userID",required=true)String userId,
+	public Map<String, Object> feedBack(@RequestParam(value="userID",required=true)String userId,
 			@RequestParam(value="ideaText",required=false)String ideaText){
 		System.out.println("come into feedback $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
 		String flag="200";
+		if(!"".equals(userId)&&!"".equals(ideaText)){
 		flag=userInfoService.feedBack(userId, ideaText);
 		System.out.println(userId+"="+ideaText);
-		return "{status:"+flag+"}";
+		}else{
+			if("".equals(userId))
+					flag="用户ID为空";
+			else flag="反馈内容为空";
+		}
+		Map<String, Object> map=new HashMap<>();
+		map.put("status", flag);
+		return map;
 	}
 }

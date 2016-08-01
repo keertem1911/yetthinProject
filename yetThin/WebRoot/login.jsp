@@ -83,10 +83,11 @@ position:absolute;
 				 	data[obj[i].name]=obj[i].value.trim();
 				}  
 			}
+			 
 		 	  $.post(url,data,function(msg){ 
-		 		 	var json=JSON.parse(msg);
+		 		 
 				 
-		 		  if(json["status"]==200){
+		 		  if(msg.status==200){
 						alert("注册成功");
 		 		 $('#myModal').modal('hide');
 		 		  }
@@ -131,10 +132,10 @@ position:absolute;
 			 
 			<button type="submit" class="btn btn-default ">Submit</button> 
 				<!-- Button trigger modal -->
-				<button type="button" class="btn btn-primary btn-lg" data-whatever="@mdo" data-toggle="modal"
+			<!-- 	<button type="button" class="btn btn-primary btn-lg" data-whatever="@mdo" data-toggle="modal"
 				 data-target="#myModal">
  					 Register
-				</button>
+				</button> -->
 		</form>
 </div>
 	</div>

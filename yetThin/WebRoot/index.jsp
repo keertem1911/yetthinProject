@@ -117,7 +117,7 @@
  		<input type="submit" value="submit"/>
  	</form>
  	<br/>
- 	<form action="${pageContext.request.contextPath }/user/checkNewVersion" method="get">
+ 	<form action="${pageContext.request.contextPath }/help/checkNewVersion" method="get">
  	 	<label>checkNewVersion</label>
  		<input type="submit" value="submit"/>
  	</form>

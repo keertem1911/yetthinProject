@@ -57,4 +57,39 @@
   	<filter-name>sessionFilter</filter-name>
   	<url-pattern>/*</url-pattern>
   </filter-mapping> -->
+  <jsp-config> 
+
+   <taglib> 
+
+    <taglib-uri>http://java.sun.com/jsp/jstl/core</taglib-uri> 
+
+    <taglib-location>/WEB-INF/c.tld</taglib-location> 
+
+   </taglib> 
+
+   <taglib> 
+
+    <taglib-uri>http://java.sun.com/jsp/jstl/xml</taglib-uri> 
+
+    <taglib-location>/WEB-INF/x.tld</taglib-location> 
+
+   </taglib> 
+
+   <taglib> 
+
+    <taglib-uri>http://java.sun.com/jsp/jstl/fmt</taglib-uri> 
+
+    <taglib-location>/WEB-INF/fmt.tld</taglib-location> 
+
+   </taglib> 
+
+   <taglib> 
+
+    <taglib-uri>http://java.sun.com/jsp/jstl/sql</taglib-uri> 
+
+    <taglib-location>/WEB-INF/sql.tld</taglib-location> 
+
+   </taglib> 
+   </jsp-config>
+  
 </web-app>

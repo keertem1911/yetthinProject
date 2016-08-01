@@ -176,11 +176,11 @@
   </update>
   
   
-  <select id="selectByPhoneNumAndPassWord" parameterType="com.yetthin.web.domain.UserInfo"
-  resultType="com.yetthin.web.domain.UserInfo" >
+  <select id="selectByPhoneNumAndPassWord" parameterType="java.util.Map"
+  resultMap="BaseResultMap" >
   select 
   <include refid="Base_Column_List"></include>
-  from userinfo where phone_num =#{phoneNum,jdbcType=VARCHAR}
+  from userinfo where phone_num =#{phone,jdbcType=VARCHAR}
   AND password =#{password,jdbcType=VARCHAR}
   
   </select>

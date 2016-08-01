@@ -1,8 +1,6 @@
 package com.yetthin.web.serviceImp;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -10,8 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.yetthin.web.domain.Admin;
 import com.yetthin.web.persistence.AdminMapper;
-import com.yetthin.web.persistence.PhoneVersionMapper;
-import com.yetthin.web.persistence.UserInfoMapper;
 import com.yetthin.web.service.AdminService;
 
 @Service("AdminService")
@@ -79,6 +75,16 @@ public class AdminServiceImp implements AdminService{
 		admin.setAdminPassword(newPwd);
 		int i=adminMapper.updateByPrimaryKey(admin);
 		return i>0?"200":"error";
+	}
+
+	@Override
+	public int changeName(String string, String userName) {
+		// TODO Auto-generated method stub
+		int id=Integer.parseInt(string);
+		Admin admin=adminMapper.selectByPrimaryKey(id);
+		admin.setAdminName(userName);
+		
+		return adminMapper.updateByPrimaryKey(admin);
 	}
 
 }
