@@ -45,7 +45,8 @@ public class UserInfoController extends BaseController{
 			@RequestParam(value="verifyCode",required=false)String verifyCodes){
 		u.setPhoneNum(u.getPhoneNum().trim());
 		u.setPassword(u.getPassword().trim());
-		String msg="200";
+		String msg=null;
+		String statusCode="200";
 		if(!"".equals(u.getPassword().trim())&&!"".equals(u.getPhoneNum().trim())){
 		List<UserInfo> users=userInfoService.getListAll();
 		boolean same=false;
@@ -70,17 +71,20 @@ public class UserInfoController extends BaseController{
 			e.printStackTrace();
 			flag=0;
 		}
-		
-		if(flag!=1)
+		if(flag!=1){
 			msg="添加失败";
+			statusCode="501";
+		}
 		}else{
 			msg="电话号码已注册";
+			statusCode="502";
 		}
 		}else{
+			statusCode="503";
 			msg="用户名或密码不能为空";
 		}
-		status.put("status", msg);
-		
+		status.put("status",statusCode);
+		status.put("msg", msg);
 			return JSON.toJSONString(status);
 	}
 	/**
@@ -112,19 +116,22 @@ public class UserInfoController extends BaseController{
 		
 		UserInfo u = userInfoService.selectByPhoneNum(phone);
 
-		String msg="200";
-
-		if(u==null)
+		String msg=null;
+		String statusCode="200";
+		if(u==null){
 			msg="用户不存在";
-		else if(u.getPassword().trim().equals(password.trim())){
+			statusCode="504";
+		}else if(u.getPassword().trim().equals(password.trim())){
 			String auth_id=phone+"="+getEncrty(u.getPhoneNum());
 			model.addAttribute("auth_id", auth_id);
 			model.addAttribute("userID",u.getUserId());
-			status.put("user", u);
+			status.put("items", u);
 		}else{
 			msg="密码错误";
+			statusCode="505";
 		}
-			status.put("status", msg);
+			status.put("status", statusCode);
+			status.put("msg", msg);
 			return status;
 	}
 	
@@ -143,9 +150,11 @@ public class UserInfoController extends BaseController{
 			@RequestParam(value="password")String password){
 		System.out.println("come into forgetPwd $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
 		System.out.println("phoneNum="+phoneNum+",verifyCode="+verifyCode+",password="+password);
-		String flag="200";
+		String msg=null;
+		String statusCode="200";
 		Map<String, Object> map=new HashMap<>();
-		map.put("status", flag);
+		map.put("status", statusCode);
+		map.put("msg", msg);
 		return map;
 	
 	}
@@ -158,11 +167,13 @@ public class UserInfoController extends BaseController{
 	@RequestMapping(value="/getforgetPwdVerify",method=RequestMethod.PUT,
 			produces = {"application/json;charset=UTF-8"})
 	public Map<String, Object> getForgetPwdVerify(@RequestParam(value="phoneNum",required=true)String phoneNum){
-		String flag="200";
+		String statusCode="200";
+		String msg=null;
 		System.out.println("come into getForgetPwdVerify $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
 		System.out.println("phoneNum="+phoneNum);
 		Map<String, Object> map=new HashMap<>();
-		map.put("status", flag);
+		map.put("status", statusCode);
+		map.put("msg", msg);
 		return map;
 	}
 	/**
@@ -176,20 +187,28 @@ public class UserInfoController extends BaseController{
 			produces = {"application/json;charset=UTF-8"})
 	public Map<String , Object> updateJpushID(@RequestParam("userID")String userId,
 			@RequestParam(value="JpushID")String JpushID){
-		String flag=null;
+		String msg=null;
+		String statusCode="200";
 		userId=userId.trim();
 		JpushID =JpushID.trim();
 		if(!"".equals(userId)&&!"".equals(JpushID)){
 			 
 		System.out.println("come into updateJpushID $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
 		System.out.println(userId+"="+JpushID);
-		flag=userInfoService.updateJpushId(userId, JpushID);
-			 
+		msg=userInfoService.updateJpushId(userId, JpushID);
+		String []subStr=msg.split("=");
+		if(subStr[1]!=null){
+			msg=subStr[1];
+			
+		}
+		statusCode=subStr[0];
 		}else{
-			flag="用户名或极光ID不能为空";
+			msg="用户名或极光ID不能为空";
+			statusCode="503";
 		}
 		Map<String, Object> map=new HashMap<>();
-		map.put("status", flag);
+		map.put("status", statusCode);
+		map.put("msg", msg);
 		return map;
 	}
 	/**
@@ -205,20 +224,29 @@ public class UserInfoController extends BaseController{
 			@RequestParam(value="status")String status){
 		userId =userId.trim();
 		status=status.trim();
-		String flag=null;
+		String msg=null;
+		String statusCode="200";
 		if(!"".equals(userId)&&!"".equals(status)){
 			if(status.equals("1")||status.equals("0")){
 			System.out.println("come into updateJpushStatus $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
-		flag=userInfoService.updateJpushStatus(userId, status);
+		String flag=userInfoService.updateJpushStatus(userId, status);
+		String [] subStr=flag.split("=");
+		if(subStr[1]!=null){
+			msg=subStr[1];
+		}
+		statusCode=subStr[0];
 		System.out.println(userId+"="+status);
 			}else{
-				flag="开关值只能为1或0";
+				msg="开关值只能为1或0";
+				statusCode="507";
 			}
 		}else{
-			flag="id不能为空或开关为空";
+			msg="id不能为空或开关为空";
+			statusCode="503";
 		}
 		Map<String, Object> map=new HashMap<>();
-		map.put("status", flag);
+		map.put("status", statusCode);
+		map.put("msg", msg);
 		return map;
 	}
 	public boolean checkEmail(String email){
@@ -247,18 +275,26 @@ public class UserInfoController extends BaseController{
 	@ResponseBody
 	@RequestMapping(value="/bindingEmail",method=RequestMethod.PUT,produces = {"application/json;charset=UTF-8"})
 	public Map<String, Object> bindingEmail(@RequestParam(value="userID")String userId,@RequestParam(value="email")String email){
-		String flag="200";
+		String statusCode="200";
+		String msg=null;
 		userId=userId.trim();
 		email=email.trim();
 		if(checkEmail(email)){
 		System.out.println("come into updateJpushStatus bindingEmail $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
 		System.out.println("userID="+userId+",email="+email);
-		flag=userInfoService.bindingEmail(userId, email);
+		String flag=userInfoService.bindingEmail(userId, email);
+		String [] subStr=flag.split("=");
+		if(subStr[1]!=null){
+			msg=subStr[1];
+		}
+		statusCode=subStr[0];
 		}else{
-			flag="邮箱格式错误";
+			statusCode="507";
+			msg="邮箱格式错误";
 		}
 		Map<String, Object> map=new HashMap<>();
-		map.put("status", flag);
+		map.put("status", statusCode);
+		map.put("msg", msg);
 		return map;
 	}
 	/**
@@ -274,36 +310,46 @@ public class UserInfoController extends BaseController{
 			@RequestParam(value="oldPwd")String oldPassword,
 			@RequestParam(value="newPwd")String newPassword){
 		System.out.println("come into  changePwd $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
-		String flag="200";
+		String statusCode="200";
+		String msg=null;
 		if(!"".equals(userId)&&!"".equals(newPassword)&&!"".equals(oldPassword)){
 		userId =userId.trim();
 		oldPassword=oldPassword.trim();
 		newPassword=newPassword.trim();
 		UserInfo u=userInfoService.get(userId);
 		if(u==null){
-			flag="用户不存在";
+			msg="用户不存在";
+			statusCode="504";
 		}else{
 			System.out.println(u);
 			String oldP=getEncrty(u.getPhoneNum()+","+oldPassword);
 			if(u.getPassword().equals(oldP.trim())){
 			String newP=getEncrty(u.getPhoneNum()+","+newPassword);
 			u.setPassword(newP);
-			flag=userInfoService.changePwd(u);
+			String flag=userInfoService.changePwd(u);
+			if(!flag.equals("200")){
+				msg=flag;
+				statusCode="506";
+			}
 			}else{
-				flag="密码错误";
+				statusCode="505";
+				msg="密码错误";
 			}
 		}
 		System.out.println(userId+"="+oldPassword+"="+newPassword);
 		}else{
-			if("".equals(userId))
-			flag="用户名为空";
-			else if("".equals(oldPassword))
-			flag="旧为空";
-			else
-			flag="新为空";
+			statusCode="503";
+			if("".equals(userId)){
+			msg="用户名为空";
+			}else if("".equals(oldPassword)){
+			msg="旧为空";
+			}else{
+			msg="新为空";
+			}
 		}
 		Map<String, Object> map=new HashMap<>();
-		map.put("status", flag);
+		map.put("status", statusCode);
+		map.put("msg", msg);
 		return map;
 		
 	}
@@ -319,17 +365,25 @@ public class UserInfoController extends BaseController{
 	public Map<String, Object> feedBack(@RequestParam(value="userID",required=true)String userId,
 			@RequestParam(value="ideaText",required=false)String ideaText){
 		System.out.println("come into feedback $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
-		String flag="200";
+		String statusCode="200";
+		String msg=null;
 		if(!"".equals(userId)&&!"".equals(ideaText)){
-		flag=userInfoService.feedBack(userId, ideaText);
+		String flag=userInfoService.feedBack(userId, ideaText);
+		String [] subStr=flag.split("=");
+		if(subStr[1]!=null){
+			msg=subStr[1];
+		}
+		statusCode=subStr[0];
 		System.out.println(userId+"="+ideaText);
 		}else{
+			statusCode="503";
 			if("".equals(userId))
-					flag="用户ID为空";
-			else flag="反馈内容为空";
+					msg="用户ID为空";
+			else msg="反馈内容为空";
 		}
 		Map<String, Object> map=new HashMap<>();
-		map.put("status", flag);
+		map.put("status", statusCode);
+		map.put("msg", msg);
 		return map;
 	}
 }

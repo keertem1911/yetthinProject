@@ -1,5 +1,8 @@
 package com.yetthin.web.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
@@ -22,13 +25,19 @@ public class PhoneVersionController {
 	 */
 	@ResponseBody
 	@RequestMapping(value="/checkNewVersion",method=RequestMethod.GET,produces = {"application/json;charset=UTF-8"})
-	public PhoneVersion checkNewVersion(){
+	public Map<String, Object> checkNewVersion(){
+		Map<String, Object> map=new HashMap<>();
+		String msg=null;
+		String statusCode="200";
 		System.out.println("come into checkNewVersion $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
 		PhoneVersion pv=new PhoneVersion();
 		pv.setApkUrl("www.baidu.com");
 		pv.setExplain("版本1 wwwhawavfeawsiofhawihfoi阿瓦打我的");
 		pv.setVersionCode("#include <stdio.h>");
 		pv.setVersionName("yetthin1.1");
-		return pv;
+		map.put("items", pv);
+		map.put("msg", msg);
+		map.put("status", statusCode);
+		return map;
 	}
 }

@@ -61,50 +61,63 @@ public class UserInfoServiceImp extends BaseService implements UserInfoService{
 	@Override
 	public String updateJpushId(String userId, String JpushID) {
 		// TODO Auto-generated method stub
-		String status="200";
+		String msg=null;
+		String statusCode="200";
 		UserInfo ui=userInfoMapper.selectByPrimaryKey(Integer.parseInt(userId));
 		if(ui==null){
-			status="用户不存在";
+			msg="用户不存在";
+			statusCode="504";
+			
 		}else{
 			ui.setJpushId(JpushID);
 			int i=userInfoMapper.updateByPrimaryKeySelective(ui);
-			if(i==0)
-				status="更新失败";
+			if(i==0){
+				msg="更新失败";
+				statusCode="506";
+			}
 		}
-		return status;
+		return statusCode+"="+msg;
 	}
 	@Override
 	public String updateJpushStatus(String userId, String status) {
 		// TODO Auto-generated method stub
-		String status1="200";
+		String statusCode="200";
+		String msg=null;
 		UserInfo ui=userInfoMapper.selectByPrimaryKey(Integer.parseInt(userId));
 		if(ui==null){
-			status1="用户不存在";
+			msg="用户不存在";
+			statusCode="504";
 		}else{
 		
 			ui.setStatus(Integer.parseInt(status));
 			int i=userInfoMapper.updateByPrimaryKeySelective(ui);
-			if(i==0)
-				status1="更新失败";
+			if(i==0){
+				statusCode="506";
+				msg="更新失败";
+			}
 		}
-		return status1;
+		return statusCode+"="+msg;
 		 
 	}
 	@Override
 	public String bindingEmail(String userID, String email) {
 		// TODO Auto-generated method stub
-		String status1="200";
+		String statusCode="200";
+		String msg=null;
 		UserInfo ui=userInfoMapper.selectByPrimaryKey(Integer.parseInt(userID));
 		if(ui==null){
-			status1="用户不存在";
+			msg="用户不存在";
+			statusCode="504";
 		}else{
 		
 			ui.setEmail(email);
 			int i=userInfoMapper.updateByPrimaryKeySelective(ui);
-			if(i==0)
-				status1="更新失败";
+			if(i==0){
+				msg="更新失败";
+				statusCode="506";
+			}
 		}
-		return status1;
+		return statusCode+"="+msg;
 	}
 	@Override
 	public String changePwd(UserInfo u) {
@@ -120,18 +133,22 @@ public class UserInfoServiceImp extends BaseService implements UserInfoService{
 	@Override
 	public String feedBack(String userId, String ideaText) {
 		// TODO Auto-generated method stub
-		String status1="200";
+		String statusCode="200";
+		String msg=null;
 		UserInfo ui=userInfoMapper.selectByPrimaryKey(Integer.parseInt(userId));
 		if(ui==null){
-			status1="用户不存在";
+			msg="用户不存在";
+			statusCode="504";
 		}else{
 		
 			ui.setIdeaText(ideaText);
 			int i=userInfoMapper.updateByPrimaryKeySelective(ui);
-			if(i==0)
-				status1="更新失败";
+			if(i==0){
+				msg="更新失败";
+				statusCode="506";
+			}
 		}
-		return status1;
+		return statusCode+"="+msg;
 		 
 	}
 	@Override

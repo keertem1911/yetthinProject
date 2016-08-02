@@ -82,4 +82,12 @@ public class UserInfo {
     public void setIdeaText(String ideaText) {
         this.ideaText = ideaText;
     }
+
+	@Override
+	public String toString() {
+		return "UserInfo [userId=" + userId + ", phoneNum=" + phoneNum + ", myMoney=" + myMoney + ", email=" + email
+				+ ", password=" + password + ", jpushId=" + jpushId + ", status=" + status + ", ideaText=" + ideaText
+				+ "]";
+	}
+    
 }
