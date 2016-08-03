@@ -90,6 +90,10 @@
  		<input name="userID" type="text" />
  		<input name="JpushID" type="text" />
  		<input name="_method" type="hidden" value="put" />
+ 		<select name="type">
+ 			<option value="1">Android</option>
+ 			<option value="-1">IOS</option>
+ 		</select>
  		<input type="submit" value="submit"/>
  	</form>
  	<br/>

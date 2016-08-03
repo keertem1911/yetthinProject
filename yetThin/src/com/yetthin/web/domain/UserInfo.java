@@ -10,13 +10,25 @@ public class UserInfo {
     private String email;
 
     private String password;
-
+    //极光id
     private String jpushId;
-
+    //极光开关
     private int status;
-
+    //极光 ID 的类型
+    private int type;
     private String ideaText;
-
+    
+    public UserInfo() {
+		// TODO Auto-generated constructor stub
+    	
+    }
+    
+    public int getType() {
+		return type;
+	}
+    public void setType(int type) {
+		this.type = type;
+	}
     public Integer getUserId() {
         return userId;
     }

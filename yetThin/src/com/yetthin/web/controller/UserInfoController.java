@@ -7,14 +7,24 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.apache.commons.fileupload.RequestContext;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.util.WebUtils;
 
 import com.alibaba.fastjson.JSON;
 import com.yetthin.web.domain.UserInfo;
@@ -23,7 +33,7 @@ import com.yetthin.web.service.TempCodeService;
 import com.yetthin.web.service.UserInfoService;
 
 @Controller
-@SessionAttributes(value="auth_id",types=String.class)
+@SessionAttributes(value="auth_id,type",types=String.class)
 @RequestMapping("/user")
 public class UserInfoController extends BaseController{
 
@@ -31,8 +41,15 @@ public class UserInfoController extends BaseController{
 	private UserInfoService userInfoService;
 	@Resource(name="TempCodeSerivce")
 	private TempCodeService tempCodeService;
-	
 	 
+	private HttpServletRequest request;
+	private HttpServletResponse response;
+	@ModelAttribute
+	public void setReqAndRes(HttpServletRequest request, HttpServletResponse response){  
+        this.request = request;  
+        this.response = response;  
+         
+    }  
 	/**
 	 * 注册
 	 * @param userInfo
@@ -126,6 +143,10 @@ public class UserInfoController extends BaseController{
 			model.addAttribute("auth_id", auth_id);
 			model.addAttribute("userID",u.getUserId());
 			status.put("items", u);
+			HttpSession session = request.getSession();
+			String sessionId=session.getId();
+			Cookie cookie=new Cookie("JSESSION", sessionId);
+			response.addCookie(cookie);
 		}else{
 			msg="密码错误";
 			statusCode="505";
@@ -176,6 +197,8 @@ public class UserInfoController extends BaseController{
 		map.put("msg", msg);
 		return map;
 	}
+	
+	 
 	/**
 	 * 更新极光id
 	 * @param userId
@@ -186,13 +209,22 @@ public class UserInfoController extends BaseController{
 	@RequestMapping(value="/updateJpushID",method=RequestMethod.PUT,
 			produces = {"application/json;charset=UTF-8"})
 	public Map<String , Object> updateJpushID(@RequestParam("userID")String userId,
-			@RequestParam(value="JpushID")String JpushID){
+			@RequestParam(value="JpushID")String JpushID,@RequestParam(value="type")String type){
 		String msg=null;
 		String statusCode="200";
-		userId=userId.trim();
-		JpushID =JpushID.trim();
-		if(!"".equals(userId)&&!"".equals(JpushID)){
-			 
+ 		     
+ 		 HttpSession session = request.getSession();
+ 		 System.out.println(session.getId()+" ididididididididid");
+ 		 if(session.getAttribute("type")!=null )
+ 			System.out.println(" $$$$$$$$$$$      "+type+"   ￥￥￥￥￥￥￥￥￥￥￥￥￥");
+		if(!"".equals(userId)&&!"".equals(JpushID)&&!"".equals(type)){
+			userId=userId.trim();
+			JpushID =JpushID.trim();
+	 	session.setAttribute("type", type);
+	 	  session = request.getSession();
+		String sessionId=session.getId();
+		Cookie cookie=new Cookie("JSESSION", sessionId);
+		response.addCookie(cookie);
 		System.out.println("come into updateJpushID $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
 		System.out.println(userId+"="+JpushID);
 		msg=userInfoService.updateJpushId(userId, JpushID);
