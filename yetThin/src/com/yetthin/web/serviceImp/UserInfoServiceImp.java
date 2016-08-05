@@ -24,8 +24,8 @@ public class UserInfoServiceImp extends BaseService implements UserInfoService{
 	@Override
 	public UserInfo get(String id) {
 		// TODO Auto-generated method stub
-		int userId=Integer.parseInt(id);
-		return userInfoMapper.selectByPrimaryKey(userId);
+	 
+		return userInfoMapper.selectByPrimaryKey(id);
 	}
 	 
 	@Transactional(propagation=Propagation.REQUIRED,isolation=Isolation.READ_COMMITTED)
@@ -39,7 +39,7 @@ public class UserInfoServiceImp extends BaseService implements UserInfoService{
 	@Override
 	public int delete(String id) throws Exception {
 		// TODO Auto-generated method stub
-		return userInfoMapper.deleteByPrimaryKey(Integer.parseInt(id));
+		return userInfoMapper.deleteByPrimaryKey(id);
 	}
 	
  
@@ -59,17 +59,18 @@ public class UserInfoServiceImp extends BaseService implements UserInfoService{
 		return null;
 	}
 	@Override
-	public String updateJpushId(String userId, String JpushID) {
+	public String updateJpushId(String userId, String JpushID,String JpushType) {
 		// TODO Auto-generated method stub
 		String msg=null;
 		String statusCode="200";
-		UserInfo ui=userInfoMapper.selectByPrimaryKey(Integer.parseInt(userId));
+		UserInfo ui=userInfoMapper.selectByPrimaryKey(userId);
 		if(ui==null){
 			msg="用户不存在";
 			statusCode="504";
 			
 		}else{
 			ui.setJpushId(JpushID);
+			ui.setJpushType(JpushType);
 			int i=userInfoMapper.updateByPrimaryKeySelective(ui);
 			if(i==0){
 				msg="更新失败";
@@ -79,17 +80,17 @@ public class UserInfoServiceImp extends BaseService implements UserInfoService{
 		return statusCode+"="+msg;
 	}
 	@Override
-	public String updateJpushStatus(String userId, String status) {
+	public String updateJpushStatus(String userId, String jpushStatus) {
 		// TODO Auto-generated method stub
 		String statusCode="200";
 		String msg=null;
-		UserInfo ui=userInfoMapper.selectByPrimaryKey(Integer.parseInt(userId));
+		UserInfo ui=userInfoMapper.selectByPrimaryKey(userId);
 		if(ui==null){
 			msg="用户不存在";
 			statusCode="504";
 		}else{
 		
-			ui.setStatus(Integer.parseInt(status));
+			ui.setJpushStatus(Integer.parseInt(jpushStatus));
 			int i=userInfoMapper.updateByPrimaryKeySelective(ui);
 			if(i==0){
 				statusCode="506";
@@ -104,7 +105,7 @@ public class UserInfoServiceImp extends BaseService implements UserInfoService{
 		// TODO Auto-generated method stub
 		String statusCode="200";
 		String msg=null;
-		UserInfo ui=userInfoMapper.selectByPrimaryKey(Integer.parseInt(userID));
+		UserInfo ui=userInfoMapper.selectByPrimaryKey(userID);
 		if(ui==null){
 			msg="用户不存在";
 			statusCode="504";
@@ -135,7 +136,7 @@ public class UserInfoServiceImp extends BaseService implements UserInfoService{
 		// TODO Auto-generated method stub
 		String statusCode="200";
 		String msg=null;
-		UserInfo ui=userInfoMapper.selectByPrimaryKey(Integer.parseInt(userId));
+		UserInfo ui=userInfoMapper.selectByPrimaryKey(userId);
 		if(ui==null){
 			msg="用户不存在";
 			statusCode="504";

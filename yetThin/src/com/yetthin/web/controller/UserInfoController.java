@@ -2,9 +2,13 @@ package com.yetthin.web.controller;
 
  
  
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
@@ -12,24 +16,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.fileupload.RequestContext;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
-import org.springframework.web.util.WebUtils;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.alibaba.fastjson.JSON;
 import com.yetthin.web.domain.UserInfo;
  
-import com.yetthin.web.service.TempCodeService;
 import com.yetthin.web.service.UserInfoService;
 
 @Controller
@@ -39,9 +41,7 @@ public class UserInfoController extends BaseController{
 
 	@Resource(name="UserInfoService")
 	private UserInfoService userInfoService;
-	@Resource(name="TempCodeSerivce")
-	private TempCodeService tempCodeService;
-	 
+	  
 	private HttpServletRequest request;
 	private HttpServletResponse response;
 	@ModelAttribute
@@ -50,6 +50,12 @@ public class UserInfoController extends BaseController{
         this.response = response;  
          
     }  
+	@InitBinder  
+	public void initBinder(WebDataBinder binder) {  
+	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");  
+	    dateFormat.setLenient(false);  
+	    binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));  
+	}
 	/**
 	 * 注册
 	 * @param userInfo
@@ -82,6 +88,11 @@ public class UserInfoController extends BaseController{
 		int flag=0;
 		try {
 			System.out.println(u+"----------------------------");
+		 
+			String s =  UUID.randomUUID().toString();
+			s=s.substring(0,8)+s.substring(9,13)+s.substring(14,18)+s.substring(19,23)+s.substring(24);
+			System.out.println(s +"  22222222222222");
+			u.setUserId(s );
 			flag=userInfoService.save(u);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -133,7 +144,7 @@ public class UserInfoController extends BaseController{
 		
 		UserInfo u = userInfoService.selectByPhoneNum(phone);
 
-		String msg=null;
+		String msg="";
 		String statusCode="200";
 		if(u==null){
 			msg="用户不存在";
@@ -142,6 +153,8 @@ public class UserInfoController extends BaseController{
 			String auth_id=phone+"="+getEncrty(u.getPhoneNum());
 			model.addAttribute("auth_id", auth_id);
 			model.addAttribute("userID",u.getUserId());
+			u.setPassword("");
+			u.setIdeaText("");
 			status.put("items", u);
 			HttpSession session = request.getSession();
 			String sessionId=session.getId();
@@ -152,6 +165,7 @@ public class UserInfoController extends BaseController{
 			statusCode="505";
 		}
 			status.put("status", statusCode);
+			if(msg!=null&&!"".equals(msg))
 			status.put("msg", msg);
 			return status;
 	}
@@ -175,6 +189,7 @@ public class UserInfoController extends BaseController{
 		String statusCode="200";
 		Map<String, Object> map=new HashMap<>();
 		map.put("status", statusCode);
+		if(msg!=null&&"".equals(msg))
 		map.put("msg", msg);
 		return map;
 	
@@ -194,6 +209,7 @@ public class UserInfoController extends BaseController{
 		System.out.println("phoneNum="+phoneNum);
 		Map<String, Object> map=new HashMap<>();
 		map.put("status", statusCode);
+		if(msg!=null&&"".equals(msg))
 		map.put("msg", msg);
 		return map;
 	}
@@ -206,10 +222,11 @@ public class UserInfoController extends BaseController{
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value="/updateJpushID",method=RequestMethod.PUT,
+	@RequestMapping(value="/updateJPushID",method=RequestMethod.PUT,
 			produces = {"application/json;charset=UTF-8"})
 	public Map<String , Object> updateJpushID(@RequestParam("userID")String userId,
-			@RequestParam(value="JpushID")String JpushID,@RequestParam(value="type")String type){
+			@RequestParam(value="JpushID")String JpushID,@RequestParam(value="phoneType")String type,
+			@RequestParam(value="JpushType")String JpushType){
 		String msg=null;
 		String statusCode="200";
  		     
@@ -217,17 +234,17 @@ public class UserInfoController extends BaseController{
  		 System.out.println(session.getId()+" ididididididididid");
  		 if(session.getAttribute("type")!=null )
  			System.out.println(" $$$$$$$$$$$      "+type+"   ￥￥￥￥￥￥￥￥￥￥￥￥￥");
-		if(!"".equals(userId)&&!"".equals(JpushID)&&!"".equals(type)){
+		if(!"".equals(userId)&&!"".equals(JpushID)&&!"".equals(type)&&!"".equals(JpushType)){
 			userId=userId.trim();
 			JpushID =JpushID.trim();
-	 	session.setAttribute("type", type);
+	 	session.setAttribute("phoneType", type);
 	 	  session = request.getSession();
 		String sessionId=session.getId();
 		Cookie cookie=new Cookie("JSESSION", sessionId);
 		response.addCookie(cookie);
 		System.out.println("come into updateJpushID $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
 		System.out.println(userId+"="+JpushID);
-		msg=userInfoService.updateJpushId(userId, JpushID);
+		msg=userInfoService.updateJpushId(userId, JpushID,JpushType);
 		String []subStr=msg.split("=");
 		if(subStr[1]!=null){
 			msg=subStr[1];
@@ -240,6 +257,7 @@ public class UserInfoController extends BaseController{
 		}
 		Map<String, Object> map=new HashMap<>();
 		map.put("status", statusCode);
+		if(msg!=null&&"".equals(msg))
 		map.put("msg", msg);
 		return map;
 	}
@@ -250,18 +268,18 @@ public class UserInfoController extends BaseController{
 	 * @return
 	 */
 	@ResponseBody()
-	@RequestMapping(value="/updateJpushStatus",method=RequestMethod.POST,
+	@RequestMapping(value="/updateJPushStatus",method=RequestMethod.POST,
 			produces = {"application/json;charset=UTF-8"})
 	public Map<String, Object> updateJpushStatus(@RequestParam(value="userID")String userId,
-			@RequestParam(value="status")String status){
-		userId =userId.trim();
-		status=status.trim();
+			@RequestParam(value="JpushStatus")String jpushStatus){
 		String msg=null;
 		String statusCode="200";
-		if(!"".equals(userId)&&!"".equals(status)){
-			if(status.equals("1")||status.equals("0")){
+		if(!"".equals(userId)&&!"".equals(jpushStatus)){
+			userId =userId.trim();
+			jpushStatus=jpushStatus.trim();
+			if(jpushStatus.equals("1")||jpushStatus.equals("0")){
 			System.out.println("come into updateJpushStatus $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
-		String flag=userInfoService.updateJpushStatus(userId, status);
+		String flag=userInfoService.updateJpushStatus(userId, jpushStatus);
 		String [] subStr=flag.split("=");
 		if(subStr[1]!=null){
 			msg=subStr[1];
@@ -278,6 +296,8 @@ public class UserInfoController extends BaseController{
 		}
 		Map<String, Object> map=new HashMap<>();
 		map.put("status", statusCode);
+		System.out.println("msg ="+msg);
+		if(msg!=null&&"".equals(msg))
 		map.put("msg", msg);
 		return map;
 	}
@@ -326,6 +346,7 @@ public class UserInfoController extends BaseController{
 		}
 		Map<String, Object> map=new HashMap<>();
 		map.put("status", statusCode);
+		if(msg!=null&&"".equals(msg))
 		map.put("msg", msg);
 		return map;
 	}
@@ -381,6 +402,7 @@ public class UserInfoController extends BaseController{
 		}
 		Map<String, Object> map=new HashMap<>();
 		map.put("status", statusCode);
+		if(msg!=null&&"".equals(msg))
 		map.put("msg", msg);
 		return map;
 		
@@ -415,7 +437,45 @@ public class UserInfoController extends BaseController{
 		}
 		Map<String, Object> map=new HashMap<>();
 		map.put("status", statusCode);
+		if(msg!=null&&!"".equals(msg))
 		map.put("msg", msg);
+		return map;
+	}
+	@ResponseBody 
+	@RequestMapping(value="/uploadPicture")
+	public Map<String, Object> updatePicture(@RequestParam("file")MultipartFile file,@RequestParam("userID")String userId){
+		Map<String, Object> map=new HashMap<>();
+		String msg=null;
+		String statusCode="200";
+		if(!"".equals(userId)&&file!=null){
+				String fileName=file.getOriginalFilename();
+				String format=fileName.substring(fileName.lastIndexOf("."));
+				 
+				userId=userId.trim();
+				UserInfo user = userInfoService.get(userId);
+				if(user!=null){
+				String path=request.getSession().getServletContext().getRealPath("/");
+				System.out.println(path);
+				String savepicture=path+"picture";
+				File directory=new File(savepicture);
+				if(directory.exists()==false){
+					directory.mkdirs();
+				}
+			
+//				InputStream is=file.getInputStream();
+// 				OutputStream out=FileUtils.openOutputStream(new File(savepicture++"/"+user.));
+				}else{
+					msg="用户不存在";
+					statusCode="504";
+				}
+				
+		}else{
+			msg="输入不能为空";
+			statusCode="503";
+		}
+		map.put("status", statusCode);
+		if(msg!=null&&!"".equals(msg))
+			map.put("msg", msg);
 		return map;
 	}
 }

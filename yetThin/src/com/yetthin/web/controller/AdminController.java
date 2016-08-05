@@ -23,7 +23,6 @@ import com.yetthin.web.domain.PhoneVersion;
 import com.yetthin.web.domain.UserInfo;
 import com.yetthin.web.service.AdminService;
 import com.yetthin.web.service.PhoneVersionService;
-import com.yetthin.web.service.TempCodeService;
 import com.yetthin.web.service.UserInfoService;
 
 @Controller
@@ -32,8 +31,6 @@ import com.yetthin.web.service.UserInfoService;
 public class AdminController extends BaseController {
 	@Resource(name = "UserInfoService")
 	private UserInfoService userInfoService;
-	@Resource(name = "TempCodeSerivce")
-	private TempCodeService tempCodeService;
 	@Resource(name = "PhoneVersionService")
 	private PhoneVersionService phoneVersionService;
 	@Resource(name = "AdminService")

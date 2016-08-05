@@ -36,6 +36,7 @@ public class PhoneVersionController {
 		pv.setVersionCode("#include <stdio.h>");
 		pv.setVersionName("yetthin1.1");
 		map.put("items", pv);
+		if(msg!=null&&!"".equals(msg))
 		map.put("msg", msg);
 		map.put("status", statusCode);
 		return map;

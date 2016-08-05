@@ -6,13 +6,13 @@ import java.util.Map;
 import com.yetthin.web.domain.UserInfo;
 
 public interface UserInfoMapper {
-    int deleteByPrimaryKey(Integer userId);
+    int deleteByPrimaryKey(String userId);
 
     int insert(UserInfo record);
 
     int insertSelective(UserInfo record);
 
-    UserInfo selectByPrimaryKey(Integer userId);
+    UserInfo selectByPrimaryKey(String userId);
 
     int updateByPrimaryKeySelective(UserInfo record);
 

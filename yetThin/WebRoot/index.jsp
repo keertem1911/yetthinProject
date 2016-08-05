@@ -5,52 +5,31 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style type="text/css">
+	form {
+		vertical-align: center;
+		text-align: left;
+		margin-left: 20px;
+		
+	}
+	.main{
+	margin-top: 20px;
+	}
+</style>
 <title>Insert title here jsp</title>
 <script type="text/javascript" src="js/jquery-3.1.0.min.js"></script>
 <script type="text/javascript" src="js/jquery-form.js"></script>
 
 <script type="text/javascript">
- 	$(function(){
- 		function init(){
- 			var url=$("#updateJpushIDForm").attr("action");
- 		$.ajax({
- 			url:url,
- 			type:"post",
- 			data:{
- 				userID:"7",
- 				JpushID:"123123123",
- 				_method:"put"
- 			},
- 			success:function(msg){
-				alert(msg);
- 				$("#showtable").apply(msg);
-			}
- 		});
- 		}
- 		 $(".mybtn").click(function(){
- 			 init();
- 		 })
- 		 $("#btnupdate").click(function(){
- 			 
- 			var url =window.location.href;
-			 url=url.substr(0, url.lastIndexOf("/")+1);
- 		$("#updateForm").ajaxSubmit({
-			url: url+'admin/updateNewVersion2',
-			success: function(data) {
-				 			console.log(data); 
-			},
-			});
- 			 
- 		 })
- 	})
+ 	 
 </script>
 </head>
 <body>
-	
+	<div class="main">
  	<form action="${pageContext.request.contextPath }/user/register" method="post">
  	 	<label>register</label>
- 	 	<input type="text" name="phoneNum"/>
- 		<input type="password" name="password"/>
+ 	 	<input type="text" name="phoneNum" placeholder="电话号码"/>
+ 		<input type="password" name="password" placeholder="密码"/>
  		<input type="hidden" value="@#$qowafdhjqo" name="verifyCode"/>
  		
  		<input type="submit" value="submit"  />
@@ -58,65 +37,67 @@
  	<br/>
  	<form action="${pageContext.request.contextPath }/user/getRegisterVerify" method="get">
  	 	<label>getRegisterVerify</label>
- 		<input name="phoneNum" type="text" />
+ 		<input name="phoneNum" type="text" placeholder="电话号码"/>
  		<input type="submit" value="submit"/>
  	</form>
  	<br/>
  	<form action="${pageContext.request.contextPath }/user/login" method="post">
  	 	<label>login</label>
- 	 	<input type="text" name="phoneNum"/>
- 		<input type="password" name="password"/>
+ 	 	<input type="text" name="phoneNum" placeholder="电话号码"/>
+ 		<input type="password" name="password" placeholder="密码"/>
  		<input type="submit" value="submit"  />
  	</form>
  	<br/>
  	<form action="${pageContext.request.contextPath }/user/forgetPwd" method="post">
  	 	<label>forgetPwd</label>
- 		<input name="phoneNum" type="text" />
- 		<input name="verifyCode" type="hidden" value="!@#$%&*%" />
- 		<input name="password" type="text"/>
+ 		<input name="phoneNum" type="text" placeholder="电话号码"/>
+ 		<input name="verifyCode" type="hidden" value="!@#$%&*%"  />
+ 		<input name="password" type="text" placeholder="密码"/>
  		<input type="submit" value="submit"/>
  	</form>
  	<br/>
  	<form action="${pageContext.request.contextPath }/user/getforgetPwdVerify" method="post">
  	 	<label>getforgetPwdVerify</label>
- 		<input name="phoneNum" type="text" />
+ 		<input name="phoneNum" type="text" placeholder="电话号码"/>
  		<input name="_method" type="hidden" value="put" />
  		<input type="submit" value="submit"/>
  	</form>
  	<br/>
- 	<form action="${pageContext.request.contextPath }/user/updateJpushID"  id="updateJpushIDForm" method="post">
+ 	<form action="${pageContext.request.contextPath }/user/updateJPushID"  id="updateJpushIDForm" method="post">
  	
- 	 	<label>updateJpushID</label>
- 		<input name="userID" type="text" />
- 		<input name="JpushID" type="text" />
+ 	 	<label>updateJPushID</label>
+ 		<input name="userID" type="text" placeholder="用户Id" />
+ 		<input name="JpushID" type="text" placeholder="更新极光ID" />
  		<input name="_method" type="hidden" value="put" />
- 		<select name="type">
+ 		 <input name="JpushType" value="推送类型保留" type="text" />
+ 		<select name="phoneType" >
+ 			<option value="0">推送极光的客户端</option>
  			<option value="1">Android</option>
  			<option value="-1">IOS</option>
  		</select>
  		<input type="submit" value="submit"/>
  	</form>
  	<br/>
- 	<form action="${pageContext.request.contextPath }/user/updateJpushStatus" method="post">
- 	 	<label>updateJpushStatus</label>
- 		<input name="userID" type="text" />
- 		<input name="status" type="text" />
+ 	<form action="${pageContext.request.contextPath }/user/updateJPushStatus" method="post">
+ 	 	<label>updateJPushStatus</label>
+ 		<input name="userID" type="text" placeholder="用户ID"/>
+ 		<input name="JpushStatus" type="text" placeholder="推送极光的开关 1关闭 0打开" />
  		<input type="submit" value="submit"/>
  	</form>
  	<br/>
  	<form action="${pageContext.request.contextPath }/user/bindingEmail" method="post">
  	 	<label>bindingEmail</label>
- 		<input name="userID" type="text" />
- 		<input name="email" type="text" />
+ 		<input name="userID" type="text" placeholder="用户ID"/>
+ 		<input name="email" type="text" placeholder="用户邮箱" />
  		<input name="_method" type="hidden" value="put" />
  		<input type="submit" value="submit"/>
  	</form>
  	<br/>
  	<form action="${pageContext.request.contextPath }/user/changePwd" method="post">
  	 	<label>changePwd</label>
- 		<input name="userID" type="text" />
- 		<input name="oldPwd" type="text" />
- 		<input name="newPwd" type="text" />
+ 		<input name="userID" type="text" placeholder="用户ID"/>
+ 		<input name="oldPwd" type="text" placeholder="旧密码"/>
+ 		<input name="newPwd" type="text" placeholder="新密码"/>
  		<input name="_method" type="hidden" value="put" />
  		<input type="submit" value="submit"/>
  	</form>
@@ -128,20 +109,18 @@
  	<br/>
  	<form action="${pageContext.request.contextPath }/user/feedback" method="post">
  	 	<label>feedback</label>
- 		<input name="userID" type="text" />
- 		<input name="ideaText" type="text" />
+ 		<input name="userID" type="text" placeholder="用户ID"/>
+ 		<input name="ideaText" type="text"  placeholder="意见反馈"/>
  		<input name="_method" type="hidden" value="put" />
  		<input type="submit" value="submit"/>
  	</form>
- 	<form action="admin/updateNewVersion2" id="updateForm"
- 	 method="post" enctype="multipart/form-data">
- 	 	<label>upload</label>
- 		 
- 		<input name="file" type="file" />
- 		<input type="button" id="btnupdate" value="submit"/>
- 	</form>
+  
+ 		<form action="${pageContext.request.contextPath }/user/uploadPicture" method="POST" enctype="multipart/form-data">
+		File: <input type="file" name="file"/>
+		Desc: <input type="text" name="userID"/>
+		<input type="submit" value="Submit"/>
+	</form>
  	<br/>
- 	<input type="button" class="mybtn" value="click"/>
- 	<label id="showtable"></label>
+  </div>
 </body>
 </html>

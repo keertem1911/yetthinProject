@@ -2,25 +2,26 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.yetthin.web.persistence.UserInfoMapper" >
   <resultMap id="BaseResultMap" type="com.yetthin.web.domain.UserInfo" >
-    <id column="user_id" property="userId" jdbcType="INTEGER" />
+    <id column="user_id" property="userId" jdbcType="VARCHAR" />
     <result column="phone_num" property="phoneNum" jdbcType="VARCHAR" />
     <result column="my_money" property="myMoney" jdbcType="DOUBLE" />
     <result column="email" property="email" jdbcType="VARCHAR" />
     <result column="password" property="password" jdbcType="VARCHAR" />
     <result column="Jpush_id" property="jpushId" jdbcType="VARCHAR" />
-    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="Jpush_status" property="jpushStatus" jdbcType="INTEGER" />
+    <result column="Jpush_type" property="jpushType" jdbcType="VARCHAR"/>
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.yetthin.web.domain.UserInfo" extends="BaseResultMap" >
     <result column="idea_text" property="ideaText" jdbcType="LONGVARCHAR" />
   </resultMap>
   
    <resultMap id="ideaTextMap" type="com.yetthin.web.domain.UserInfo" extends="ResultMapWithBLOBs">
-    <id column="user_id" property="userId" jdbcType="INTEGER" />
+    <id column="user_id" property="userId" jdbcType="VARCHAR" />
     <result column="phone_num" property="phoneNum" jdbcType="VARCHAR" />
 		
   </resultMap>
   <sql id="Base_Column_List" >
-    user_id, phone_num, my_money, email, password, Jpush_id, status
+    user_id, phone_num, my_money, email, password, Jpush_id, Jpush_status, Jpush_type
   </sql>
   <sql id="ideaText_List">
   	user_id,phone_num,idea_text
@@ -39,11 +40,11 @@
     from userinfo
     
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
     from userinfo
-    where user_id = #{userId,jdbcType=INTEGER}
+    where user_id = #{userId,jdbcType=VARCHAR}
   </select>
   <select id="selectByPhoneNum" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
@@ -57,25 +58,21 @@
     from userinfo
     where email = #{email,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from userinfo
-    where user_id = #{userId,jdbcType=INTEGER}
+    where user_id = #{userId,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.yetthin.web.domain.UserInfo" >
-    <selectKey resultType="java.lang.Integer" keyProperty="userId" order="BEFORE" >
-      SELECT LAST_INSERT_ID()
-    </selectKey>
+    
     insert into userinfo (user_id, phone_num, my_money, 
       email, password, Jpush_id, 
-      status, idea_text)
-    values (#{userId,jdbcType=INTEGER}, #{phoneNum,jdbcType=VARCHAR}, #{myMoney,jdbcType=DOUBLE}, 
+      Jpush_status, idea_text,jpush_type)
+    values (#{userId,jdbcType=VARCHAR}, #{phoneNum,jdbcType=VARCHAR}, #{myMoney,jdbcType=DOUBLE}, 
       #{email,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{jpushId,jdbcType=VARCHAR}, 
-      #{status,jdbcType=INTEGER}, #{ideaText,jdbcType=LONGVARCHAR})
+      #{jpushStatus,jdbcType=INTEGER}, #{ideaText,jdbcType=LONGVARCHAR},#{jpushType,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.yetthin.web.domain.UserInfo" >
-    <selectKey resultType="java.lang.Integer" keyProperty="userId" order="BEFORE" >
-      SELECT LAST_INSERT_ID()
-    </selectKey>
+     
     insert into userinfo
     <trim prefix="(" suffix=")" suffixOverrides="," >
       user_id,
@@ -94,15 +91,18 @@
       <if test="jpushId != null" >
         Jpush_id,
       </if>
-      <if test="status != null" >
-        status,
+      <if test="jpushStatus != null" >
+       Jpush_status,
       </if>
       <if test="ideaText != null" >
         idea_text,
       </if>
+      <if test="jpushType!=null">
+      	jpush_type
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      #{userId,jdbcType=INTEGER},
+      #{userId,jdbcType=VARCHAR},
       <if test="phoneNum != null" >
         #{phoneNum,jdbcType=VARCHAR},
       </if>
@@ -118,12 +118,16 @@
       <if test="jpushId != null" >
         #{jpushId,jdbcType=VARCHAR},
       </if>
-      <if test="status != null" >
-        #{status,jdbcType=INTEGER},
+      <if test="jpushStatus != null" >
+        #{jpushStatus,jdbcType=INTEGER},
       </if>
       <if test="ideaText != null" >
         #{ideaText,jdbcType=LONGVARCHAR},
       </if>
+      <if test="jpushType !=null">
+           #{jpushType,jdbcType=LONGVARCHAR},
+      </if>
+
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.yetthin.web.domain.UserInfo" >
@@ -144,14 +148,17 @@
       <if test="jpushId != null" >
         Jpush_id = #{jpushId,jdbcType=VARCHAR},
       </if>
-      <if test="status != null" >
-        status = #{status,jdbcType=INTEGER},
+      <if test="jpushType !=null">
+      	Jpush_type = #{jpushType,jdbcType=VARCHAR},
+      </if>
+      <if test="jpushStatus != null" >
+        Jpush_status = #{jpushStatus,jdbcType=INTEGER},
       </if>
       <if test="ideaText != null" >
         idea_text = #{ideaText,jdbcType=LONGVARCHAR},
       </if>
     </set>
-    where user_id = #{userId,jdbcType=INTEGER}
+    where user_id = #{userId,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.yetthin.web.domain.UserInfo" >
     update userinfo
@@ -160,9 +167,10 @@
       email = #{email,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
       Jpush_id = #{jpushId,jdbcType=VARCHAR},
-      status = #{status,jdbcType=INTEGER},
+      Jpush_status = #{jpushStatus,jdbcType=INTEGER},
+    	Jpush_type=#{jpushType,jdbcType=VARCHAR}
       idea_text = #{ideaText,jdbcType=LONGVARCHAR}
-    where user_id = #{userId,jdbcType=INTEGER}
+    where user_id = #{userId,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.yetthin.web.domain.UserInfo" >
     update userinfo
@@ -171,8 +179,8 @@
       email = #{email,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
       Jpush_id = #{jpushId,jdbcType=VARCHAR},
-      status = #{status,jdbcType=INTEGER}
-    where user_id = #{userId,jdbcType=INTEGER}
+      Jpush_status = #{jpushStatus,jdbcType=INTEGER}
+    where user_id = #{userId,jdbcType=VARCHAR}
   </update>
   
   
