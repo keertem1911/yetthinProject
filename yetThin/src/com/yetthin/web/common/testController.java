@@ -47,7 +47,7 @@ public class testController {
 		            //发送POST请求必须设置如下两行  
 		            conn.setDoOutput(true);  
 		            conn.setDoInput(true);  
-		            conn.setRequestProperty("Cookie", "JSESSIONID=BF1ACBD7472EBFD563BD4382C4903E32"  );  
+		           conn.setRequestProperty("Cookie", "JSESSIONID=BF1ACBD7472EBFD563BD4382C4903E32"  );  
 		            //获取URLConnection对象对应的输出流  
 		            try {
 						out = new PrintWriter(conn.getOutputStream());
@@ -113,10 +113,19 @@ public class testController {
     //提供主方法，测试发送GET请求和POST请求  
     public static void main(String args[]) {  
              //发送POST请求  
-        String s1=null;
+        String s1=null; 
 		try {
-			s1 =new  testController().sendPost("http://www.cktim.net/yetThin/user/updateJpushID",  
-			    "userID=7&JpushID=110&type=1&_method=put");
+//			System.out.println("发送验证码     ======");
+//			s1 =new  testController().sendPost("http://www.cktim.net/yetThin/user/getRegisterVerify",  
+//			    "phoneNum=18829290541");
+//			Thread.sleep(4000);
+//			System.out.println(" 注册     =====");
+			s1 =new  testController().sendPost("http://localhost:8080/yetThin/user/getSplash",  
+			    "");
+			Thread.sleep(4000);
+			
+//			s1 =new  testController().sendPost("http://www.cktim.net/yetThin/user/register",  
+//				    "phoneNum=18829290541&verifyCode=290541&password=123456");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

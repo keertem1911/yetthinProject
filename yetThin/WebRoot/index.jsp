@@ -30,12 +30,12 @@
  	 	<label>register</label>
  	 	<input type="text" name="phoneNum" placeholder="电话号码"/>
  		<input type="password" name="password" placeholder="密码"/>
- 		<input type="hidden" value="@#$qowafdhjqo" name="verifyCode"/>
+ 		<input type="text" value="" name="verifyCode" placeholder="验证码"/>
  		
  		<input type="submit" value="submit"  />
  	</form>
  	<br/>
- 	<form action="${pageContext.request.contextPath }/user/getRegisterVerify" method="get">
+ 	<form action="${pageContext.request.contextPath }/user/getRegisterVerify" method="post">
  	 	<label>getRegisterVerify</label>
  		<input name="phoneNum" type="text" placeholder="电话号码"/>
  		<input type="submit" value="submit"/>
@@ -51,8 +51,8 @@
  	<form action="${pageContext.request.contextPath }/user/forgetPwd" method="post">
  	 	<label>forgetPwd</label>
  		<input name="phoneNum" type="text" placeholder="电话号码"/>
- 		<input name="verifyCode" type="hidden" value="!@#$%&*%"  />
- 		<input name="password" type="text" placeholder="密码"/>
+ 		<input name="verifyCode" type="text" value="" placeholder="验证码"  />
+ 		<input name="password" type="password" placeholder="密码"/>
  		<input type="submit" value="submit"/>
  	</form>
  	<br/>

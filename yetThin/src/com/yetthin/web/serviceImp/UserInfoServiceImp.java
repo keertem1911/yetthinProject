@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.yetthin.web.common.sendEmailVerify;
 import com.yetthin.web.domain.PhoneVersion;
 import com.yetthin.web.domain.UserInfo;
 import com.yetthin.web.persistence.UserInfoMapper;
@@ -49,9 +50,11 @@ public class UserInfoServiceImp extends BaseService implements UserInfoService{
 		return null;
 	}
 	@Override
-	public String forgetPwd(String phoneNum, String verifyCode, String password) {
+	public String forgetPwd(UserInfo userinfo) {
 		// TODO Auto-generated method stub
-		return null;
+		int i=userInfoMapper.updateByPrimaryKey(userinfo);
+		  
+		return		i==0?"506,添加失败":"200, ";
 	}
 	@Override
 	public String getforgetPwdVerify(String phoneNum) {
@@ -187,5 +190,10 @@ public class UserInfoServiceImp extends BaseService implements UserInfoService{
 		return null;
 	}
 	
+	public int sendEmailVerifyService(String to){
+			int i=0;
+			sendEmailVerify.sendEmail(to, "邮件验证", "");
+			return i;
+	}
 
 }

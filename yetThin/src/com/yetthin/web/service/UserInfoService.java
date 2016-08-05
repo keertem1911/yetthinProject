@@ -7,7 +7,7 @@ import com.yetthin.web.domain.UserInfo;
 
 public interface UserInfoService extends BaseService<UserInfo>{
 	public abstract String getRegisterVerify(String phoneNum);
-	public abstract String forgetPwd(String phoneNum,String verifyCode,String password);
+	public abstract String forgetPwd(UserInfo userinfo);
 	public abstract String getforgetPwdVerify(String phoneNum);
 	public abstract String updateJpushId(String userId,String JpushID,String JpushType);
 	public abstract String updateJpushStatus(String userId,String status);

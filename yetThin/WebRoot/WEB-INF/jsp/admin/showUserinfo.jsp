@@ -60,6 +60,7 @@
 					<td><span>password</span></td>
 					<td><span>jpushID</span></td>
 					<td><span>status</span></td>
+					<td><span>jpushType</span></td>
 					<td><span>删除</span></td>
 				</tr>
 				</thead>
@@ -72,7 +73,8 @@
 					<td><span>${user.email }</span></td>
 					<td><span>${user.password }</span></td>
 					<td><span>${user.jpushId }</span></td>
-					<td><span>${user.status }</span></td>
+					<td><span>${user.jpushStatus }</span></td>
+					<td><span>${user.jpushType }</span></td>
 					<td><a href="${pageContext.request.contextPath }/admin/deleteUserById/${user.userId}"><span class="label label-warning">delete</span></a></td>
 				</tr>
 				 
