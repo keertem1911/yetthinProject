@@ -20,4 +20,6 @@ public interface UserInfoService extends BaseService<UserInfo>{
 	public abstract  UserInfo selectByEmail(String email);
 	public abstract  List<UserInfo> lookIdeaText();
 	public abstract UserInfo getByPhoneAndPassword(String phone, String password);
+	public abstract String checkEmailVerify(String email,String verifyCode);
+	public abstract String changePhoneNum(String userId, String newphoneNum, String password);
 }

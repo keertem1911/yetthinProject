@@ -29,4 +29,8 @@ public interface UserInfoMapper {
     List<UserInfo> lookIdeaText();
 
 	UserInfo selectByPhoneNumAndPassWord(Map<String, String> map);
+	
+	UserInfo  findVerifyEmailByEmail(String email);
+	
+	
 }

@@ -5,9 +5,7 @@ package com.yetthin.web.controller;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 import javax.annotation.Resource;
@@ -16,7 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.collections.iterators.LoopingIterator;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,7 +26,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.util.WebUtils;
 
 import com.alibaba.fastjson.JSON;
 import com.yetthin.web.common.MessageSendToPhone;
@@ -44,8 +40,7 @@ public class UserInfoController extends BaseController{
 
 	@Resource(name="UserInfoService")
 	private UserInfoService userInfoService;
-	//设置验证码时间为2 分钟
-	private static final int VERIFT_COOKIE= 60*30*1000;
+	 
 	private HttpServletRequest request;
 	private HttpServletResponse response;
 	@ModelAttribute
@@ -69,16 +64,14 @@ public class UserInfoController extends BaseController{
 	@ResponseBody
 	@RequestMapping(value="/register",method=RequestMethod.POST,
 			produces = {"application/json;charset=UTF-8"})
-	public String Rigister(@RequestParam("phoneNum")String phoneNum,@RequestParam("password")String password,
-			@RequestParam(value="verifyCode",required=true)String verifyCodes){
+	public String Rigister(@RequestParam("phoneNum")String phoneNum,@RequestParam("password")String password){
 		
 		String msg=null;
 		String statusCode="200";
-		Map<String , Object> map=new HashMap<>();
-		if(!"".equals(phoneNum)&&!"".equals(verifyCodes)&&!"".equals(password)){
+		if(!"".equals(phoneNum)&&!"".equals(password)){
 			password =password.trim();
 			phoneNum=phoneNum.trim();
-			verifyCodes=verifyCodes.trim();
+			 
 			List<UserInfo> lists=userInfoService.getListAll();
 			boolean same=false;
 			for(UserInfo u:lists){
@@ -89,15 +82,7 @@ public class UserInfoController extends BaseController{
 			}//for
 			
 			if(!same){
-				String cookie =(String)request.getSession().getAttribute("verifyRegister");
-				String [] subStr =cookie.split(",");
-				long createTime=Long.parseLong(subStr[0]);
-				long currentTime=System.currentTimeMillis();
-				System.out.println(currentTime-createTime);
-				if((currentTime-createTime)<VERIFT_COOKIE){
-					if(subStr[1].equals(phoneNum)&&subStr[2].equals(verifyCodes)){
-						
-						password= getEncrty(phoneNum+","+password);
+			 	  	password= getEncrty(phoneNum+","+password);
 						
 						UserInfo user=new UserInfo();
 						user.setPassword(password);
@@ -116,17 +101,8 @@ public class UserInfoController extends BaseController{
 							e.printStackTrace();
 						}
 						
-					}else{ // phone != phonereigster verifycode != reigster
-						if(!subStr[1].equals(verifyCodes))
-							msg="验证码错误";	
-						else
-						msg="输入电话号码没有发过验证码";
-						statusCode="509";
-					}
-				}else{ // cookie == null
-					msg="验证码过期";
-					statusCode="510";
-				}
+					 
+				 
 				
 			}else{ //same if 
 				msg="电话号码已注册";
@@ -141,10 +117,9 @@ public class UserInfoController extends BaseController{
 		}
 		
 		
-		map.put("status", statusCode);
-		if(msg!=null&&!"".equals(msg.trim()))
-			map.put("msg",msg);
-		return JSON.toJSONString(map);
+		if(msg==null||"".equals(msg.trim()))
+			msg="";
+		return "{status:\""+statusCode+"\",msg:\""+msg+"\"}";
 
 	}
 	/**
@@ -154,31 +129,20 @@ public class UserInfoController extends BaseController{
 	 */
 	@ResponseBody
 	@RequestMapping(value="/getRegisterVerify",method=RequestMethod.POST,produces = {"application/json;charset=UTF-8"})
-	public Map<String, Object> getRegisterVerify(@RequestParam(value="phoneNum",required=true)String phone){
+	public String getRegisterVerify(@RequestParam(value="phoneNum",required=true)String phone){
 		System.out.println(" getRegisterVerify session    "+request.getSession().getId()+" =================="); 
 		System.out.println("come into getRegisterVerify $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
 		String msg ="";
 		String statusCode="200";
 		if(!"".equals(phone.trim())){
 			
-		String verifyCode="";
-		String results =MessageSendToPhone.sendToRigister(phone,"SMS_10140395","投智星app");
-		String [] resSub=results.split(",");
-		msg=resSub[2].trim();
-		verifyCode=resSub[0];
-		statusCode=resSub[1];
-		HttpSession session = request.getSession();
-		session.setAttribute("verifyRegister", System.currentTimeMillis()+","+phone+","+verifyCode);
-		System.out.println(verifyCode);
-		}else{
+		 }else{
 			msg="电话输入为空";
 			statusCode="503";
 		}
-		Map<String, Object> map=new HashMap<>();
-		if(msg!=null&&!"".equals(msg.trim()))
-		map.put("msg", msg);
-		map.put("status", statusCode);
-		return map;
+		if(msg==null||"".equals(msg.trim()))
+			msg="' '";
+		return "{status:\""+statusCode+"\",msg:\""+msg+"\"}";
 		
 	}
 	/**
@@ -189,7 +153,7 @@ public class UserInfoController extends BaseController{
 	 */
 	@ResponseBody
 	@RequestMapping(value="/login",method=RequestMethod.POST,produces = {"application/json;charset=UTF-8"})
-	public Map<String, Object> login(@RequestParam("phoneNum")String phone,
+	public String login(@RequestParam("phoneNum")String phone,
 			@RequestParam("password")String password,Model model){
 		System.out.println("login session    "+request.getSession().getId()+" =================="); 
 		phone=phone.trim();
@@ -198,7 +162,7 @@ public class UserInfoController extends BaseController{
 		password=getEncrty(phone+","+password);
 		
 		UserInfo u = userInfoService.selectByPhoneNum(phone);
-
+		String item="";
 		String msg="";
 		String statusCode="200";
 		if(u==null){
@@ -210,7 +174,7 @@ public class UserInfoController extends BaseController{
 			 
 			u.setPassword("");
 			u.setIdeaText("");
-			status.put("items", u);
+			item=JSON.toJSONString(u);
 			HttpSession session = request.getSession();
 			String sessionId=session.getId();
 			Cookie cookie=new Cookie("JSESSION", sessionId);
@@ -220,10 +184,9 @@ public class UserInfoController extends BaseController{
 			statusCode="505";
 		}
 		}
-			status.put("status", statusCode);
-			if(msg!=null&&!"".equals(msg.trim()))
-			status.put("msg", msg);
-			return status;
+			if(msg==null||"".equals(msg.trim()))
+				msg="";
+				return "{status:\""+statusCode+"\",msg:\""+msg+"\",item:"+item+"}";
 	}
 	
 	/**
@@ -236,7 +199,7 @@ public class UserInfoController extends BaseController{
 	@ResponseBody
 	@RequestMapping(value="/forgetPwd",method=RequestMethod.POST,
 			produces = {"application/json;charset=UTF-8"})
-	public Map<String, Object>  forgetPwd(@RequestParam(value="phoneNum")String phoneNum,
+	public String  forgetPwd(@RequestParam(value="phoneNum")String phoneNum,
 			@RequestParam(value="verifyCode")String verifyCode,
 			@RequestParam(value="password")String password){
 		System.out.println("forgetPwd session    "+request.getSession().getId()+" =================="); 
@@ -244,18 +207,11 @@ public class UserInfoController extends BaseController{
 		System.out.println("phoneNum="+phoneNum+",verifyCode="+verifyCode+",password="+password);
 		String msg=null;
 		String statusCode="200";
-		 String cookieString =(String)request.getSession().getAttribute("verifyForget");
-		 String [] subStr=cookieString.split(",");
-		 long createTime=Long.parseLong(subStr[0]);
-		 long currentTime=System.currentTimeMillis();
-		if(!"".equals(phoneNum)&&!"".equals(verifyCode)&&!"".equals(password)){
-		if((currentTime-createTime)<VERIFT_COOKIE){
+		  
+		 	if(!"".equals(phoneNum)&&!"".equals(verifyCode)&&!"".equals(password)){
 		 
-			String phoneC=subStr[1];
-			String verifyC=subStr[2];
-			if(verifyC.trim().equals(verifyCode.trim())&&phoneC.equals(phoneNum.trim())){
-				 
-				 
+		 
+			 	 
 				UserInfo userinfo = userInfoService.selectByPhoneNum(phoneNum);
 				if(userinfo!=null){
 					password=getEncrty(phoneNum+","+password);
@@ -272,18 +228,7 @@ public class UserInfoController extends BaseController{
 					msg="用户未注册";
 					statusCode="504";
 				}
-			}else{
-				
-				if(!verifyC.trim().equals(verifyCode.trim()))
-				msg="验证码错误";
-				else
-					msg="输入电话号码没有发过验证码";
-				statusCode="509";
-			}
-		}else{
-			msg="验证码过期";
-			statusCode="510";
-		}
+			 
 		}else{
 			statusCode="503";
 			if("".equals(phoneNum)){
@@ -295,11 +240,9 @@ public class UserInfoController extends BaseController{
 					msg="密码输入为空";
 			}
 		}
-		Map<String, Object> map=new HashMap<>();
-		map.put("status", statusCode);
-		if(msg!=null&&!"".equals(msg.trim()))
-		map.put("msg", msg);
-		return map;
+		if(msg==null||"".equals(msg.trim()))
+		msg=" ' '";
+		return "{status:\""+statusCode+"\",msg:\""+msg+"\"}";
 	
 	}
 	/**
@@ -310,7 +253,7 @@ public class UserInfoController extends BaseController{
 	@ResponseBody
 	@RequestMapping(value="/getforgetPwdVerify",method=RequestMethod.PUT,
 			produces = {"application/json;charset=UTF-8"})
-	public Map<String, Object> getForgetPwdVerify(@RequestParam(value="phoneNum",required=true)String phoneNum){
+	public String getForgetPwdVerify(@RequestParam(value="phoneNum",required=true)String phoneNum){
 		String statusCode="200";
 		System.out.println("getForgetPwdVerify session    "+request.getSession().getId()+" =================="); 
 		String msg=null;
@@ -320,21 +263,14 @@ public class UserInfoController extends BaseController{
 		if(!"".equals(phoneNum.trim())){
 		String verifyCode="";
 		String results =MessageSendToPhone.sendToRigister(phoneNum,"SMS_10140393","投智星app");
-		String [] resSub=results.split(",");
-		msg=resSub[2].trim();
-		verifyCode=resSub[0];
-		statusCode=resSub[1];
-		request.getSession().setAttribute("verifyForget", System.currentTimeMillis()+","+phoneNum+","+verifyCode);
-		System.out.println(verifyCode+ "  msg="+msg);
+	 
 		}else{
 			msg="电话输入为空";
 			statusCode="503";
 		}
-		Map<String, Object> map=new HashMap<>();
-		map.put("status", statusCode);
-		if(msg!=null&&!"".equals(msg))
-		map.put("msg", msg);
-		return map;
+		if(msg==null||"".equals(msg))
+			msg="''";
+			return "{status:\""+statusCode+"\",msg:\""+msg+"\"}";
 	}
 	
 	 
@@ -347,7 +283,7 @@ public class UserInfoController extends BaseController{
 	@ResponseBody
 	@RequestMapping(value="/updateJPushID",method=RequestMethod.PUT,
 			produces = {"application/json;charset=UTF-8"})
-	public Map<String , Object> updateJpushID(@RequestParam("userID")String userId,
+	public String updateJpushID(@RequestParam("userID")String userId,
 			@RequestParam(value="JpushID")String JpushID,@RequestParam(value="phoneType")String type,
 			@RequestParam(value="JpushType")String JpushType){
 			String msg=null;
@@ -378,11 +314,9 @@ public class UserInfoController extends BaseController{
 			msg="用户名或极光ID不能为空";
 			statusCode="503";
 		}
-		Map<String, Object> map=new HashMap<>();
-		map.put("status", statusCode);
-		if(msg!=null&&"".equals(msg.trim()))
-		map.put("msg", msg);
-		return map;
+		if(msg==null||"".equals(msg.trim()))
+			msg="";
+			return "{status:\""+statusCode+"\",msg:\""+msg+"\"}";
 	}
 	/**
 	 * 更新本机推送开关
@@ -393,7 +327,7 @@ public class UserInfoController extends BaseController{
 	@ResponseBody()
 	@RequestMapping(value="/updateJPushStatus",method=RequestMethod.POST,
 			produces = {"application/json;charset=UTF-8"})
-	public Map<String, Object> updateJpushStatus(@RequestParam(value="userID")String userId,
+	public String updateJpushStatus(@RequestParam(value="userID")String userId,
 			@RequestParam(value="JpushStatus")String jpushStatus){
 		String msg=null;
 		String statusCode="200";
@@ -417,12 +351,9 @@ public class UserInfoController extends BaseController{
 			msg="id不能为空或开关为空";
 			statusCode="503";
 		}
-		Map<String, Object> map=new HashMap<>();
-		map.put("status", statusCode);
-		System.out.println("msg ="+msg);
-		if(msg!=null&&"".equals(msg.trim()))
-		map.put("msg", msg);
-		return map;
+		if(msg==null||"".equals(msg.trim()))
+			msg="";
+		return "{status:\""+statusCode+"\",msg:\""+msg+"\"}";
 	}
 	public boolean checkEmail(String email){
 		boolean flag=true;
@@ -449,7 +380,7 @@ public class UserInfoController extends BaseController{
 	 */
 	@ResponseBody
 	@RequestMapping(value="/bindingEmail",method=RequestMethod.PUT,produces = {"application/json;charset=UTF-8"})
-	public Map<String, Object> bindingEmail(@RequestParam(value="userID")String userId,@RequestParam(value="email")String email){
+	public String bindingEmail(@RequestParam(value="userID")String userId,@RequestParam(value="email")String email){
 		String statusCode="200";
 		String msg=null;
 		userId=userId.trim();
@@ -467,11 +398,9 @@ public class UserInfoController extends BaseController{
 			statusCode="507";
 			msg="邮箱格式错误";
 		}
-		Map<String, Object> map=new HashMap<>();
-		map.put("status", statusCode);
-		if(msg!=null&&"".equals(msg))
-		map.put("msg", msg);
-		return map;
+		if(msg==null||"".equals(msg))
+			msg="";
+			return "{status:\""+statusCode+"\",msg:\""+msg+"\"}";
 	}
 	/**
 	 * 更改密码
@@ -482,7 +411,7 @@ public class UserInfoController extends BaseController{
 	 */
 	@ResponseBody
 	@RequestMapping(value="/changePwd",method=RequestMethod.PUT,produces = {"application/json;charset=UTF-8"})
-	public Map<String, Object> changePwd(@RequestParam(value="userID")String userId,
+	public String changePwd(@RequestParam(value="userID")String userId,
 			@RequestParam(value="oldPwd")String oldPassword,
 			@RequestParam(value="newPwd")String newPassword){
 		System.out.println("come into  changePwd $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
@@ -523,12 +452,9 @@ public class UserInfoController extends BaseController{
 			msg="新为空";
 			}
 		}
-		Map<String, Object> map=new HashMap<>();
-		map.put("status", statusCode);
-		if(msg!=null&&"".equals(msg))
-		map.put("msg", msg);
-		return map;
-		
+		if(msg==null||"".equals(msg))
+			msg="";
+		return "{status:\""+statusCode+"\",msg:\""+msg+"\"}";
 	}
 	
 	/**
@@ -539,7 +465,7 @@ public class UserInfoController extends BaseController{
 	 */
 	@ResponseBody
 	@RequestMapping(value="/feedback",method=RequestMethod.PUT,produces = {"application/json;charset=UTF-8"})
-	public Map<String, Object> feedBack(@RequestParam(value="userID",required=true)String userId,
+	public String feedBack(@RequestParam(value="userID",required=true)String userId,
 			@RequestParam(value="ideaText",required=false)String ideaText){
 		System.out.println("come into feedback $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
 		String statusCode="200";
@@ -558,16 +484,19 @@ public class UserInfoController extends BaseController{
 					msg="用户ID为空";
 			else msg="反馈内容为空";
 		}
-		Map<String, Object> map=new HashMap<>();
-		map.put("status", statusCode);
-		if(msg!=null&&!"".equals(msg))
-		map.put("msg", msg);
-		return map;
+		if(msg==null||"".equals(msg))
+			msg="";
+		return "{status:\""+statusCode+"\",msg:\""+msg+"\"}";
 	}
+	/**
+	 * 更新头像 
+	 * @param file
+	 * @param userId
+	 * @return
+	 */
 	@ResponseBody 
-	@RequestMapping(value="/uploadPicture")
-	public Map<String, Object> updatePicture(@RequestParam("file")MultipartFile file,@RequestParam("userID")String userId){
-		Map<String, Object> map=new HashMap<>();
+	@RequestMapping(value="/uploadPicture",produces = {"application/json;charset=UTF-8"})
+	public String updatePicture(@RequestParam("file")MultipartFile file,@RequestParam("userID")String userId){
 		String msg=null;
 		String statusCode="200";
 		if(!"".equals(userId)&&file!=null){
@@ -596,19 +525,55 @@ public class UserInfoController extends BaseController{
 			msg="输入不能为空";
 			statusCode="503";
 		}
-		map.put("status", statusCode);
-		if(msg!=null&&!"".equals(msg))
-			map.put("msg", msg);
-		return map;
+		if(msg==null||"".equals(msg))
+			msg="";
+		return "{status:\""+statusCode+"\",msg:\""+msg+"\"}";
 	}
 	 @ResponseBody
-	@RequestMapping(value="/getSplash",method=RequestMethod.GET)
+	@RequestMapping(value="/getSplash",method=RequestMethod.GET,produces = {"application/json;charset=UTF-8"})
 	 public String  getSplash(){
 		String jsessionid=request.getSession().getId();
 		System.out.println("getSplash session    "+request.getSession().getId()+" =================="); 
 		
-			return "{JSESSION:"+jsessionid+",img:\"/img/start.png\",status:200}";
+			return "{JSESSION:\""+jsessionid+"\",img:\"/img/start.png\",status:\"200\"}";
 	 }
+	 /**
+	  * 邮箱激活回调
+	  * @param email
+	  * @param verifyEmail
+	  * @return
+	  */
+	 
+	 @RequestMapping(value="/emailCallback",method=RequestMethod.GET,produces = {"application/json;charset=UTF-8"})
+	public String emailCallback(@RequestParam(value="email")String email,
+			@RequestParam(value="verifyEmail")String verifyEmail){
+		 String msg="";
+		 String statusCode="200";
+		 msg=userInfoService.checkEmailVerify(email, verifyEmail);
+		request.setAttribute("email", email);
+		request.setAttribute("msg", msg);
+		 if(!msg.equals("200")){
+			 statusCode="511";
+			 return "/bindingEmail/error";
+		 }else{
+			 return "/bindingEmail/success";
+			 
+		 }
+	}
 	
-	
+	 @ResponseBody
+	 @RequestMapping(value="/changePhone",method=RequestMethod.POST,produces = {"application/json;charset=UTF-8"})
+	 public String changePhoneNum(@RequestParam(value="userID")String userId,
+			 @RequestParam(value="newPhoneNum")String NewphoneNum,@RequestParam(value="password")String password){
+		 String statusCode="200";
+		 String msg="";
+		 msg=userInfoService.changePhoneNum(userId,NewphoneNum,password);
+		 if("200".equals(msg.trim())){
+			 msg="";
+		 }else{
+			 statusCode=msg.split(",")[0];
+			 msg=msg.split(",")[1];
+		 }
+		 return "{status:\""+statusCode+"\",msg=\""+msg+"\"}";
+	 }
 }

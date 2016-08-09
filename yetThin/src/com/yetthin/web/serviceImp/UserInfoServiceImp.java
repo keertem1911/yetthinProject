@@ -1,5 +1,9 @@
 package com.yetthin.web.serviceImp;
 
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +25,8 @@ public class UserInfoServiceImp extends BaseService implements UserInfoService{
 
 	@Autowired
 	private UserInfoMapper userInfoMapper;
+	
+	private SimpleDateFormat  sf=new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
 	@Transactional(propagation=Propagation.REQUIRED,isolation=Isolation.READ_UNCOMMITTED)
 	@Override
 	public UserInfo get(String id) {
@@ -115,7 +121,22 @@ public class UserInfoServiceImp extends BaseService implements UserInfoService{
 		}else{
 		
 			ui.setEmail(email);
+			ui.setVerifyEmail(getEncrty(email));
+			String date1=simple.format(new Date(System.currentTimeMillis()+28800000));
+			ui.setRegisterTime(date1);
+			ui.setEmailStatus("0");
 			int i=userInfoMapper.updateByPrimaryKeySelective(ui);
+			StringBuffer sb=new StringBuffer();
+			sb.append("<html><head></head><body><h2>复制下面链接到浏览器激活账号，8小时生效，否则重新注册账号</h2><br/>");
+		//	sb.append("                        <a href=\""+EMAIL_CALLBACK_ADDRESS+"?email="+email+"&verifyEmail="+getEncrty(email)+"\">");
+			sb.append(""+EMAIL_CALLBACK_ADDRESS+"?email="+email+"&verifyEmail="+getEncrty(email));
+
+		//	sb.append("</a>");
+			sb.append("</body></htmk>");
+			
+			
+			System.out.println(sb.toString());
+			getSender().sendEmail(email, "投智星邮件绑定验证",sb.toString());
 			if(i==0){
 				msg="更新失败";
 				statusCode="506";
@@ -192,8 +213,74 @@ public class UserInfoServiceImp extends BaseService implements UserInfoService{
 	
 	public int sendEmailVerifyService(String to){
 			int i=0;
-			sendEmailVerify.sendEmail(to, "邮件验证", "");
+			getSender().sendEmail(to, "邮件验证", "");
 			return i;
 	}
 
+	@Override
+	public String checkEmailVerify(String email, String verifyCode)  {
+		// TODO Auto-generated method stub
+		String error="";
+		UserInfo user= userInfoMapper.findVerifyEmailByEmail(email);
+		 if(user!=null){
+			 	Date date= new Date();
+			 	Date date2=null;
+			 	try {
+					date2=simple.parse(user.getRegisterTime());
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			 	if(date.before(date2)){
+			 		if(user.getVerifyEmail().equals(verifyCode.trim())){
+			 			System.out.println("激活成功！！！");
+			 			user.setRegisterTime(simple.format(new Date(System.currentTimeMillis())));
+			 			user.setEmailStatus("1");
+			 			userInfoMapper.updateByPrimaryKeySelective(user);
+			 			error="200";
+			 		}else{
+			 			error="验证信息错误";
+			 		}
+			 	}else{
+			 		error="验证链接过期";
+			 	}
+		 }else{
+			 error="用户不存在";
+		 }
+		return error;
+	}
+
+	@Override
+	public String changePhoneNum(String userId, String newphoneNum, String password) {
+		// TODO Auto-generated method stub
+		String statusCode="200";
+		String msg="200";
+		UserInfo user=userInfoMapper.selectByPrimaryKey(userId);
+		if(user!=null){
+			String phoneOld=user.getPhoneNum();
+			password=getEncrty(phoneOld+","+password);
+			if(password.trim().equals(user.getPassword())){
+					user.setPhoneNum(newphoneNum);
+					user.setPassword(newphoneNum+","+password);
+					System.out.println(user);
+					int i =userInfoMapper.updateByPrimaryKey(user);
+					if(i==0){
+						statusCode="506";
+					 	msg=",更新失败";
+					}
+			}else{// 密码错误
+				msg=",密码错误";
+				statusCode="505";
+			}
+					
+		}else{ //user ==null
+			msg=",用户不存在";
+			statusCode="504";
+		}
+		
+		if(statusCode.equals("200"))
+			msg="";
+		
+		return statusCode+msg;
+	}
 }

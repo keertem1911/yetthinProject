@@ -1,5 +1,8 @@
 package com.yetthin.web.domain;
 
+import java.sql.Timestamp;
+import java.util.Date;
+
 public class UserInfo {
     private String userId;
 
@@ -19,9 +22,41 @@ public class UserInfo {
     // 推送类型
     private String jpushType;
  
+    private String verifyEmail;
+    
+     private String registerTime;
      
-    
-    
+     private String emailStatus;
+     public String getEmailStatus() {
+		return emailStatus;
+	}
+     public void setEmailStatus(String emailStatus) {
+		this.emailStatus = emailStatus;
+	}
+     
+     
+     
+	public String getRegisterTime() {
+		return registerTime;
+	}
+	
+	public void setRegisterTime(String registerTime) {
+		this.registerTime = registerTime;
+	}
+	public String getVerifyEmail() {
+		return verifyEmail;
+	}
+
+
+
+
+	public void setVerifyEmail(String verifyEmail) {
+		this.verifyEmail = verifyEmail;
+	}
+
+
+
+
 	public UserInfo( ) {
 		super();
 		this.userId = "";
@@ -33,6 +68,9 @@ public class UserInfo {
 		this.jpushStatus = 1;
 		this.ideaText = "";
 		this.jpushType = "";
+		this.verifyEmail="false";
+		this.registerTime="";		
+		emailStatus="0";
 	}
 
 
@@ -160,25 +198,14 @@ public class UserInfo {
 	public void setJpushType(String jpushType) {
 		this.jpushType = jpushType;
 	}
-
-
-
-
 	@Override
 	public String toString() {
 		return "UserInfo [userId=" + userId + ", phoneNum=" + phoneNum + ", myMoney=" + myMoney + ", email=" + email
 				+ ", password=" + password + ", jpushId=" + jpushId + ", jpushStatus=" + jpushStatus + ", ideaText="
-				+ ideaText + ", jpushType=" + jpushType + "]";
+				+ ideaText + ", jpushType=" + jpushType + ", verifyEmail=" + verifyEmail + ", registerTime="
+				+ registerTime + "]";
 	}
-	 
 
-
-
-	 
-
-	 
-	 
-
-	 
-    
+ 
+	
 }

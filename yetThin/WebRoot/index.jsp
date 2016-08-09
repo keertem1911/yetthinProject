@@ -30,16 +30,16 @@
  	 	<label>register</label>
  	 	<input type="text" name="phoneNum" placeholder="电话号码"/>
  		<input type="password" name="password" placeholder="密码"/>
- 		<input type="text" value="" name="verifyCode" placeholder="验证码"/>
- 		
+ 		<!-- <input type="text" value="" name="verifyCode" placeholder="验证码"/>
+ 	 -->	
  		<input type="submit" value="submit"  />
  	</form>
  	<br/>
- 	<form action="${pageContext.request.contextPath }/user/getRegisterVerify" method="post">
+ <%-- 	<form action="${pageContext.request.contextPath }/user/getRegisterVerify" method="post">
  	 	<label>getRegisterVerify</label>
  		<input name="phoneNum" type="text" placeholder="电话号码"/>
  		<input type="submit" value="submit"/>
- 	</form>
+ 	</form> --%>
  	<br/>
  	<form action="${pageContext.request.contextPath }/user/login" method="post">
  	 	<label>login</label>
@@ -48,7 +48,7 @@
  		<input type="submit" value="submit"  />
  	</form>
  	<br/>
- 	<form action="${pageContext.request.contextPath }/user/forgetPwd" method="post">
+ <%-- 	<form action="${pageContext.request.contextPath }/user/forgetPwd" method="post">
  	 	<label>forgetPwd</label>
  		<input name="phoneNum" type="text" placeholder="电话号码"/>
  		<input name="verifyCode" type="text" value="" placeholder="验证码"  />
@@ -61,7 +61,7 @@
  		<input name="phoneNum" type="text" placeholder="电话号码"/>
  		<input name="_method" type="hidden" value="put" />
  		<input type="submit" value="submit"/>
- 	</form>
+ 	</form> --%>
  	<br/>
  	<form action="${pageContext.request.contextPath }/user/updateJPushID"  id="updateJpushIDForm" method="post">
  	
@@ -119,7 +119,16 @@
 		File: <input type="file" name="file"/>
 		Desc: <input type="text" name="userID"/>
 		<input type="submit" value="Submit"/>
+	</form> <br/>
+	
+		<form action="${pageContext.request.contextPath }/user/changePhone" method="POST" >
+		<label>changePhone</label>
+		 <input type="text" name="newPhoneNum" placeholder="新手机号"/>
+		<input type="text" name="userID" placeholder="用户ID"/>
+			<input type="password" name="password" placeholder="密码"/>
+		<input type="submit" value="Submit"/>
 	</form>
+	
  	<br/>
   </div>
 </body>
