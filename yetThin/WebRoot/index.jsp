@@ -130,6 +130,17 @@
 	</form>
 	
  	<br/>
+ 	<form method="post" action="${pageContext.request.contextPath }/jtdoa/getL1">
+ 	<label>L1</label>
+ 	 
+ 	<input type="submit" value="submit"/>
+ 	</form>
+ 	<br/>
+ 	<form method="get" action="${pageContext.request.contextPath }/jtdoa/login">
+ 	<label>login</label>
+ 	 
+ 	<input type="submit" value="submit"/>
+ 	</form>
   </div>
 </body>
 </html>

@@ -1,13 +1,24 @@
 package util;
 
-import org.springframework.stereotype.Service;
+import java.util.HashMap;
+import java.util.Map;
+
+import redis.clients.jedis.Jedis;
 
 public class JTdoa {
 	private boolean logined=false;//初始false登陆成功回调里改为true
 	private boolean connected=false;//初始false连接成功回调里改为true;
 	
+	
+	
+	private static Jedis jedis_M=null;
+	private Jedis jedis_S=null;
+	static{
+		jedis_M=new Jedis("127.0.0.1",6379);
+	}
 	public JTdoa() {
-		// TODO Auto-generated constructor stub
+		  	 
+//		// TODO Auto-generated constructor stub
  	}
 	
 	public boolean isLogined() {
@@ -41,7 +52,11 @@ public class JTdoa {
 		this.connected=true;
 	}
 	
-	void disconnected(){}
+	void disconnected(){
+		
+	//	JedisPoolUtil.release(pool, jedis_M);
+		
+	}
 	
 	void logined( long userId, long loginCode, String message)
 	{
@@ -52,15 +67,30 @@ public class JTdoa {
 		System.out.println(userId+" "+loginCode+" "+message);
 		logined=true;
 	}
-	
+	/**
+	 * level2 买卖方摆单
+	 * @param tickId
+	 * @param symbol  股票代码
+	 * @param exchange 市场
+	 * @param currency 货币
+	 * @param market
+	 * @param side 1为卖 0 为买
+	 * @param price
+	 * @param size 摆单数量
+	 * @param checksum 层数
+	 */
 	void updateMktDepth( long tickId, String symbol,String exchange,String currency, String market, int side, double price, int size, int checksum)
 	{
 		/*****************
 		 * 摆单报价数据更新推送
 		 */
 		/*以下代码可自由定义*/
-		System.out.println("update");
-		System.out.println(symbol+exchange+market);
+		jedis_M.select(1);
+		Map<String, String> map=new HashMap<>();
+		map.put(side+":"+checksum, price+":"+size);
+		jedis_M.hmset(symbol+":"+exchange, map);
+		System.out.println("updateMktDepth ");
+	 	System.out.println("symbol = "+symbol+",exchange="+exchange+",market="+market+",currency="+currency+",side="+side+",price="+price+",checksum="+checksum);
 	}
 	
 	void orderStatus( long tickId, Order order, OrderState orderState,Contract contract){}
@@ -71,7 +101,17 @@ public class JTdoa {
 		 * L1报价数据更新推送
 		 */
 		/*以下代码可自由定义*/
-		System.out.println(tickId+" "+symbol+" "+secType+" "+currency+" "+tickType+" "+L1Value+" "+size);
+		StringBuffer sb=new StringBuffer();
+		sb.append("secType="+secType);
+		sb.append(",currency="+ currency);
+		sb.append(",tickType="+ Integer.toString(tickType));
+		sb.append(",L1Value="+ L1Value);
+		sb.append(",size="+ Integer.toString(size));
+		jedis_M.select(0);
+		jedis_M.hset(exchange, symbol,sb.toString());
+		
+		System.out.println("tickGeneric udpate "+jedis_M.hgetAll(symbol+":"+exchange));
+		System.out.println("symbol="+symbol+",secType="+secType+",exchange="+exchange+",currency"+currency+",tickType="+tickType+",L1Value="+L1Value+",size="+size);
 	}
 	
 	void tickPrice( long tickId,String symbol,String secType,String exchange,String currency, double price, String time, long volume)
@@ -90,7 +130,7 @@ public class JTdoa {
 	void timerFunction(){}
 	void updateClient( String version){}
 	void updateSymbol( SymbolStruct symbol, int sendFlag,int flag){}
-	void updateMarket( String enStatement, String zhStatement, String type, boolean last){}
+	void updateMarket(String enStatement, String zhStatement, String type, boolean last){}
 	void updateUserAccountState( int state, String secType){}
 	
 	
@@ -175,9 +215,9 @@ public class JTdoa {
 		}
 		
 		Contract contract=new Contract();
-		contract.symbol="002001";
-		contract.currency="CNY";
-		contract.exchange="SZ";
+		contract.symbol="603737"; 
+		contract.currency="CNY"; 
+		contract.exchange="SH";
 		contract.secType="STK";
 		System.out.println("hello");
 		int status=jda.TDOASubscribeMarketDepth(4, contract, 5);
