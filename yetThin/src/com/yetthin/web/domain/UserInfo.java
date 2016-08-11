@@ -20,6 +20,7 @@ public class UserInfo {
     //建议
     private String ideaText;
     // 推送类型
+    // 1 自选股 2 股票预警 3 公共信息
     private String jpushType;
  
     private String verifyEmail;

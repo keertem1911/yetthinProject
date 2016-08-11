@@ -3,18 +3,20 @@ package util;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.yetthin.web.common.RedisUtil;
+
 import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
 
 public class JTdoa {
 	private boolean logined=false;//初始false登陆成功回调里改为true
 	private boolean connected=false;//初始false连接成功回调里改为true;
 	
-	
+	private static JedisPool poolM=RedisUtil.getInstanceMsater();
 	
 	private static Jedis jedis_M=null;
-	private Jedis jedis_S=null;
 	static{
-		jedis_M=new Jedis("127.0.0.1",6379);
+		jedis_M=poolM.getResource();
 	}
 	public JTdoa() {
 		  	 
@@ -87,8 +89,9 @@ public class JTdoa {
 		/*以下代码可自由定义*/
 		jedis_M.select(1);
 		Map<String, String> map=new HashMap<>();
-		map.put(side+":"+checksum, price+":"+size);
+		map.put(side+":"+checksum, price+":"+size+":"+exchange+":"+currency);
 		jedis_M.hmset(symbol+":"+exchange, map);
+		
 		System.out.println("updateMktDepth ");
 	 	System.out.println("symbol = "+symbol+",exchange="+exchange+",market="+market+",currency="+currency+",side="+side+",price="+price+",checksum="+checksum);
 	}

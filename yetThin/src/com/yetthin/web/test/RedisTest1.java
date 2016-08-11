@@ -23,6 +23,7 @@ import util.Level1Value;
 public class RedisTest1 {
 	
 	private static Jedis jedis=new Jedis("127.0.0.1",6379);
+	
 	// 模糊匹配 查询key
 	public  void getL2BysideAndCheckSum(String symbol,int side,int checkSum) {
 		
@@ -66,7 +67,7 @@ public class RedisTest1 {
 	public static void main(String[] args) {
 		RedisTest1 test = new RedisTest1();
 		ReadTextSymbol sy=new ReadTextSymbol();
-		List<String> lists=sy.readSymolByString();
+		List<String> lists=sy.readSymolByString("src/symbol.txt");
 		for (int i = 0; i < lists.size(); i++) {
 			System.out.println(lists.get(i));
 			test.getL2BysideAndCheckSum(lists.get(i), 1, 2);

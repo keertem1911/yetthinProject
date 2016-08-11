@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.yetthin.web.common.JtdoaUtil;
@@ -14,16 +15,16 @@ import util.JTdoa;
 
 public class ReadTextSymbol {
 	
- 	private static JTdoa jtdoa=JtdoaUtil.getInstance();
+  	private static JTdoa jtdoa=JtdoaUtil.getInstance();
 	public void jtdoaFun(Contract contract){
 		jtdoa.TDOASubscribeMarketDepth(5, contract, 3);
 	}
-	public List<String> readSymolByString(){
+	public List<String> readSymolByString(String path){
 		BufferedReader reader=null;
 		List<String> lists=new ArrayList<>();
 		try {
 			 reader=new BufferedReader(
-					new InputStreamReader(new FileInputStream("src/symbol.txt")));
+					new InputStreamReader(new FileInputStream(path)));
 			String line=null;
 			while((line=reader.readLine())!=null){
 				String [] sub=line.split("[.]");
@@ -47,12 +48,12 @@ public class ReadTextSymbol {
 		}
 		return lists;
 	}
-	public List<Contract> readTextByContract(){
+	public List<Contract> readTextByContract(String path){
 		BufferedReader reader=null;
 		List<Contract> lists=new ArrayList<>();
 		try {
 			 reader=new BufferedReader(
-					new InputStreamReader(new FileInputStream("src/symbol.txt")));
+					new InputStreamReader(new FileInputStream(path)));
 			String line=null;
 			while((line=reader.readLine())!=null){
 				String [] sub=line.split("[.]");
@@ -80,8 +81,10 @@ public class ReadTextSymbol {
 		}
 		return lists;
 	}
+	
 	public static void main(String[] args) {
 		ReadTextSymbol readerObj = new ReadTextSymbol();
-		
+		List<String > lists=readerObj.readSymolByString("src/symbol.txt");
+		System.out.println(Arrays.asList(lists));
 	}
 }

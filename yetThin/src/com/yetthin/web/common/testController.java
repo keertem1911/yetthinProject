@@ -119,9 +119,11 @@ public class testController {
 //			s1 =new  testController().sendPost("http://www.cktim.net/yetThin/user/getRegisterVerify",  
 //			    "phoneNum=18829290541");
 //			Thread.sleep(4000);
-//			System.out.println(" 注册     =====");
-			s1 =new  testController().sendPost("http://localhost:8080/yetThin/user/getSplash",  
-			    "");
+//			
+			
+ 
+			s1 =new  testController().sendPost("http://localhost:8080/yetThin/user/updateJPushStatus",  
+			    "userID=4018787c83f9485ebe6c3d4614d8a6a9&JpushStatus=1&JpushType=1");
 			Thread.sleep(4000);
 			
 //			s1 =new  testController().sendPost("http://www.cktim.net/yetThin/user/register",  

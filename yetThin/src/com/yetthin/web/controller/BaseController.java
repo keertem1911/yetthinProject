@@ -3,8 +3,12 @@ package com.yetthin.web.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.yetthin.web.common.Md5UnitTool;
 
@@ -14,6 +18,15 @@ public class BaseController {
 	// 设置 COOKIE 标志位
 	private static final String AUTH_COOKIE_NAME = "yetthin";
 
+	protected    HttpServletRequest request;
+	protected HttpServletResponse response;
+	
+	@ModelAttribute
+	public void setReqAndRes(HttpServletRequest request, HttpServletResponse response){  
+        this.request = request;  
+        this.response = response;  
+         
+    } 
 	// 设置Cookie 的持续时间
 	// 长 1个月
 	private static final int longLogin = 60 * 60 * 24 * 30;

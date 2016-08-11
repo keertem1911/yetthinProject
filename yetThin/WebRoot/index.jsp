@@ -48,20 +48,20 @@
  		<input type="submit" value="submit"  />
  	</form>
  	<br/>
- <%-- 	<form action="${pageContext.request.contextPath }/user/forgetPwd" method="post">
+ 	<form action="${pageContext.request.contextPath }/user/forgetPwd" method="post">
  	 	<label>forgetPwd</label>
  		<input name="phoneNum" type="text" placeholder="电话号码"/>
- 		<input name="verifyCode" type="text" value="" placeholder="验证码"  />
+ 		 
  		<input name="password" type="password" placeholder="密码"/>
  		<input type="submit" value="submit"/>
- 	</form>
+ 	</form><!-- 
  	<br/>
  	<form action="${pageContext.request.contextPath }/user/getforgetPwdVerify" method="post">
  	 	<label>getforgetPwdVerify</label>
  		<input name="phoneNum" type="text" placeholder="电话号码"/>
  		<input name="_method" type="hidden" value="put" />
  		<input type="submit" value="submit"/>
- 	</form> --%>
+ 	</form>  -->
  	<br/>
  	<form action="${pageContext.request.contextPath }/user/updateJPushID"  id="updateJpushIDForm" method="post">
  	
@@ -69,12 +69,13 @@
  		<input name="userID" type="text" placeholder="用户Id" />
  		<input name="JpushID" type="text" placeholder="更新极光ID" />
  		<input name="_method" type="hidden" value="put" />
- 		 <input name="JpushType" value="推送类型保留" type="text" />
+ 		 
  		<select name="phoneType" >
  			<option value="0">推送极光的客户端</option>
  			<option value="1">Android</option>
  			<option value="-1">IOS</option>
  		</select>
+ 		
  		<input type="submit" value="submit"/>
  	</form>
  	<br/>
@@ -82,6 +83,7 @@
  	 	<label>updateJPushStatus</label>
  		<input name="userID" type="text" placeholder="用户ID"/>
  		<input name="JpushStatus" type="text" placeholder="推送极光的开关 1关闭 0打开" />
+ 		<input type="text" name="JpushType" placeholder="推送类型"/>
  		<input type="submit" value="submit"/>
  	</form>
  	<br/>
@@ -130,17 +132,7 @@
 	</form>
 	
  	<br/>
- 	<form method="post" action="${pageContext.request.contextPath }/jtdoa/getL1">
- 	<label>L1</label>
- 	 
- 	<input type="submit" value="submit"/>
- 	</form>
- 	<br/>
- 	<form method="get" action="${pageContext.request.contextPath }/jtdoa/login">
- 	<label>login</label>
- 	 
- 	<input type="submit" value="submit"/>
- 	</form>
+  	<a href="Jdtoa.jsp">查看行情接口</a>
   </div>
 </body>
 </html>

@@ -10,7 +10,7 @@ public interface UserInfoService extends BaseService<UserInfo>{
 	public abstract String forgetPwd(UserInfo userinfo);
 	public abstract String getforgetPwdVerify(String phoneNum);
 	public abstract String updateJpushId(String userId,String JpushID,String JpushType);
-	public abstract String updateJpushStatus(String userId,String status);
+	public abstract String updateJpushStatus(String userId,String status,String JpushType);
 	public abstract String bindingEmail(String userID,String email);
 	public abstract String changePwd(UserInfo u);
 	public abstract PhoneVersion checkNewVersion();

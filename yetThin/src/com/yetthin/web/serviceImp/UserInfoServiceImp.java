@@ -89,7 +89,7 @@ public class UserInfoServiceImp extends BaseService implements UserInfoService{
 		return statusCode+"="+msg;
 	}
 	@Override
-	public String updateJpushStatus(String userId, String jpushStatus) {
+	public String updateJpushStatus(String userId, String jpushStatus,String JpushType) {
 		// TODO Auto-generated method stub
 		String statusCode="200";
 		String msg=null;
@@ -100,6 +100,7 @@ public class UserInfoServiceImp extends BaseService implements UserInfoService{
 		}else{
 		
 			ui.setJpushStatus(Integer.parseInt(jpushStatus));
+			ui.setJpushType(JpushType);
 			int i=userInfoMapper.updateByPrimaryKeySelective(ui);
 			if(i==0){
 				statusCode="506";

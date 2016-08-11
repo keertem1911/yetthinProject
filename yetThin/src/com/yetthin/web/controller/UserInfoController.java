@@ -41,12 +41,10 @@ public class UserInfoController extends BaseController{
 	@Resource(name="UserInfoService")
 	private UserInfoService userInfoService;
 	 
-	private HttpServletRequest request;
-	private HttpServletResponse response;
 	@ModelAttribute
 	public void setReqAndRes(HttpServletRequest request, HttpServletResponse response){  
-        this.request = request;  
-        this.response = response;  
+        super.request = request;  
+        super.response = response;  
          
     }  
 	@InitBinder  
@@ -117,8 +115,8 @@ public class UserInfoController extends BaseController{
 		}
 		
 		
-		if(msg==null||"".equals(msg.trim()))
-			msg="";
+		if(msg==null||"null".equals(msg))
+			msg="\'\'";
 		return "{status:\""+statusCode+"\",msg:\""+msg+"\"}";
 
 	}
@@ -140,8 +138,8 @@ public class UserInfoController extends BaseController{
 			msg="电话输入为空";
 			statusCode="503";
 		}
-		if(msg==null||"".equals(msg.trim()))
-			msg="' '";
+		if(msg==null||"null".equals(msg))
+			msg="\'\'";
 		return "{status:\""+statusCode+"\",msg:\""+msg+"\"}";
 		
 	}
@@ -162,7 +160,7 @@ public class UserInfoController extends BaseController{
 		password=getEncrty(phone+","+password);
 		
 		UserInfo u = userInfoService.selectByPhoneNum(phone);
-		String item="";
+		String item="\"\"";
 		String msg="";
 		String statusCode="200";
 		if(u==null){
@@ -182,10 +180,11 @@ public class UserInfoController extends BaseController{
 		}else{
 			msg="密码错误";
 			statusCode="505";
+			
 		}
 		}
-			if(msg==null||"".equals(msg.trim()))
-				msg="";
+		if(msg==null||"null".equals(msg))
+			msg="\'\'";
 				return "{status:\""+statusCode+"\",msg:\""+msg+"\",item:"+item+"}";
 	}
 	
@@ -200,15 +199,13 @@ public class UserInfoController extends BaseController{
 	@RequestMapping(value="/forgetPwd",method=RequestMethod.POST,
 			produces = {"application/json;charset=UTF-8"})
 	public String  forgetPwd(@RequestParam(value="phoneNum")String phoneNum,
-			@RequestParam(value="verifyCode")String verifyCode,
 			@RequestParam(value="password")String password){
 		System.out.println("forgetPwd session    "+request.getSession().getId()+" =================="); 
 		System.out.println("come into forgetPwd $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
-		System.out.println("phoneNum="+phoneNum+",verifyCode="+verifyCode+",password="+password);
 		String msg=null;
 		String statusCode="200";
 		  
-		 	if(!"".equals(phoneNum)&&!"".equals(verifyCode)&&!"".equals(password)){
+		 	if(!"".equals(password)){
 		 
 		 
 			 	 
@@ -233,15 +230,10 @@ public class UserInfoController extends BaseController{
 			statusCode="503";
 			if("".equals(phoneNum)){
 			msg="电话输入为空";
-			}else{
-				if("".equals(verifyCode))
-				msg="验证码输入为空";
-				else
-					msg="密码输入为空";
-			}
+			} 
 		}
-		if(msg==null||"".equals(msg.trim()))
-		msg=" ' '";
+		 	if(msg==null||"null".equals(msg))
+				msg="\'\'";
 		return "{status:\""+statusCode+"\",msg:\""+msg+"\"}";
 	
 	}
@@ -268,8 +260,8 @@ public class UserInfoController extends BaseController{
 			msg="电话输入为空";
 			statusCode="503";
 		}
-		if(msg==null||"".equals(msg))
-			msg="''";
+		if(msg==null||"null".equals(msg))
+			msg="\'\'";
 			return "{status:\""+statusCode+"\",msg:\""+msg+"\"}";
 	}
 	
@@ -284,16 +276,15 @@ public class UserInfoController extends BaseController{
 	@RequestMapping(value="/updateJPushID",method=RequestMethod.PUT,
 			produces = {"application/json;charset=UTF-8"})
 	public String updateJpushID(@RequestParam("userID")String userId,
-			@RequestParam(value="JpushID")String JpushID,@RequestParam(value="phoneType")String type,
-			@RequestParam(value="JpushType")String JpushType){
-			String msg=null;
+			@RequestParam(value="JpushID")String JpushID,@RequestParam(value="phoneType")String type){
+			String msg="''";
 		String statusCode="200";
  		     
  		 HttpSession session = request.getSession();
  		 System.out.println(session.getId()+" ididididididididid");
  		 if(session.getAttribute("type")!=null )
  			System.out.println(" $$$$$$$$$$$      "+type+"   ￥￥￥￥￥￥￥￥￥￥￥￥￥");
-		if(!"".equals(userId)&&!"".equals(JpushID)&&!"".equals(type)&&!"".equals(JpushType)){
+		if(!"".equals(userId)&&!"".equals(JpushID)&&!"".equals(type)){
 			userId=userId.trim();
 			JpushID =JpushID.trim();
 	 	session.setAttribute("phoneType", type);
@@ -303,7 +294,7 @@ public class UserInfoController extends BaseController{
 		response.addCookie(cookie);
 		System.out.println("come into updateJpushID $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
 		System.out.println(userId+"="+JpushID);
-		msg=userInfoService.updateJpushId(userId, JpushID,JpushType);
+		msg=userInfoService.updateJpushId(userId, JpushID,"0");
 		String []subStr=msg.split("=");
 		if(subStr[1]!=null){
 			msg=subStr[1];
@@ -314,9 +305,11 @@ public class UserInfoController extends BaseController{
 			msg="用户名或极光ID不能为空";
 			statusCode="503";
 		}
-		if(msg==null||"".equals(msg.trim()))
-			msg="";
-			return "{status:\""+statusCode+"\",msg:\""+msg+"\"}";
+		System.out.println("msagmsgmsgmsmg "+msg);
+		if(msg==null||"null".equals(msg))
+			msg="\'\'";
+		 
+			return "{status:\""+statusCode+"\",msg:"+msg+"}";
 	}
 	/**
 	 * 更新本机推送开关
@@ -328,15 +321,16 @@ public class UserInfoController extends BaseController{
 	@RequestMapping(value="/updateJPushStatus",method=RequestMethod.POST,
 			produces = {"application/json;charset=UTF-8"})
 	public String updateJpushStatus(@RequestParam(value="userID")String userId,
-			@RequestParam(value="JpushStatus")String jpushStatus){
-		String msg=null;
+			@RequestParam(value="JpushStatus")String jpushStatus,
+			@RequestParam(value="JpushType")String JpushType){
+		String msg="\"\"";
 		String statusCode="200";
 		if(!"".equals(userId)&&!"".equals(jpushStatus)){
 			userId =userId.trim();
 			jpushStatus=jpushStatus.trim();
 			if(jpushStatus.equals("1")||jpushStatus.equals("0")){
 			System.out.println("come into updateJpushStatus $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
-		String flag=userInfoService.updateJpushStatus(userId, jpushStatus);
+		String flag=userInfoService.updateJpushStatus(userId, jpushStatus,JpushType);
 		String [] subStr=flag.split("=");
 		if(subStr[1]!=null){
 			msg=subStr[1];
@@ -351,7 +345,7 @@ public class UserInfoController extends BaseController{
 			msg="id不能为空或开关为空";
 			statusCode="503";
 		}
-		if(msg==null||"".equals(msg.trim()))
+		if(msg==null||"null".equals(msg.trim()))
 			msg="";
 		return "{status:\""+statusCode+"\",msg:\""+msg+"\"}";
 	}
@@ -382,7 +376,7 @@ public class UserInfoController extends BaseController{
 	@RequestMapping(value="/bindingEmail",method=RequestMethod.PUT,produces = {"application/json;charset=UTF-8"})
 	public String bindingEmail(@RequestParam(value="userID")String userId,@RequestParam(value="email")String email){
 		String statusCode="200";
-		String msg=null;
+		String msg="\"\"";
 		userId=userId.trim();
 		email=email.trim();
 		if(checkEmail(email)){
@@ -398,8 +392,8 @@ public class UserInfoController extends BaseController{
 			statusCode="507";
 			msg="邮箱格式错误";
 		}
-		if(msg==null||"".equals(msg))
-			msg="";
+		if(msg==null||"null".equals(msg))
+			msg="\'\'";
 			return "{status:\""+statusCode+"\",msg:\""+msg+"\"}";
 	}
 	/**
@@ -416,7 +410,7 @@ public class UserInfoController extends BaseController{
 			@RequestParam(value="newPwd")String newPassword){
 		System.out.println("come into  changePwd $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
 		String statusCode="200";
-		String msg=null;
+		String msg="\"\"";
 		if(!"".equals(userId)&&!"".equals(newPassword)&&!"".equals(oldPassword)){
 		userId =userId.trim();
 		oldPassword=oldPassword.trim();
@@ -452,8 +446,8 @@ public class UserInfoController extends BaseController{
 			msg="新为空";
 			}
 		}
-		if(msg==null||"".equals(msg))
-			msg="";
+		if(msg==null||"null".equals(msg))
+			msg="\'\'";
 		return "{status:\""+statusCode+"\",msg:\""+msg+"\"}";
 	}
 	
@@ -469,7 +463,7 @@ public class UserInfoController extends BaseController{
 			@RequestParam(value="ideaText",required=false)String ideaText){
 		System.out.println("come into feedback $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
 		String statusCode="200";
-		String msg=null;
+		String msg="\"\"";
 		if(!"".equals(userId)&&!"".equals(ideaText)){
 		String flag=userInfoService.feedBack(userId, ideaText);
 		String [] subStr=flag.split("=");
@@ -484,8 +478,8 @@ public class UserInfoController extends BaseController{
 					msg="用户ID为空";
 			else msg="反馈内容为空";
 		}
-		if(msg==null||"".equals(msg))
-			msg="";
+		if(msg==null||"null".equals(msg))
+			msg="\'\'";
 		return "{status:\""+statusCode+"\",msg:\""+msg+"\"}";
 	}
 	/**
@@ -497,7 +491,9 @@ public class UserInfoController extends BaseController{
 	@ResponseBody 
 	@RequestMapping(value="/uploadPicture",produces = {"application/json;charset=UTF-8"})
 	public String updatePicture(@RequestParam("file")MultipartFile file,@RequestParam("userID")String userId){
-		String msg=null;
+		
+	 
+		String msg="\"\"";	
 		String statusCode="200";
 		if(!"".equals(userId)&&file!=null){
 				String fileName=file.getOriginalFilename();
@@ -525,8 +521,8 @@ public class UserInfoController extends BaseController{
 			msg="输入不能为空";
 			statusCode="503";
 		}
-		if(msg==null||"".equals(msg))
-			msg="";
+		if(msg==null||"null".equals(msg))
+			msg="\'\'";
 		return "{status:\""+statusCode+"\",msg:\""+msg+"\"}";
 	}
 	 @ResponseBody
@@ -547,7 +543,7 @@ public class UserInfoController extends BaseController{
 	 @RequestMapping(value="/emailCallback",method=RequestMethod.GET,produces = {"application/json;charset=UTF-8"})
 	public String emailCallback(@RequestParam(value="email")String email,
 			@RequestParam(value="verifyEmail")String verifyEmail){
-		 String msg="";
+			String msg="\"\"";
 		 String statusCode="200";
 		 msg=userInfoService.checkEmailVerify(email, verifyEmail);
 		request.setAttribute("email", email);
@@ -566,7 +562,7 @@ public class UserInfoController extends BaseController{
 	 public String changePhoneNum(@RequestParam(value="userID")String userId,
 			 @RequestParam(value="newPhoneNum")String NewphoneNum,@RequestParam(value="password")String password){
 		 String statusCode="200";
-		 String msg="";
+			String msg="\"\"";
 		 msg=userInfoService.changePhoneNum(userId,NewphoneNum,password);
 		 if("200".equals(msg.trim())){
 			 msg="";
