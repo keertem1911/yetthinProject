@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.yetthin.web.common.sendEmailVerify;
+import com.yetthin.web.commit.sendEmailVerify;
 import com.yetthin.web.domain.PhoneVersion;
 import com.yetthin.web.domain.UserInfo;
 import com.yetthin.web.persistence.UserInfoMapper;
@@ -258,11 +258,20 @@ public class UserInfoServiceImp extends BaseService implements UserInfoService{
 		String msg="200";
 		UserInfo user=userInfoMapper.selectByPrimaryKey(userId);
 		if(user!=null){
+			boolean same=false;
+			List<UserInfo> lists=userInfoMapper.getAllUser();
+			for (UserInfo userInfo : lists) {
+				if(newphoneNum.equals(userInfo.getPhoneNum())){
+					same=true;
+					break;
+				}
+			}
+			if(!same){
 			String phoneOld=user.getPhoneNum();
-			password=getEncrty(phoneOld+","+password);
-			if(password.trim().equals(user.getPassword())){
+			String passwordt=getEncrty(phoneOld+","+password);
+			if(passwordt.trim().equals(user.getPassword())){
 					user.setPhoneNum(newphoneNum);
-					user.setPassword(newphoneNum+","+password);
+					user.setPassword(getEncrty(newphoneNum+","+password));
 					System.out.println(user);
 					int i =userInfoMapper.updateByPrimaryKey(user);
 					if(i==0){
@@ -273,7 +282,10 @@ public class UserInfoServiceImp extends BaseService implements UserInfoService{
 				msg=",密码错误";
 				statusCode="505";
 			}
-					
+			}else{
+				msg=",电话号码已注册";
+				statusCode="502";
+			}
 		}else{ //user ==null
 			msg=",用户不存在";
 			statusCode="504";

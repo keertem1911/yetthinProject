@@ -1,13 +1,17 @@
 package util;
 
 import java.util.HashMap;
+
 import java.util.Map;
 
-import com.yetthin.web.common.RedisUtil;
+import org.springframework.stereotype.Service;
+
+import com.yetthin.web.commit.RedisUtil;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
+@Service(value="JTdoa")
 public class JTdoa {
 	private boolean logined=false;//初始false登陆成功回调里改为true
 	private boolean connected=false;//初始false连接成功回调里改为true;
@@ -87,13 +91,14 @@ public class JTdoa {
 		 * 摆单报价数据更新推送
 		 */
 		/*以下代码可自由定义*/
+		 
 		jedis_M.select(1);
 		Map<String, String> map=new HashMap<>();
 		map.put(side+":"+checksum, price+":"+size+":"+exchange+":"+currency);
 		jedis_M.hmset(symbol+":"+exchange, map);
-		
-		System.out.println("updateMktDepth ");
-	 	System.out.println("symbol = "+symbol+",exchange="+exchange+",market="+market+",currency="+currency+",side="+side+",price="+price+",checksum="+checksum);
+	 
+	//	System.out.println("updateMktDepth ");
+	 //	System.out.println("symbol = "+symbol+",exchange="+exchange+",market="+market+",currency="+currency+",side="+side+",price="+price+",checksum="+checksum);
 	}
 	
 	void orderStatus( long tickId, Order order, OrderState orderState,Contract contract){}
@@ -113,8 +118,8 @@ public class JTdoa {
 		jedis_M.select(0);
 		jedis_M.hset(exchange, symbol,sb.toString());
 		
-		System.out.println("tickGeneric udpate "+jedis_M.hgetAll(symbol+":"+exchange));
-		System.out.println("symbol="+symbol+",secType="+secType+",exchange="+exchange+",currency"+currency+",tickType="+tickType+",L1Value="+L1Value+",size="+size);
+		//System.out.println("tickGeneric udpate "+jedis_M.hgetAll(symbol+":"+exchange));
+		//System.out.println("symbol="+symbol+",secType="+secType+",exchange="+exchange+",currency"+currency+",tickType="+tickType+",L1Value="+L1Value+",size="+size);
 	}
 	
 	void tickPrice( long tickId,String symbol,String secType,String exchange,String currency, double price, String time, long volume)
@@ -188,7 +193,7 @@ public class JTdoa {
 	
 	public native  int		TDOAReqProfitList( long tickId);//请求盈利列表
     static {
-        System.loadLibrary("JTdoa");//
+       System.loadLibrary("JTdoa");//
     }
 	public static void main(String[] args) {
 		JTdoa jda=new JTdoa();

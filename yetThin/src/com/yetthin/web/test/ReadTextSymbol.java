@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.yetthin.web.common.JtdoaUtil;
+import com.yetthin.web.commit.JtdoaUtil;
 
 import util.Contract;
 import util.JTdoa;

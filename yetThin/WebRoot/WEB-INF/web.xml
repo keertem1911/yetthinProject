@@ -21,6 +21,9 @@
     <load-on-startup>1</load-on-startup>
   
   </servlet>
+	<listener>
+  <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+ </listener>
   <servlet-mapping>
     <servlet-name>springDispatcherServlet</servlet-name>
     <url-pattern>/</url-pattern>
@@ -88,13 +91,6 @@
 
    </taglib> 
    </jsp-config>
-  
-  
-  
-  <listener>    
-        <listener-class>    
-            org.springframework.web.context.request.RequestContextListener    
-        </listener-class>    
-</listener> 
-  
+ 
+ 
 </web-app>

@@ -6,8 +6,8 @@ import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.yetthin.web.common.Md5UnitTool;
-import com.yetthin.web.common.sendEmailVerify;
+import com.yetthin.web.commit.Md5UnitTool;
+import com.yetthin.web.commit.sendEmailVerify;
 
 public class BaseService {
 	// 设置MD5 加盐参数

@@ -68,7 +68,7 @@ public class UserInfo {
 		this.jpushId = "";
 		this.jpushStatus = 1;
 		this.ideaText = "";
-		this.jpushType = "";
+		this.jpushType = "0,0,0";
 		this.verifyEmail="false";
 		this.registerTime="";		
 		emailStatus="0";

@@ -19,11 +19,7 @@
 </head>
 <body>
 	<div>
-	<form method="get" action="${pageContext.request.contextPath }/jtdoa/login">
- 	<label>login</label>
- 	 
- 	<input type="submit" value="submit"/>
- 	</form><br/>
+	<br/>
 	<form action="${pageContext.request.contextPath }/jtdoa/getLevel1" method="post">
 		<label>获取level1  不要被吓住了</label>
 		<select name="exchange">
