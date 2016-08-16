@@ -1,40 +1,26 @@
 package util;
 
-import java.util.HashMap;
 
-import java.util.Map;
 
-import org.springframework.stereotype.Service;
 
-import com.yetthin.web.commit.RedisUtil;
+import com.yetthin.web.dao.JtdoaDao;
 
-import redis.clients.jedis.Jedis;
-import redis.clients.jedis.JedisPool;
-
-@Service(value="JTdoa")
+ 
 public class JTdoa {
-	private boolean logined=false;//初始false登陆成功回调里改为true
-	private boolean connected=false;//初始false连接成功回调里改为true;
 	
-	private static JedisPool poolM=RedisUtil.getInstanceMsater();
+	 
+	private JtdoaDao jtdoaDao =new JtdoaDao();
 	
-	private static Jedis jedis_M=null;
-	static{
-		jedis_M=poolM.getResource();
-	}
-	public JTdoa() {
-		  	 
-//		// TODO Auto-generated constructor stub
- 	}
-	
-	public boolean isLogined() {
-		return logined;
-	}
-
+	boolean logined=false;//初始false登陆成功回调里改为true
+	boolean connected=false;//初始false连接成功回调里改为true;
 	public boolean isConnected() {
 		return connected;
 	}
-
+	public boolean isLogined() {
+		return logined;
+	}
+ 
+	
 	//////////////////
 	//////////Call backs 回调函数
 	///////////////////////
@@ -44,7 +30,12 @@ public class JTdoa {
 		 */
 		/*以下代码可自由定义*/
 		System.out.println("java");
-		System.out.println(message);		
+		try {
+			System.out.println(message);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 	}
 	
 	void localError( long tickId, long code, String message){}
@@ -58,11 +49,7 @@ public class JTdoa {
 		this.connected=true;
 	}
 	
-	void disconnected(){
-		
-	//	JedisPoolUtil.release(pool, jedis_M);
-		
-	}
+	void disconnected(){}
 	
 	void logined( long userId, long loginCode, String message)
 	{
@@ -73,32 +60,16 @@ public class JTdoa {
 		System.out.println(userId+" "+loginCode+" "+message);
 		logined=true;
 	}
-	/**
-	 * level2 买卖方摆单
-	 * @param tickId
-	 * @param symbol  股票代码
-	 * @param exchange 市场
-	 * @param currency 货币
-	 * @param market
-	 * @param side 1为卖 0 为买
-	 * @param price
-	 * @param size 摆单数量
-	 * @param checksum 层数
-	 */
+	
 	void updateMktDepth( long tickId, String symbol,String exchange,String currency, String market, int side, double price, int size, int checksum)
 	{
 		/*****************
 		 * 摆单报价数据更新推送
 		 */
 		/*以下代码可自由定义*/
-		 
-		jedis_M.select(1);
-		Map<String, String> map=new HashMap<>();
-		map.put(side+":"+checksum, price+":"+size+":"+exchange+":"+currency);
-		jedis_M.hmset(symbol+":"+exchange, map);
-	 
-	//	System.out.println("updateMktDepth ");
-	 //	System.out.println("symbol = "+symbol+",exchange="+exchange+",market="+market+",currency="+currency+",side="+side+",price="+price+",checksum="+checksum);
+		jtdoaDao.Leve2Depth(tickId,symbol,exchange,currency,market,side,price,size,checksum);
+		System.out.println("update");
+		System.out.println(symbol+exchange+market);
 	}
 	
 	void orderStatus( long tickId, Order order, OrderState orderState,Contract contract){}
@@ -109,17 +80,8 @@ public class JTdoa {
 		 * L1报价数据更新推送
 		 */
 		/*以下代码可自由定义*/
-		StringBuffer sb=new StringBuffer();
-		sb.append("secType="+secType);
-		sb.append(",currency="+ currency);
-		sb.append(",tickType="+ Integer.toString(tickType));
-		sb.append(",L1Value="+ L1Value);
-		sb.append(",size="+ Integer.toString(size));
-		jedis_M.select(0);
-		jedis_M.hset(exchange, symbol,sb.toString());
-		
-		//System.out.println("tickGeneric udpate "+jedis_M.hgetAll(symbol+":"+exchange));
-		//System.out.println("symbol="+symbol+",secType="+secType+",exchange="+exchange+",currency"+currency+",tickType="+tickType+",L1Value="+L1Value+",size="+size);
+ 		System.out.println(tickId+" "+symbol+" "+secType+" "+currency+" "+TickType.values()[tickType]+" "+L1Value+" "+size);
+ 		jtdoaDao.Level1Data(tickId,symbol,secType,exchange,currency,tickType,L1Value,size);
 	}
 	
 	void tickPrice( long tickId,String symbol,String secType,String exchange,String currency, double price, String time, long volume)
@@ -138,7 +100,7 @@ public class JTdoa {
 	void timerFunction(){}
 	void updateClient( String version){}
 	void updateSymbol( SymbolStruct symbol, int sendFlag,int flag){}
-	void updateMarket(String enStatement, String zhStatement, String type, boolean last){}
+	void updateMarket( String enStatement, String zhStatement, String type, boolean last){}
 	void updateUserAccountState( int state, String secType){}
 	
 	
@@ -193,7 +155,7 @@ public class JTdoa {
 	
 	public native  int		TDOAReqProfitList( long tickId);//请求盈利列表
     static {
-       System.loadLibrary("JTdoa");//
+        System.loadLibrary("JTdoa");//
     }
 	public static void main(String[] args) {
 		JTdoa jda=new JTdoa();
@@ -209,7 +171,7 @@ public class JTdoa {
 				}
 				System.out.println(jda.connected);
 		}
-		int ls=jda.TDOALoginServer("td4", "td4", "90-b1-1c-80-a4-78", 0, "1");
+		int ls=jda.TDOALoginServer("td15", "td15", "90-b1-1c-80-a4-78", 0, "1");
 		System.out.println(ls);
 		while(jda.logined==false)
 		{
@@ -223,22 +185,21 @@ public class JTdoa {
 		}
 		
 		Contract contract=new Contract();
-		contract.symbol="603737"; 
-		contract.currency="CNY"; 
-		contract.exchange="SH";
+		contract.symbol="002001";
+		contract.currency="CNY";
+		contract.exchange="SZ";
 		contract.secType="STK";
 		System.out.println("hello");
 		int status=jda.TDOASubscribeMarketDepth(4, contract, 5);
-		System.out.println(status);
-		System.out.println("hello");
+//		System.out.println(status);
+//		System.out.println("hello");
+//		
+//		status=jda.TDOASubscribeMarketData(5, contract);
+//		System.out.println("mktdata"+status);
+//		System.out.println("hello");
 		
-		status=jda.TDOASubscribeMarketData(5, contract);
-		System.out.println("mktdata"+status);
-		System.out.println("hello");
-		
-		status=jda.TDOASubscibeLevel1Data(6, contract);
-		System.out.println("mktdata"+status);
-		System.out.println("tickPrice");		
+//		jda.TDOASubscibeLevel1Data(6, contract);
+		//System.out.println("mktdata"+status);	
 		
 	}
 

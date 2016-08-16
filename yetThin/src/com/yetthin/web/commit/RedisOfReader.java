@@ -24,11 +24,22 @@ import util.Contract;
 import util.Level1Value;
 import util.Level2Value;
 
-public class RedisOfReader {
+public class RedisOfReader implements ValueFormatUtil{
 	private static JedisPool pool=RedisUtil.getInstanceSlave();
 	
+	static{
+		System.out.println("redis of reader ---------------------");
+		System.out.println("redis of reader ---------------------");
+		System.out.println("redis of reader ---------------------");
+		System.out.println("redis of reader ---------------------");
+	}
 	private static Jedis jedis=null;
-	
+	private static final String INIT_STRING="0:0:0:0:0:0:0:0:0:0"
+//			   1	   2     3     4     5   6	  7    8       
+	 	+ ":0:0:0:0:0:0:0:0:0:0"
+//		 	9    10    11    12    13     14    15    16    17    18       
+	 	+ ":0:0:0:0:0:0:0:0:0:0";
+//		  19 20 2122 23 24 25 26  27 28  
 	
 	static{
 		// TODO Auto-generated constructor stub
@@ -41,7 +52,7 @@ public class RedisOfReader {
 		
 		jedis.select(0);
 		for (Contract contract : list) {
-			jedis.hset(contract.getExchange(), contract.getSymbol(), "");
+			jedis.set(contract.getSymbol()+"."+contract.getExchange(), INIT_STRING);
 		}
 	}
 	/**
@@ -64,35 +75,23 @@ public class RedisOfReader {
 	 * @param exchange
 	 * @return
 	 */
-	public static List<Level2Value> getL2Value(String symbol){
+	public static String getL2Value(String symbol){
 		List<Level2Value> list2=new LinkedList<>();
-		jedis.select(1);
-		String exchange=symbol.split(":")[1];
-		Map<String, String> map=jedis.hgetAll(symbol);
-		Set<Entry<String, String>>  sets=map.entrySet();
-		Iterator<Entry<String, String>> it=sets.iterator();
-		while(it.hasNext()){
-			Entry<String, String> entry=it.next();
-			String key=entry.getKey();
-			String value=entry.getValue();
-			if(Integer.parseInt(key.split(":")[1])<6){
-			Level2Value level2Value=new Level2Value();
-			level2Value.setChecksum(Integer.parseInt(key.split(":")[1]));
-			level2Value.setSide(Integer.parseInt(key.split(":")[0]));
-			level2Value.setSymbol(symbol);
-			level2Value.setExchange(exchange);
-			level2Value.setPrice(Double.parseDouble(value.split(":")[0]));
-			level2Value.setSize(Integer.parseInt(value.split(":")[1]));
-			level2Value.setExchange(value.split(":")[2]);
-			level2Value.setCurrency(value.split(":")[3]);
-		 
-			list2.add(level2Value);
-			}
+		jedis.select(0);
+		 String value=jedis.get(symbol.toUpperCase());
+		 StringBuffer sb=new StringBuffer();
+		String [] subStr=value.split(SPLIT_STR);
+		for (int i = 0; i < 10; i++) {
+			sb.append(subStr[LEVEL2_INDEX_SIDE1+i]);
+			sb.append(":");
+			sb.append(subStr[LEVEL2_INDEX_SIDE1+i+10]);
+			if(i!=9)
+				sb.append(",");
 		}
 		 
-		return list2;
+		return sb.toString();
 	}
-	public static List<Level2Value> getL2Value(String symbol,String exchange){
+	public static String getL2Value(String symbol,String exchange){
 		return getL2Value(symbol+":"+exchange);
 		
 	}
@@ -135,11 +134,11 @@ public class RedisOfReader {
 			return listsL1;
 		}
 	public static void main(String[] args) {
-		List<Level2Value> list=getL2Value("002647", "SZ");
-		System.out.println(JSON.toJSON(list));
-		for (Level2Value level2Value : list) {
-			System.out.println(level2Value);
-		}
+//		List<Level2Value> list=getL2Value("002647", "SZ");
+//		System.out.println(JSON.toJSON(list));
+//		for (Level2Value level2Value : list) {
+//			System.out.println(level2Value);
+//		}
 	}
 	
 	

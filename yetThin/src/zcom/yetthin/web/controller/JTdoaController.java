@@ -4,12 +4,10 @@ package zcom.yetthin.web.controller;
  
 
 import java.util.List;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,12 +16,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
-import com.yetthin.web.commit.JtdoaUtil;
+import com.yetthin.web.commit.JtdoaValueMarket;
 import com.yetthin.web.commit.RedisOfReader;
-import com.yetthin.web.test.ReadTextSymbol;
+import com.yetthin.web.serviceImp.JtdoaServiceImp;
 
-import util.Contract;
-import util.JTdoa;
 import util.Level1Value;
 import util.Level2Value;
 /**
@@ -33,37 +29,79 @@ import util.Level2Value;
  */
 @Controller
 @RequestMapping(value="/jtdoa")
-public class JTdoaController extends BaseController  implements InitializingBean{
-	
+public class JTdoaController extends BaseController implements JtdoaValueMarket {
+	@Resource
+	private JtdoaServiceImp jtdoaServiceImp;
 	 
-	private    JTdoa jtdoa ;
 	
-	private Executor executor=Executors.newFixedThreadPool(200);
-	
+	private String putReturnValue1(String statusCode,String msg,String item){
+		return  "{\"status\":\""+statusCode+"\",\"msg\":\""+msg+"\",\"item\":"+item+"}";
+	}
+	private String putReturnValue2(String statusCode,String index,String msg,String item){
+		return  "{\"status\":\""+statusCode+"\",\"index\":\""+index+"\",\"msg\":\""+msg+"\",\"item\":"+item+"}";
+	}
 	@Autowired
 	private HttpServletRequest request;
 	 
-	public   void init(){
-	 	jtdoa= JtdoaUtil.getInstance();
-		System.out.println("come into --------------------");
-		executor.execute(  new Runnable() {
-			public void run() {
-				ReadTextSymbol test=new ReadTextSymbol();
-				 
-//		String path=request.getSession().getServletContext().getRealPath("/WEB-INF/classes"); 
-//		System.out.println(path);
-	 
-		List<Contract> list=test.readTextByContract("d:/symbol.txt");
-		
-		for (int i = 0; i < list.size(); i++) {
-			 
-			jtdoa.TDOASubscibeLevel1Data(i, list.get(i));
-			jtdoa.TDOASubscribeMarketDepth(i, list.get(i), 10);
-		}	
-	//	 RedisOfReader.initReadInredisKeyLevel1(list);
-			}
-		});
-		
+	public String shenzhen(){
+		String msg="";
+		String statusCode="200";
+		String item="";
+		String index="";
+		String [] subStr=jtdoaServiceImp.getL1(HU_SHEN);
+		/*{
+		    "status": "状态码", 
+		    "index": [
+		        {
+		            "name": "上证指数", 
+		            "price": "价格", 
+		            "stockID": "股票代码",
+		            "increase":"ture|flase",
+		            "growth": "增长量", 
+		            "growthRate": "增长率"
+		        }, 
+		        {
+		            "name": "深证成指", 
+		            "price": "价格",
+		            "stockID": "股票代码", 
+		            "increase":"ture|flase",
+		            "growth": "增长量", 
+		            "growthRate": "增长率"
+		        }
+		    ], 
+		    "items": [
+		        {
+		            "group": "组名", 
+		            "index": [
+		                {
+		                    "name": "名字", 
+		                    "stockID": "股票代码", 
+		                    "increase": "ture|flase", 
+		                    "price": "价格", 
+		                    "value": "增长率"
+		                }
+		                
+		            ]
+		        }, 
+		        {
+		            "group": "组名", 
+		            "index": [
+		                {
+		                    "name": "名字", 
+		                    "stockID": "股票代码", 
+		                    "increase": "ture|flase", 
+		                    "price": "价格", 
+		                    "value": "增长率"
+		                }
+		                 
+		            ]
+		        }
+		         
+		    ], 
+		    "msg": { }
+		}*/
+		 
+		return putReturnValue2(statusCode, index,msg, item);
 	}
 	@ResponseBody
 	@RequestMapping(value="/getLevel1",method=RequestMethod.POST,produces = {"application/json;charset=UTF-8"})
@@ -79,29 +117,25 @@ public class JTdoaController extends BaseController  implements InitializingBean
 		}else{
 			item=JSON.toJSONString(list);
 		}
-		return "{status:\""+statusCode+"\",msg:\""+msg+"\",item:"+item+"}";
+		return putReturnValue1(statusCode, msg, item);
 	}
 	@ResponseBody
 	@RequestMapping(value="/getLevel2",method=RequestMethod.POST,produces = {"application/json;charset=UTF-8"})
 	public String getLevel2(@RequestParam(value="symbol")String symbol){
-		List<Level2Value> list=RedisOfReader.getL2Value(symbol);
+		String value=RedisOfReader.getL2Value(symbol);
 		String msg="";
 		String statusCode="200";
 		String item="";
-		if(list==null||list.size()==0){
+		if(value!=null&&"".equals(value.trim())){
 			msg="股票不存在";
 			statusCode="507";
 			item="\"\"";
 		}else{
-			item=JSON.toJSONString(list);
+			item="\""+value+"\"";
 		}
-		return "{status:\""+statusCode+"\",msg:\""+msg+"\",item:"+item+"}";
 
+		return putReturnValue1(statusCode, msg, item);
 	}
-	@Override
-	public void afterPropertiesSet() throws Exception {
-		// TODO Auto-generated method stub
-		init();
-	}
+	 
 	 
 }

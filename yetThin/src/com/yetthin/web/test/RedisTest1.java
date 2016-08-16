@@ -1,17 +1,21 @@
 package com.yetthin.web.test;
 
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import com.alibaba.fastjson.JSON;
 import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
 
 import redis.clients.jedis.Jedis;
+import redis.clients.jedis.Tuple;
 import util.Contract;
 import util.Level1Value;
 
@@ -64,7 +68,7 @@ public class RedisTest1 {
 		
 		
 	}
-	public static void main(String[] args) {
+	public  void main1() {
 		RedisTest1 test = new RedisTest1();
 		ReadTextSymbol sy=new ReadTextSymbol();
 		List<String> lists=sy.readSymolByString("src/symbol.txt");
@@ -74,4 +78,27 @@ public class RedisTest1 {
 		}
 	 //	test.expireL1("SZ");
 	}
+	public static void main(String[] args) {
+		
+		jedis.select(1);
+		Map<Double, String> map=new HashMap<>();
+		map.put(-62.1, "aw");
+		map.put(-42.2, "b1");
+		map.put(-60.2, "cs");
+		jedis.zadd("001", map);
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			Set<Tuple> range=jedis.zrevrangeWithScores("001", 0, -1);
+			for (Tuple tuple : range) {
+				System.out.println(tuple.getElement()+", "+tuple.getScore());
+			}
+		}
+ 
+	}
+	
+	
 }

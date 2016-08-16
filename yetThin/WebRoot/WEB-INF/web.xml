@@ -10,8 +10,9 @@
   </context-param>
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-  </listener>
-  <servlet>
+   </listener>
+  	<listener><listener-class>zcom.yetthin.web.listener.CreateJdoaListener</listener-class></listener>  	
+   <servlet>
     <servlet-name>springDispatcherServlet</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
     <init-param>

@@ -1,14 +1,19 @@
 package com.yetthin.web.commit;
 
-import org.springframework.beans.factory.InitializingBean;
-
+import util.BarData;
+import util.Contract;
+import util.JHdboa;
 import util.JTdoa;
+import util.TickData;
 
-public class JtdoaUtil implements InitializingBean{
-	private JtdoaUtil(){};
+public class JtdoaUtil {
+	 
+	private JtdoaUtil(){
+		
+	};
 	private static volatile JTdoa jTdoa=null;
-	
-	public static JTdoa getInstance(){
+	private static volatile JHdboa jHdboa=null;
+	public static JTdoa getInstanceJTdoa(){
 		if(jTdoa==null){
 			synchronized(JtdoaUtil.class){
 				if(jTdoa==null){
@@ -26,7 +31,7 @@ public class JtdoaUtil implements InitializingBean{
 					}
 					if(jTdoa.isConnected()){
 						System.out.println("login has ready ------------");
-						int ls=jTdoa.TDOALoginServer("td5", "td5",  "90-b1-1c-80-a4-78", 0, "1");
+						int ls=jTdoa.TDOALoginServer("td7", "td7",  "90-b1-1c-80-a4-78", 0, "1");
 						System.out.println("ls ls ="+ls);
 					}
 				 
@@ -48,12 +53,32 @@ public class JtdoaUtil implements InitializingBean{
 		}
 		return jTdoa;
 	}
-
-	@Override
-	public void afterPropertiesSet() throws Exception {
-		// TODO Auto-generated method stub
-		System.out.println(" aftet ------------------");
+	public static JHdboa getInstanceJHdboa(){
+		if(jHdboa ==null){
+		synchronized (JtdoaUtil.class){
+			if(jHdboa ==null){
+				 jHdboa=new JHdboa();
+			 	 jHdboa.HdboaInit(new BarData(),new Contract(),new TickData());
+					
+				jHdboa.HdboaConnect("222.173.29.210", 7008);
+				while(!jHdboa.connected)
+				{
+					System.out.println("wait");
+					try {
+						Thread.sleep(50);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+			
+		}
+		}
+		return jHdboa;
 	}
-
-	 
+	public static void main(String[] args) {
+		JHdboa j=JtdoaUtil.getInstanceJHdboa();
+		System.out.println(j);
+	}
 }

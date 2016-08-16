@@ -11,11 +11,13 @@ import java.util.List;
 import com.yetthin.web.commit.JtdoaUtil;
 
 import util.Contract;
+import util.JHdboa;
 import util.JTdoa;
 
 public class ReadTextSymbol {
 	
-  	private static JTdoa jtdoa=JtdoaUtil.getInstance();
+  	private static JTdoa jtdoa=JtdoaUtil.getInstanceJTdoa();
+  	private static JHdboa jhdboa=JtdoaUtil.getInstanceJHdboa();
 	public void jtdoaFun(Contract contract){
 		jtdoa.TDOASubscribeMarketDepth(5, contract, 3);
 	}
