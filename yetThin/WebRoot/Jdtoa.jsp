@@ -20,20 +20,15 @@
 <body>
 	<div>
 	<br/>
-	<form action="${pageContext.request.contextPath }/jtdoa/getLevel1" method="post">
-		<label>获取level1  不要被吓住了</label>
-		<select name="exchange">
-			<option>市场exchange</option>
-			<option value="SZ">SZ</option>
-			<option value="SH">SH</option>
-		</select>
+	<form action="${pageContext.request.contextPath }/jtdoa/shenzhen" method="post">
+		 
 		<input type="submit" value="get"/>
 	</form><br/>
-	<form method="post" action="${pageContext.request.contextPath }/jtdoa/getLevel2">
+	<%-- <form method="post" action="${pageContext.request.contextPath }/jtdoa/getLevel2">
 		<label>获取level2 摆单  不要被吓住了</label>
 		<input type="text" name="symbol" placeholder="股票代码+':'+市场"></input>
 		<input type="submit" value="get"/>
-	</form>
+	</form> --%>
 	</div>
 </body>
 </html>

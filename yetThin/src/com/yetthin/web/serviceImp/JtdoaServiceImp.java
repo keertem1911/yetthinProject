@@ -12,13 +12,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.yetthin.web.commit.JtdoaValueMarket;
 import com.yetthin.web.commit.ValueFormatUtil;
+import com.yetthin.web.dao.JtdoaAPIDao;
 import com.yetthin.web.dao.JtdoaDao;
+import com.yetthin.web.service.JtdoaService;
 
-import redis.clients.jedis.Jedis;
 import redis.clients.jedis.Tuple;
 
 @Service("JtdoaService")
-public class JtdoaServiceImp implements JtdoaValueMarket,ValueFormatUtil{
+public class JtdoaServiceImp implements JtdoaValueMarket,ValueFormatUtil,JtdoaService{
 	/**
 	 * 指数通用模板
 	 * @return
@@ -102,47 +103,59 @@ public class JtdoaServiceImp implements JtdoaValueMarket,ValueFormatUtil{
 		         
 		    ]
 	 * @return
+	 * @param Map<String,Set<Tuple>> market 
+	 * 			 	组名    有序set 
+	 * 			0		1	 2	  3			4			5
+	 * tuple 601595.SH:N上影:14.67:4.48:20160817151044, 43.96
+	 * 			股票代碼   名稱     當前價    漲幅值     時間  				漲幅率
 	 */
 	private String putStockMarketData(Map<String,Set<Tuple>> market){
 		StringBuffer sb=new StringBuffer();
+		if(!market.isEmpty()){
 		sb.append("[");
 		Set<Entry<String, Set<Tuple>>> entry=market.entrySet();
 		
 		for (Entry<String, Set<Tuple>> entry2 : entry) {
-			sb.append("{\"group\":\""+entry2.getKey().split(JTDOA_SPLIT_STR)[1]+"\",");
+			sb.append("{\"group\":\""+NAME_MARKET[Integer.parseInt(entry2.getKey().split(JTDOA_SPLIT_STR)[1])-1]+"\",");
 			sb.append("\"index\":[");
 			Set<Tuple> tu1=entry2.getValue();
 			for (Tuple tuple : tu1) {
-				String desc= doubleformat.format(tuple.getScore());
+				String desc_price= doubleformat.format(tuple.getScore());
 				String []values = tuple.getElement().split(JTDOA_SPLIT_STR);//股票代码.市场:价格:日期
-				String name=jtdoaDao.getNameBySymbol(values[0]);
-				sb.append(  "{\"name\":\""+name+"\","+ 
+				 
+				sb.append(  "{\"name\":\""+values[1]+"\","+ 
 		                    "\"stockID\":\" "+values[0]+"\",");
 				boolean plus =true;
-				if(desc.indexOf("-")!=-1){
+				if(desc_price.indexOf("-")!=-1){
 					plus=false;
-					desc=desc.substring(1);
+					desc_price=desc_price.substring(1);
 				}
 		                   sb.append("\"increase\":\""+plus+"\","+ 
-		                    "\"price\": \""+values[1]+"\","+ 
-		                    "\"value\": \""+desc+"\"},");
+		                    "\"price\": \""+values[2]+"\","+ 
+		                    "\"rate\": \""+desc_price+"\","+
+		                    "\"value\":\""+values[3]+"\"},");
 			}
 			
-			sb.append("] },");
+			String str=sb.toString();
+			str=str.substring(0,str.lastIndexOf(","))+"]}";
+			sb=new StringBuffer(str+",");
 		}
 		
 		sb.append("]");
 		
 		String str=sb.toString();
 		str=str.substring(0,str.lastIndexOf(","))+"]";
-		str=str.substring(0,str.lastIndexOf(","))+" ]}]";
-		
+		str=str.substring(0,str.lastIndexOf(","))+" }]}]";
 		
 		return str;
+		}
+		return sb.toString();
 	}
 	@Resource
 	private JtdoaDao jtdoaDao;
 	
+	@Resource
+	private JtdoaAPIDao jtdoaAPIDao;
 	/**
 	 *  获取l1值 包括 股指 股票涨跌分类等
 	 * @param id
@@ -153,13 +166,25 @@ public class JtdoaServiceImp implements JtdoaValueMarket,ValueFormatUtil{
 		String [] subStr=new String [4];
 		switch(id){
 		case HU_SHEN: 
-			String [] index= jtdoaDao.getStockIndex(HU_SHEN);
-			subStr[2]=putIndex(index);// 指数解析
+			String [] index= jtdoaDao.getStockIndex(HU_SHEN,false);
+			subStr[1]=putIndex(index);// 指数解析
+		//	Map<String,Set<Tuple>> market =jtdoaDao.getL1StockMarketData(HU_SHEN,false);
+			//模拟数据
+			Map<String,Set<Tuple>> market =jtdoaDao.getL1StockMarketData(HU_SHEN,false);
 			
+			subStr[2]=putStockMarketData(market);
+			if((subStr[1].equals("")||subStr[1]==null)&&(subStr[2].equals("")||subStr[2]==null)){
+				subStr[0]="520";//
+				subStr[3]="level1 data 查询失败";
+			}else{
+				subStr[0]="200";
+				subStr[3]=" ";
+			}
 			break;
 		}
-		
-		
 		return subStr;
+	}
+	public static void main(String[] args) {
+		
 	}
 }

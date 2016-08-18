@@ -40,44 +40,43 @@ public class RegularTest {
 		System.out.println(joinStringSplit(substr, ":"));
 	}
 	public static void main(String[] args) {
-		 
-		String str=" [ "+
-				"		        {"+
-				"		            \"group\": \"组名\", "+
-				"		            \"index\": ["+
-				"		                {"+
-				"		                    \"name\": \"名字\", "+
-				"		                    \"stockID\": \"股票代码\", "+
-				"		                    \"increase\": \"ture|flase\", "+
-				"		                    \"price\": \"价格\", "+
-				"		                    \"value\": \"增长率\""+
-				"		                }"+
-				"		                "+
-				"		            ]"+
-				"		        }, "+
-				"		        {"+
-				"		            \"group\": \"组名\", "+
-				"		            \"index\": ["+
-				"		                {"+
-				"		                    \"name\": \"名字\", "+
-				"		                    \"stockID\": \"股票代码\", "+
-				"		                    \"increase\": \"ture|flase\", "+
-				"		                    \"price\": \"价格\", "+
-				"		                    \"value\": \"增长率\""+
-				"		                },"+
-				"{"+
-					"		                    \"name\": \"名字\", "+
-					"		                    \"stockID\": \"股票代码\", "+
-					"		                    \"increase\": \"ture|flase\", "+
-					"		                    \"price\": \"价格\", "+
-					"		                    \"value\": \"增长率\""+
-					"		                },"+
-				"		                 "+
-				"		            ]"+
-				"		        },"+
-				"		         "+
-				"		    ]";
-		str=str.substring(0,str.lastIndexOf(","))+"]";
-		str=str.substring(0,str.lastIndexOf(","))+" ]}]";
+//		String str=" [ "+
+//				"		        {"+
+//				"		            \"group\": \"组名\", "+
+//				"		            \"index\": ["+
+//				"		                {"+
+//				"		                    \"name\": \"名字\", "+
+//				"		                    \"stockID\": \"股票代码\", "+
+//				"		                    \"increase\": \"ture|flase\", "+
+//				"		                    \"price\": \"价格\", "+
+//				"		                    \"value\": \"增长率\""+
+//				"		                }"+
+//				"		                "+
+//				"		            ]"+
+//				"		        }, "+
+//				"		        {"+
+//				"		            \"group\": \"组名\", "+
+//				"		            \"index\": ["+
+//				"		                {"+
+//				"		                    \"name\": \"名字\", "+
+//				"		                    \"stockID\": \"股票代码\", "+
+//				"		                    \"increase\": \"ture|flase\", "+
+//				"		                    \"price\": \"价格\", "+
+//				"		                    \"value\": \"增长率\""+
+//				"		                },"+
+//				"{"+
+//					"		                    \"name\": \"名字\", "+
+//					"		                    \"stockID\": \"股票代码\", "+
+//					"		                    \"increase\": \"ture|flase\", "+
+//					"		                    \"price\": \"价格\", "+
+//					"		                    \"value\": \"增长率\""+
+//					"		                },"+
+//				"		                 "+
+//				"		            ]"+
+//				"		        },"+
+//				"		         "+
+//				"		    ]";
+//		str=str.substring(0,str.lastIndexOf(","))+"]";
+//		str=str.substring(0,str.lastIndexOf(","))+" ]}]";
 	}
 }

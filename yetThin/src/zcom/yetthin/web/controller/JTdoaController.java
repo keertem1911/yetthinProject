@@ -18,10 +18,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSON;
 import com.yetthin.web.commit.JtdoaValueMarket;
 import com.yetthin.web.commit.RedisOfReader;
+import com.yetthin.web.service.JtdoaService;
 import com.yetthin.web.serviceImp.JtdoaServiceImp;
 
 import util.Level1Value;
-import util.Level2Value;
 /**
  * 行情业务
  * @author Administrator
@@ -31,24 +31,23 @@ import util.Level2Value;
 @RequestMapping(value="/jtdoa")
 public class JTdoaController extends BaseController implements JtdoaValueMarket {
 	@Resource
-	private JtdoaServiceImp jtdoaServiceImp;
+	private JtdoaService jtdoaService;
 	 
 	
 	private String putReturnValue1(String statusCode,String msg,String item){
 		return  "{\"status\":\""+statusCode+"\",\"msg\":\""+msg+"\",\"item\":"+item+"}";
 	}
 	private String putReturnValue2(String statusCode,String index,String msg,String item){
-		return  "{\"status\":\""+statusCode+"\",\"index\":\""+index+"\",\"msg\":\""+msg+"\",\"item\":"+item+"}";
+		return  "{\"status\":\""+statusCode+"\",\"index\":"+index+",\"msg\":\""+msg+"\",\"item\":"+item+"}";
 	}
 	@Autowired
 	private HttpServletRequest request;
-	 
+	
+	@ResponseBody
+	@RequestMapping(value="/shenzhen",method=RequestMethod.POST,produces = {"application/json;charset=UTF-8"})
 	public String shenzhen(){
-		String msg="";
-		String statusCode="200";
-		String item="";
-		String index="";
-		String [] subStr=jtdoaServiceImp.getL1(HU_SHEN);
+		 
+		String [] subStr=jtdoaService.getL1(HU_SHEN);
 		/*{
 		    "status": "状态码", 
 		    "index": [
@@ -91,17 +90,17 @@ public class JTdoaController extends BaseController implements JtdoaValueMarket 
 		                    "stockID": "股票代码", 
 		                    "increase": "ture|flase", 
 		                    "price": "价格", 
-		                    "value": "增长率"
+		                    "value": "增长率",
 		                }
 		                 
 		            ]
-		        }
+		        },
 		         
 		    ], 
 		    "msg": { }
 		}*/
 		 
-		return putReturnValue2(statusCode, index,msg, item);
+		return putReturnValue2(subStr[0], subStr[1],subStr[3], subStr[2]);
 	}
 	@ResponseBody
 	@RequestMapping(value="/getLevel1",method=RequestMethod.POST,produces = {"application/json;charset=UTF-8"})

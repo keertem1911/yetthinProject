@@ -83,14 +83,25 @@ public class JTdoa {
  		System.out.println(tickId+" "+symbol+" "+secType+" "+currency+" "+TickType.values()[tickType]+" "+L1Value+" "+size);
  		jtdoaDao.Level1Data(tickId,symbol,secType,exchange,currency,tickType,L1Value,size);
 	}
-	
+	/**
+	 * TDOASubscribeMarketData
+	 * @param tickId
+	 * @param symbol
+	 * @param secType
+	 * @param exchange
+	 * @param currency
+	 * @param price
+	 * @param time
+	 * @param volume
+	 */
 	void tickPrice( long tickId,String symbol,String secType,String exchange,String currency, double price, String time, long volume)
 	{
 		/*****************
 		 * 分笔数据更新推送
 		 */
 		/*以下代码可自由定义*/
-		System.out.println(tickId+" "+symbol+" "+secType+" "+price+" "+time+" "+volume);		
+		jtdoaDao.tickPrice(tickId,symbol,secType,exchange,currency,price,time,volume);
+		System.out.println(symbol+"TICK PRICE");		
 	}
 	void accountStatus( long tickerId, UserFund info){}
 	

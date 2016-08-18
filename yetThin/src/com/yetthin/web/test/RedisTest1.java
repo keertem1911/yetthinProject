@@ -13,6 +13,7 @@ import java.util.Set;
 
 import com.alibaba.fastjson.JSON;
 import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
+import com.yetthin.web.commit.JtdoaValueMarket;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.Tuple;
@@ -24,7 +25,7 @@ import util.Level1Value;
  * @author Administrator
  *
  */
-public class RedisTest1 {
+public class RedisTest1 implements JtdoaValueMarket{
 	
 	private static Jedis jedis=new Jedis("127.0.0.1",6379);
 	
@@ -81,23 +82,22 @@ public class RedisTest1 {
 	public static void main(String[] args) {
 		
 		jedis.select(1);
-		Map<Double, String> map=new HashMap<>();
-		map.put(-62.1, "aw");
-		map.put(-42.2, "b1");
-		map.put(-60.2, "cs");
-		jedis.zadd("001", map);
-		try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally{
-			Set<Tuple> range=jedis.zrevrangeWithScores("001", 0, -1);
-			for (Tuple tuple : range) {
-				System.out.println(tuple.getElement()+", "+tuple.getScore());
-			}
+			 for (int i = 0; i < MARKET.length; i++) {
+				for (int j = 1; j < MARKET[i].length; j++) {
+					
+					 String string =MARKET[i][0]+":"+MARKET[i][j];
+					 Set<Tuple> range=jedis.zrevrangeWithScores(string, 0, 5);
+
+					 if(j==2)
+						 range=jedis.zrangeWithScores(string, 0, 5); 
+					 
+						for (Tuple tuple : range) {
+							System.out.println(tuple.getElement()+", "+tuple.getScore());
+						}
+						
+				}
+				 
 		}
- 
 	}
 	
 	

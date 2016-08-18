@@ -34,7 +34,7 @@ public class RedisOfReader implements ValueFormatUtil{
 		System.out.println("redis of reader ---------------------");
 	}
 	private static Jedis jedis=null;
-	private static final String INIT_STRING="0:0:0:0:0:0:0:0:0:0"
+	private static final String INIT_STRING="0:0:0:0:0:0:0:0:0:0:0"
 //			   1	   2     3     4     5   6	  7    8       
 	 	+ ":0:0:0:0:0:0:0:0:0:0"
 //		 	9    10    11    12    13     14    15    16    17    18       
@@ -139,6 +139,21 @@ public class RedisOfReader implements ValueFormatUtil{
 //		for (Level2Value level2Value : list) {
 //			System.out.println(level2Value);
 //		}
+	}
+	/**
+	 * 保存代码对应的名字
+	 * @param names
+	 */
+	public static void initNameToSymbol(Map<String, String> names) {
+		// TODO Auto-generated method stub
+		jedis.select(0);
+		
+		Set<Entry<String, String>> sets=names.entrySet();
+		Iterator<Entry<String, String>> it =sets.iterator();
+		while(it.hasNext()){
+			Entry<String, String> entry=(Entry<String, String>)it.next();
+			jedis.set("name"+entry.getKey(), entry.getValue());
+		}
 	}
 	
 	

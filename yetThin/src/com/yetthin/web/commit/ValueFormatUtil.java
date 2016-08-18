@@ -14,9 +14,9 @@ public interface ValueFormatUtil {
 	public static final int PRE_VOLUME_INDEX=7;// 上次成交量
 	public static final int LIMIT_UP_INDEX=8;// 涨停价
 	public static final int LIMIT_DOWN_INDEX=9;//跌停价
-	
-	public static final int LEVEL2_INDEX_SIDE1=10;// 卖方 卖5
-	public static final int LEVEL2_INDEX_SIDE0=15;// 买方  买1
+	public static final int EXCHANGE_RATE=10; //换手率
+	public static final int LEVEL2_INDEX_SIDE1=11;// 卖方 卖5
+	public static final int LEVEL2_INDEX_SIDE0=16;// 买方  买1
 
 	public static final String SPLIT_STR=":";
 	public static SimpleDateFormat format=new SimpleDateFormat("hh-mm-ss");

@@ -1,66 +1,100 @@
 package zcom.yetthin.web.listener;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-import com.yetthin.web.commit.JtdoaUtil;
+import com.yetthin.web.commit.QQMarketLevelUtilByMaster;
+import com.yetthin.web.commit.QQMarketLevelUtilBySimple;
 import com.yetthin.web.commit.RedisOfReader;
+import com.yetthin.web.commit.SinaMarketIndex;
+import com.yetthin.web.dao.JtdoaAPIDao;
+import com.yetthin.web.dao.UrlRequestDao;
 import com.yetthin.web.test.ReadTextSymbol;
 
-import util.CYCTYPE;
 import util.Contract;
-import util.JHdboa;
-import util.JTdoa;
-import util.UseRTH;
 
-public class CreateJdoaListener implements ServletContextListener {
 
-	private JTdoa jtdoa;
-	private JHdboa jhdboa;
+public class CreateJdoaListener implements ServletContextListener,QQMarketLevelUtilBySimple,QQMarketLevelUtilByMaster,SinaMarketIndex {
+
+	private JtdoaAPIDao jtdoaAPIDao=new JtdoaAPIDao();
+	
+	private static final int dev_num=20;
+	private UrlRequestDao urlRequestDao=new UrlRequestDao();
+//	private JTdoa jtdoa;
+//	private JHdboa jhdboa;
 	private Executor executor = Executors.newFixedThreadPool(200);
-	private static final String UPDATE_TIME="14:33:30";
 	private  List<Contract> list;
+	  
 	@Override
 	public void contextDestroyed(ServletContextEvent arg0) {
 		// TODO Auto-generated method stub
-
 	}
 
 	private void init() {
-		 jtdoa = JtdoaUtil.getInstanceJTdoa();
-		jhdboa =JtdoaUtil.getInstanceJHdboa();
+//		 jtdoa = JtdoaUtil.getInstanceJTdoa();
+//		jhdboa =JtdoaUtil.getInstanceJHdboa();
 		System.out.println("come into --------------------");
 		executor.execute(new Runnable() {
+			@SuppressWarnings("unchecked")
 			public void run() {
 				ReadTextSymbol test = new ReadTextSymbol();
-
-				// String
-				// path=request.getSession().getServletContext().getRealPath("/WEB-INF/classes");
-				// System.out.println(path);
-
-				list= test.readTextByContract("e:/symbol.txt");
-				System.out.println("tdia 0-00000000000000000");
-				for (int i = 0; i < list.size(); i++) {
-
-			 		jtdoa.TDOASubscibeLevel1Data(1000+i, list.get(i));
-			 		jtdoa.TDOASubscribeMarketDepth(1000+i, list.get(i), 4);
+ 				Map<String, Object> map= test.readTextByContract("d:/symbol.txt");
+ 				list=(List<Contract>) map.get("contracts");
+				List<String> symbols = test.readSymolByString("d:/symbol.txt");
+				RedisOfReader.initReadInredisKeyLevel1(list);
+				 //股票 更新 详细信息   开盘价  收盘价 摆单情况
+				
+				while(true){
+				for(int j=0;j<symbols.size()/dev_num;++j){
+					StringBuffer sb=new StringBuffer();
+					int cnt=dev_num;
+					if(j==symbols.size()-1&&symbols.size()%1000!=0)
+						cnt=symbols.size()%dev_num;
+				 for (int i = 0; i < cnt; i++) {
+					sb.append(symbols.get(j*dev_num+i));
+					 if(i!=symbols.size()-1)
+						sb.append(",");
 				}
- 				  RedisOfReader.initReadInredisKeyLevel1(list);
+				 
+				 try {
+					 List<String> values=	urlRequestDao.readContentFromGet(QQ_M_REQUEST_URL+sb.toString());
+					 
+					 jtdoaAPIDao.saveQQ_M_REQUEST_URL(values);
+				 } catch (IOException e) {
+					 // TODO Auto-generated catch block
+					 e.printStackTrace();
+				 }
+				}
+					 try {
+						Thread.sleep(1000*60*5);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+ 				 }
+//				for (int i = 0; i < list.size(); i++) {
+//					if(tickId<0)
+//						tickId=0;
+//			 		jtdoa.TDOASubscibeLevel1Data(tickId++, list.get(i));
+//			 		if(tickId<0)
+//			 			tickId=0;
+//			 		jtdoa.TDOASubscribeMarketDepth(tickId++, list.get(i), 4);
+//			 		if(tickId<0)
+//			 			tickId=0;
+//			 		jtdoa.TDOASubscribeMarketData(tickId++, list.get(i));
+//			 		if(tickId<0)
+//			 			tickId=0;
+//				}
+// 				  RedisOfReader.initReadInredisKeyLevel1(list);
+//  				  RedisOfReader.initNameToSymbol(names);
 			}
 		});
-//		executor.execute(new Runnable() { //秒线请求
-//			
-//			public void run() {
-//				
-//			}
-//		});
 	}
 
 	@Override
@@ -68,53 +102,8 @@ public class CreateJdoaListener implements ServletContextListener {
 		// TODO Auto-generated method stub
 		Runnable run=new Runnable() {
 			public void run() {
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
 			 
 			 	init();
-				int count=0;
-				while(true){
-					 
-				long timedate=System.currentTimeMillis();
-				Date date=new Date(timedate);
-				SimpleDateFormat simple=new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-				String format_time = simple.format(date);
-				String now_date=format_time.substring(format_time.lastIndexOf(" ")+1);
-				String hourse=format_time.substring(0,format_time.lastIndexOf(" ")+1);
-				hourse+=UPDATE_TIME;
-				 
-				Date  date1=null;
-				
-				try {
-					 date1=simple.parse(hourse);
-					 while(now_date.trim().equals(UPDATE_TIME)&&count==0){
-						 for (int i = 0; i < list.size(); i++) {
-							
-							 jhdboa.HdboaReqHistoricalData(8001+i, list.get(i),(System.currentTimeMillis()-1000*60*60*12)/1000, (System.currentTimeMillis())/1000,CYCTYPE.CYC_DAY.ordinal(), 1, UseRTH.USE_RTH.ordinal());
-						}
-//						 System.out.println("come into call ");
-//						 Contract contract=new Contract();
-//							contract.symbol="002362";
-//							contract.currency="CNY";
-//							contract.exchange="SZ";
-//							contract.secType="STK";
-//						 jhdboa.HdboaReqHistoricalData(9,contract  ,(System.currentTimeMillis()-1000*60*60*24*2)/1000, System.currentTimeMillis()/1000,CYCTYPE.CYC_DAY.ordinal(), 1, UseRTH.USE_RTH.ordinal());
-						 count++;
-					 }
-					 if(!now_date.trim().equals(UPDATE_TIME)&&count ==1){
-						 count=0;
-					 }
-				} catch (ParseException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				 
-				}
-			 
 			}
 		};
 		Thread thread=new Thread(run);

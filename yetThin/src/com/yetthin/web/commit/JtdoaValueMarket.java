@@ -8,8 +8,9 @@ public interface JtdoaValueMarket {
 	public static final int BAN_KUAI=5;
 	
 	public static final String JTDOA_SPLIT_STR=":";
-	public static final String [][] MARKET={{0+"","涨幅榜","跌幅榜"}};
-	
+	//1 为涨幅榜 2 为跌幅榜
+	public static final String [][] MARKET={{0+"","1","2"}};
+	public static final String [] NAME_MARKET={"涨幅榜","跌幅榜"};
 	public static final String [] [] HU_SHEN_STOCK_INDEX={	{"000001.SH","上证综指"},
 			{"399001.SZ","深证成指"},
 			{"399006.SZ","创业板指"},
