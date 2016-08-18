@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.yetthin.web.commit.JtdoaValueMarket;
 import com.yetthin.web.commit.RedisUtil;
+import com.yetthin.web.commit.SinaMarketIndex;
 import com.yetthin.web.commit.ValueFormatUtil;
 
 import redis.clients.jedis.Jedis;
@@ -17,14 +18,17 @@ import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.Tuple;
 
 @Service("JtdoaDao")
-public class JtdoaDao implements ValueFormatUtil,JtdoaValueMarket{
+public class JtdoaDao implements ValueFormatUtil,JtdoaValueMarket,SinaMarketIndex{
 	
 	private static JedisPool poolM=RedisUtil.getInstanceMsater();
 	
-	private static Jedis jedis_M=null;
+	private static JedisPool poolS=RedisUtil.getInstanceSlave();
 	
+	private static Jedis jedis_M=null;
+	private static Jedis jedis_S=null;
 	static{
 		 
+		jedis_S=poolS.getResource();
 		jedis_M=poolM.getResource();
 	}
 	private  String joinStringSplit(String [] array,String sp){
@@ -37,6 +41,18 @@ public class JtdoaDao implements ValueFormatUtil,JtdoaValueMarket{
 		 
 		return buffer.toString();
 	}
+	/**
+	 * JNI SAVE LEVE2
+	 * @param tickId
+	 * @param symbol
+	 * @param exchange
+	 * @param currency
+	 * @param market
+	 * @param side
+	 * @param price
+	 * @param size
+	 * @param checksum
+	 */
 	public void Leve2Depth(long tickId, String symbol,String exchange,String currency, String market, int side, double price, int size, int checksum){
 		jedis_M.select(0);
 		symbol= symbol+"."+exchange.toUpperCase();
@@ -86,6 +102,7 @@ public class JtdoaDao implements ValueFormatUtil,JtdoaValueMarket{
 		
 	}
 	/**
+	 * FROM JNI 
 	 *  level1 的数据处理 根据不同的 tickType 更新对应的值
 	 * @param tickId
 	 * @param symbol 股票代码
@@ -169,10 +186,11 @@ public class JtdoaDao implements ValueFormatUtil,JtdoaValueMarket{
 	/**
 	 * 获取指数字符串
 	 * @param huShen 市场编号 
-	 * @param moreflag 是否所有的 false 取前五条
+	 * @param begin 开始位置
+	 * @param end  结束位置(不包含)
 	 * @return
 	 */
-	public String [] getStockIndex(int huShen,boolean moreflag) {
+	public String [] getStockIndex(int huShen,int begin,int end) {
 		// TODO Auto-generated method stub
 		String [][] STOCK_NAME=null;
 		switch(huShen){
@@ -184,18 +202,22 @@ public class JtdoaDao implements ValueFormatUtil,JtdoaValueMarket{
 		case GANG_GU:
 			break;
 		}
-		int size =5;
-		if(moreflag) size=STOCK_NAME.length;
+		int size=end-begin+1; 
+		if(size<0) size=STOCK_NAME.length;
 		String [] StockIndexs=new String [size];
 		/*
 		 * 模拟指数部分值
 		 */
-		for (int i = 0; i < size; i++) {
-		int mod=	(int) (System.currentTimeMillis()/1000%2);
-		if(mod==1)
-		StockIndexs[i]=STOCK_NAME[i][0]+":"+STOCK_NAME[i][1]+":"+"12.1"+":"+"1.1:-1.1%";
-		else
-		StockIndexs[i]=STOCK_NAME[i][0]+":"+STOCK_NAME[i][1]+":"+"12.1"+":"+"3.3:2.1%";
+		jedis_S.select(1);
+		for (int i = begin; i < size; i++) {
+		String value=jedis_S.get(HU_SHEN_STOCK_INDEX[i][0]);
+		String [] subStr=value.split(SINA_I_SPLIT_STR);
+		StockIndexs[i]=HU_SHEN_STOCK_INDEX[i][0]+":"+HU_SHEN_STOCK_INDEX[i][1]+":"+subStr[SINA_I_LAST_PRICE]+":"+subStr[SINA_I_INDEX_POINT]+":"+subStr[SINA_I_UP_DOWN_RATE];
+//		int mod=	(int) (System.currentTimeMillis()/1000%2);
+//		if(mod==1)
+//		StockIndexs[i]=STOCK_NAME[i][0]+":"+STOCK_NAME[i][1]+":"+"12.1"+":"+"1.1:-1.1%";
+//		else
+//		StockIndexs[i]=STOCK_NAME[i][0]+":"+STOCK_NAME[i][1]+":"+"12.1"+":"+"3.3:2.1%";
 		}
 	 	return StockIndexs;
 	}
@@ -206,16 +228,17 @@ public class JtdoaDao implements ValueFormatUtil,JtdoaValueMarket{
 	 */
 	public String getNameBySymbol(String string) {
 		// TODO Auto-generated method stub
-		jedis_M.select(0);
-		return jedis_M.get("name"+string.toUpperCase());
+		jedis_S.select(0);
+		return jedis_S.get("name"+string.toUpperCase());
 	}
 	/**
 	 * 获取行情下的 股票涨跌榜信息 
 	 * @param huShen  股票市场
+	 * @param params 
 	 * @param b 是否全部
 	 * @return
 	 */
-	public Map<String, Set<Tuple>> getL1StockMarketData(int huShen, boolean b) {
+	public Map<String, Set<Tuple>> getL1StockMarketData(int huShen,int begin,int end, String[] params) {
 		// TODO Auto-generated method stub
 		Map<String, Set<Tuple>> map=new HashMap<>();
 //		jedis_M.select(1);
@@ -225,18 +248,20 @@ public class JtdoaDao implements ValueFormatUtil,JtdoaValueMarket{
 //			Set<Tuple> tuple=jedis_M.zrevrangeByScoreWithScores(string, 0, size);
 //			map.put(string, tuple);
 //		}
-		int size=b==false?20:-1;
-		jedis_M.select(1);
-			for (int j = 1; j < MARKET[huShen].length; j++) {
+		 
+		jedis_S.select(1);
+			for (String s : params) {
+				int index= Integer.parseInt(s);
+				String string =MARKET[huShen][0]+":"+MARKET[huShen][index];
+				Set<Tuple> range=jedis_S.zrevrangeWithScores(string, begin,end);
 				
-				 String string =MARKET[huShen][0]+":"+MARKET[huShen][j];
-				 Set<Tuple> range=jedis_M.zrevrangeWithScores(string, 0, size);
-
-				 if(j==2)
-					 range=jedis_M.zrangeWithScores(string, 0, size); 
-				 
-						map.put(string, range);
-	}
+				if(index==2)
+					range=jedis_S.zrangeWithScores(string, begin,end); 
+				
+				map.put(string, range);
+				
+			}
+				
 		return map;
 	}
 	/**
@@ -268,6 +293,17 @@ public class JtdoaDao implements ValueFormatUtil,JtdoaValueMarket{
 		}
 		return map;
 	}
+	/**
+	 * FROM JNI 
+	 * @param tickId
+	 * @param symbol
+	 * @param secType
+	 * @param exchange
+	 * @param currency
+	 * @param price
+	 * @param time
+	 * @param volume
+	 */
 	public void tickPrice(long tickId, String symbol, String secType, String exchange, String currency, double price,
 			String time, long volume) {
 		// TODO Auto-generated method stub
@@ -282,9 +318,21 @@ public class JtdoaDao implements ValueFormatUtil,JtdoaValueMarket{
 			 
 				subStr[LAST_PRICE_INDEX] =L1Value;
 				saveSortBalance(symbol, exchange, L1Value, subStr[OPEN_INDEX], date);
-				subStr[PRE_VOLUME_INDEX] =Long.toString(volume);
+			//	subStr[PRE_VOLUME_INDEX] =Long.toString(volume);
 				
 			value=joinStringSplit(subStr, SPLIT_STR);
 			jedis_M.set(symbol+"."+exchange.toUpperCase(), value);
+	}
+	/**
+	 * 获取单支 股票的  level2 
+	 * @param symbol
+	 * @return
+	 */
+	public String getL2(String symbol) {
+		// TODO Auto-generated method stub
+		jedis_S.select(0);
+		String value = jedis_S.get(symbol);
+		
+		return value;
 	}
 }

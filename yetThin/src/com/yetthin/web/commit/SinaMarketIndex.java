@@ -16,7 +16,7 @@ package com.yetthin.web.commit;
  *
  */
 public interface SinaMarketIndex {
-	public static final String SINA_I_REQUEST_URL="http://hq.sinajs.cn/list=s_";
+	public static final String SINA_I_REQUEST_URL="http://hq.sinajs.cn/list=";
 	public static final int SINA_I_INDEX_NAME=0;
 	public static final int SINA_I_INDEX_POINT=1;
 	public static final int SINA_I_LAST_PRICE=2;

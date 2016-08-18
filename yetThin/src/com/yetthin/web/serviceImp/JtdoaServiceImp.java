@@ -42,7 +42,8 @@ public class JtdoaServiceImp implements JtdoaValueMarket,ValueFormatUtil,JtdoaSe
 		        }
 		    ], 
 	 
-	 * 指数格式为 [{指数代码,指数名称,当前价格,增长量,增长率},{},{}]
+	 * 指数格式为 [{指数代码,指数名称,当前价格,点数,涨跌率},{},{}]
+	 * 			  0      1      2    3    4
 	 * @param index
 	 * @return
 	 */
@@ -55,6 +56,7 @@ public class JtdoaServiceImp implements JtdoaValueMarket,ValueFormatUtil,JtdoaSe
 		            "\"price\":\""+subStr[2]+"\","+
 		            "\"stockID\":\""+subStr[0]+"\",");
 			boolean plus=true;
+			 
 			if(subStr[4].indexOf("-")!=-1){
 				plus=false;
 				subStr[4]=subStr[4].substring(1);
@@ -102,6 +104,7 @@ public class JtdoaServiceImp implements JtdoaValueMarket,ValueFormatUtil,JtdoaSe
 		        },
 		         
 		    ]
+	 * @param params 
 	 * @return
 	 * @param Map<String,Set<Tuple>> market 
 	 * 			 	组名    有序set 
@@ -116,7 +119,7 @@ public class JtdoaServiceImp implements JtdoaValueMarket,ValueFormatUtil,JtdoaSe
 		Set<Entry<String, Set<Tuple>>> entry=market.entrySet();
 		
 		for (Entry<String, Set<Tuple>> entry2 : entry) {
-			sb.append("{\"group\":\""+NAME_MARKET[Integer.parseInt(entry2.getKey().split(JTDOA_SPLIT_STR)[1])-1]+"\",");
+			sb.append("{\"group\":\""+NAME_MARKET[Integer.parseInt(entry2.getKey().split(JTDOA_SPLIT_STR)[1])]+"\",");
 			sb.append("\"index\":[");
 			Set<Tuple> tu1=entry2.getValue();
 			for (Tuple tuple : tu1) {
@@ -156,23 +159,31 @@ public class JtdoaServiceImp implements JtdoaValueMarket,ValueFormatUtil,JtdoaSe
 	
 	@Resource
 	private JtdoaAPIDao jtdoaAPIDao;
+	
+	
 	/**
 	 *  获取l1值 包括 股指 股票涨跌分类等
 	 * @param id
 	 * @return 字符数组  1 状态码 2 指数的JSON 3 股票的分类排行L1 4 错误信息 
 	 */
+	@Override
 	@Transactional
-	public String []  getL1(int id){
+	public String []  getL1(int id,int begin,int end,String market){
+		String [] subMarket=market.split(SPLIT_STR);
+		int marketIndex=Integer.parseInt(subMarket[0]);
+		// level1 属性 涨跌幅及换手率等
+		String [] params= subMarket[1].split(",");
 		String [] subStr=new String [4];
+		if(begin<end&&begin>=0&&end>0){
 		switch(id){
 		case HU_SHEN: 
-			String [] index= jtdoaDao.getStockIndex(HU_SHEN,false);
+			String [] index= jtdoaDao.getStockIndex(marketIndex,0,6);
 			subStr[1]=putIndex(index);// 指数解析
-		//	Map<String,Set<Tuple>> market =jtdoaDao.getL1StockMarketData(HU_SHEN,false);
+		 	Map<String,Set<Tuple>> marketS =jtdoaDao.getL1StockMarketData(HU_SHEN,begin,end,params);
 			//模拟数据
-			Map<String,Set<Tuple>> market =jtdoaDao.getL1StockMarketData(HU_SHEN,false);
+		//	Map<String,Set<Tuple>> market =jtdoaDao.getL1StockMarketData(HU_SHEN,false);
 			
-			subStr[2]=putStockMarketData(market);
+			subStr[2]=putStockMarketData(marketS);
 			if((subStr[1].equals("")||subStr[1]==null)&&(subStr[2].equals("")||subStr[2]==null)){
 				subStr[0]="520";//
 				subStr[3]="level1 data 查询失败";
@@ -182,9 +193,96 @@ public class JtdoaServiceImp implements JtdoaValueMarket,ValueFormatUtil,JtdoaSe
 			}
 			break;
 		}
+		}else{
+			subStr[0]="502";
+			subStr[1]="[]";
+			subStr[2]="输入错误";
+		}
 		return subStr;
 	}
-	public static void main(String[] args) {
+	 
+	/**
+	 * @param 	String symbol 股票代码 000001.SH
+	 * @return  字符数组  0 状态码 1 股票对应的level2的JSON 2 错误信息
+	 */
+	@Override
+	@Transactional 
+	public String[] getL2(String symbol) {
+		String [] subStr=new String [3];
+		// TODO Auto-generated method stub
+			String level2= jtdoaDao.getL2(symbol);
+			if(level2==null||"".equals(level2.trim())){
+				subStr[0]="520";
+				subStr[2]="level2 代码为空";
+			}else{
+				String [] subValue=level2.split(SPLIT_STR);
+				subStr[1]=putLevel2Depth(subValue);
+				subStr[0]="200";
+				subStr[2]="";
+				
+			}
+		return subStr;
+	}
+	/**
+	 * level2模板格式 
+	 * { 	"level1":{"last":"11.2","open":"12.1",
+	 * 			"updown":"12.1","rate":"1.1%","increate":"false",
+	 * 			"low":"12.11","height":"13.11","exchange":"1.1%"
+	 * 			"volum":"11112","totlesum":"121122(万)"},
+	 * 		"level2":{"buy5":["1.1","200"],"buy4":["2.1","500"]}
+	 * }
+	 * 
+	 * 将level2 的字符串转换为 json  的 item格式
+	 * @param subValue
+	 * @return
+	 */
+	private String putLevel2Depth(String[] subValue) {
+		// TODO Auto-generated method stub
+		StringBuffer sb1=new StringBuffer();
+		sb1.append("\"level1\":{");
+		sb1.append("\"open\":\""+subValue[OPEN_INDEX]+"\",");
+		sb1.append("\"last\":\""+subValue[LAST_PRICE_INDEX]+"\",");
+		sb1.append("\"updown\":\""+subValue[UP_DOWN_PRICE]+"\",");
+		sb1.append("\"exchange\":\""+subValue[EXCHANGE_RATE]+"\",");
+		boolean plus=true;
+		String plusPrice=subValue[UP_DOWN_PRICE_RATE];
+		if(subValue[UP_DOWN_PRICE_RATE].indexOf("-")!=-1){
+			plus=false;
+			plusPrice=plusPrice.substring(1);
+		}
+		sb1.append("\"rate\":\""+plusPrice+"\",");
+		sb1.append("\"increate\":\""+plus+"\",");
 		
+		sb1.append("\"low\":\""+subValue[LOW_INDEX]+"\",");
+		sb1.append("\"height\":\""+subValue[HEIGHT_INDEX]+"\",");
+		sb1.append("\"totlesum\":\""+subValue[TOTLE_SUM_INDEX]+"\",");
+		sb1.append("\"volume\":\""+subValue[VOLUME_INDEX]+"\"");
+		sb1.append("}");
+		/**
+		 * "level2":{"buy5":["1.1","200"],"buy4":["2.1","500"]}
+		 */
+		StringBuffer sb=new StringBuffer();
+		
+		sb.append("{");
+		for (int i = 0; i < 5; i++) {
+			sb.append("\"sell"+(5-i)+"\":");
+			sb.append("[");
+			sb.append("\""+subValue[LEVEL2_INDEX_SIDE1+i]+"\",");
+			sb.append("\""+subValue[LEVEL2_INDEX_SIDE1+10+i]+"\"");
+			sb.append("],");
+		}
+//		sb.append(",");
+		for (int i = 1; i < 6; i++) {
+			sb.append("\"buy"+i+"\":");
+			sb.append("[");
+			sb.append("\""+subValue[LEVEL2_INDEX_SIDE0+i-1]+"\",");
+			sb.append("\""+subValue[LEVEL2_INDEX_SIDE0+10+i-1]+"\"");
+			sb.append("],");
+		}
+		sb.append("}");
+		String value=sb.toString();
+		value = value.substring(0,value.lastIndexOf(","))+"}";
+		value="{"+sb1.toString()+",\"level2\":"+value+"}";
+		return value;
 	}
 }

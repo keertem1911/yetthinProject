@@ -46,6 +46,8 @@ public class UrlRequestDao {
       
         	String [] subStr = lines.split("=");
         	String value=subStr[1];
+        	value=value.replace("\"", "");
+        	value=value.replace(";", "");
  	   		String sybmol =lines.split("=")[0].substring(lines.split("=")[0].length()-8);
  	   		 	list.add(value+"&"+sybmol);
      	   }   

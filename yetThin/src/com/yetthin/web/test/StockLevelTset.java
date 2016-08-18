@@ -7,10 +7,11 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.Arrays;
 
-public class StockLevelTset {
-	public static final String GET_URL =   "http://qt.gtimg.cn/q=sz300218";
+import com.yetthin.web.commit.JtdoaValueMarket;
+
+public class StockLevelTset implements JtdoaValueMarket{
+	public static final String GET_URL =   "http://hq.sinajs.cn/list=";
 	  
 	  
     public static final String POST_URL = " http://localhost:8080/demo/  ";   
@@ -18,13 +19,13 @@ public class StockLevelTset {
 
     
 
-    public static void readContentFromGet() throws IOException {   
+    public static void readContentFromGet(String url) throws IOException {   
 
         // 拼凑get请求的URL字串，使用URLEncoder.encode对特殊和不可见字符进行编码   
 
       
 
-        URL getUrl = new URL(GET_URL);   
+        URL getUrl = new URL(url);   
 
         // 根据拼凑的URL，打开连接，URL.openConnection()函数会根据 URL的类型，返回不同的URLConnection子类的对象，在这里我们的URL是一个http，因此它实际上返回的是HttpURLConnection   
 
@@ -48,11 +49,13 @@ public class StockLevelTset {
 
         while ((lines = reader.readLine()) != null) {   
      	   		 
-            	String [] subStr = lines.split("=");
-            	String value=subStr[1];
-     	   		String sybmol =lines.split("=")[0].substring(lines.split("=")[0].length()-8);
-     	   		 
-     	   		System.out.println(value.split("~")[32]);
+        	System.out.println(lines);
+//        	String [] subStr = lines.split("=");
+//        	String value=subStr[1];
+//        	value=value.replace("\"", "");
+//        	value=value.replace(";", "");
+// 	   		String sybmol =lines.split("=")[0].substring(lines.split("=")[0].length()-8);
+// 	   		System.out.println(value+"&"+sybmol);
         }   
 
         reader.close();   
@@ -157,22 +160,34 @@ public class StockLevelTset {
  }   
 
     public static void main(String[] args) {   
-
-           // TODO Auto-generated method stub   
-
-           try {   
-
-                   readContentFromGet();   
-
-//                   readContentFromPost();   
-
-           } catch (IOException e) {   
-
-                   // TODO Auto-generated catch block   
-
-                   e.printStackTrace();   
-
-           }   
+    		
+    	String [] [] husheng=HU_SHEN_STOCK_INDEX;
+    	StringBuffer sb=new StringBuffer();
+    	for (int i = 0; i < husheng.length; i++) {
+			sb.append("s_"+husheng[i][0].substring(7).toLowerCase()+husheng[i][0].substring(0, 6));
+			if(i<husheng.length-1)
+				sb.append(",");
+    	}
+    	try {
+    //		System.out.println(sb.toString());
+			readContentFromGet(GET_URL+sb.toString());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+            
 
     }   
 }	
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,27 +1,15 @@
 package zcom.yetthin.web.controller;
 
- 
- 
-
-import java.util.List;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.alibaba.fastjson.JSON;
 import com.yetthin.web.commit.JtdoaValueMarket;
-import com.yetthin.web.commit.RedisOfReader;
 import com.yetthin.web.service.JtdoaService;
-import com.yetthin.web.serviceImp.JtdoaServiceImp;
 
-import util.Level1Value;
 /**
  * 行情业务
  * @author Administrator
@@ -40,14 +28,24 @@ public class JTdoaController extends BaseController implements JtdoaValueMarket 
 	private String putReturnValue2(String statusCode,String index,String msg,String item){
 		return  "{\"status\":\""+statusCode+"\",\"index\":"+index+",\"msg\":\""+msg+"\",\"item\":"+item+"}";
 	}
-	@Autowired
-	private HttpServletRequest request;
-	
+ 	
 	@ResponseBody
 	@RequestMapping(value="/shenzhen",method=RequestMethod.POST,produces = {"application/json;charset=UTF-8"})
-	public String shenzhen(){
-		 
-		String [] subStr=jtdoaService.getL1(HU_SHEN);
+	public String shenzhen(@RequestParam(value="begin",required=false,defaultValue="0")String begin,
+			@RequestParam(value="end",required=false,defaultValue="9")String end,
+			@RequestParam(value="marketCode",defaultValue="0:0,1,2")String market){
+		if("".equals(begin)){
+			begin="0";
+		}
+		if("".equals(end)){
+			end="9";
+		}
+		if("".equals(market)){
+			market="0:0,1,2";
+		}
+		int beginIndex=Integer.parseInt(begin);
+		int endIndex=Integer.parseInt(end);
+		String [] subStr=jtdoaService.getL1(HU_SHEN,beginIndex,endIndex,market);
 		/*{
 		    "status": "状态码", 
 		    "index": [
@@ -102,38 +100,15 @@ public class JTdoaController extends BaseController implements JtdoaValueMarket 
 		 
 		return putReturnValue2(subStr[0], subStr[1],subStr[3], subStr[2]);
 	}
+	 
+	 
 	@ResponseBody
-	@RequestMapping(value="/getLevel1",method=RequestMethod.POST,produces = {"application/json;charset=UTF-8"})
-	public String getLevel1(@RequestParam(value="exchange")String exchange){
-		List<Level1Value> list=RedisOfReader.getLevel1(exchange);
-		String msg="";
-		String statusCode="200";
-		String item="";
-		if(list==null||list.size()==0){
-			msg="市场不存在";
-			statusCode="507";
-			item="\"\"";
-		}else{
-			item=JSON.toJSONString(list);
-		}
-		return putReturnValue1(statusCode, msg, item);
-	}
-	@ResponseBody
-	@RequestMapping(value="/getLevel2",method=RequestMethod.POST,produces = {"application/json;charset=UTF-8"})
+	@RequestMapping(value="/getLevel2",method=RequestMethod.POST
+	,produces = {"application/json;charset=UTF-8"})
 	public String getLevel2(@RequestParam(value="symbol")String symbol){
-		String value=RedisOfReader.getL2Value(symbol);
-		String msg="";
-		String statusCode="200";
-		String item="";
-		if(value!=null&&"".equals(value.trim())){
-			msg="股票不存在";
-			statusCode="507";
-			item="\"\"";
-		}else{
-			item="\""+value+"\"";
-		}
+		String [] subStr= jtdoaService.getL2(symbol.toUpperCase());
 
-		return putReturnValue1(statusCode, msg, item);
+		return putReturnValue1(subStr[0],subStr[2], subStr[1]);
 	}
 	 
 	 

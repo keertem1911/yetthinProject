@@ -1,6 +1,7 @@
 package zcom.yetthin.web.listener;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Executor;
@@ -9,6 +10,7 @@ import java.util.concurrent.Executors;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
+import com.yetthin.web.commit.JtdoaValueMarket;
 import com.yetthin.web.commit.QQMarketLevelUtilByMaster;
 import com.yetthin.web.commit.QQMarketLevelUtilBySimple;
 import com.yetthin.web.commit.RedisOfReader;
@@ -20,12 +22,20 @@ import com.yetthin.web.test.ReadTextSymbol;
 import util.Contract;
 
 
-public class CreateJdoaListener implements ServletContextListener,QQMarketLevelUtilBySimple,QQMarketLevelUtilByMaster,SinaMarketIndex {
+public class CreateJdoaListener implements ServletContextListener,
+QQMarketLevelUtilBySimple,QQMarketLevelUtilByMaster,
+SinaMarketIndex,JtdoaValueMarket{
 
 	private JtdoaAPIDao jtdoaAPIDao=new JtdoaAPIDao();
 	
+	private static final SimpleDateFormat dateFormat=new SimpleDateFormat("HH:mm");
+	private static final String END_TIME ="23:30";
+	private static final String START_TIME="08:45";
 	private static final int dev_num=20;
+	private static final String FILE_NAME_PATH="d:/symbol.txt";
 	private UrlRequestDao urlRequestDao=new UrlRequestDao();
+	private final static long SECOND=1000;
+	private final static long MINUTE=SECOND*60;
 //	private JTdoa jtdoa;
 //	private JHdboa jhdboa;
 	private Executor executor = Executors.newFixedThreadPool(200);
@@ -35,7 +45,20 @@ public class CreateJdoaListener implements ServletContextListener,QQMarketLevelU
 	public void contextDestroyed(ServletContextEvent arg0) {
 		// TODO Auto-generated method stub
 	}
-
+	private boolean  AfterTimeCompared(String current,String target){
+		boolean aftercompared=false;
+		// 09:31  09:30
+		if(current.split(":")[0].compareTo(target.split(":")[0])>0){
+			aftercompared=true;
+		}else{
+			if(current.split(":")[0].compareTo(target.split(":")[0])==0){
+				if(current.split(":")[1].compareTo(target.split(":")[1])>0){
+					aftercompared=true;
+				}
+			}
+		}
+		return aftercompared;
+	}
 	private void init() {
 //		 jtdoa = JtdoaUtil.getInstanceJTdoa();
 //		jhdboa =JtdoaUtil.getInstanceJHdboa();
@@ -44,13 +67,16 @@ public class CreateJdoaListener implements ServletContextListener,QQMarketLevelU
 			@SuppressWarnings("unchecked")
 			public void run() {
 				ReadTextSymbol test = new ReadTextSymbol();
- 				Map<String, Object> map= test.readTextByContract("d:/symbol.txt");
+ 				Map<String, Object> map= test.readTextByContract(FILE_NAME_PATH);
  				list=(List<Contract>) map.get("contracts");
-				List<String> symbols = test.readSymolByString("d:/symbol.txt");
+				List<String> symbols = test.readSymolByString(FILE_NAME_PATH);
 				RedisOfReader.initReadInredisKeyLevel1(list);
 				 //股票 更新 详细信息   开盘价  收盘价 摆单情况
 				
 				while(true){
+				
+				String currentTime = dateFormat.format(System.currentTimeMillis());
+				if(AfterTimeCompared(currentTime, START_TIME)&&!AfterTimeCompared(currentTime, END_TIME)){
 				for(int j=0;j<symbols.size()/dev_num;++j){
 					StringBuffer sb=new StringBuffer();
 					int cnt=dev_num;
@@ -70,14 +96,17 @@ public class CreateJdoaListener implements ServletContextListener,QQMarketLevelU
 					 // TODO Auto-generated catch block
 					 e.printStackTrace();
 				 }
-				}
+				}// end in  for(int j=0;j<symbols.size()/dev_num;++j){ 
+				
+				
 					 try {
-						Thread.sleep(1000*60*5);
+						Thread.sleep(MINUTE<<2);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
- 				 }
+ 				 }// if
+				}//while
 //				for (int i = 0; i < list.size(); i++) {
 //					if(tickId<0)
 //						tickId=0;
@@ -94,6 +123,42 @@ public class CreateJdoaListener implements ServletContextListener,QQMarketLevelU
 // 				  RedisOfReader.initReadInredisKeyLevel1(list);
 //  				  RedisOfReader.initNameToSymbol(names);
 			}
+		});
+		/*
+		 *  指数发送
+		 */
+		executor.execute(new Runnable() {
+			public void run() {
+				System.currentTimeMillis();
+				
+				String [] [] husheng=HU_SHEN_STOCK_INDEX;
+				while(true){
+					String currentTime = dateFormat.format(System.currentTimeMillis());
+					if(AfterTimeCompared(currentTime, START_TIME)&&!AfterTimeCompared(currentTime, END_TIME)){
+				
+		    	StringBuffer sb=new StringBuffer();
+		    	for (int i = 0; i < husheng.length; i++) {
+					sb.append("s_"+husheng[i][0].substring(7).toLowerCase()+husheng[i][0].substring(0, 6));
+					if(i<husheng.length-1)
+						sb.append(",");
+		    	}
+		    	try {
+					List<String> values=urlRequestDao.readContentFromGet(SINA_I_REQUEST_URL+sb.toString());
+					jtdoaAPIDao.saveSina_REQUEST_URL_INDEX(values);
+		    	} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}	
+		    	try {
+					Thread.sleep(SECOND*20);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+					}//if
+			}//while 
+				 
+				}
 		});
 	}
 

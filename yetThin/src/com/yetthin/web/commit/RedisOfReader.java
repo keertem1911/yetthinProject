@@ -1,23 +1,13 @@
 package com.yetthin.web.commit;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import com.alibaba.fastjson.JSON;
-
 import java.util.Map.Entry;
-
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import util.Contract;
@@ -25,35 +15,32 @@ import util.Level1Value;
 import util.Level2Value;
 
 public class RedisOfReader implements ValueFormatUtil{
-	private static JedisPool pool=RedisUtil.getInstanceSlave();
+	private static JedisPool pool=RedisUtil.getInstanceMsater();
 	
-	static{
-		System.out.println("redis of reader ---------------------");
-		System.out.println("redis of reader ---------------------");
-		System.out.println("redis of reader ---------------------");
-		System.out.println("redis of reader ---------------------");
-	}
-	private static Jedis jedis=null;
+	 
+	 
 	private static final String INIT_STRING="0:0:0:0:0:0:0:0:0:0:0"
-//			   1	   2     3     4     5   6	  7    8       
-	 	+ ":0:0:0:0:0:0:0:0:0:0"
-//		 	9    10    11    12    13     14    15    16    17    18       
-	 	+ ":0:0:0:0:0:0:0:0:0:0";
-//		  19 20 2122 23 24 25 26  27 28  
+//			   1	   2     3     4     5   6	  7    8         >> SUM 11
+	 	+ ":0:0:0:0:0:0:0:0:0:0" 
+//		 	9    10    11    12    13     14    15    16    17    18  >>SUM    10   
+	 	+ ":0:0:0:0:0:0:0:0:0:0:0:0";
+//		  19 20 2122 23 24 25 26  27 28        >> SUM 12   TOTLE 33 INDEX 0 -32
 	
-	static{
-		// TODO Auto-generated constructor stub
-		jedis=pool.getResource();
-	}
+	 
 	/**
 	 * 
 	 */
 	public static void initReadInredisKeyLevel1(List<Contract> list){
-		
+		Jedis jedis=pool.getResource();
 		jedis.select(0);
 		for (Contract contract : list) {
+//			if(!"".equals(contract.getSymbol()+"."+contract.getExchange())){
+//				break;
+//			}
 			jedis.set(contract.getSymbol()+"."+contract.getExchange(), INIT_STRING);
 		}
+		
+		RedisUtil.RealseJedis_M(jedis);
 	}
 	/**
 	 * 
@@ -63,11 +50,12 @@ public class RedisOfReader implements ValueFormatUtil{
 	 */
 	// 模糊匹配 查询key
 	public static void getL2BysideAndCheckSum(String symbol,int side,int checkSum) {
-			
+			Jedis jedis=pool.getResource();
 				jedis.select(1);
 		
 		 		String l2=jedis.hget(symbol,side+":"+checkSum);
 				System.out.println(l2);
+			RedisUtil.RealseJedis_M(jedis);
 	}
 	/**
 	 * 返回指定 代码的 摆单 list 
@@ -77,6 +65,7 @@ public class RedisOfReader implements ValueFormatUtil{
 	 */
 	public static String getL2Value(String symbol){
 		List<Level2Value> list2=new LinkedList<>();
+		Jedis jedis=pool.getResource();
 		jedis.select(0);
 		 String value=jedis.get(symbol.toUpperCase());
 		 StringBuffer sb=new StringBuffer();
@@ -88,7 +77,7 @@ public class RedisOfReader implements ValueFormatUtil{
 			if(i!=9)
 				sb.append(",");
 		}
-		 
+		RedisUtil.RealseJedis_M(jedis);
 		return sb.toString();
 	}
 	public static String getL2Value(String symbol,String exchange){
@@ -102,6 +91,7 @@ public class RedisOfReader implements ValueFormatUtil{
 	 */
 	// 解析 l1  
 	public static List<Level1Value> getLevel1(String exchange){
+		Jedis jedis=pool.getResource();
 			jedis.select(0);
 			Map<String , String> map=jedis.hgetAll(exchange);
 			List<Level1Value> listsL1= new LinkedList<>();
@@ -131,6 +121,7 @@ public class RedisOfReader implements ValueFormatUtil{
 				listsL1.add(con);
 			}
 			 Collections.sort(listsL1);
+			 RedisUtil.RealseJedis_M(jedis);
 			return listsL1;
 		}
 	public static void main(String[] args) {
@@ -146,6 +137,7 @@ public class RedisOfReader implements ValueFormatUtil{
 	 */
 	public static void initNameToSymbol(Map<String, String> names) {
 		// TODO Auto-generated method stub
+		Jedis jedis=pool.getResource();
 		jedis.select(0);
 		
 		Set<Entry<String, String>> sets=names.entrySet();
@@ -154,6 +146,7 @@ public class RedisOfReader implements ValueFormatUtil{
 			Entry<String, String> entry=(Entry<String, String>)it.next();
 			jedis.set("name"+entry.getKey(), entry.getValue());
 		}
+		RedisUtil.RealseJedis_M(jedis);
 	}
 	
 	
