@@ -67,10 +67,10 @@ SinaMarketIndex,JtdoaValueMarket{
 			@SuppressWarnings("unchecked")
 			public void run() {
 				ReadTextSymbol test = new ReadTextSymbol();
- 				Map<String, Object> map= test.readTextByContract(FILE_NAME_PATH);
- 				list=(List<Contract>) map.get("contracts");
+ 				  
+ 				list=test.readTextByContract(FILE_NAME_PATH);
 				List<String> symbols = test.readSymolByString(FILE_NAME_PATH);
-				RedisOfReader.initReadInredisKeyLevel1(list);
+//				RedisOfReader.initReadInredisKeyLevel1(list);
 				 //股票 更新 详细信息   开盘价  收盘价 摆单情况
 				
 				while(true){
@@ -80,9 +80,12 @@ SinaMarketIndex,JtdoaValueMarket{
 				for(int j=0;j<symbols.size()/dev_num;++j){
 					StringBuffer sb=new StringBuffer();
 					int cnt=dev_num;
-					if(j==symbols.size()-1&&symbols.size()%1000!=0)
+					if(j==((symbols.size()/dev_num))&&symbols.size()%1000!=0)
 						cnt=symbols.size()%dev_num;
 				 for (int i = 0; i < cnt; i++) {
+					 if(cnt!=dev_num){
+						 System.out.println(j*dev_num+i+":"+symbols.get(j*dev_num+i));
+					 }
 					sb.append(symbols.get(j*dev_num+i));
 					 if(i!=symbols.size()-1)
 						sb.append(",");
@@ -97,11 +100,21 @@ SinaMarketIndex,JtdoaValueMarket{
 					 e.printStackTrace();
 				 }
 				}// end in  for(int j=0;j<symbols.size()/dev_num;++j){ 
-				
-				
-					 try {
+				try {
+				StringBuffer sb=new StringBuffer(); 
+				for (int i = 0; i < symbols.size()%dev_num; i++) {
+					  
+					sb.append(symbols.get((symbols.size()/dev_num)*dev_num+i));
+//				 	System.out.println((symbols.size()/dev_num)*dev_num+i);
+					if(i!=symbols.size()-1)
+						sb.append(",");
+				}
+				 
+				 List<String> values=	urlRequestDao.readContentFromGet(QQ_M_REQUEST_URL+sb.toString());
+				 
+				 jtdoaAPIDao.saveQQ_M_REQUEST_URL(values);
 						Thread.sleep(MINUTE<<2);
-					} catch (InterruptedException e) {
+					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}

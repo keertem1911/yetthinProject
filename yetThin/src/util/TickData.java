@@ -13,7 +13,7 @@ public class TickData {
 	}
 	@Override
 	public String toString() {
-		return "TickData [contract=" + contract + ", dateTime=" + dateTime + ", tickPrice=" + tickPrice + ", volume="
+		return "TickData [  tickPrice=" + tickPrice + ", volume="
 				+ volume + ", turover=" + turover + ", matchItems=" + matchItems + "]";
 	}
 	

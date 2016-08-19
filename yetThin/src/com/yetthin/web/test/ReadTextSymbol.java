@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
 import com.yetthin.web.commit.JtdoaUtil;
 
 import util.Contract;
@@ -31,7 +32,7 @@ public class ReadTextSymbol {
 					new InputStreamReader(new FileInputStream(path)));
 			String line=null;
 			while((line=reader.readLine())!=null){
-				line =line.split("\\s")[0];
+				 
 				String [] sub=line.split("[.]");
 				String symbol=sub[0];
 				String exchange=sub[1];
@@ -54,19 +55,16 @@ public class ReadTextSymbol {
 		 
 		return lists;
 	}
-	public Map<String,Object> readTextByContract(String path){
+	public List<Contract> readTextByContract(String path){
 		BufferedReader reader=null;
-		Map<String, Object> map=new HashMap<>();
 		List<Contract> lists=new ArrayList<>();
-		Map<String, String> names=new HashMap<>();
 		try {
 			 reader=new BufferedReader(
 					new InputStreamReader(new FileInputStream(path)));
 			String line=null;
 			while((line=reader.readLine())!=null){
-				String [] subStr= line.split("\\s");
-				System.out.println(line);
-				String [] sub=subStr[0].split("[.]");
+			 
+				String [] sub=line.split("[.]");
 				String symbol=sub[0];
 				String exchange=sub[1];
 				Contract contract=new Contract();
@@ -75,7 +73,7 @@ public class ReadTextSymbol {
 				contract.exchange=exchange;
 				contract.secType="STK";
 				lists.add(contract);
-				names.put(subStr[0].toUpperCase(), subStr[1]);
+				 
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -90,9 +88,8 @@ public class ReadTextSymbol {
 				}
 			}
 		}
-		map.put("contracts", lists);
-		map.put("names", names);
-		return map;
+		 
+		return lists;
 	}
 	
 	public static void main(String[] args) {

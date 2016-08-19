@@ -19,7 +19,8 @@ public interface ValueFormatUtil {
 	public static final int LEVEL2_INDEX_SIDE0=16;// 买方  买1
 	public static final int UP_DOWN_PRICE=31; // 涨跌价
 	public static final int UP_DOWN_PRICE_RATE=32; // 涨跌率
+	public static final int NAME=33;
 	public static final String SPLIT_STR=":";
-	public static SimpleDateFormat format=new SimpleDateFormat("hh-mm-ss");
+	public static SimpleDateFormat format=new SimpleDateFormat("HH-mm");
 	public static DecimalFormat   doubleformat=new DecimalFormat("#.###"); 
 }

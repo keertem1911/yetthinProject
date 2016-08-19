@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
 import com.sun.xml.internal.fastinfoset.util.ValueArray;
 import com.yetthin.web.commit.JtdoaValueMarket;
 import com.yetthin.web.commit.QQMarketLevelUtilByMaster;
@@ -50,6 +51,9 @@ public class JtdoaAPIDao implements
 		 try{
 			// 保存的值
 			String [] subStr= redisValue.split(SPLIT_STR);
+			if(symbol.equals("603515")){
+				System.out.println(subStr);
+			}
 			//更新操作
 			subStr[DATE_INDEX]=subValue[QQ_M_UP_DOWN_TIME];
 			subStr[PRE_CLOSE_INDEX]=subValue[QQ_M_YST_CLOSE];// 前收盘价
@@ -62,8 +66,9 @@ public class JtdoaAPIDao implements
 			subStr[LIMIT_UP_INDEX]=subValue[QQ_M_LIMIT_UP];// 涨停价
 			subStr[LIMIT_DOWN_INDEX]=subValue[QQ_M_LIMIT_DOWN];//跌停价
 			subStr[EXCHANGE_RATE]=subValue[QQ_M_EXCHANGE]; //换手率
-			subStr[UP_DOWN_PRICE]= subValue[QQ_M_UP_DOWN];
-			subStr[UP_DOWN_PRICE_RATE] = subValue[QQ_M_UP_DOWN_RATE];
+			subStr[UP_DOWN_PRICE]= subValue[QQ_M_UP_DOWN]; // 涨跌价
+			subStr[UP_DOWN_PRICE_RATE] = subValue[QQ_M_UP_DOWN_RATE];//涨跌率
+			subStr[NAME]=subValue[QQ_M_NAME];
 			for (int j = 0,k=0; j < 10;k++,j+=2) {
 				// 15 14 13 12 11
 				// 25 24 23 22 21
@@ -110,11 +115,11 @@ public class JtdoaAPIDao implements
 		}
 		//涨跌幅
 		if(desc_reate>0)
-			jedis.zadd(MARKET[marketName][0]+":"+MARKET[marketName][1],desc_reate,symbol+"."+exchange.toUpperCase()+":"+subStr[QQ_M_NAME]+":"+subStr[QQ_M_LAST_PRICE]+":"+subStr[QQ_M_UP_DOWN]+":"+subStr[QQ_M_UP_DOWN_TIME]);
+			jedis.zadd(MARKET[marketName][0]+":"+MARKET[marketName][1],desc_reate,symbol+"."+exchange.toUpperCase());
 		else
-			jedis.zadd(MARKET[marketName][0]+":"+MARKET[marketName][2],desc_reate,symbol+"."+exchange.toUpperCase()+":"+subStr[QQ_M_NAME]+":"+subStr[QQ_M_LAST_PRICE]+":"+subStr[QQ_M_UP_DOWN]+":"+subStr[QQ_M_UP_DOWN_TIME]);
+			jedis.zadd(MARKET[marketName][0]+":"+MARKET[marketName][2],desc_reate,symbol+"."+exchange.toUpperCase());
 		//换手率
-		jedis.zadd(MARKET[marketName][0]+":"+MARKET[marketName][3], Double.parseDouble(subStr[QQ_M_EXCHANGE]),symbol+"."+exchange.toUpperCase()+":"+subStr[QQ_M_NAME]+":"+subStr[QQ_M_LAST_PRICE]+":"+subStr[QQ_M_UP_DOWN_TIME]);
+		jedis.zadd(MARKET[marketName][0]+":"+MARKET[marketName][3], Double.parseDouble(subStr[QQ_M_EXCHANGE]),symbol+"."+exchange.toUpperCase());
 		jedis.select(0);
 		RedisUtil.RealseJedis_M(jedis);
 	}

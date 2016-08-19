@@ -1,13 +1,20 @@
 package com.yetthin.web.dao;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeSet;
 
 import org.springframework.stereotype.Service;
 
+import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
 import com.yetthin.web.commit.JtdoaValueMarket;
 import com.yetthin.web.commit.RedisUtil;
 import com.yetthin.web.commit.SinaMarketIndex;
@@ -16,6 +23,12 @@ import com.yetthin.web.commit.ValueFormatUtil;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.Tuple;
+import util.BarData;
+import util.Contract;
+import util.JHdboa;
+import util.TickData;
+import util.TickSort;
+import util.UseRTH;
 
 @Service("JtdoaDao")
 public class JtdoaDao implements ValueFormatUtil,JtdoaValueMarket,SinaMarketIndex{
@@ -238,9 +251,9 @@ public class JtdoaDao implements ValueFormatUtil,JtdoaValueMarket,SinaMarketInde
 	 * @param b 是否全部
 	 * @return
 	 */
-	public Map<String, Set<Tuple>> getL1StockMarketData(int huShen,int begin,int end, String[] params) {
+	public Map<String, List<String>> getL1StockMarketData(int huShen,long begin,Long end, String[] params) {
 		// TODO Auto-generated method stub
-		Map<String, Set<Tuple>> map=new HashMap<>();
+		Map<String, List<String>> map=new HashMap<>();
 //		jedis_M.select(1);
 //		Set<String> sets=jedis_M.keys(huShen+":*");
 //		int size=b==false?4:-1;
@@ -248,20 +261,44 @@ public class JtdoaDao implements ValueFormatUtil,JtdoaValueMarket,SinaMarketInde
 //			Set<Tuple> tuple=jedis_M.zrevrangeByScoreWithScores(string, 0, size);
 //			map.put(string, tuple);
 //		}
-		 
+		 Map<String, Set<Tuple>> mapTuple=new HashMap<>();
 		jedis_S.select(1);
-			for (String s : params) {
-				int index= Integer.parseInt(s);
+			for (int i=0;i<params.length;++i) {
+				int index= Integer.parseInt(params[i])+1;
 				String string =MARKET[huShen][0]+":"+MARKET[huShen][index];
+				if(jedis_S.zcard(string)<=end){
+					end =jedis_S.zcard(string)-1;
+				}
+				
 				Set<Tuple> range=jedis_S.zrevrangeWithScores(string, begin,end);
 				
-				if(index==2)
+				if(MARKET[huShen][index].equals("1"))
 					range=jedis_S.zrangeWithScores(string, begin,end); 
 				
-				map.put(string, range);
+				mapTuple.put(string, range);
 				
 			}
-				
+		jedis_S.select(0);
+		
+		/**
+		 *  sb =>>  股票代码,名称,价格,涨跌幅率
+		 */
+		Set<Entry<String, Set<Tuple>>> set=mapTuple.entrySet();
+		for (Entry<String, Set<Tuple>> entry : set) {
+			String market = entry.getKey();
+			List<String> symbolList=new ArrayList<>();
+			Set<Tuple> tupleSet=entry.getValue();
+			for (Tuple tuple : tupleSet) {
+				StringBuffer sb=new StringBuffer();
+				String symbol=tuple.getElement();
+				double rate=tuple.getScore();
+				String []redisValue = jedis_S.get(symbol).split(SPLIT_STR);
+				symbolList.add(symbol+":"+redisValue[NAME]+":"
+				+redisValue[LAST_PRICE_INDEX]+":"+rate);
+			}
+			map.put(market, symbolList);
+		}
+			
 		return map;
 	}
 	/**
@@ -334,5 +371,83 @@ public class JtdoaDao implements ValueFormatUtil,JtdoaValueMarket,SinaMarketInde
 		String value = jedis_S.get(symbol);
 		
 		return value;
+	}
+	public List<TickSort> getLevel2Detail(String symbol){
+		JHdboa jhd=new JHdboa();
+		jhd.HdboaInit(new BarData(),new Contract(),new TickData());
+		jhd.HdboaConnect("222.173.29.210", 7008);
+		while(!jhd.connected)
+		{
+			System.out.println("wait");
+			try {
+				Thread.sleep(50);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		  SimpleDateFormat yy_MM_ddformat =new SimpleDateFormat("yyyy:MM:dd");
+		 SimpleDateFormat ALL_format =new SimpleDateFormat("yyyy:MM:dd HH:mm:ss");
+		 List<TickSort> list=null;
+		 Contract contract=new Contract();
+		 contract.symbol=symbol.split(".")[0];
+		 contract.currency="CNY";
+		 contract.exchange=symbol.split(".")[1].toUpperCase();
+		 contract.secType="STK";
+		 int cntTime=0;
+		 
+		 try {
+			 long current_Time=System.currentTimeMillis();
+		 String dateStr=yy_MM_ddformat.format(current_Time);
+		 Date endTime =ALL_format.parse(dateStr+" 15:01:00");
+		 Date beginTime =ALL_format.parse(dateStr+" 09:30:00");
+		 long fromTime=0l;
+		 long toTime=0l;
+		 // 起始时间与终止时间之差 10分钟
+		 long index_time=1000*60*30;
+		 // 第二天请求昨天的
+		 long yestday=1000*60*60*24;
+		 do{
+			 jhd.setLevel2Detail(null);
+				 if(endTime.getTime()<current_Time){// 超过 收盘时间
+					 fromTime=endTime.getTime()-index_time-cntTime;
+					 toTime=endTime.getTime();
+				 }else{
+					 if(beginTime.getTime()>current_Time){// 先于  开盘时间
+						 fromTime=endTime.getTime()-index_time-cntTime-yestday;
+						 toTime=endTime.getTime()-yestday;
+					 }else{
+						 toTime=current_Time;
+						 fromTime=current_Time-index_time-cntTime;
+					 }
+				 }
+				 
+				 list=jhd.getLevel2Detail();
+				 System.out.println("from "+new Date(fromTime)+"  to "+new Date(toTime));
+				 jhd.HdboaReqHistoricalTickData(3, contract, fromTime/1000, toTime/1000,UseRTH.USE_RTH.ordinal());
+				while(!jhd.isIsset()){
+					Thread.sleep(100);
+				//	System.out.println(jhd.isset);
+				}
+					 Thread.sleep(1000);
+					 System.out.println(list.size());
+					 cntTime+=1000*60;
+		 }while(list.size()<20&&fromTime>beginTime.getTime());
+		 } catch (Exception e) {
+			 // TODO Auto-generated catch block
+			 e.printStackTrace();
+		 } 
+	 	Collections.sort(list);
+		System.out.println("ceoom i   =---------------------------");
+			System.out.println(Arrays.asList(list));
+			System.out.println(list.size());
+			jhd.setLevel2Detail(null);
+			jhd.HdboaDisconnect();
+			jhd.HdboaDestory();
+			System.out.println(Thread.currentThread().getName());
+			while(!jhd.end);
+		System.out.println("sa");
+		jhd=null;
+		return list;
 	}
 }

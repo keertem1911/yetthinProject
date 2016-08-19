@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
 import com.yetthin.web.commit.JtdoaValueMarket;
 import com.yetthin.web.service.JtdoaService;
 
@@ -43,8 +45,8 @@ public class JTdoaController extends BaseController implements JtdoaValueMarket 
 		if("".equals(market)){
 			market="0:0,1,2";
 		}
-		int beginIndex=Integer.parseInt(begin);
-		int endIndex=Integer.parseInt(end);
+		long beginIndex=Long.parseLong(begin);
+		long endIndex=Long.parseLong(end);
 		String [] subStr=jtdoaService.getL1(HU_SHEN,beginIndex,endIndex,market);
 		/*{
 		    "status": "状态码", 
@@ -110,6 +112,13 @@ public class JTdoaController extends BaseController implements JtdoaValueMarket 
 
 		return putReturnValue1(subStr[0],subStr[2], subStr[1]);
 	}
-	 
+	
+	@ResponseBody 
+	@RequestMapping(value="/getLevel2Detail",method=RequestMethod.POST,
+	produces = {"application/json;charset=UTF-8"})
+	public String getLevel2DetailTick(@RequestParam(value="symbol")String symbol){
+		String [] subStr=jtdoaService.getLevel2Detail(symbol);
+		return putReturnValue1(subStr[0],subStr[2], subStr[1]);
+	 }
 	 
 }

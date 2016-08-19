@@ -12,7 +12,7 @@ public class JtdoaUtil {
 		
 	};
 	private static volatile JTdoa jTdoa=null;
-	private static volatile JHdboa jHdboa=null;
+
 	public static JTdoa getInstanceJTdoa(){
 		if(jTdoa==null){
 			synchronized(JtdoaUtil.class){
@@ -54,6 +54,7 @@ public class JtdoaUtil {
 		return jTdoa;
 	}
 	public static JHdboa getInstanceJHdboa(){
+		 JHdboa jHdboa=null;
 		if(jHdboa ==null){
 		synchronized (JtdoaUtil.class){
 			if(jHdboa ==null){

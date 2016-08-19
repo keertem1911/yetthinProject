@@ -80,24 +80,7 @@ public class RedisTest1 implements JtdoaValueMarket{
 	 //	test.expireL1("SZ");
 	}
 	public static void main(String[] args) {
-		
-		jedis.select(1);
-			 for (int i = 0; i < MARKET.length; i++) {
-				for (int j = 1; j < MARKET[i].length; j++) {
-					
-					 String string =MARKET[i][0]+":"+MARKET[i][j];
-					 Set<Tuple> range=jedis.zrevrangeWithScores(string, 0, 5);
-
-					 if(j==2)
-						 range=jedis.zrangeWithScores(string, 0, 5); 
-					 
-						for (Tuple tuple : range) {
-							System.out.println(tuple.getElement()+", "+tuple.getScore());
-						}
-						
-				}
-				 
-		}
+	 
 	}
 	
 	

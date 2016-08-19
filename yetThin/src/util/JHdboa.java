@@ -1,9 +1,13 @@
 package util;
 
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Formatter;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Locale;
 
 import com.yetthin.web.commit.RedisUtil;
@@ -17,14 +21,11 @@ public class JHdboa implements ValueFormatUtil{
 	
 	private static JedisPool poolM=RedisUtil.getInstanceMsater();
 	
-	private static Jedis jedis_M=null;
-	
-	static{
-		 
-		jedis_M=poolM.getResource();
-	}
-	
-	
+	 
+	private List<TickSort> level2Detail=null;
+	 
+	private boolean isset=false;
+	SimpleDateFormat mm_ddformat =new SimpleDateFormat("HH:mm:ss");
 	public boolean connected=false;
 	public JHdboa() {
 		// TODO Auto-generated constructor stub
@@ -72,14 +73,18 @@ public class JHdboa implements ValueFormatUtil{
     	System.out.println("connected");
     	connected=true;
     }
-    
+    public boolean end =false;
     public void disconnected()
     {
+    	System.out.println(Thread.currentThread().getName());
     	System.out.println("disconnected");
+    	 Thread.currentThread().interrupt();
+    	 end=true;
+    	 System.out.println("aaa");
     }
     public void UpdateHistoricalBarData(long tickId,BarData bar,int sendFlag)
     {
-    	 
+    	 Jedis jedis_M=poolM.getResource();
     	System.out.println(tickId+" "+sendFlag+" "+bar);
     	 String value=jedis_M.get(bar.contract.symbol.toUpperCase());
     	 
@@ -98,13 +103,33 @@ public class JHdboa implements ValueFormatUtil{
     			 
     		 }
     	 }
+    	 RedisUtil.RealseJedis_M(jedis_M);
     	 
     }
+    public List<TickSort> getLevel2Detail() {
+			level2Detail=new LinkedList<>();
+			isset=false;
+		 
+    	return level2Detail;
+	}
+    public void setLevel2Detail(List<TickSort> level2Detail) {
+    	isset=false;
+		this.level2Detail = level2Detail;
+	}
     public void UpdateHistoricalTick(long tickId,TickData tick,int sendFlag)
     {
-    	System.out.println("tickData:"+tickId+" "+sendFlag+" "+tick.contract.exchange+" "+tick.tickPrice+" "+getDateStr(tick.dateTime*1000)+" "+tick.volume);
+//    	if(level2Detail!=null){
+    	isset=true;
+    	String date=mm_ddformat.format(tick.dateTime*1000);
+    	TickSort tickSort = new TickSort(tick, date);
+    	level2Detail.add(tickSort);
+     	System.out.println(tickSort);
+//    	}
+    	System.out.println("tickData:"+tickId+" "+sendFlag+" "+tick+" "+tick.dateTime*1000);
     }
-
+    public boolean isIsset() {
+		return isset;
+	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		JHdboa jhd=new JHdboa();
@@ -120,15 +145,73 @@ public class JHdboa implements ValueFormatUtil{
 				e.printStackTrace();
 			}
 		}
-		Contract contract=new Contract();
-		contract.symbol="002362";
-		contract.currency="CNY";
-		contract.exchange="SZ";
-		contract.secType="STK";
+		  SimpleDateFormat yy_MM_ddformat =new SimpleDateFormat("yyyy:MM:dd");
+		 SimpleDateFormat ALL_format =new SimpleDateFormat("yyyy:MM:dd HH:mm:ss");
+		 List<TickSort> list=null;
+		 Contract contract=new Contract();
+		 contract.symbol="002362";
+		 contract.currency="CNY";
+		 contract.exchange="SZ";
+		 contract.secType="STK";
+		 int cntTime=0;
+		 
+		 try {
+			 long current_Time=System.currentTimeMillis();
+		 String dateStr=yy_MM_ddformat.format(current_Time);
+		 Date endTime =ALL_format.parse(dateStr+" 15:01:00");
+		 Date beginTime =ALL_format.parse(dateStr+" 09:30:00");
+		 long fromTime=0l;
+		 long toTime=0l;
+		 // 起始时间与终止时间之差 10分钟
+		 long index_time=1000*60*30;
+		 // 第二天请求昨天的
+		 long yestday=1000*60*60*24;
+		 do{
+			 jhd.setLevel2Detail(null);
+				 if(endTime.getTime()<current_Time){// 超过 收盘时间
+					 fromTime=endTime.getTime()-index_time-cntTime;
+					 toTime=endTime.getTime();
+				 }else{
+					 if(beginTime.getTime()>current_Time){// 先于  开盘时间
+						 fromTime=endTime.getTime()-index_time-cntTime-yestday;
+						 toTime=endTime.getTime()-yestday;
+					 }else{
+						 toTime=current_Time;
+						 fromTime=current_Time-index_time-cntTime;
+					 }
+				 }
+				 
+				 list=jhd.getLevel2Detail();
+				 System.out.println("from "+new Date(fromTime)+"  to "+new Date(toTime));
+				 jhd.HdboaReqHistoricalTickData(3, contract, fromTime/1000, toTime/1000,UseRTH.USE_RTH.ordinal());
+				while(!jhd.isset){
+					Thread.sleep(100);
+				//	System.out.println(jhd.isset);
+				}
+					 Thread.sleep(1000);
+					 System.out.println(list.size());
+					 cntTime+=1000*60;
+		 }while(list.size()<20&&fromTime>beginTime.getTime());
+		 } catch (Exception e) {
+			 // TODO Auto-generated catch block
+			 e.printStackTrace();
+		 } 
 		//System.out.println(getDateStr(System.currentTimeMillis()-1000*60*60*24)+getDateStr(System.currentTimeMillis()));
-		int status=jhd.HdboaReqHistoricalData(8000, contract,(System.currentTimeMillis()-1000*60*60*25)/1000, System.currentTimeMillis()/1000,CYCTYPE.CYC_DAY.ordinal(), 1, UseRTH.USE_RTH.ordinal());
-		System.out.println(status);
-	//	status=jhd.HdboaReqHistoricalTickData(3, contract, (System.currentTimeMillis()-1000*60*60*24)/1000, System.currentTimeMillis()/1000,UseRTH.USE_RTH.ordinal());
+	//	int status=jhd.HdboaReqHistoricalData(8000, contract,(System.currentTimeMillis()-1000*60*60*25)/1000, System.currentTimeMillis()/1000,CYCTYPE.CYC_DAY.ordinal(), 1, UseRTH.USE_RTH.ordinal());
+//		System.out.println(status);
+//	 jhd.HdboaReqHistoricalTickData(3, contract, (System.currentTimeMillis()-1000*60*60*24)/1000, (System.currentTimeMillis())/1000,UseRTH.USE_RTH.ordinal());
+			
+	 	Collections.sort(list);
+		System.out.println("ceoom i   =---------------------------");
+			System.out.println(Arrays.asList(list));
+			System.out.println(list.size());
+			jhd.setLevel2Detail(null);
+			jhd.HdboaDisconnect();
+			jhd.HdboaDestory();
+			System.out.println(Thread.currentThread().getName());
+			while(!jhd.end);
+		System.out.println("sa");
+		jhd=null;
 	}
 	private static String getDateStr(long millis) {
 		Calendar cal = Calendar.getInstance();

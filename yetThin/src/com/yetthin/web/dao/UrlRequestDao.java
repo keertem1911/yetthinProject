@@ -20,7 +20,7 @@ public class UrlRequestDao {
     public   List<String> readContentFromGet(String url) throws IOException {   
 
         // 拼凑get请求的URL字串，使用URLEncoder.encode对特殊和不可见字符进行编码   
-
+     
     	List<String> list=new LinkedList<>();
         URL getUrl = new URL(url);   
         
@@ -57,7 +57,7 @@ public class UrlRequestDao {
         // 断开连接   
 
         connection.disconnect();   
-        System.out.println(Arrays.asList(list));
+  //      System.out.println(Arrays.asList(list));
         return list;
  }   
 
