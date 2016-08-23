@@ -1,5 +1,7 @@
 package util;
 
+import java.util.Date;
+
 public class BarData {
 
 	public Contract contract;
@@ -18,7 +20,7 @@ public class BarData {
 	}
 	@Override
 	public String toString() {
-		return "BarData [contract=" + contract + ", dateTime=" + dateTime + ", open=" + open + ", high=" + high
+		return "BarData [contract=" + contract + ", dateTime=" + new Date(dateTime*1000) + ", open=" + open + ", high=" + high
 				+ ", low=" + low + ", close=" + close + ", ystClose=" + ystClose + ", volume=" + volume + ", iTurover="
 				+ iTurover + ", matchItems=" + matchItems + "]";
 	}

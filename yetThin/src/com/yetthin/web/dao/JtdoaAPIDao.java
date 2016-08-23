@@ -1,12 +1,9 @@
 package com.yetthin.web.dao;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
-import com.sun.xml.internal.fastinfoset.util.ValueArray;
 import com.yetthin.web.commit.JtdoaValueMarket;
 import com.yetthin.web.commit.QQMarketLevelUtilByMaster;
 import com.yetthin.web.commit.QQMarketLevelUtilBySimple;
@@ -16,7 +13,6 @@ import com.yetthin.web.commit.ValueFormatUtil;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
-import sun.awt.SunHints.Value;
 
 @Repository("JtdoaAPIDao")
 public class JtdoaAPIDao implements 
@@ -35,7 +31,7 @@ public class JtdoaAPIDao implements
 		 
 		return buffer.toString();
 	}
-	public void saveQQ_M_REQUEST_URL(List<String> values) {
+	public void saveQQ_M_REQUEST_URL(List<String> values,boolean index) {
 		
 		Jedis jedis=jedispool.getResource();
 		// TODO Auto-generated method stub
@@ -50,6 +46,7 @@ public class JtdoaAPIDao implements
 			String redisValue=jedis.get(symbol.substring(2)+"."+symbol.substring(0, 2).toUpperCase());
 		 try{
 			// 保存的值
+			 if(redisValue!=null){
 			String [] subStr= redisValue.split(SPLIT_STR);
 			if(symbol.equals("603515")){
 				System.out.println(subStr);
@@ -69,6 +66,28 @@ public class JtdoaAPIDao implements
 			subStr[UP_DOWN_PRICE]= subValue[QQ_M_UP_DOWN]; // 涨跌价
 			subStr[UP_DOWN_PRICE_RATE] = subValue[QQ_M_UP_DOWN_RATE];//涨跌率
 			subStr[NAME]=subValue[QQ_M_NAME];
+			if(subValue[QQ_M_LAST_DONE]!=null){
+				subStr[LAST_DONE] = subValue[QQ_M_LAST_DONE].replace(":", "-");
+			}else
+				subStr[LAST_DONE]="0";
+			subStr[PRICE_EARING_RATIO]= subValue[QQ_M_PRICE_EARING_RATIO];
+			if(subValue[QQ_M_STOCK_AMPLITUPE]==null||"".equals(subValue[QQ_M_STOCK_AMPLITUPE].trim()))
+				
+				subStr[STOCK_AMPLITUPE]="0";
+			else 
+				subStr[STOCK_AMPLITUPE]=subValue[QQ_M_STOCK_AMPLITUPE];
+			if(subValue[QQ_M_FAMC]==null&&"".equals(subValue[QQ_M_FAMC].trim()))
+				subStr[FAMC]= "0";
+			else
+				subStr[FAMC]= subValue[QQ_M_FAMC];
+			if(subValue[TOTLE_MAREKT_VALUE]==null||"".equals(subValue[TOTLE_MAREKT_VALUE].trim()))
+				subStr[TOTLE_MAREKT_VALUE]="0";
+			else
+			subStr[TOTLE_MAREKT_VALUE]=subValue[TOTLE_MAREKT_VALUE];
+			if(subValue[QQ_M_TOTLE_NET_WORTH]==null||"".equals(subValue[QQ_M_TOTLE_NET_WORTH].trim()))
+				subStr[TOTLE_NET_WORTH]= "0";
+			else
+				subStr[TOTLE_NET_WORTH]= subValue[QQ_M_TOTLE_NET_WORTH];
 			for (int j = 0,k=0; j < 10;k++,j+=2) {
 				// 15 14 13 12 11
 				// 25 24 23 22 21
@@ -82,7 +101,9 @@ public class JtdoaAPIDao implements
 			}
 			redisValue=joinStringSplit(subStr, SPLIT_STR);
 			jedis.set(symbol.substring(2)+"."+symbol.substring(0, 2).toUpperCase(), redisValue);
+			if(!index)
 			saveSortBalance(symbol.substring(2),symbol.substring(0, 2).toUpperCase(), subValue);
+			 }
 		 }catch (Exception e) {
 			 System.out.println("-----------errorrrr          redisValue = "+ redisValue);
 			 System.out.println("-----------errorrrr          redisValue = "+ symbol.substring(2)+"."+symbol.substring(0, 2).toUpperCase());
@@ -91,6 +112,7 @@ public class JtdoaAPIDao implements
 			 System.out.println("-----------errorrrr          redisValue = "+ redisValue);
 			 System.out.println("-----------errorrrr          redisValue = "+ redisValue);
 			 // TODO: handle exception
+			 e.printStackTrace();
 		 }
 		}
 		}

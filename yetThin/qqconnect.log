@@ -1,0 +1,573 @@
+101652 INFO  [2016-08-22 08:52:12]  重新从OAUTH服务器获取TOKEN.次数:0
+101743 DEBUG [2016-08-22 08:52:12]  accessor token:net.oauth.OAuthAccessor@1a74e259[consumer=net.oauth.OAuthConsumer@6fb84ea0,requestToken=<null>,accessToken=7d718c78e07b856f910376bfe7e95e72,tokenSecret=7c33f7fd86cc694b64353db1fffff9c8,properties={}]
+101744 DEBUG [2016-08-22 08:52:12]  request:OAuthMessage(POST, http://1.85.59.245/gdsp/v1/public-opinion/topN, [p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D, q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D, oauth_token=7d718c78e07b856f910376bfe7e95e72, oauth_consumer_key=egoandroid, oauth_signature_method=HMAC-SHA1, oauth_timestamp=1471827132, oauth_nonce=953257312088501, oauth_version=1.0, oauth_signature=CjAT%2BpsdUgXnt0eZ3pHF4JdMONg%3D])
+106800 ERROR [2016-08-22 08:52:17]  OAuthException
+net.oauth.OAuthProblemException: HTTP/1.1 401 Unauthorized
+URL: http://1.85.59.245/gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D&q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D
+oauth_signature base string: POST&http%3A%2F%2F1.85.59.245%2Fgdsp%2Fv1%2Fpublic-opinion%2FtopN&oauth_consumer_key%3Degoandroid%26oauth_nonce%3D953257312088501%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1471827132%26oauth_token%3D7d718c78e07b856f910376bfe7e95e72%26oauth_version%3D1.0%26p%3D%255BcurrentPageNo%253A1%253BpageSize%253A3000%255D%26q%3D%255Bcodes%253A000001%252C000002%252C600000%252C399001%252C000004%252C000005%252C000006%252C000007%252C000008%252C000009%252C000010%252C000011%252C000012%252C000014%252C000016%252C000017%252C000018%252C000019%252C000416%252C000421%252C000422%252C000423%252C000411%255D
+>>>>>>>> HTTP request:
+POST /gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D&q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D
+Content-Type: application/json;charset=utf-8
+Authorization: OAuth oauth_token="7d718c78e07b856f910376bfe7e95e72", oauth_consumer_key="egoandroid", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1471827132", oauth_nonce="953257312088501", oauth_version="1.0", oauth_signature="CjAT%2BpsdUgXnt0eZ3pHF4JdMONg%3D"
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: 1.85.59.245
+Cookie: $Version=0; WEB=20111124; $Path=/
+Content-Length: 0
+
+
+<<<<<<<< HTTP response:
+HTTP/1.1 401 Unauthorized
+Date: Mon, 22 Aug 2016 00:51:57 GMT
+Server: Apache/2.0.64 (Unix) DAV/2 mod_jk/1.2.31
+Content-Length: 0
+Content-Type: text/plain
+
+
+	at net.oauth.client.OAuthResponseMessage.toOAuthProblemException(OAuthResponseMessage.java:83)
+	at net.oauth.client.OAuthClient.invoke(OAuthClient.java:308)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:136)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at com.util.gdsp.Opinionpost.getYJNews(Opinionpost.java:237)
+	at com.util.gdsp.Opinionpost.main(Opinionpost.java:253)
+107002 INFO  [2016-08-22 08:52:18]  重新从OAUTH服务器获取TOKEN.次数:0
+107094 DEBUG [2016-08-22 08:52:18]  accessor token:net.oauth.OAuthAccessor@10d8b0f6[consumer=net.oauth.OAuthConsumer@249ef1e,requestToken=<null>,accessToken=afa685a6e0a5883d3ed8cd243a8058cf,tokenSecret=9f5d31e8fe4c480b68863f0fd5e21503,properties={}]
+107096 DEBUG [2016-08-22 08:52:18]  request:OAuthMessage(POST, http://1.85.59.245/gdsp/v1/public-opinion/topN, [p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D, q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D, oauth_token=afa685a6e0a5883d3ed8cd243a8058cf, oauth_consumer_key=egoandroid, oauth_signature_method=HMAC-SHA1, oauth_timestamp=1471827138, oauth_nonce=953262663812170, oauth_version=1.0, oauth_signature=1hRQYx1qMjHQ3AbRDUJPZOOGytQ%3D])
+112153 ERROR [2016-08-22 08:52:23]  OAuthException
+net.oauth.OAuthProblemException: HTTP/1.1 401 Unauthorized
+URL: http://1.85.59.245/gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D&q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D
+oauth_signature base string: POST&http%3A%2F%2F1.85.59.245%2Fgdsp%2Fv1%2Fpublic-opinion%2FtopN&oauth_consumer_key%3Degoandroid%26oauth_nonce%3D953262663812170%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1471827138%26oauth_token%3Dafa685a6e0a5883d3ed8cd243a8058cf%26oauth_version%3D1.0%26p%3D%255BcurrentPageNo%253A1%253BpageSize%253A3000%255D%26q%3D%255Bcodes%253A000001%252C000002%252C600000%252C399001%252C000004%252C000005%252C000006%252C000007%252C000008%252C000009%252C000010%252C000011%252C000012%252C000014%252C000016%252C000017%252C000018%252C000019%252C000416%252C000421%252C000422%252C000423%252C000411%255D
+>>>>>>>> HTTP request:
+POST /gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D&q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D
+Content-Type: application/json;charset=utf-8
+Authorization: OAuth oauth_token="afa685a6e0a5883d3ed8cd243a8058cf", oauth_consumer_key="egoandroid", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1471827138", oauth_nonce="953262663812170", oauth_version="1.0", oauth_signature="1hRQYx1qMjHQ3AbRDUJPZOOGytQ%3D"
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: 1.85.59.245
+Cookie: $Version=0; WEB=20111124; $Path=/
+Content-Length: 0
+
+
+<<<<<<<< HTTP response:
+HTTP/1.1 401 Unauthorized
+Date: Mon, 22 Aug 2016 00:52:03 GMT
+Server: Apache/2.0.64 (Unix) DAV/2 mod_jk/1.2.31
+Content-Length: 0
+Content-Type: text/plain
+
+
+	at net.oauth.client.OAuthResponseMessage.toOAuthProblemException(OAuthResponseMessage.java:83)
+	at net.oauth.client.OAuthClient.invoke(OAuthClient.java:308)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:136)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at com.util.gdsp.Opinionpost.getYJNews(Opinionpost.java:237)
+	at com.util.gdsp.Opinionpost.main(Opinionpost.java:253)
+112354 INFO  [2016-08-22 08:52:23]  重新从OAUTH服务器获取TOKEN.次数:0
+112443 DEBUG [2016-08-22 08:52:23]  accessor token:net.oauth.OAuthAccessor@4fa0b0f5[consumer=net.oauth.OAuthConsumer@3ec1cdaa,requestToken=<null>,accessToken=3f59cc153dcbcf3125f737ee8eb8a094,tokenSecret=5916f28c061f595b99f6e6b7ec3b95c3,properties={}]
+112444 DEBUG [2016-08-22 08:52:23]  request:OAuthMessage(POST, http://1.85.59.245/gdsp/v1/public-opinion/topN, [p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D, q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D, oauth_token=3f59cc153dcbcf3125f737ee8eb8a094, oauth_consumer_key=egoandroid, oauth_signature_method=HMAC-SHA1, oauth_timestamp=1471827143, oauth_nonce=953268012230378, oauth_version=1.0, oauth_signature=YKgQOqRDeSzo3QL4AA%2FOkdC3bkQ%3D])
+117522 ERROR [2016-08-22 08:52:28]  OAuthException
+net.oauth.OAuthProblemException: HTTP/1.1 401 Unauthorized
+URL: http://1.85.59.245/gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D&q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D
+oauth_signature base string: POST&http%3A%2F%2F1.85.59.245%2Fgdsp%2Fv1%2Fpublic-opinion%2FtopN&oauth_consumer_key%3Degoandroid%26oauth_nonce%3D953268012230378%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1471827143%26oauth_token%3D3f59cc153dcbcf3125f737ee8eb8a094%26oauth_version%3D1.0%26p%3D%255BcurrentPageNo%253A1%253BpageSize%253A3000%255D%26q%3D%255Bcodes%253A000001%252C000002%252C600000%252C399001%252C000004%252C000005%252C000006%252C000007%252C000008%252C000009%252C000010%252C000011%252C000012%252C000014%252C000016%252C000017%252C000018%252C000019%252C000416%252C000421%252C000422%252C000423%252C000411%255D
+>>>>>>>> HTTP request:
+POST /gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D&q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D
+Content-Type: application/json;charset=utf-8
+Authorization: OAuth oauth_token="3f59cc153dcbcf3125f737ee8eb8a094", oauth_consumer_key="egoandroid", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1471827143", oauth_nonce="953268012230378", oauth_version="1.0", oauth_signature="YKgQOqRDeSzo3QL4AA%2FOkdC3bkQ%3D"
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: 1.85.59.245
+Cookie: $Version=0; WEB=20111124; $Path=/
+Content-Length: 0
+
+
+<<<<<<<< HTTP response:
+HTTP/1.1 401 Unauthorized
+Date: Mon, 22 Aug 2016 00:52:08 GMT
+Server: Apache/2.0.64 (Unix) DAV/2 mod_jk/1.2.31
+Content-Length: 0
+Content-Type: text/plain
+
+
+	at net.oauth.client.OAuthResponseMessage.toOAuthProblemException(OAuthResponseMessage.java:83)
+	at net.oauth.client.OAuthClient.invoke(OAuthClient.java:308)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:136)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at com.util.gdsp.Opinionpost.getYJNews(Opinionpost.java:237)
+	at com.util.gdsp.Opinionpost.main(Opinionpost.java:253)
+117723 INFO  [2016-08-22 08:52:28]  重新从OAUTH服务器获取TOKEN.次数:0
+117818 DEBUG [2016-08-22 08:52:28]  accessor token:net.oauth.OAuthAccessor@49606c14[consumer=net.oauth.OAuthConsumer@5957baae,requestToken=<null>,accessToken=4fd9d8fc9108542846d5fa35979b4627,tokenSecret=ee00fae32169ece4d063591712517b8b,properties={}]
+117819 DEBUG [2016-08-22 08:52:28]  request:OAuthMessage(POST, http://1.85.59.245/gdsp/v1/public-opinion/topN, [p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D, q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D, oauth_token=4fd9d8fc9108542846d5fa35979b4627, oauth_consumer_key=egoandroid, oauth_signature_method=HMAC-SHA1, oauth_timestamp=1471827148, oauth_nonce=953273387034961, oauth_version=1.0, oauth_signature=FhQ9xP%2BTwGRXVHqLLnITYFT9GR4%3D])
+122875 ERROR [2016-08-22 08:52:33]  OAuthException
+net.oauth.OAuthProblemException: HTTP/1.1 401 Unauthorized
+URL: http://1.85.59.245/gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D&q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D
+oauth_signature base string: POST&http%3A%2F%2F1.85.59.245%2Fgdsp%2Fv1%2Fpublic-opinion%2FtopN&oauth_consumer_key%3Degoandroid%26oauth_nonce%3D953273387034961%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1471827148%26oauth_token%3D4fd9d8fc9108542846d5fa35979b4627%26oauth_version%3D1.0%26p%3D%255BcurrentPageNo%253A1%253BpageSize%253A3000%255D%26q%3D%255Bcodes%253A000001%252C000002%252C600000%252C399001%252C000004%252C000005%252C000006%252C000007%252C000008%252C000009%252C000010%252C000011%252C000012%252C000014%252C000016%252C000017%252C000018%252C000019%252C000416%252C000421%252C000422%252C000423%252C000411%255D
+>>>>>>>> HTTP request:
+POST /gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D&q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D
+Content-Type: application/json;charset=utf-8
+Authorization: OAuth oauth_token="4fd9d8fc9108542846d5fa35979b4627", oauth_consumer_key="egoandroid", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1471827148", oauth_nonce="953273387034961", oauth_version="1.0", oauth_signature="FhQ9xP%2BTwGRXVHqLLnITYFT9GR4%3D"
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: 1.85.59.245
+Cookie: $Version=0; WEB=20111124; $Path=/
+Content-Length: 0
+
+
+<<<<<<<< HTTP response:
+HTTP/1.1 401 Unauthorized
+Date: Mon, 22 Aug 2016 00:52:13 GMT
+Server: Apache/2.0.64 (Unix) DAV/2 mod_jk/1.2.31
+Content-Length: 0
+Content-Type: text/plain
+
+
+	at net.oauth.client.OAuthResponseMessage.toOAuthProblemException(OAuthResponseMessage.java:83)
+	at net.oauth.client.OAuthClient.invoke(OAuthClient.java:308)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:136)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at com.util.gdsp.Opinionpost.getYJNews(Opinionpost.java:237)
+	at com.util.gdsp.Opinionpost.main(Opinionpost.java:253)
+123076 INFO  [2016-08-22 08:52:34]  重新从OAUTH服务器获取TOKEN.次数:0
+123164 DEBUG [2016-08-22 08:52:34]  accessor token:net.oauth.OAuthAccessor@7516a8f3[consumer=net.oauth.OAuthConsumer@22ae2593,requestToken=<null>,accessToken=3c7830947cbdd429afa1fe206b57e454,tokenSecret=93e7913002e0cdc9f624adc876393bba,properties={}]
+123165 DEBUG [2016-08-22 08:52:34]  request:OAuthMessage(POST, http://1.85.59.245/gdsp/v1/public-opinion/topN, [p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D, q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D, oauth_token=3c7830947cbdd429afa1fe206b57e454, oauth_consumer_key=egoandroid, oauth_signature_method=HMAC-SHA1, oauth_timestamp=1471827154, oauth_nonce=953278733544658, oauth_version=1.0, oauth_signature=AF%2Bsz6ktJVTDAS22nJEv3ll0J00%3D])
+128221 ERROR [2016-08-22 08:52:39]  OAuthException
+net.oauth.OAuthProblemException: HTTP/1.1 401 Unauthorized
+URL: http://1.85.59.245/gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D&q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D
+oauth_signature base string: POST&http%3A%2F%2F1.85.59.245%2Fgdsp%2Fv1%2Fpublic-opinion%2FtopN&oauth_consumer_key%3Degoandroid%26oauth_nonce%3D953278733544658%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1471827154%26oauth_token%3D3c7830947cbdd429afa1fe206b57e454%26oauth_version%3D1.0%26p%3D%255BcurrentPageNo%253A1%253BpageSize%253A3000%255D%26q%3D%255Bcodes%253A000001%252C000002%252C600000%252C399001%252C000004%252C000005%252C000006%252C000007%252C000008%252C000009%252C000010%252C000011%252C000012%252C000014%252C000016%252C000017%252C000018%252C000019%252C000416%252C000421%252C000422%252C000423%252C000411%255D
+>>>>>>>> HTTP request:
+POST /gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D&q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D
+Content-Type: application/json;charset=utf-8
+Authorization: OAuth oauth_token="3c7830947cbdd429afa1fe206b57e454", oauth_consumer_key="egoandroid", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1471827154", oauth_nonce="953278733544658", oauth_version="1.0", oauth_signature="AF%2Bsz6ktJVTDAS22nJEv3ll0J00%3D"
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: 1.85.59.245
+Cookie: $Version=0; WEB=20111124; $Path=/
+Content-Length: 0
+
+
+<<<<<<<< HTTP response:
+HTTP/1.1 401 Unauthorized
+Date: Mon, 22 Aug 2016 00:52:19 GMT
+Server: Apache/2.0.64 (Unix) DAV/2 mod_jk/1.2.31
+Content-Length: 0
+Content-Type: text/plain
+
+
+	at net.oauth.client.OAuthResponseMessage.toOAuthProblemException(OAuthResponseMessage.java:83)
+	at net.oauth.client.OAuthClient.invoke(OAuthClient.java:308)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:136)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at com.util.gdsp.Opinionpost.getYJNews(Opinionpost.java:237)
+	at com.util.gdsp.Opinionpost.main(Opinionpost.java:253)
+128422 INFO  [2016-08-22 08:52:39]  重新从OAUTH服务器获取TOKEN.次数:0
+128518 DEBUG [2016-08-22 08:52:39]  accessor token:net.oauth.OAuthAccessor@37e67d34[consumer=net.oauth.OAuthConsumer@7d25fd97,requestToken=<null>,accessToken=4dbb1226ca281ad7e80ccca3eb352159,tokenSecret=35558e5aeca88239410ed2933df53917,properties={}]
+128519 DEBUG [2016-08-22 08:52:39]  request:OAuthMessage(POST, http://1.85.59.245/gdsp/v1/public-opinion/topN, [p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D, q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D, oauth_token=4dbb1226ca281ad7e80ccca3eb352159, oauth_consumer_key=egoandroid, oauth_signature_method=HMAC-SHA1, oauth_timestamp=1471827159, oauth_nonce=953284087610123, oauth_version=1.0, oauth_signature=rsZkdB3OT5ihgr2wWEIyCDsx0So%3D])
+133576 ERROR [2016-08-22 08:52:44]  OAuthException
+net.oauth.OAuthProblemException: HTTP/1.1 401 Unauthorized
+URL: http://1.85.59.245/gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D&q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D
+oauth_signature base string: POST&http%3A%2F%2F1.85.59.245%2Fgdsp%2Fv1%2Fpublic-opinion%2FtopN&oauth_consumer_key%3Degoandroid%26oauth_nonce%3D953284087610123%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1471827159%26oauth_token%3D4dbb1226ca281ad7e80ccca3eb352159%26oauth_version%3D1.0%26p%3D%255BcurrentPageNo%253A1%253BpageSize%253A3000%255D%26q%3D%255Bcodes%253A000001%252C000002%252C600000%252C399001%252C000004%252C000005%252C000006%252C000007%252C000008%252C000009%252C000010%252C000011%252C000012%252C000014%252C000016%252C000017%252C000018%252C000019%252C000416%252C000421%252C000422%252C000423%252C000411%255D
+>>>>>>>> HTTP request:
+POST /gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D&q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D
+Content-Type: application/json;charset=utf-8
+Authorization: OAuth oauth_token="4dbb1226ca281ad7e80ccca3eb352159", oauth_consumer_key="egoandroid", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1471827159", oauth_nonce="953284087610123", oauth_version="1.0", oauth_signature="rsZkdB3OT5ihgr2wWEIyCDsx0So%3D"
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: 1.85.59.245
+Cookie: $Version=0; WEB=20111124; $Path=/
+Content-Length: 0
+
+
+<<<<<<<< HTTP response:
+HTTP/1.1 401 Unauthorized
+Date: Mon, 22 Aug 2016 00:52:24 GMT
+Server: Apache/2.0.64 (Unix) DAV/2 mod_jk/1.2.31
+Content-Length: 0
+Content-Type: text/plain
+
+
+	at net.oauth.client.OAuthResponseMessage.toOAuthProblemException(OAuthResponseMessage.java:83)
+	at net.oauth.client.OAuthClient.invoke(OAuthClient.java:308)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:136)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at com.util.gdsp.Opinionpost.getYJNews(Opinionpost.java:237)
+	at com.util.gdsp.Opinionpost.main(Opinionpost.java:253)
+133777 INFO  [2016-08-22 08:52:44]  重新从OAUTH服务器获取TOKEN.次数:0
+133866 DEBUG [2016-08-22 08:52:44]  accessor token:net.oauth.OAuthAccessor@68e825fe[consumer=net.oauth.OAuthConsumer@61167c80,requestToken=<null>,accessToken=fff86e545a5ae3bccf364f6505f74538,tokenSecret=b30962c6464b8ebed57af79b567a195b,properties={}]
+133867 DEBUG [2016-08-22 08:52:44]  request:OAuthMessage(POST, http://1.85.59.245/gdsp/v1/public-opinion/topN, [p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D, q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D, oauth_token=fff86e545a5ae3bccf364f6505f74538, oauth_consumer_key=egoandroid, oauth_signature_method=HMAC-SHA1, oauth_timestamp=1471827164, oauth_nonce=953289434530864, oauth_version=1.0, oauth_signature=iAnMHxrOYZ6lbk0GePqHaH5WdYY%3D])
+138923 ERROR [2016-08-22 08:52:50]  OAuthException
+net.oauth.OAuthProblemException: HTTP/1.1 401 Unauthorized
+URL: http://1.85.59.245/gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D&q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D
+oauth_signature base string: POST&http%3A%2F%2F1.85.59.245%2Fgdsp%2Fv1%2Fpublic-opinion%2FtopN&oauth_consumer_key%3Degoandroid%26oauth_nonce%3D953289434530864%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1471827164%26oauth_token%3Dfff86e545a5ae3bccf364f6505f74538%26oauth_version%3D1.0%26p%3D%255BcurrentPageNo%253A1%253BpageSize%253A3000%255D%26q%3D%255Bcodes%253A000001%252C000002%252C600000%252C399001%252C000004%252C000005%252C000006%252C000007%252C000008%252C000009%252C000010%252C000011%252C000012%252C000014%252C000016%252C000017%252C000018%252C000019%252C000416%252C000421%252C000422%252C000423%252C000411%255D
+>>>>>>>> HTTP request:
+POST /gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D&q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D
+Content-Type: application/json;charset=utf-8
+Authorization: OAuth oauth_token="fff86e545a5ae3bccf364f6505f74538", oauth_consumer_key="egoandroid", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1471827164", oauth_nonce="953289434530864", oauth_version="1.0", oauth_signature="iAnMHxrOYZ6lbk0GePqHaH5WdYY%3D"
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: 1.85.59.245
+Cookie: $Version=0; WEB=20111124; $Path=/
+Content-Length: 0
+
+
+<<<<<<<< HTTP response:
+HTTP/1.1 401 Unauthorized
+Date: Mon, 22 Aug 2016 00:52:30 GMT
+Server: Apache/2.0.64 (Unix) DAV/2 mod_jk/1.2.31
+Content-Length: 0
+Content-Type: text/plain
+
+
+	at net.oauth.client.OAuthResponseMessage.toOAuthProblemException(OAuthResponseMessage.java:83)
+	at net.oauth.client.OAuthClient.invoke(OAuthClient.java:308)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:136)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at com.util.gdsp.Opinionpost.getYJNews(Opinionpost.java:237)
+	at com.util.gdsp.Opinionpost.main(Opinionpost.java:253)
+139124 INFO  [2016-08-22 08:52:50]  重新从OAUTH服务器获取TOKEN.次数:0
+139221 DEBUG [2016-08-22 08:52:50]  accessor token:net.oauth.OAuthAccessor@1e25825d[consumer=net.oauth.OAuthConsumer@3091b721,requestToken=<null>,accessToken=fef36b47ec6d54f6219c053624bcf698,tokenSecret=0f59517aa4e3ed9e1d1b6327a95dc959,properties={}]
+139222 DEBUG [2016-08-22 08:52:50]  request:OAuthMessage(POST, http://1.85.59.245/gdsp/v1/public-opinion/topN, [p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D, q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D, oauth_token=fef36b47ec6d54f6219c053624bcf698, oauth_consumer_key=egoandroid, oauth_signature_method=HMAC-SHA1, oauth_timestamp=1471827170, oauth_nonce=953294789751615, oauth_version=1.0, oauth_signature=FGhiwUadlQyBBruqC8WChDKJuo8%3D])
+144278 ERROR [2016-08-22 08:52:55]  OAuthException
+net.oauth.OAuthProblemException: HTTP/1.1 401 Unauthorized
+URL: http://1.85.59.245/gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D&q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D
+oauth_signature base string: POST&http%3A%2F%2F1.85.59.245%2Fgdsp%2Fv1%2Fpublic-opinion%2FtopN&oauth_consumer_key%3Degoandroid%26oauth_nonce%3D953294789751615%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1471827170%26oauth_token%3Dfef36b47ec6d54f6219c053624bcf698%26oauth_version%3D1.0%26p%3D%255BcurrentPageNo%253A1%253BpageSize%253A3000%255D%26q%3D%255Bcodes%253A000001%252C000002%252C600000%252C399001%252C000004%252C000005%252C000006%252C000007%252C000008%252C000009%252C000010%252C000011%252C000012%252C000014%252C000016%252C000017%252C000018%252C000019%252C000416%252C000421%252C000422%252C000423%252C000411%255D
+>>>>>>>> HTTP request:
+POST /gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D&q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D
+Content-Type: application/json;charset=utf-8
+Authorization: OAuth oauth_token="fef36b47ec6d54f6219c053624bcf698", oauth_consumer_key="egoandroid", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1471827170", oauth_nonce="953294789751615", oauth_version="1.0", oauth_signature="FGhiwUadlQyBBruqC8WChDKJuo8%3D"
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: 1.85.59.245
+Cookie: $Version=0; WEB=20111124; $Path=/
+Content-Length: 0
+
+
+<<<<<<<< HTTP response:
+HTTP/1.1 401 Unauthorized
+Date: Mon, 22 Aug 2016 00:52:35 GMT
+Server: Apache/2.0.64 (Unix) DAV/2 mod_jk/1.2.31
+Content-Length: 0
+Content-Type: text/plain
+
+
+	at net.oauth.client.OAuthResponseMessage.toOAuthProblemException(OAuthResponseMessage.java:83)
+	at net.oauth.client.OAuthClient.invoke(OAuthClient.java:308)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:136)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at com.util.gdsp.Opinionpost.getYJNews(Opinionpost.java:237)
+	at com.util.gdsp.Opinionpost.main(Opinionpost.java:253)
+144479 INFO  [2016-08-22 08:52:55]  重新从OAUTH服务器获取TOKEN.次数:0
+144571 DEBUG [2016-08-22 08:52:55]  accessor token:net.oauth.OAuthAccessor@68a460f0[consumer=net.oauth.OAuthConsumer@7fd8623b,requestToken=<null>,accessToken=738c72a54542e8f7ab79d2a273682276,tokenSecret=b1dd1bf89fb98756053b5f6cce0ac273,properties={}]
+144572 DEBUG [2016-08-22 08:52:55]  request:OAuthMessage(POST, http://1.85.59.245/gdsp/v1/public-opinion/topN, [p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D, q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D, oauth_token=738c72a54542e8f7ab79d2a273682276, oauth_consumer_key=egoandroid, oauth_signature_method=HMAC-SHA1, oauth_timestamp=1471827175, oauth_nonce=953300139779353, oauth_version=1.0, oauth_signature=oUt3axqlQvNs3IaLm7Hsuik%2BJnQ%3D])
+149630 ERROR [2016-08-22 08:53:00]  OAuthException
+net.oauth.OAuthProblemException: HTTP/1.1 401 Unauthorized
+URL: http://1.85.59.245/gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D&q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D
+oauth_signature base string: POST&http%3A%2F%2F1.85.59.245%2Fgdsp%2Fv1%2Fpublic-opinion%2FtopN&oauth_consumer_key%3Degoandroid%26oauth_nonce%3D953300139779353%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1471827175%26oauth_token%3D738c72a54542e8f7ab79d2a273682276%26oauth_version%3D1.0%26p%3D%255BcurrentPageNo%253A1%253BpageSize%253A3000%255D%26q%3D%255Bcodes%253A000001%252C000002%252C600000%252C399001%252C000004%252C000005%252C000006%252C000007%252C000008%252C000009%252C000010%252C000011%252C000012%252C000014%252C000016%252C000017%252C000018%252C000019%252C000416%252C000421%252C000422%252C000423%252C000411%255D
+>>>>>>>> HTTP request:
+POST /gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D&q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D
+Content-Type: application/json;charset=utf-8
+Authorization: OAuth oauth_token="738c72a54542e8f7ab79d2a273682276", oauth_consumer_key="egoandroid", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1471827175", oauth_nonce="953300139779353", oauth_version="1.0", oauth_signature="oUt3axqlQvNs3IaLm7Hsuik%2BJnQ%3D"
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: 1.85.59.245
+Cookie: $Version=0; WEB=20111124; $Path=/
+Content-Length: 0
+
+
+<<<<<<<< HTTP response:
+HTTP/1.1 401 Unauthorized
+Date: Mon, 22 Aug 2016 00:52:40 GMT
+Server: Apache/2.0.64 (Unix) DAV/2 mod_jk/1.2.31
+Content-Length: 0
+Content-Type: text/plain
+
+
+	at net.oauth.client.OAuthResponseMessage.toOAuthProblemException(OAuthResponseMessage.java:83)
+	at net.oauth.client.OAuthClient.invoke(OAuthClient.java:308)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:136)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at com.util.gdsp.Opinionpost.getYJNews(Opinionpost.java:237)
+	at com.util.gdsp.Opinionpost.main(Opinionpost.java:253)
+149831 INFO  [2016-08-22 08:53:00]  重新从OAUTH服务器获取TOKEN.次数:0
+149920 DEBUG [2016-08-22 08:53:00]  accessor token:net.oauth.OAuthAccessor@3f18dc75[consumer=net.oauth.OAuthConsumer@7931a5af,requestToken=<null>,accessToken=4bffc69fe47d3b828948abc02a71b16e,tokenSecret=f1372d960ee3d157831dd2b06c5cafda,properties={}]
+149921 DEBUG [2016-08-22 08:53:01]  request:OAuthMessage(POST, http://1.85.59.245/gdsp/v1/public-opinion/topN, [p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D, q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D, oauth_token=4bffc69fe47d3b828948abc02a71b16e, oauth_consumer_key=egoandroid, oauth_signature_method=HMAC-SHA1, oauth_timestamp=1471827180, oauth_nonce=953305487949908, oauth_version=1.0, oauth_signature=e%2Fca8xgYvWZYEh27JAiCRh3Xco4%3D])
+154972 ERROR [2016-08-22 08:53:06]  OAuthException
+net.oauth.OAuthProblemException: HTTP/1.1 401 Unauthorized
+URL: http://1.85.59.245/gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D&q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D
+oauth_signature base string: POST&http%3A%2F%2F1.85.59.245%2Fgdsp%2Fv1%2Fpublic-opinion%2FtopN&oauth_consumer_key%3Degoandroid%26oauth_nonce%3D953305487949908%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1471827180%26oauth_token%3D4bffc69fe47d3b828948abc02a71b16e%26oauth_version%3D1.0%26p%3D%255BcurrentPageNo%253A1%253BpageSize%253A3000%255D%26q%3D%255Bcodes%253A000001%252C000002%252C600000%252C399001%252C000004%252C000005%252C000006%252C000007%252C000008%252C000009%252C000010%252C000011%252C000012%252C000014%252C000016%252C000017%252C000018%252C000019%252C000416%252C000421%252C000422%252C000423%252C000411%255D
+>>>>>>>> HTTP request:
+POST /gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D&q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D
+Content-Type: application/json;charset=utf-8
+Authorization: OAuth oauth_token="4bffc69fe47d3b828948abc02a71b16e", oauth_consumer_key="egoandroid", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1471827180", oauth_nonce="953305487949908", oauth_version="1.0", oauth_signature="e%2Fca8xgYvWZYEh27JAiCRh3Xco4%3D"
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: 1.85.59.245
+Cookie: $Version=0; WEB=20111124; $Path=/
+Content-Length: 0
+
+
+<<<<<<<< HTTP response:
+HTTP/1.1 401 Unauthorized
+Date: Mon, 22 Aug 2016 00:52:46 GMT
+Server: Apache/2.0.64 (Unix) DAV/2 mod_jk/1.2.31
+Content-Length: 0
+Content-Type: text/plain
+
+
+	at net.oauth.client.OAuthResponseMessage.toOAuthProblemException(OAuthResponseMessage.java:83)
+	at net.oauth.client.OAuthClient.invoke(OAuthClient.java:308)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:136)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at com.util.gdsp.Opinionpost.getYJNews(Opinionpost.java:237)
+	at com.util.gdsp.Opinionpost.main(Opinionpost.java:253)
+155173 INFO  [2016-08-22 08:53:06]  重新从OAUTH服务器获取TOKEN.次数:0
+155276 DEBUG [2016-08-22 08:53:06]  accessor token:net.oauth.OAuthAccessor@5781ab44[consumer=net.oauth.OAuthConsumer@2132a3e,requestToken=<null>,accessToken=c9cfc0fa0570d9c8700333fa12b0b6cf,tokenSecret=9d4f27bf4dce7a9fa8991e3ed0c6f885,properties={}]
+155277 DEBUG [2016-08-22 08:53:06]  request:OAuthMessage(POST, http://1.85.59.245/gdsp/v1/public-opinion/topN, [p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D, q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D, oauth_token=c9cfc0fa0570d9c8700333fa12b0b6cf, oauth_consumer_key=egoandroid, oauth_signature_method=HMAC-SHA1, oauth_timestamp=1471827186, oauth_nonce=953310844608244, oauth_version=1.0, oauth_signature=9sc16KBgptWkF8CF%2FwEMe8QxC9s%3D])
+0    DEBUG [2016-08-22 08:53:55]  accessor token:net.oauth.OAuthAccessor@467d8ddd[consumer=net.oauth.OAuthConsumer@d0619b7,requestToken=<null>,accessToken=56199d7229a6b0233d4124f8647975a2,tokenSecret=9d17925337dc1ed1b6a87ef6f4b07aec,properties={}]
+6    DEBUG [2016-08-22 08:53:55]  request:OAuthMessage(POST, http://1.85.59.245/gdsp/v1/public-opinion/topN, [p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D, q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D, oauth_token=56199d7229a6b0233d4124f8647975a2, oauth_consumer_key=egoandroid, oauth_signature_method=HMAC-SHA1, oauth_timestamp=1471827235, oauth_nonce=953360251791206, oauth_version=1.0, oauth_signature=RTuojHZvOGwMS%2B9q2ychPT0gGYk%3D])
+5109 ERROR [2016-08-22 08:54:00]  OAuthException
+net.oauth.OAuthProblemException: HTTP/1.1 401 Unauthorized
+URL: http://1.85.59.245/gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D&q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D
+oauth_signature base string: POST&http%3A%2F%2F1.85.59.245%2Fgdsp%2Fv1%2Fpublic-opinion%2FtopN&oauth_consumer_key%3Degoandroid%26oauth_nonce%3D953360251791206%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1471827235%26oauth_token%3D56199d7229a6b0233d4124f8647975a2%26oauth_version%3D1.0%26p%3D%255BcurrentPageNo%253A1%253BpageSize%253A3000%255D%26q%3D%255Bcodes%253A000001%252C000002%252C600000%252C399001%252C000004%252C000005%252C000006%252C000007%252C000008%252C000009%252C000010%252C000011%252C000012%252C000014%252C000016%252C000017%252C000018%252C000019%252C000416%252C000421%252C000422%252C000423%252C000411%255D
+>>>>>>>> HTTP request:
+POST /gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D&q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D
+Content-Type: application/json;charset=utf-8
+Authorization: OAuth oauth_token="56199d7229a6b0233d4124f8647975a2", oauth_consumer_key="egoandroid", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1471827235", oauth_nonce="953360251791206", oauth_version="1.0", oauth_signature="RTuojHZvOGwMS%2B9q2ychPT0gGYk%3D"
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: 1.85.59.245
+Content-Length: 11
+
+{"did":"4"}
+<<<<<<<< HTTP response:
+HTTP/1.1 401 Unauthorized
+Date: Mon, 22 Aug 2016 00:53:40 GMT
+Server: Apache/2.0.64 (Unix) DAV/2 mod_jk/1.2.31
+Content-Length: 0
+Content-Type: text/plain
+Set-Cookie: WEB=20111124; path=/
+
+
+	at net.oauth.client.OAuthResponseMessage.toOAuthProblemException(OAuthResponseMessage.java:83)
+	at net.oauth.client.OAuthClient.invoke(OAuthClient.java:308)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:136)
+	at com.util.gdsp.Opinionpost.getYJNews(Opinionpost.java:237)
+	at com.util.gdsp.Opinionpost.main(Opinionpost.java:253)
+5313 INFO  [2016-08-22 08:54:01]  重新从OAUTH服务器获取TOKEN.次数:0
+5403 DEBUG [2016-08-22 08:54:01]  accessor token:net.oauth.OAuthAccessor@61b4607f[consumer=net.oauth.OAuthConsumer@92b63f6,requestToken=<null>,accessToken=4e090bda4441018bf2f74b9e8d739b47,tokenSecret=71af35560242a3125f94933422ee306e,properties={}]
+5406 DEBUG [2016-08-22 08:54:01]  request:OAuthMessage(POST, http://1.85.59.245/gdsp/v1/public-opinion/topN, [p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D, q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D, oauth_token=4e090bda4441018bf2f74b9e8d739b47, oauth_consumer_key=egoandroid, oauth_signature_method=HMAC-SHA1, oauth_timestamp=1471827241, oauth_nonce=953365653832483, oauth_version=1.0, oauth_signature=%2BBU8u8lBaqq4q4XWTui9dynThOs%3D])
+0    DEBUG [2016-08-22 09:32:38]  accessor token:net.oauth.OAuthAccessor@46c8fa1e[consumer=net.oauth.OAuthConsumer@1a4eb887,requestToken=<null>,accessToken=c3bc904ae0deac3c462a6e076cf0c015,tokenSecret=4c514d99d971f815aa4a8314c222e8ab,properties={}]
+3    DEBUG [2016-08-22 09:32:38]  request:OAuthMessage(POST, http://1.85.59.245/gdsp/v1/opinion/cmsproxy, [oauth_token=c3bc904ae0deac3c462a6e076cf0c015, oauth_consumer_key=egoandroid, oauth_signature_method=HMAC-SHA1, oauth_timestamp=1471829558, oauth_nonce=955682903091555, oauth_version=1.0, oauth_signature=j4fKKDTIZgBNx6JTE9XOxtN1%2FHM%3D])
+7767 DEBUG [2016-08-22 09:32:46]  responsebody:{"response":"success","antn_action_text":"http://192.168.65.131:19000/action\u003dquery\u0026text\u003ddreall\u0026databasematch\u003dvmonth_news\u0026sort\u003drelevance\u0026starttag\u003d\u003cfont color\u003d#FF6600\u003e\u0026highlight\u003dterms,summaryterms\u0026totalresults\u003dtrue\u0026print\u003dfields\u0026xmlmeta\u003dtrue\u0026maxresults\u003d10\u0026printfields\u003dpublishdate,sourceinfo,DRETITLE,COMBINEVALUE,AUTHOR,COMBINECOUNT,sourcename,auto_summary,summary,storetime,forward_count,AUTO_SUMMARY\u0026start\u003d1\u0026fieldtext\u003d((EQUAL{1,2,3}:CPP_STATE))+AND+RANGE{-7,.}:publishdate\u0026predict\u003dfalse\u0026matchallterms\u003dtrue\u0026timeoutms\u003d","as_q2":"","OTHER_MAP":{"db":"vnews","get_reply":"0","is_hl":"1","is_sum":"1","s_date":"-7","totalresults":"1"},"action":"QUERY","normalized_string":"dreall   db:vnews get_reply:0 is_hl:1 is_sum:1 s_date:-7  status:cpp totalresults:1","__KEY_DATAS":[{"summary":"在抛出了“我国经济有很大可能性在今后一两年成功触底”的判断后，国务院发展研究中心原副主任、中国发展研究基金会副理事长刘世锦又表示，触底过程可能是有反复的。三指标判断中国经济触底但是，刘世锦表示，接近底部与实现触底是两回事。也因此，触底的过程可能不会那么顺利，可...","region":"","person":"","weight":"96.00","cpp_is_neg2":"0","neu_ent":"","sitename":"","sitelogo":"","neg2_ent":"","neg1_ent":"","sourcename":"第一财经网","dredate":"1471828454","cpp_neu_ent":"","publishdate":"2016-08-17 10:13:00","org":"","drecontent":"","id":"1272490","author":"","sourceinfo":"咸阳视听网","title":"刘世锦：中国经济一两年内将触底 触底后会有反复","cpp_neg1_ent":"","sitedomain":"","storetime":"1471828224","filetype":"","industry":"","combinecount":"1","sourceregion":"","links":"","sourcebigkind":"","combinevalue":"10230838","database":"VMONTH_NEWS","reference":"http%3A%2F%2Fwww.xybtv.com%2Ffinance%2Fsdyd%2F2016%2F0817%2F96204.html","cpp_neg2_ent":"","cpp_is_neg":"0","is_neg2":"0","create_time":"","zjj":"","is_neg":"0","samecount":"0"},{"summary":"评议组听取了全市食品药品监管基本情况、2015年以来食品药品监管重点工作、政协提案办理情况、存在问题和今后重点工作的汇报，发放了民主评议工作测评表，分三组与市食品药品监管局干部职工座谈，征求大家建议和意见，并分别对市食品药品监察支队和食品药品检验所开展了民主测...","region":"","person":"","weight":"96.00","cpp_is_neg2":"0","neu_ent":"","sitename":"","sitelogo":"","neg2_ent":"","neg1_ent":"","sourcename":"商洛日报","dredate":"1471827244","cpp_neu_ent":"","publishdate":"2016-08-16 09:02:40","org":"","drecontent":"","id":"1272351","author":"","sourceinfo":"商洛之窗","title":"商洛市政协民主评议食品药品监管工作","cpp_neg1_ent":"","sitedomain":"","storetime":"1471826816","filetype":"","industry":"","combinecount":"1","sourceregion":"","links":"","sourcebigkind":"","combinevalue":"10228676","database":"VMONTH_NEWS","reference":"http%3A%2F%2Fwww.slrbs.com%2Fszbm%2Fqwfb%2F2016-08-16%2F788200.html","cpp_neg2_ent":"","cpp_is_neg":"0","is_neg2":"0","create_time":"","zjj":"","is_neg":"0","samecount":"0"},{"summary":"世界知识产权组织专家认为，自首次发布全球创新指数以来，中国创新在全部领域有系统性改善。中国在创新指数排名中的上升，令外国专家也感到振奋。8月8日，中国国务院印发了《“十三五”国家科技创新规划》，对中国未来5年科技创新发展具有重要意义。中国不只是经济贸易大国，更...","region":"","person":"","weight":"96.00","cpp_is_neg2":"0","neu_ent":"","sitename":"","sitelogo":"","neg2_ent":"","neg1_ent":"","sourcename":"","dredate":"1471815882","cpp_neu_ent":"","publishdate":"2016-08-18 00:00:00","org":"","drecontent":"","id":"1270939","author":"","sourceinfo":"国际海事信息网","title":"中国首次跻身世界创新前25强","cpp_neg1_ent":"","sitedomain":"","storetime":"1471815424","filetype":"","industry":"","combinecount":"1","sourceregion":"","links":"","sourcebigkind":"","combinevalue":"10222336","database":"VMONTH_NEWS","reference":"http%3A%2F%2Fwww.simic.net.cn%2Fnews_show.php%3Fid%3D186016","cpp_neg2_ent":"","cpp_is_neg":"0","is_neg2":"0","create_time":"","zjj":"","is_neg":"0","samecount":"0"},{"summary":"根据《湘财证券股份有限公司融资融券可充抵保证金证券及标的证券管理细则》的相关规定，自2016年8月18日，对公司标的证券保证金比例调整如下：序号证券代码证券简称原融资保证金比例（%）现融资保证金比例(%)原融券保证金比例（%）现融券保证金比例(%)100004...","region":"","person":"","weight":"96.00","cpp_is_neg2":"0","neu_ent":"","sitename":"","sitelogo":"","neg2_ent":"","neg1_ent":"","sourcename":"湘财证券","dredate":"1471802769","cpp_neu_ent":"","publishdate":"2016-08-18 00:00:00","org":"","drecontent":"","id":"1269330","author":"","sourceinfo":"湘财证券","title":"关于标的证券保证金比例调整公告（20160818）","cpp_neg1_ent":"","sitedomain":"","storetime":"1471802240","filetype":"","industry":"","combinecount":"1","sourceregion":"","links":"","sourcebigkind":"","combinevalue":"10219346","database":"VMONTH_NEWS","reference":"http%3A%2F%2Fwww.xcsc.com%2Fservlet%2Fnews%2FArticle%3FarticleId%3D1003719212","cpp_neg2_ent":"","cpp_is_neg":"0","is_neg2":"0","create_time":"","zjj":"","is_neg":"0","samecount":"0"},{"summary":"根据《湘财证券股份有限公司融资融券可充抵保证金证券及标的证券管理细则》的相关规定，自2016年8月18日，我公司可充抵保证金证券名单减少6只证券，详情如下：1、因上交所调出可充抵保证金证券122091（11重机债）,我公司同步调出；2、因深交所调出可充抵保证金...","region":"","person":"","weight":"96.00","cpp_is_neg2":"0","neu_ent":"","sitename":"","sitelogo":"","neg2_ent":"","neg1_ent":"","sourcename":"湘财证券","dredate":"1471802769","cpp_neu_ent":"","publishdate":"2016-08-18 00:00:00","org":"","drecontent":"","id":"1269329","author":"","sourceinfo":"湘财证券","title":"关于减少6只可充抵保证金证券的公告（20160818）","cpp_neg1_ent":"","sitedomain":"","storetime":"1471802240","filetype":"","industry":"","combinecount":"1","sourceregion":"","links":"","sourcebigkind":"","combinevalue":"10219344","database":"VMONTH_NEWS","reference":"http%3A%2F%2Fwww.xcsc.com%2Fservlet%2Fnews%2FArticle%3FarticleId%3D1003719213","cpp_neg2_ent":"","cpp_is_neg":"0","is_neg2":"0","create_time":"","zjj":"","is_neg":"0","samecount":"0"},{"summary":"1、我公司发布了《关于湘财华夏幸福永清鼎泰园区1号集合资产管理计划资产管理合同按照证券期货经营机构私募资产管理业务运作管理暂行规定办理的公告》，请投资者认购本产品第4期前认真阅读此公告并进行确认。湘财证券股份有限公司风险提示：湘财证券依照诚实信用、勤勉尽职的原...","region":"","person":"","weight":"96.00","cpp_is_neg2":"0","neu_ent":"","sitename":"","sitelogo":"","neg2_ent":"","neg1_ent":"","sourcename":"湘财证券","dredate":"1471802769","cpp_neu_ent":"","publishdate":"2016-08-16 00:00:00","org":"","drecontent":"","id":"1269328","author":"","sourceinfo":"湘财证券","title":"关于湘财华夏幸福永清鼎泰园区1号集合资产管理计划3个月期限产品第3期结束暨第4期发行的公告","cpp_neg1_ent":"","sitedomain":"","storetime":"1471802240","filetype":"","industry":"","combinecount":"1","sourceregion":"","links":"","sourcebigkind":"","combinevalue":"10219339","database":"VMONTH_NEWS","reference":"http%3A%2F%2Fwww.xcsc.com%2Fservlet%2Fnews%2FArticle%3FarticleId%3D1003702393","cpp_neg2_ent":"","cpp_is_neg":"0","is_neg2":"0","create_time":"","zjj":"","is_neg":"0","samecount":"0"},{"summary":"湘财证券天业股份集合资产管理计划（以下简称本集合计划）于2016年8月15日开始发售，并于2016年8月15日结束推广活动。按单位份额面值人民币1.00元计算，本集合计划推广期共参与199,000,000.00份，已分别计入相应委托人的集合计划账户。推广期认购...","region":"","person":"","weight":"96.00","cpp_is_neg2":"0","neu_ent":"","sitename":"","sitelogo":"","neg2_ent":"","neg1_ent":"","sourcename":"湘财证券","dredate":"1471802769","cpp_neu_ent":"","publishdate":"2016-08-17 00:00:00","org":"","drecontent":"","id":"1269327","author":"","sourceinfo":"湘财证券","title":"湘财证券天业股份集合资产管理计划成立公告","cpp_neg1_ent":"","sitedomain":"","storetime":"1471802240","filetype":"","industry":"","combinecount":"1","sourceregion":"","links":"","sourcebigkind":"","combinevalue":"10219333","database":"VMONTH_NEWS","reference":"http%3A%2F%2Fwww.xcsc.com%2Fservlet%2Fnews%2FArticle%3FarticleId%3D1003712276","cpp_neg2_ent":"","cpp_is_neg":"0","is_neg2":"0","create_time":"","zjj":"","is_neg":"0","samecount":"0"},{"summary":"海尔施生物医药股份有限公司（以下简称“发行人”）首次公开发行股票总量不超过6,900万股人民币普通股（A股）（以下简称“本次发行”）的申请已获得中国证券监督管理委员会证监许可[2016]1755号文核准。附公告链接:http://static.sse.com....","region":"","person":"","weight":"96.00","cpp_is_neg2":"0","neu_ent":"","sitename":"","sitelogo":"","neg2_ent":"","neg1_ent":"","sourcename":"湘财证券","dredate":"1471802769","cpp_neu_ent":"","publishdate":"2016-08-17 00:00:00","org":"","drecontent":"","id":"1269321","author":"","sourceinfo":"湘财证券","title":"关于“海尔施”(601206）暂缓首次公开发行股票的提示性公告","cpp_neg1_ent":"","sitedomain":"","storetime":"1471802240","filetype":"","industry":"","combinecount":"1","sourceregion":"","links":"","sourcebigkind":"","combinevalue":"10219328","database":"VMONTH_NEWS","reference":"http%3A%2F%2Fwww.xcsc.com%2Fservlet%2Fnews%2FArticle%3FarticleId%3D1003712904","cpp_neg2_ent":"","cpp_is_neg":"0","is_neg2":"0","create_time":"","zjj":"","is_neg":"0","samecount":"0"},{"summary":"该批期权合约将于2016年8月24日到期并行权，合约代码到期后将被注销，请投资者密切关注上述合约的交易及行权事项，及时做好相关交易或行权准备（请特别关注价格波动，义务仓投资者注意保证金变化通知并提前准备足额保证金）。最后交易日、行权日、到期日湘财证券股份有限公...","region":"","person":"","weight":"96.00","cpp_is_neg2":"0","neu_ent":"","sitename":"","sitelogo":"","neg2_ent":"","neg1_ent":"","sourcename":"湘财证券","dredate":"1471802769","cpp_neu_ent":"","publishdate":"2016-08-17 00:00:00","org":"","drecontent":"","id":"1269320","author":"","sourceinfo":"湘财证券","title":"关于2016年8月到期期权合约最后交易日、行权日、到期日的特别提醒公告","cpp_neg1_ent":"","sitedomain":"","storetime":"1471802240","filetype":"","industry":"","combinecount":"1","sourceregion":"","links":"","sourcebigkind":"","combinevalue":"10219322","database":"VMONTH_NEWS","reference":"http%3A%2F%2Fwww.xcsc.com%2Fservlet%2Fnews%2FArticle%3FarticleId%3D1003710658","cpp_neg2_ent":"","cpp_is_neg":"0","is_neg2":"0","create_time":"","zjj":"","is_neg":"0","samecount":"0"},{"summary":"具体联系方式如下：联系电话：010-59013948、010-59013949联系人：资本市场部4发行人：江苏花王园艺股份有限公司保荐人（主承销商）：中泰证券股份有限公司2016年8月16日附表：网下投资者初步配售明细配售对象申购数量获配数量序号投资者名称配售...","region":"","person":"","weight":"96.00","cpp_is_neg2":"0","neu_ent":"","sitename":"","sitelogo":"","neg2_ent":"","neg1_ent":"","sourcename":"湘财证券","dredate":"1471822934","cpp_neu_ent":"","publishdate":"2016-08-16 00:00:00","org":"","drecontent":"","id":"1269312","author":"","sourceinfo":"湘财证券","title":"花王股份(603007)首次公开发行股票网下发行初步配售结果及网上中签结果公告","cpp_neg1_ent":"","sitedomain":"","storetime":"1471802240","filetype":"","industry":"","combinecount":"1","sourceregion":"","links":"","sourcebigkind":"","combinevalue":"10219318","database":"VMONTH_NEWS","reference":"http%3A%2F%2Fwww.xcsc.com%2Fservlet%2Fnews%2FArticle%3FarticleId%3D1003698017","cpp_neg2_ent":"","cpp_is_neg":"0","is_neg2":"0","create_time":"","zjj":"","is_neg":"0","samecount":"0"}],"__elapse":"7539","NORMALIZE_AS_Q":"dreall   status:cpp","count_num":"50803","NORMALIZED_MAP":{"as_q":"dreall  ","db":"vnews","get_reply":"0","is_hl":"1","is_sum":"1","s_date":"-7","samecount":"false","status":"cpp","totalresults":"1"}}

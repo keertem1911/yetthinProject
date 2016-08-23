@@ -2,6 +2,7 @@ package zcom.yetthin.web.listener;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Executor;
@@ -29,15 +30,19 @@ SinaMarketIndex,JtdoaValueMarket{
 	private JtdoaAPIDao jtdoaAPIDao=new JtdoaAPIDao();
 	
 	private static final SimpleDateFormat dateFormat=new SimpleDateFormat("HH:mm");
-	private static final String END_TIME ="23:30";
-	private static final String START_TIME="08:45";
+	private static final String END_TIME ="21:30";
+	private static final String START_TIME="07:45";
 	private static final int dev_num=20;
-	private static final String FILE_NAME_PATH="d:/symbol.txt";
+	private  String FILE_NAME_PATH;
 	private UrlRequestDao urlRequestDao=new UrlRequestDao();
 	private final static long SECOND=1000;
 	private final static long MINUTE=SECOND*60;
+	private boolean initFlag;
 //	private JTdoa jtdoa;
 //	private JHdboa jhdboa;
+	public CreateJdoaListener() {
+		// TODO Auto-generated constructor stub
+	}
 	private Executor executor = Executors.newFixedThreadPool(200);
 	private  List<Contract> list;
 	  
@@ -64,13 +69,14 @@ SinaMarketIndex,JtdoaValueMarket{
 //		jhdboa =JtdoaUtil.getInstanceJHdboa();
 		System.out.println("come into --------------------");
 		executor.execute(new Runnable() {
-			@SuppressWarnings("unchecked")
+			 
 			public void run() {
 				ReadTextSymbol test = new ReadTextSymbol();
  				  
  				list=test.readTextByContract(FILE_NAME_PATH);
 				List<String> symbols = test.readSymolByString(FILE_NAME_PATH);
-//				RedisOfReader.initReadInredisKeyLevel1(list);
+				if(initFlag)
+   				RedisOfReader.initReadInredisKeyLevel1(list);
 				 //股票 更新 详细信息   开盘价  收盘价 摆单情况
 				
 				while(true){
@@ -94,7 +100,7 @@ SinaMarketIndex,JtdoaValueMarket{
 				 try {
 					 List<String> values=	urlRequestDao.readContentFromGet(QQ_M_REQUEST_URL+sb.toString());
 					 
-					 jtdoaAPIDao.saveQQ_M_REQUEST_URL(values);
+					 jtdoaAPIDao.saveQQ_M_REQUEST_URL(values,false);
 				 } catch (IOException e) {
 					 // TODO Auto-generated catch block
 					 e.printStackTrace();
@@ -112,8 +118,8 @@ SinaMarketIndex,JtdoaValueMarket{
 				 
 				 List<String> values=	urlRequestDao.readContentFromGet(QQ_M_REQUEST_URL+sb.toString());
 				 
-				 jtdoaAPIDao.saveQQ_M_REQUEST_URL(values);
-						Thread.sleep(MINUTE<<2);
+				 jtdoaAPIDao.saveQQ_M_REQUEST_URL(values,false);
+						Thread.sleep(SECOND*20);
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -145,19 +151,23 @@ SinaMarketIndex,JtdoaValueMarket{
 				System.currentTimeMillis();
 				
 				String [] [] husheng=HU_SHEN_STOCK_INDEX;
+				if(initFlag)
+					RedisOfReader.initReadInredisKeyLevel1Index(HU_SHEN_STOCK_INDEX);
+
 				while(true){
 					String currentTime = dateFormat.format(System.currentTimeMillis());
 					if(AfterTimeCompared(currentTime, START_TIME)&&!AfterTimeCompared(currentTime, END_TIME)){
 				
 		    	StringBuffer sb=new StringBuffer();
 		    	for (int i = 0; i < husheng.length; i++) {
-					sb.append("s_"+husheng[i][0].substring(7).toLowerCase()+husheng[i][0].substring(0, 6));
+					sb.append(""+husheng[i][0].substring(7).toLowerCase()+husheng[i][0].substring(0, 6));
 					if(i<husheng.length-1)
 						sb.append(",");
 		    	}
 		    	try {
-					List<String> values=urlRequestDao.readContentFromGet(SINA_I_REQUEST_URL+sb.toString());
-					jtdoaAPIDao.saveSina_REQUEST_URL_INDEX(values);
+					List<String> values=urlRequestDao.readContentFromGet(QQ_M_REQUEST_URL+sb.toString());
+//					jtdoaAPIDao.saveSina_REQUEST_URL_INDEX(values);
+				    jtdoaAPIDao.saveQQ_M_REQUEST_URL(values,true);
 		    	} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -177,6 +187,10 @@ SinaMarketIndex,JtdoaValueMarket{
 
 	@Override
 	public void contextInitialized(ServletContextEvent arg0) {
+		String path=arg0.getServletContext().getInitParameter("path");
+		String initFlag=(arg0.getServletContext().getInitParameter("initFlag"));
+		this.initFlag=Boolean.parseBoolean(initFlag);
+		FILE_NAME_PATH=path;
 		// TODO Auto-generated method stub
 		Runnable run=new Runnable() {
 			public void run() {

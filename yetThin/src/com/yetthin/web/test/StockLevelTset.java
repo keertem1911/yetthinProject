@@ -11,7 +11,7 @@ import java.net.URLEncoder;
 import com.yetthin.web.commit.JtdoaValueMarket;
 
 public class StockLevelTset implements JtdoaValueMarket{
-	public static final String GET_URL =   "http://hq.sinajs.cn/list=";
+	public static final String GET_URL =   "http://qt.gtimg.cn/q=";
 	  
 	  
     public static final String POST_URL = " http://localhost:8080/demo/  ";   
@@ -25,7 +25,7 @@ public class StockLevelTset implements JtdoaValueMarket{
 
       
 
-        URL getUrl = new URL(url);   
+        URL getUrl = new URL("http://qt.gtimg.cn/q=sz002809");   
 
         // 根据拼凑的URL，打开连接，URL.openConnection()函数会根据 URL的类型，返回不同的URLConnection子类的对象，在这里我们的URL是一个http，因此它实际上返回的是HttpURLConnection   
 
@@ -49,13 +49,14 @@ public class StockLevelTset implements JtdoaValueMarket{
 
         while ((lines = reader.readLine()) != null) {   
      	   		 
-        	System.out.println(lines);
-//        	String [] subStr = lines.split("=");
-//        	String value=subStr[1];
-//        	value=value.replace("\"", "");
-//        	value=value.replace(";", "");
-// 	   		String sybmol =lines.split("=")[0].substring(lines.split("=")[0].length()-8);
-// 	   		System.out.println(value+"&"+sybmol);
+        	 
+        	String [] subStr = lines.split("=");
+        	String value=subStr[1];
+        	String []sub=value.split("~"); 
+        	for (int i = 0; i < sub.length; i++) {
+				System.out.println(i+" ="+sub[i]);
+			} 
+ 	   		 
         }   
 
         reader.close();   
@@ -161,22 +162,22 @@ public class StockLevelTset implements JtdoaValueMarket{
 
     public static void main(String[] args) {   
     		
-    	String [] [] husheng=HU_SHEN_STOCK_INDEX;
+    	
+        String [][] market=HU_SHEN_STOCK_INDEX;    
     	StringBuffer sb=new StringBuffer();
-    	for (int i = 0; i < husheng.length; i++) {
-			sb.append("s_"+husheng[i][0].substring(7).toLowerCase()+husheng[i][0].substring(0, 6));
-			if(i<husheng.length-1)
-				sb.append(",");
-    	}
+    	for (int i = 0; i < market.length; i++) {
+    		String  subs=market[i][0].substring(market[i][0].lastIndexOf("."))+market[i][0].substring(0, market[i][0].lastIndexOf("."));
+			sb.append(subs.substring(1).toLowerCase());
+			System.out.println(subs.substring(1));
+			if(i<market.length-1) sb.append(",");
+		}
+    
     	try {
-    //		System.out.println(sb.toString());
 			readContentFromGet(GET_URL+sb.toString());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-            
-
     }   
 }	
 

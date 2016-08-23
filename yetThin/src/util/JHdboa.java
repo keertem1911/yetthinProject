@@ -15,16 +15,16 @@ import com.yetthin.web.commit.ValueFormatUtil;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
-import redis.clients.jedis.Transaction;
 
 public class JHdboa implements ValueFormatUtil{
 	
 	private static JedisPool poolM=RedisUtil.getInstanceMsater();
 	
-	 
-	private List<TickSort> level2Detail=null;
-	 
-	private boolean isset=false;
+		
+	private List<TickSort> tickSorts=null;
+	
+	
+	public boolean isset=false;
 	SimpleDateFormat mm_ddformat =new SimpleDateFormat("HH:mm:ss");
 	public boolean connected=false;
 	public JHdboa() {
@@ -84,47 +84,40 @@ public class JHdboa implements ValueFormatUtil{
     }
     public void UpdateHistoricalBarData(long tickId,BarData bar,int sendFlag)
     {
-    	 Jedis jedis_M=poolM.getResource();
+    	  
     	System.out.println(tickId+" "+sendFlag+" "+bar);
-    	 String value=jedis_M.get(bar.contract.symbol.toUpperCase());
+    	 	 
     	 
-    	 String [] subStr=value.split(SPLIT_STR);
     	 if(tickId>=8000){//日线
- 		subStr[OPEN_INDEX]=doubleformat.format(bar.open);
- 		subStr[PRE_CLOSE_INDEX]=doubleformat.format(bar.ystClose);
- 		subStr[LIMIT_UP_INDEX]=doubleformat.format(bar.open*1.1);
- 		subStr[LIMIT_DOWN_INDEX]=doubleformat.format(bar.open*0.9);
-// 		 
- 		value =joinStringSplit(subStr, SPLIT_STR);
- 		jedis_M.set(bar.contract.symbol.toUpperCase(), value);
-    	 }else{
-    		 if(tickId>1000&&tickId<8000){// 分钟线
-    			 subStr[DATE_INDEX]=format.format(new Date());
+    		 	System.out.println(bar);
+    		 	isset=true;
+ 		 }else{
+    		 
+ 			 if(tickId>1000&&tickId<8000){// 分钟线
     			 
     		 }
     	 }
-    	 RedisUtil.RealseJedis_M(jedis_M);
     	 
     }
-    public List<TickSort> getLevel2Detail() {
-			level2Detail=new LinkedList<>();
-			isset=false;
+    public List<TickSort> getTickSorts() {
+    	 List<TickSort> list1= new LinkedList<>();
 		 
-    	return level2Detail;
+    	return list1;
 	}
-    public void setLevel2Detail(List<TickSort> level2Detail) {
-    	isset=false;
-		this.level2Detail = level2Detail;
-	}
+    public void setTickSorts(List<TickSort> sort){
+    	this.tickSorts=sort;
+    }
+     
     public void UpdateHistoricalTick(long tickId,TickData tick,int sendFlag)
     {
-//    	if(level2Detail!=null){
+    	if(tickSorts!=null){
+    	System.out.println(Thread.currentThread().getName());
     	isset=true;
     	String date=mm_ddformat.format(tick.dateTime*1000);
     	TickSort tickSort = new TickSort(tick, date);
-    	level2Detail.add(tickSort);
+    	tickSorts.add(tickSort);
      	System.out.println(tickSort);
-//    	}
+    	}
     	System.out.println("tickData:"+tickId+" "+sendFlag+" "+tick+" "+tick.dateTime*1000);
     }
     public boolean isIsset() {
@@ -167,7 +160,7 @@ public class JHdboa implements ValueFormatUtil{
 		 // 第二天请求昨天的
 		 long yestday=1000*60*60*24;
 		 do{
-			 jhd.setLevel2Detail(null);
+			 jhd.setTickSorts(null);
 				 if(endTime.getTime()<current_Time){// 超过 收盘时间
 					 fromTime=endTime.getTime()-index_time-cntTime;
 					 toTime=endTime.getTime();
@@ -181,31 +174,34 @@ public class JHdboa implements ValueFormatUtil{
 					 }
 				 }
 				 
-				 list=jhd.getLevel2Detail();
-				 System.out.println("from "+new Date(fromTime)+"  to "+new Date(toTime));
+				 list=jhd.getTickSorts();
+				 System.out.println(Thread.currentThread().getName());
+				 System.out.println("from "+new Date(System.currentTimeMillis()-1000*60*60*20)+"  to "+new Date(toTime));
 				 jhd.HdboaReqHistoricalTickData(3, contract, fromTime/1000, toTime/1000,UseRTH.USE_RTH.ordinal());
-				while(!jhd.isset){
+//				 jhd.HdboaReqHistoricalData(8002, contract,(System.currentTimeMillis()-1000*60*60*20)/1000, (System.currentTimeMillis())/1000,CYCTYPE.CYC_DAY.ordinal(), 1, UseRTH.USE_RTH.ordinal());
+				 int cnt=0;
+				 while(!jhd.isset){
 					Thread.sleep(100);
-				//	System.out.println(jhd.isset);
+					cnt++;
+					if(cnt==50)
+						break;
+//				 	System.out.println(jhd.isset);
 				}
 					 Thread.sleep(1000);
 					 System.out.println(list.size());
 					 cntTime+=1000*60;
-		 }while(list.size()<20&&fromTime>beginTime.getTime());
+		 }while(false);
+		 if(jhd.isset==false){
+			 System.out.println("time errir");
+		 }
 		 } catch (Exception e) {
 			 // TODO Auto-generated catch block
 			 e.printStackTrace();
 		 } 
-		//System.out.println(getDateStr(System.currentTimeMillis()-1000*60*60*24)+getDateStr(System.currentTimeMillis()));
-	//	int status=jhd.HdboaReqHistoricalData(8000, contract,(System.currentTimeMillis()-1000*60*60*25)/1000, System.currentTimeMillis()/1000,CYCTYPE.CYC_DAY.ordinal(), 1, UseRTH.USE_RTH.ordinal());
-//		System.out.println(status);
-//	 jhd.HdboaReqHistoricalTickData(3, contract, (System.currentTimeMillis()-1000*60*60*24)/1000, (System.currentTimeMillis())/1000,UseRTH.USE_RTH.ordinal());
-			
-	 	Collections.sort(list);
+		 
 		System.out.println("ceoom i   =---------------------------");
-			System.out.println(Arrays.asList(list));
-			System.out.println(list.size());
-			jhd.setLevel2Detail(null);
+		 
+			jhd.setTickSorts(null);
 			jhd.HdboaDisconnect();
 			jhd.HdboaDestory();
 			System.out.println(Thread.currentThread().getName());

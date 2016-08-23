@@ -19,7 +19,14 @@ public interface ValueFormatUtil {
 	public static final int LEVEL2_INDEX_SIDE0=16;// 买方  买1
 	public static final int UP_DOWN_PRICE=31; // 涨跌价
 	public static final int UP_DOWN_PRICE_RATE=32; // 涨跌率
-	public static final int NAME=33;
+	public static final int NAME=33;// 名称
+	public static final int LAST_DONE=34;// 最近一次成交信息  现手
+	public static final int PRICE_EARING_RATIO=35;// 市盈率 （市盈动）
+	public static final int STOCK_AMPLITUPE=36;// 振幅
+	public static final int FAMC=37;// 流通市值
+	public static final int TOTLE_MAREKT_VALUE=38;// 总市值
+	public static final int TOTLE_NET_WORTH=39;// 总净值
+	
 	public static final String SPLIT_STR=":";
 	public static SimpleDateFormat format=new SimpleDateFormat("HH-mm");
 	public static DecimalFormat   doubleformat=new DecimalFormat("#.###"); 

@@ -40,6 +40,9 @@ public class RegularTest {
 		System.out.println(joinStringSplit(substr, ":"));
 	}
 	public static void main(String[] args) {
+		 String name="10-12-26/68.30/2/B/13660/3497|10-12-26/68.29/2/S/13658/3496|10-12-20/68.29/4/B/27316/3493|10-12-20/68.29/1/B/6829/3491|10-12-17/68.29/11/B/75119/3490|10-12-14/68.29/4/B/27305/3489";
+		 String  subStr=name.split("[/]")[2];
+		 System.out.println(subStr);
 //		String str=" [ "+
 //				"		        {"+
 //				"		            \"group\": \"组名\", "+

@@ -23,9 +23,10 @@ public class RedisOfReader implements ValueFormatUtil{
 //			   1	   2     3     4     5   6	  7    8         >> SUM 11
 	 	+ ":0:0:0:0:0:0:0:0:0:0" 
 //		 	9    10    11    12    13     14    15    16    17    18  >>SUM    10   
-	 	+ ":0:0:0:0:0:0:0:0:0:0:0:0:0";
-//		  19 20 2122 23 24 25 26  27 28        >> SUM 12   TOTLE 33 INDEX 0 -32
-	
+	 	+ ":0:0:0:0:0:0:0:0:0:0:0:0:0"
+//		  19 20 2122 23 24 25 26  27 28 29 30 31 32 33          TOTLE 33 INDEX 0 -32
+	 	+":0:0:0:0:0:0";
+//		34 35 36 37 38 39  >> SUM 40 		
 	 
 	/**
 	 * 
@@ -146,6 +147,19 @@ public class RedisOfReader implements ValueFormatUtil{
 			Entry<String, String> entry=(Entry<String, String>)it.next();
 			jedis.set("name"+entry.getKey(), entry.getValue());
 		}
+		RedisUtil.RealseJedis_M(jedis);
+	}
+	public static void initReadInredisKeyLevel1Index(String[][] huShenStockIndex) {
+		// TODO Auto-generated method stub
+		Jedis jedis=pool.getResource();
+		jedis.select(0);
+		
+		for (int i = 0; i < huShenStockIndex.length; i++) {
+			
+			jedis.set(huShenStockIndex[i][0], INIT_STRING);
+			
+		}
+		
 		RedisUtil.RealseJedis_M(jedis);
 	}
 	
