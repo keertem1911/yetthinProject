@@ -2,11 +2,14 @@ package com.yetthin.web.dao;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 //import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
+import com.alibaba.fastjson.JSON;
 
 import net.oauth.OAuth;
 import net.p5w.gdsp.client.base.GdspClient;
@@ -230,7 +233,11 @@ public class Cmsget {
 		cms.setCurrentPageNo("2");
 		cms.getContent();
 		cms.orgniseRlt();
-
+		System.out.println(JSON.toJSON(cms.maplist));
+		System.out.println();
+		for (int i = 0; i < cms.maplist.size(); i++) {
+			System.out.println(cms.maplist.get(i));
+		}
 	}
 
 }

@@ -1,8 +1,10 @@
 package com.yetthin.web.dao;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -14,11 +16,9 @@ import java.util.TreeSet;
 
 import org.springframework.stereotype.Service;
 
-import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
 import com.yetthin.web.commit.JtdoaValueMarket;
 import com.yetthin.web.commit.QQMarketLevelUtilByMaster;
 import com.yetthin.web.commit.RedisUtil;
-import com.yetthin.web.commit.SinaMarketIndex;
 import com.yetthin.web.commit.ValueFormatUtil;
 
 import redis.clients.jedis.Jedis;
@@ -128,7 +128,7 @@ public class JtdoaDao implements ValueFormatUtil,JtdoaValueMarket,QQMarketLevelU
 	 * @param size 大小
 	 */
 	public void Level1Data(long tickId, String symbol,String secType,String exchange,String currency,int tickType,String L1Value, int size){
-		jedis_M.select(0);
+		/*jedis_M.select(0);
 		String value=jedis_M.get(symbol+"."+exchange);
 		String [] subStr=value.split(SPLIT_STR);
 		String date=format.format(System.currentTimeMillis());
@@ -145,15 +145,15 @@ public class JtdoaDao implements ValueFormatUtil,JtdoaValueMarket,QQMarketLevelU
 			break;
 		case 3:
 			break;
-//		case 4: // LAST 最新成交价
-//			
-//			subStr[LAST_PRICE_INDEX] =L1Value;
-//			saveSortBalance(symbol, exchange, L1Value, subStr[OPEN_INDEX], date);
-//			break;
-//		case 5: // 最后一次成交笔数
-//			subStr[PRE_VOLUME_INDEX] =L1Value;
-//			System.out.println(L1Value);
-//			break;
+		case 4: // LAST 最新成交价
+			
+			subStr[LAST_PRICE_INDEX] =L1Value;
+			saveSortBalance(symbol, exchange, L1Value, subStr[OPEN_INDEX], date);
+			break;
+		case 5: // 最后一次成交笔数
+			subStr[PRE_VOLUME_INDEX] =L1Value;
+			System.out.println(L1Value);
+			break;
 		case 6: // 开盘价
 			subStr[OPEN_INDEX] =L1Value;
 			break;
@@ -194,7 +194,7 @@ public class JtdoaDao implements ValueFormatUtil,JtdoaValueMarket,QQMarketLevelU
 		}
 		value=joinStringSplit(subStr, SPLIT_STR);
 		System.out.println("save succes "+value );
-		jedis_M.set(symbol+"."+exchange, value);
+		jedis_M.set(symbol+"."+exchange, value);*/
 	 
 	}
 	/**
@@ -229,11 +229,6 @@ public class JtdoaDao implements ValueFormatUtil,JtdoaValueMarket,QQMarketLevelU
 		StockIndexs[i]=HU_SHEN_STOCK_INDEX[i][0]+":"+HU_SHEN_STOCK_INDEX[i][1]+":"+subStr[LAST_PRICE_INDEX]+":"+subStr[UP_DOWN_PRICE]+":"+subStr[UP_DOWN_PRICE_RATE];
 		if(master)
 			StockIndexs[i]+=":"+subStr[STOCK_AMPLITUPE]+":"+subStr[TOTLE_SUM_INDEX]+":"+subStr[VOLUME_INDEX];
-			//		int mod=	(int) (System.currentTimeMillis()/1000%2);
-//		if(mod==1)
-//		StockIndexs[i]=STOCK_NAME[i][0]+":"+STOCK_NAME[i][1]+":"+"12.1"+":"+"1.1:-1.1%";
-//		else
-//		StockIndexs[i]=STOCK_NAME[i][0]+":"+STOCK_NAME[i][1]+":"+"12.1"+":"+"3.3:2.1%";
 		}
 	 	return StockIndexs;
 	}
@@ -295,35 +290,7 @@ public class JtdoaDao implements ValueFormatUtil,JtdoaValueMarket,QQMarketLevelU
 			
 		return map;
 	}
-	/**
-	 *  模拟l1 的数据
-	 */
-	public Map<String, Set<Tuple>> getL1StockMarketDataM(){
-		Map<String, Set<Tuple>> map=new HashMap<String, Set<Tuple>>();
-		String []name={"0:涨幅榜","0:跌幅榜"};
-		for(int j=0;j<2;++j){
-			Set<Tuple> tuples=new TreeSet();
-			 
-				try {
-					Tuple t3=new Tuple("300506.SZ:3.5", 7.16);
-					Tuple t=new Tuple("002800.SZ:1.1", 3.32);
-					Tuple t1=new Tuple("300520.SZ:3.1", 3.22);
-					Tuple t4=new Tuple("300474.SZ:12.1", 2.33);
-					Tuple t2=new Tuple("002805.SZ:0.2", 1.11);
-					tuples.add(t3);
-					tuples.add(t);
-					tuples.add(t1);
-					tuples.add(t4);
-					tuples.add(t2);
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}finally{
-				}
-				map.put(name[j], tuples);
-		}
-		return map;
-	}
+	 
 	/**
 	 * FROM JNI 
 	 * @param tickId
@@ -366,94 +333,304 @@ public class JtdoaDao implements ValueFormatUtil,JtdoaValueMarket,QQMarketLevelU
 		
 		return value;
 	}
-	public List<TickSort> getLevel2Detail(String symbol){
-	 
-	  
-			 List<TickSort> list=null;
-			JHdboa jhd=new JHdboa();
-			jhd.HdboaInit(new BarData(),new Contract(),new TickData());
-			jhd.HdboaConnect("222.173.29.210", 7008);
-			while(!jhd.connected)
-			{
-				System.out.println("wait");
-				try {
-					Thread.sleep(50);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+	/**
+	 * 
+	 * @param symbol
+	 * @param jniCallBackType 回调函数类型
+	 * @param [] params  参数列表  K线列表顺序 [barNum,currenyTime,cycType,cycNum]
+	 * @return
+	 */
+	private List  connectJHdboa(String symbol,int jniCallBackType,String [] params){
+		List listReturn=null;
+		JHdboa jhd=new JHdboa();
+		jhd.HdboaInit(new BarData(),new Contract(),new TickData());
+		jhd.HdboaConnect("222.173.29.210", 7008);
+		while(!jhd.connected)
+		{
+			System.out.println("wait");
+			try {
+				Thread.sleep(50);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-			  SimpleDateFormat yy_MM_ddformat =new SimpleDateFormat("yyyy:MM:dd");
-			 SimpleDateFormat ALL_format =new SimpleDateFormat("yyyy:MM:dd HH:mm:ss");
-			 Contract contract=new Contract();
-			 contract.symbol="002362";
-			 contract.currency="CNY";
-			 contract.exchange="SZ";
-			 contract.secType="STK";
-			 int cntTime=0;
-			 
-			 try {
-				 long current_Time=System.currentTimeMillis();
-			 String dateStr=yy_MM_ddformat.format(current_Time);
-			 Date endTime =ALL_format.parse(dateStr+" 15:01:00");
-			 Date beginTime =ALL_format.parse(dateStr+" 09:30:00");
-			 long fromTime=0l;
-			 long toTime=0l;
-			 // 起始时间与终止时间之差 10分钟
-			 long index_time=1000*60*30;
-			 // 第二天请求昨天的
-			 long yestday=1000*60*60*24;
-			 do{
-				 jhd.setTickSorts(null);
-					 if(endTime.getTime()<current_Time){// 超过 收盘时间
-						 fromTime=endTime.getTime()-index_time-cntTime;
-						 toTime=endTime.getTime();
-					 }else{
-						 if(beginTime.getTime()>current_Time){// 先于  开盘时间
-							 fromTime=endTime.getTime()-index_time-cntTime-yestday;
-							 toTime=endTime.getTime()-yestday;
-						 }else{
-							 toTime=current_Time;
-							 fromTime=current_Time-index_time-cntTime;
+		}
+		 SimpleDateFormat yy_MM_ddformat =new SimpleDateFormat("yyyy:MM:dd");
+		 SimpleDateFormat ALL_format =new SimpleDateFormat("yyyy:MM:dd HH:mm:ss");
+//		 Contract contract=new Contract();
+//		 contract.symbol="002362";
+//		 contract.currency="CNY";
+//		 contract.exchange="SZ";
+//		 contract.secType="STK";
+		 
+		 
+		 Contract contract=new Contract();
+		 contract.symbol=symbol.split("[.]")[0];
+		 contract.currency="CNY";
+		 contract.exchange=symbol.split("[.]")[1];
+		 contract.secType="STK";
+		 long cntTime=0l;
+		 
+		 long current_Time=System.currentTimeMillis();
+		 // 起始时间与终止时间之差 30分钟
+		 long index_time=1000*60*30;
+		 String dateStr=yy_MM_ddformat.format(current_Time);
+		 Date beginTime = null;
+		try {
+			beginTime = ALL_format.parse(dateStr+" 09:30:00");
+		} catch (ParseException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		 
+		 if(jniCallBackType==1){
+			List<TickSort> tickSort=null;
+		 try {
+		 Date endTime =ALL_format.parse(dateStr+" 15:01:00");
+		 long fromTime=0l;
+		 long toTime=0l;
+		 // 第二天请求昨天的
+		 long yestday=1000*60*60*24;
+		
+		 do{
+			 jhd.setTickSorts(null);
+			 if(endTime.getTime()<current_Time){// 超过 收盘时间
+				 fromTime=endTime.getTime()-index_time-cntTime;
+				 toTime=endTime.getTime();
+			 }else{
+				 if(beginTime.getTime()>current_Time){// 先于  开盘时间
+					 fromTime=endTime.getTime()-index_time-cntTime-yestday;
+					 toTime=endTime.getTime()-yestday;
+				 }else{
+					 toTime=current_Time;
+					 fromTime=current_Time-index_time-cntTime;
+				 }
+			 }
+				 
+				 tickSort=jhd.getTickSorts();
+				 System.out.println("from "+new Date(fromTime)+"  to "+new Date(toTime));
+				int j= jhd.HdboaReqHistoricalTickData(3, contract, fromTime/1000, toTime/1000,UseRTH.USE_RTH.ordinal());
+				System.out.println(j);
+				Thread.sleep(1000);
+				while(!jhd.isset){
+					Thread.sleep(100);
+				//	System.out.println(jhd.isset);
+				}
+					 Thread.sleep(1000);
+					 System.out.println(tickSort.size());
+					 cntTime+=1000*60;
+		 }while(tickSort.size()<20&&fromTime>beginTime.getTime());
+		 } catch (Exception e) {
+			 // TODO Auto-generated catch block
+			 e.printStackTrace();
+		 } 
+		 Collections.sort(tickSort);
+	 	listReturn=tickSort;
+		 }else{
+			 //[barNum,currenyTime,cycType,cycNum]
+			 if(params.length>3){
+				 int barNum=Integer.parseInt(params[0]);
+				 String currenyTime=params[1];
+				 int  cycType=Integer.parseInt(params[2]);
+				 int cycNum=Integer.parseInt(params[3]);
+				 Date date = null;
+				 long longDate=0l;
+				try {
+					date = ALL_format.parse(currenyTime);
+					 longDate=date.getTime();
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				long beginTime1=0l;
+				String []day_hourse=currenyTime.split("[\\s]");
+				String day=day_hourse[0];
+				String hourse=day_hourse[1];
+				 
+				int [][] SEASONS={{01,01,03,31},{04,01,06,30},{07,01,9,30},{10,01,12,31}};
+				int [][] HalfYears ={{6,30},{12,31}};
+				Calendar cal =Calendar.getInstance();
+				 int yeartemp=Integer.parseInt(day.split("[:]")[0]);
+				 int monthtemp=Integer.parseInt(day.split("[:]")[1]);
+				 int daytemp=Integer.parseInt(day.split("[:]")[2]);
+				cal.setTime(date);
+			//	(0:SECOND,1:MINUTE,2:DAY,3:WEEK,4:MONTH,5:SEASON,6:HAFLYEAR,7:YEAR) 
+				switch(cycType){
+				case 0: cal.set(Calendar.SECOND, cal.get(Calendar.SECOND)-(barNum*cycNum+1)); // second
+					break;
+				case 1: // mintue
+					cal.set(Calendar.MINUTE, cal.get(Calendar.MINUTE)-(barNum*cycNum+1));
+					break;
+				case 2:  
+					 cal.set(Calendar.HOUR, 15);
+					 cal.set(Calendar.MINUTE, 15);
+					 cal.set(Calendar.SECOND, 15);
+					 longDate=cal.getTimeInMillis();
+					 cal.set(Calendar.DAY_OF_MONTH, cal.get(Calendar.DAY_OF_MONTH)-(barNum*cycNum+1));
+					 
+					break;
+				case 3: // weekend
+					cal.set(Calendar.WEEK_OF_MONTH,cal.get(Calendar.WEEK_OF_MONTH) -(barNum*cycNum+1));
+					break; 
+				case 4: // month
+						for (int i = 0; i < barNum*cycNum; i++) {
+							
+							int month = cal.get(Calendar.MONTH);
+							if(month<0){
+								int year =cal.get(Calendar.YEAR);
+								year--;
+								cal.set(Calendar.YEAR, year);
+								cal.set(Calendar.MONTH, 12);
+							}else{
+								cal.set(Calendar.MONDAY, month-1);
+							}
+						}
+						
+					break;
+				case 5: //season
+				{
+					int cnt = SEASONS.length-1;
+					 cal.set(Calendar.HOUR, 15);
+					 cal.set(Calendar.MINUTE, 15);
+					 cal.set(Calendar.SECOND, 15);
+					 int index=0;
+					 for(int i=0;i<SEASONS.length;++i){
+						 if(monthtemp>=SEASONS[i][0]&&monthtemp<=SEASONS[i][2]){
+							 index=i;
+							 break;
 						 }
 					 }
-					 
-					 list=jhd.getTickSorts();
-					 System.out.println("from "+new Date(fromTime)+"  to "+new Date(toTime));
-					int j= jhd.HdboaReqHistoricalTickData(3, contract, fromTime/1000, toTime/1000,UseRTH.USE_RTH.ordinal());
-					System.out.println(j);
-					while(!jhd.isset){
-						Thread.sleep(100);
-					//	System.out.println(jhd.isset);
+					 cal.set(Calendar.MONDAY, SEASONS[index][2]-1);
+					 cal.set(Calendar.DAY_OF_MONTH, SEASONS[index][3]);
+					 longDate=cal.getTimeInMillis();
+					 int endcnt=barNum-1+(cnt-index);
+					 int yearcnt=endcnt/SEASONS.length;
+					 int indexcnt=cnt-(endcnt%SEASONS.length);
+					 index= indexcnt;
+					 cal.set(Calendar.YEAR, yeartemp-yearcnt);
+					 cal.set(Calendar.MONDAY, SEASONS[index][0]-1);
+					 cal.set(Calendar.DAY_OF_MONTH, SEASONS[index][1]);
+					 cal.set(Calendar.HOUR, 9);
+					 cal.set(Calendar.MINUTE, 00);
+					 cal.set(Calendar.SECOND, 00);
+					 }
+					break;
+				case 6://halfyear
+					{
+						int [] halfYear=HalfYears[cycNum];
+					int index=0;
+					cal.set(Calendar.HOUR, 15);
+					 cal.set(Calendar.MINUTE, 15);
+					 cal.set(Calendar.SECOND, 15);
+					for(int i=0;i<HalfYears.length;++i){
+						 if(monthtemp<=HalfYears[i][0]&&daytemp<=HalfYears[i][1]){
+							 index=i;
+							 break;
+						 }
+					 }
+					cal.set(Calendar.MONTH, HalfYears[index][0]-1);
+					cal.set(Calendar.DAY_OF_MONTH, HalfYears[index][1]);
+					longDate=cal.getTimeInMillis();
+					int cnt=HalfYears.length-1;
+					int endcnt=barNum-1+(cnt-index);
+					 int yearcnt=endcnt/HalfYears.length;
+					 int indexcnt=cnt-(endcnt%HalfYears.length);
+					 index=indexcnt;
+					 cal.set(Calendar.YEAR, yeartemp-yearcnt);
+					 cal.set(Calendar.MONDAY, HalfYears[index][0]-1);
+					 cal.set(Calendar.DAY_OF_MONTH, HalfYears[index][1]);
+					 cal.set(Calendar.HOUR, 9);
+					 cal.set(Calendar.MINUTE, 00);
+					 cal.set(Calendar.SECOND, 00);
 					}
-						 Thread.sleep(1000);
-						 System.out.println(list.size());
-						 cntTime+=1000*60;
-			 }while(list.size()<20&&fromTime>beginTime.getTime());
-			 } catch (Exception e) {
-				 // TODO Auto-generated catch block
-				 e.printStackTrace();
-			 } 
-			//System.out.println(getDateStr(System.currentTimeMillis()-1000*60*60*24)+getDateStr(System.currentTimeMillis()));
-		//	int status=jhd.HdboaReqHistoricalData(8000, contract,(System.currentTimeMillis()-1000*60*60*25)/1000, System.currentTimeMillis()/1000,CYCTYPE.CYC_DAY.ordinal(), 1, UseRTH.USE_RTH.ordinal());
-//			System.out.println(status);
-//		 jhd.HdboaReqHistoricalTickData(3, contract, (System.currentTimeMillis()-1000*60*60*24)/1000, (System.currentTimeMillis())/1000,UseRTH.USE_RTH.ordinal());
-				
-		 	Collections.sort(list);
-			System.out.println("ceoom i   =---------------------------");
-				System.out.println(Arrays.asList(list));
-				System.out.println(list.size());
-				 
-				jhd.HdboaDisconnect();
-//				jhd.HdboaDestory();
-				System.out.println(Thread.currentThread().getName());
-				while(!jhd.end);
-			System.out.println("sa");
-			jhd=null;
-			System.out.println(Arrays.asList(list));
-	 
-	 
-			return list;
+					break;
+				case 7://year
+					 cal.set(Calendar.MONDAY, 11);
+					 cal.set(Calendar.DAY_OF_MONTH, 31);
+					 cal.set(Calendar.HOUR, 16);
+					 cal.set(Calendar.MINUTE, 00);
+					 cal.set(Calendar.SECOND, 00);
+					 longDate=cal.getTimeInMillis();
+					int year=cal.get(Calendar.YEAR);
+					cal.set(Calendar.YEAR, year-(barNum*cycNum));
+					break;	
+				}
+				 int size=0;
+				beginTime1 =cal.getTimeInMillis();
+				 List<BarData> barDatas=null;
+				 do{
+				 jhd.setBarDatas(null);
+				 barDatas=null;
+				 barDatas=jhd.getBarDatas();
+				 System.out.println(ALL_format.format(new Date(beginTime1))+" : "+ALL_format.format(new Date(longDate)));
+				 int j =jhd.HdboaReqHistoricalData(12,contract,
+						 beginTime1/1000,longDate/1000,cycType,cycNum,UseRTH.USE_RTH.ordinal());
+				 if(j==1){
+					 try {
+					 while(!jhd.isIsset()){
+							Thread.sleep(50);
+					 }// while end
+					 		Thread.sleep(2000);
+					 		
+					 } catch (InterruptedException e) {
+						 // TODO Auto-generated catch block
+						 e.printStackTrace();
+					 }
+				 }//if end 
+					 		if(barDatas.size()<barNum){
+					 			switch(cycType){
+					 			case 0: 
+					 				cal.set(Calendar.SECOND, cal.get(Calendar.SECOND)-((barNum*cycNum)));
+					 				break;
+					 			case 1:
+					 				cal.set(Calendar.MINUTE, cal.get(Calendar.MINUTE)-((barNum*cycNum)/2));
+					 				break;
+					 			case 2:
+					 			 cal.set(Calendar.DAY_OF_MONTH, cal.get(Calendar.DAY_OF_MONTH)-(((barNum*cycNum)/7)*2));
+					 			 break;
+					 			case 5:
+					 				int cnt = SEASONS.length-1;
+								 	 int index=0;
+									 for(int i=0;i<SEASONS.length;++i){
+										 if(monthtemp>=SEASONS[i][0]&&monthtemp<=SEASONS[i][2]){
+											 index=i;
+											 break;
+										 }
+									 }
+									 int endcnt1=barNum-1+(cnt-index);
+									 int yearcnt1=endcnt1/SEASONS.length;
+									 int indexcnt1=cnt-(endcnt1%SEASONS.length);
+									 index= indexcnt1;
+									 cal.set(Calendar.YEAR, cal.get(Calendar.YEAR)-yearcnt1);
+									 cal.set(Calendar.MONDAY, SEASONS[index][0]-1);
+									 cal.set(Calendar.DAY_OF_MONTH, SEASONS[index][1]);
+					 				break;
+					 			}
+					 			 
+					 		}
+					 		beginTime1=cal.getTimeInMillis();
+					 		System.out.println("size ="+barDatas.size());
+					 		if(size!=barDatas.size())
+					 			size=barDatas.size();
+					 		else break;
+				 	}while(barDatas.size()<barNum);
+				 Collections.sort(barDatas);
+				 System.out.println(Arrays.asList(barDatas));
+				 listReturn=barDatas;
+				 }// params.length ==3 
+		 }
+			jhd.HdboaDisconnect();
+//			jhd.HdboaDestory();
+		 	jhd=null;
+		  
+		return listReturn;
+	}
+	public List<TickSort> getLevel2Detail(String symbol){
+		List<TickSort> list=null;
+		String []params=new String[1];
+		list = connectJHdboa(symbol,1,params);
+			 
+		return list;
 	}
 	public String[] getIndexDetail(String indexCode) {
 		// TODO Auto-generated method stub
@@ -462,5 +639,38 @@ public class JtdoaDao implements ValueFormatUtil,JtdoaValueMarket,QQMarketLevelU
 		String [] subStr=jedis.get(indexCode).split(SPLIT_STR);
 		RedisUtil.RealseJedis_S(jedis);
 		return subStr;
+	}
+	private List<BarData> putBarData(){
+		List<BarData> barDatas=null;
+		
+		return barDatas;
+	}
+	/**
+	 * 查找 从当前时间之前指定周期及个数的K线
+	 * @param barNum
+	 * @param currenyTime
+	 * @param type
+	 * @param cycNum
+	 * @return
+	 */
+	public List<BarData> getHistoryBar(String symbol,String barNum, String currenyTime, int type, int cycNum) {
+		// TODO Auto-generated method stub
+//		[barNum,currenyTime,cycType,cycNum]
+		String [] params= new String[4];
+		params[0]=barNum;
+		params[1]=currenyTime;
+		params[2]=Integer.toString(type);
+		params[3]=Integer.toString(cycNum);
+		
+		List<BarData> list= connectJHdboa(symbol, 0, params);
+		return list;
+	}
+	public String getLevel1MarketNum(String marketCode) {
+		// TODO Auto-generated method stub
+		Jedis  jedis = poolM.getResource();
+		jedis.select(1);
+		String num=Long.toString(jedis.zcard(marketCode));
+		RedisUtil.RealseJedis_M(jedis);
+		return num;
 	}
 }

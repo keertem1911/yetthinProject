@@ -1,5 +1,5 @@
 package com.yetthin.web.dao;
-/*
+
 import java.io.ByteArrayInputStream;
 import java.io.UnsupportedEncodingException;
 
@@ -19,7 +19,7 @@ public class Opinionpost {
 		servIp="1.85.59.245";
 		oauIp="1.85.59.246";
 		maplist=new ArrayList<Map<String,String>>();
-		
+		 
 	}
 	
 	String servIp="";
@@ -44,7 +44,7 @@ public class Opinionpost {
 	}
 	public void getContent(){
 		JSONObject json=new JSONObject();
-	//	json.put("codes", codes);
+		json.put("codes", codes);
 		json.put("did", did);
 		try {
 				//第一个参数是App名,第二个参数是App密码,第三个参数是用户名,第四个参数是用户的密码, 
@@ -53,7 +53,7 @@ public class Opinionpost {
 				GdspClient.setOauthBaseURL("http://"+oauIp+"/gdsp-oauth/");	
 				//client.access();//这是个OAUTH认证,可以手动调用,默认访问第一个资源的时候会调用.
 				//第一个参数是资源的URI,第二个参数是参数,如参数q=[a:1;b:2]参数o=[time:desc]则写成OAuth.newList("q","[a:1;b:2]","o","[time:desc]")
-				String s=client.invoke(GdspClient.getGdspBaseURL()+"v1/public-opinion/topN", OAuth.newList("p","[currentPageNo:1;pageSize:30]","q","[codes:"+codes+"]"),
+				String s=client.invoke(GdspClient.getGdspBaseURL()+"v1/public-opinion/topN", OAuth.newList(),
 		    			"POST",new ByteArrayInputStream(json.toString().getBytes("utf-8")));
 		
 				strRtn=s;
@@ -148,29 +148,30 @@ public void orgniseRlt() {
 
 		Opinionpost op=new Opinionpost();
 
-		op.setCodes("000001,000002,600000,399001,000004,000005,000006,000007,000008,000009,000010,000011,000012,000014,000016,000017,000018,000019,000416,000421,000422,000423,000411");
 		op.setCodes("000001");
+		//op.setCodes("000001");
 		op.setDid("2");
 		op.getContent();
+	    System.out.println(op.strRtn);
 		op.orgniseRlt();
-		op.setDid("3");
-		op.getContent();
-		op.orgniseRlt();
-		op.setDid("4");
-		op.getContent();
-		op.orgniseRlt();
-		op.setDid("1");
-		//op.setCodes("600000,601288");
-		op.getContent();
-		System.out.println(op.strRtn);
-		op.orgniseRlt();	
+//		op.setDid("3");
+//		op.getContent();
+//		op.orgniseRlt();
+//		op.setDid("4");
+//		op.getContent();
+//		op.orgniseRlt();
+//		op.setDid("1");
+//		//op.setCodes("600000,601288");
+//		op.getContent();
+//		System.out.println(op.strRtn);
+//		op.orgniseRlt();	
 		
 	}
 
 }
-*/
-//package com.pb.demo;
 
+//package com.pb.demo;
+/*
 import net.oauth.OAuth;
 import net.p5w.gdsp.client.base.GdspClient;
 import net.p5w.gdsp.client.base.GdspException;
@@ -253,4 +254,4 @@ public class Opinionpost {
 			String s1 = t1.getYJNews("000001,000002,600000,399001,000004,000005,000006,000007,000008,000009,000010,000011,000012,000014,000016,000017,000018,000019,000416,000421,000422,000423,000411");
 			System.out.println("YJ:" + s1);
 	}
-}
+}*/

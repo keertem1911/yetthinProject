@@ -2,7 +2,7 @@ package util;
 
 import java.util.Date;
 
-public class BarData {
+public class BarData implements Comparable<BarData>{
 
 	public Contract contract;
 	public long dateTime;
@@ -20,9 +20,17 @@ public class BarData {
 	}
 	@Override
 	public String toString() {
-		return "BarData [contract=" + contract + ", dateTime=" + new Date(dateTime*1000) + ", open=" + open + ", high=" + high
+		return "BarData [ dateTime=" + new Date(dateTime*1000) + ", open=" + open + ", high=" + high
 				+ ", low=" + low + ", close=" + close + ", ystClose=" + ystClose + ", volume=" + volume + ", iTurover="
 				+ iTurover + ", matchItems=" + matchItems + "]";
+	}
+	@Override
+	public int compareTo(BarData o) {
+		// TODO Auto-generated method stub
+		if(o.dateTime>this.dateTime)
+			return 1;
+		else
+			return -1;
 	}
 
 }

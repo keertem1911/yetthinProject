@@ -267,7 +267,40 @@
 		 	<option value="0:0,1,2">沪深:涨幅,跌幅,换手率(0:0,1,2)</option>
 		  --></select>
 		<input type="submit" value="get" />
-	</form>
+	</form><br/>
+	<form action="${pageContext.request.contextPath }/jtdoa/getHistoryBar" method="post">
+		 <label>/jtdoa/getHistoryBar  K线历史接口 </label>
+		 <input name="symbol" type="text" value="002362.SZ" placeholder="股票代码"/>
+		 <label>K线条数 最少</label>
+		 <input type="text" name="barNum"  placeholder="K线条数 最少" /> 
+		
+		 <input type="text" name="currenyTime" value="2016:08:22  12:21:23" placeholder="时间格式2016:09:01 12:21:23"/>
+    	  <label>K线时间周期值</label>
+    	  <input type="text" name="cycNum" value="1" placeholder="K线时间周期 数字 (上面的单位)"/>
+		 <label>K线类型(单位)</label>
+		 <select name="barType" >
+		 	<option value="0">单位秒</option>
+		 	<option value="1">单位分</option>
+		 	 <option value="2">单位天</option>
+		 	<option value="3">单位周</option>
+		 	<option value="4">单位月</option>
+		 	<option value="5">单位季度</option>
+		 	<option value="6">单位半年</option>
+		 	<option value="7">单位年</option>
+ 		   </select>
+		<input type="submit" value="get" />
+	</form><br/>
+	<form action="${pageContext.request.contextPath }/jtdoa/getLevel1MarketNum" method="post">
+		 <label>/jtdoa/getLevel1MarketNum  level1更多 数量查询 </label>
+		 <label>属性代码 例0:1</label>
+		 <select name="marketCode" >
+		 	<option value="0:0">涨幅榜数量</option>
+		 	<option value="0:1">跌幅榜数量</option>
+		 	 <option value="0:2">换手率数量</option>
+ 		   </select>
+		<input type="submit" value="get" />
+	</form><br/>
+	
 	</div>
 	<div class="display">
 		<div class="level1"></div>

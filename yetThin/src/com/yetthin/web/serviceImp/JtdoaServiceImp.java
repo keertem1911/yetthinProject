@@ -1,7 +1,9 @@
 package com.yetthin.web.serviceImp;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -12,7 +14,6 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.mysql.fabric.xmlrpc.base.Array;
 import com.yetthin.web.commit.JtdoaValueMarket;
 import com.yetthin.web.commit.ValueFormatUtil;
 import com.yetthin.web.dao.JtdoaAPIDao;
@@ -20,13 +21,12 @@ import com.yetthin.web.dao.JtdoaDao;
 import com.yetthin.web.service.JtdoaService;
 
 import util.BarData;
-import util.Contract;
-import util.JHdboa;
-import util.TickData;
 import util.TickSort;
 
 @Service("JtdoaService")
 public class JtdoaServiceImp implements JtdoaValueMarket,ValueFormatUtil,JtdoaService{
+	 private SimpleDateFormat ALL_format =new SimpleDateFormat("yyyy:MM:dd HH:mm:ss");
+		
 	/**
 	 * 指数通用模板
 	 * @return
@@ -254,15 +254,12 @@ public class JtdoaServiceImp implements JtdoaValueMarket,ValueFormatUtil,JtdoaSe
 		switch(id){
 		case HU_SHEN: 
 			if(indexMarket){
-			String [] index= jtdoaDao.getStockIndex(marketIndex,0,6,false);
+			String [] index= jtdoaDao.getStockIndex(marketIndex,0,5,false);
 			subStr[1]=putIndex(index);// 指数解析
 			}else{
 				subStr[1]="{}";
 			}
 		 	Map<String,List<String>> marketS =jtdoaDao.getL1StockMarketData(HU_SHEN,begin,end,params,master);
-			//模拟数据
-		//	Map<String,Set<Tuple>> market =jtdoaDao.getL1StockMarketData(HU_SHEN,false);
-			
 			subStr[2]=putStockMarketData(marketS,master);
 			if((subStr[1].equals("")||subStr[1]==null)&&(subStr[2].equals("")||subStr[2]==null)){
 				subStr[0]="520";//
@@ -351,7 +348,7 @@ public class JtdoaServiceImp implements JtdoaValueMarket,ValueFormatUtil,JtdoaSe
 			sb.append("\""+subValue[LEVEL2_INDEX_SIDE1+10+i]+"\"");
 			sb.append("],");
 		}
-//		sb.append(",");
+ 
 		for (int i = 1; i < 6; i++) {
 			sb.append("\"buy"+i+"\":");
 			sb.append("[");
@@ -365,46 +362,10 @@ public class JtdoaServiceImp implements JtdoaValueMarket,ValueFormatUtil,JtdoaSe
 		value="{\"symbol\":\""+symbol+"\",\"name\":\""+subValue[NAME]+"\","+sb1.toString()+",\"level2\":"+value+"}";
 		return value;
 	}
-//	private static JHdboa getInstanceJhdboa(){
-//		 JHdboa jHdboa=new JHdboa();
-//	 	 jHdboa.HdboaInit(new BarData(),new Contract(),new TickData());
-//			
-//		jHdboa.HdboaConnect("222.173.29.210", 7008);
-//		while(!jHdboa.connected)
-//		{
-//			System.out.println("wait");
-//			try {
-//				Thread.sleep(50);
-//			} catch (InterruptedException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//		}
-//		return jHdboa; 
-//	}
+ 
 	@Override
 	public String [] getLevel2Detail(String symbol) {
-		// TODO Auto-generated method stub
-//		JHdboa jhdboa=getInstanceJhdboa();
-//		Contract contract=new Contract();
-//		contract.symbol="002362";
-//		contract.currency="CNY";
-//		contract.exchange="SZ";
-//		contract.secType="STK";
-//		String dateStr=yy_MM_ddformat.format(System.currentTimeMillis());
-//		long startTime=0l;
-//		try {
-//			Date date=ALL_format.parse(dateStr+" 09:00:01");
-//			startTime=date.getTime();
-//			jhdboa.HdboaReqHistoricalTickData(3, contract, (startTime-1000*60)/1000, System.currentTimeMillis()/1000,UseRTH.USE_RTH.ordinal());
-//			List<TickSort> lists=jhdboa.getLevel2Detail();
-//			Thread.sleep(1000*10);
-//			
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		return null;
+		 
 		List<TickSort> list=jtdoaDao.getLevel2Detail(symbol);
 		String [] subStr=new String[3];
 		String json =putLevel2Detail(list);
@@ -439,14 +400,7 @@ public class JtdoaServiceImp implements JtdoaValueMarket,ValueFormatUtil,JtdoaSe
 		}
 		
 		sb.append("}");
-		
-		
-		
-		
-		return sb.toString();
-
-	
-	
+	 	return sb.toString();
 	}
 	private String putIndexDetail(String []subValue){
 		StringBuffer sb1=new StringBuffer();
@@ -564,7 +518,101 @@ public class JtdoaServiceImp implements JtdoaValueMarket,ValueFormatUtil,JtdoaSe
 		subStr[1]=sb.toString();
 		return subStr;
 	}
-	
+	/**
+	 * 股票K线数据查询
+	 * @param barNum K线最小个数
+	 * @param currenyTime   当前时间
+	 * @param type     K线周期 数字
+	 * @param cycNum   周期基准
+	 * 例 :
+	 * @param barNum   50 
+	 * @param currenyTime   2016-08-22 11:30:11
+	 * @param type     0   
+	 * @param cycNum   3 
+	 * 注释: type 值取值 -> (0:SECOND,1:MINUTE,2:DAY,3:WEEK,4:MONTH,5:SEASON,6:HAFLYEAR,7:YEAR) 
+	 * 请求  2016-08-22 11:30:11之前 3秒为单位 的50 条 K线数据
+	 * 
+	 * @return  返回格式 
+	 * 		[
+	 * 		 {"open":"1.2","close":"21.2","height":"2.1","low":"1.2","time":"12221233221"},
+	 * 		 {"open":"1.2","close":"21.2","height":"2.1","low":"1.2","time":"12221233221"},
+	 * 		 {"open":"1.2","close":"21.2","height":"2.1","low":"1.2","time":"12221233221"},
+	 * 		 {"open":"1.2","close":"21.2","height":"2.1","low":"1.2","time":"12221233221"}
+	 * 		]
+	 */
+	@Override
+	public String[] getHistoryBar(String symbol,String barNum, String currenyTime, int type,int cycNum) {
+		// TODO Auto-generated method stub
+		String [] subStr= new String[3];
+		 SimpleDateFormat ALL_format =new SimpleDateFormat("yyyy:MM:dd HH:mm:ss");
+		 String month=currenyTime.split("[\\s]")[0];
+		 try {
+			long middleEnd = ALL_format.parse(month+" 11:00:00").getTime();
+			 long middleBegin = ALL_format.parse(month+" 13:00:00").getTime();
+			 long openTime = ALL_format.parse(month+" 09:00:00").getTime();
+			 long closeTime = ALL_format.parse(month+" 15:15:00").getTime();
+			 long currenyLong= ALL_format.parse(currenyTime).getTime();
+			 if(currenyLong>middleEnd&&currenyLong<middleBegin)
+				 currenyTime=ALL_format.format(new Date(middleEnd));
+			 else if(currenyLong>closeTime)
+				 currenyTime=ALL_format.format(new Date(closeTime));
+			 else if(currenyLong<openTime)
+				 currenyTime=ALL_format.format(new Date(closeTime-(1000*60*60*24)));
+				System.out.println(currenyTime); 
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		List<BarData> list = jtdoaDao.getHistoryBar(symbol,barNum,currenyTime,type,cycNum);
+		subStr[1]=putHistoryBar(list);
+		if(subStr[1]==null||"".equals(subStr[1].trim())){
+			subStr[0]="520";
+			subStr[2]="K线请求失败";
+			subStr[1]="{}";
+		}else{
+			subStr[0]="200";
+			subStr[2]="";
+		}
+		return subStr;
+	}
+	/**
+	 * K线  模板
+	 * {"时间":["最低","最高","开盘","收盘","成交量"],"时间":["最低","最高","开盘","收盘","成交量"]}
+	 * @param list
+	 * @return
+	 */
+	private String putHistoryBar(List<BarData> list) {
+		// TODO Auto-generated method stub
+		StringBuffer sb=new StringBuffer();
+		sb.append("{");
+		for (int i = 0; i < list.size(); i++) {
+			BarData tick=list.get(i);
+			sb.append("\""+ALL_format.format(tick.dateTime*1000)+"\":[");
+			sb.append("\""+Double.toString(tick.low)+"\",\""+Double.toString(tick.high)+"\","
+					+ "\""+Double.toString(tick.open)+"\",\""+Double.toString(tick.close)+"\","
+							+ "\""+Double.toString(tick.volume)+"\"]");
+			if(i<list.size()-1)
+				sb.append(",");
+		}
+		
+		sb.append("}");
+	 	return sb.toString();
+	}
+	@Override
+	public String[] getLevel1MarketNum(String marketCode) {
+		// TODO Auto-generated method stub
+		String [] subStr= new String[3];
+		subStr[0]="200";
+		subStr[2]="";
+		subStr[1]=jtdoaDao.getLevel1MarketNum(marketCode);
+		if(subStr[1]==null||"".equals(subStr[1].trim())){
+			subStr[0]="520";
+			subStr[2]="查询错误";
+			subStr[1]="\"0\"";
+		}
+		subStr[1]="{\"marketCode\":\""+marketCode+"\",\"num\":\""+subStr[1]+"\"}";
+		return subStr;
+	}
 }
 
 

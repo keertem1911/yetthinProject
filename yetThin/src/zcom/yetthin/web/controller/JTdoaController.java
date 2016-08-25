@@ -169,4 +169,30 @@ public class JTdoaController extends BaseController implements JtdoaValueMarket 
 		 String [] subStr=jtdoaService.getStockIndexList(begin,end,marketCode,master);
 		 return putReturnValue1(subStr[0], subStr[2], subStr[1]);
 	 }
+	
+	@ResponseBody
+	@RequestMapping(value="/getHistoryBar",method=RequestMethod.POST,
+	produces={"application/json;charset=utf-8"})
+	public String getHistoryBar(@RequestParam(value="symbol")String symbol,
+			@RequestParam(value="barNum")String barNum,
+			@RequestParam(value="currenyTime")String currenyTime,
+			@RequestParam(value="barType")int type,
+			@RequestParam(value="cycNum")int cycNum){
+		String [] subStr= jtdoaService.getHistoryBar(symbol,barNum,currenyTime,type,cycNum);
+		return putReturnValue1(subStr[0], subStr[2], subStr[1]);
+	}
+	@ResponseBody
+	@RequestMapping(value="getLevel1MarketNum",method=RequestMethod.POST,
+	produces={"application/json;charset=utf-8"})
+	public String getLevel1MarketNum(@RequestParam(value="marketCode")String marketCode){
+		String [] subStr= jtdoaService.getLevel1MarketNum(marketCode);
+		return putReturnValue1(subStr[0], subStr[2], subStr[1]);
+		
+	}
+	
+	
+	
+	
+	
+	
 }

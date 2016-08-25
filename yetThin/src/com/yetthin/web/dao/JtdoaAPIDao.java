@@ -105,13 +105,7 @@ public class JtdoaAPIDao implements
 			saveSortBalance(symbol.substring(2),symbol.substring(0, 2).toUpperCase(), subValue);
 			 }
 		 }catch (Exception e) {
-			 System.out.println("-----------errorrrr          redisValue = "+ redisValue);
-			 System.out.println("-----------errorrrr          redisValue = "+ symbol.substring(2)+"."+symbol.substring(0, 2).toUpperCase());
-			 System.out.println("-----------errorrrr          redisValue = "+ redisValue);
-			 System.out.println("-----------errorrrr          redisValue = "+ redisValue);
-			 System.out.println("-----------errorrrr          redisValue = "+ redisValue);
-			 System.out.println("-----------errorrrr          redisValue = "+ redisValue);
-			 // TODO: handle exception
+		 			 // TODO: handle exception
 			 e.printStackTrace();
 		 }
 		}
@@ -155,8 +149,6 @@ public class JtdoaAPIDao implements
 			String  subValue =values.get(i).split("&")[0];
 			jedis.set(sybmol, subValue); 
 		}
-		
 		RedisUtil.RealseJedis_M(jedis);
-		
 	}
 }

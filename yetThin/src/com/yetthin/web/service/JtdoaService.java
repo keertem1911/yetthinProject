@@ -12,4 +12,8 @@ public interface JtdoaService {
 
 	String[] getStockIndexList(int begin, int end, String marketCode, boolean master);
 
+	String[] getHistoryBar(String symbol,String barNum, String currenyTime, int type, int cycNum);
+
+	String[] getLevel1MarketNum(String marketCode);
+
 }

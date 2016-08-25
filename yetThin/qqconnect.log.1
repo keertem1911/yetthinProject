@@ -1,27 +1,214 @@
-0    DEBUG [2016-08-22 08:46:21]  accessor token:net.oauth.OAuthAccessor@127fbd60[consumer=net.oauth.OAuthConsumer@7e78d6c6,requestToken=<null>,accessToken=d869887abc0b43de02cbd1cd590995d1,tokenSecret=e594f789114108228c9b318989cc9cd8,properties={}]
-4    DEBUG [2016-08-22 08:46:21]  request:OAuthMessage(GET, http://1.85.59.245/gdsp/v1/000002/opinion-index, [oauth_token=d869887abc0b43de02cbd1cd590995d1, oauth_consumer_key=egoandroid, oauth_signature_method=HMAC-SHA1, oauth_timestamp=1471826781, oauth_nonce=952905807553543, oauth_version=1.0, oauth_signature=JktomlW%2F6xfGke%2Fcf6rcbR3WFnY%3D])
-105  DEBUG [2016-08-22 08:46:21]  responsebody:{"status":"505","info":"cn.com.cninfo.framework.app.intergration.dao.FrameworkDAOException: org.springframework.jdbc.UncategorizedSQLException: SqlMapClient operation; uncategorized SQLException for SQL []; SQL state [HY000]; error code [1449];   \n--- The error occurred in ibatis/sqlmap-opinion.xml.  \n--- The error occurred while applying a parameter map.  \n--- Check the opinion.findResultDetailByStockcode-InlineParameterMap.  \n--- Check the statement (query failed).  \n--- Cause: java.sql.SQLException: The user specified as a definer ('root'@'%') does not exist; nested exception is com.ibatis.common.jdbc.exception.NestedSQLException:   \n--- The error occurred in ibatis/sqlmap-opinion.xml.  \n--- The error occurred while applying a parameter map.  \n--- Check the opinion.findResultDetailByStockcode-InlineParameterMap.  \n--- Check the statement (query failed).  \n--- Cause: java.sql.SQLException: The user specified as a definer ('root'@'%') does not exist"}
-0    DEBUG [2016-08-22 08:47:51]  accessor token:net.oauth.OAuthAccessor@338fc07d[consumer=net.oauth.OAuthConsumer@18fe7fb0,requestToken=<null>,accessToken=ec0c60dafbdb097196126e5676a4255d,tokenSecret=0d1338a2fb4a8cfd2ef4b8abeb0796c9,properties={}]
-4    DEBUG [2016-08-22 08:47:51]  request:OAuthMessage(POST, http://1.85.59.245/gdsp/v1/opinion/cmsproxy, [oauth_token=ec0c60dafbdb097196126e5676a4255d, oauth_consumer_key=egoandroid, oauth_signature_method=HMAC-SHA1, oauth_timestamp=1471826871, oauth_nonce=952996356681860, oauth_version=1.0, oauth_signature=kYws2%2BekHKeokHz9eXy%2Fo0338UM%3D])
-368  DEBUG [2016-08-22 08:47:52]  responsebody:{"response":"success","antn_action_text":"http://192.168.65.132:18000/action\u003dquery\u0026text\u003ddreall\u0026databasematch\u003dvmonth_news\u0026sort\u003drelevance\u0026starttag\u003d\u003cfont color\u003d#FF6600\u003e\u0026highlight\u003dterms,summaryterms\u0026totalresults\u003dtrue\u0026print\u003dfields\u0026xmlmeta\u003dtrue\u0026maxresults\u003d10\u0026printfields\u003dpublishdate,sourceinfo,DRETITLE,COMBINEVALUE,AUTHOR,COMBINECOUNT,sourcename,auto_summary,summary,storetime,forward_count,AUTO_SUMMARY\u0026start\u003d1\u0026fieldtext\u003d((EQUAL{1,2,3}:CPP_STATE))+AND+RANGE{-7,.}:publishdate\u0026predict\u003dfalse\u0026matchallterms\u003dtrue\u0026timeoutms\u003d","as_q2":"","OTHER_MAP":{"db":"vnews","get_reply":"0","is_hl":"1","is_sum":"1","s_date":"-7","totalresults":"1"},"action":"QUERY","normalized_string":"dreall   db:vnews get_reply:0 is_hl:1 is_sum:1 s_date:-7  status:cpp totalresults:1","__KEY_DATAS":[{"summary":"酷开U50搭载64位A53架构CPU、六核GPU以及两核协处理器VPU配置，以及其全新的酷开系统5.0，重新设计的UI更加美观，风格指向流行的扁平化；在内容方面，酷开与腾讯视频合作，力求做到100%影视资源同步，当然少不了其电视派APP视频推送等多屏互动功能，...","region":"","person":"","weight":"96.00","cpp_is_neg2":"0","neu_ent":"","sitename":"","sitelogo":"","neg2_ent":"","neg1_ent":"","sourcename":"中关村在线","dredate":"1471817043","cpp_neu_ent":"","publishdate":"2016-08-18 05:22:00","org":"","drecontent":"","id":"1271058","author":"","sourceinfo":"和讯网","title":"50英寸4K 1999元！酷开U50电视火爆促销","cpp_neg1_ent":"","sitedomain":"","storetime":"1471816832","filetype":"","industry":"","combinecount":"1","sourceregion":"","links":"","sourcebigkind":"","combinevalue":"10222568","database":"VMONTH_NEWS","reference":"http%3A%2F%2Ftech.hexun.com%2F2016-08-18%2F185570753.html","cpp_neg2_ent":"","cpp_is_neg":"0","is_neg2":"0","create_time":"","zjj":"","is_neg":"0","samecount":"0"},{"summary":"世界知识产权组织专家认为，自首次发布全球创新指数以来，中国创新在全部领域有系统性改善。中国在创新指数排名中的上升，令外国专家也感到振奋。8月8日，中国国务院印发了《“十三五”国家科技创新规划》，对中国未来5年科技创新发展具有重要意义。中国不只是经济贸易大国，更...","region":"","person":"","weight":"96.00","cpp_is_neg2":"0","neu_ent":"","sitename":"","sitelogo":"","neg2_ent":"","neg1_ent":"","sourcename":"","dredate":"1471815882","cpp_neu_ent":"","publishdate":"2016-08-18 00:00:00","org":"","drecontent":"","id":"1270939","author":"","sourceinfo":"国际海事信息网","title":"中国首次跻身世界创新前25强","cpp_neg1_ent":"","sitedomain":"","storetime":"1471815424","filetype":"","industry":"","combinecount":"1","sourceregion":"","links":"","sourcebigkind":"","combinevalue":"10222336","database":"VMONTH_NEWS","reference":"http%3A%2F%2Fwww.simic.net.cn%2Fnews_show.php%3Fid%3D186016","cpp_neg2_ent":"","cpp_is_neg":"0","is_neg2":"0","create_time":"","zjj":"","is_neg":"0","samecount":"0"},{"summary":"根据《湘财证券股份有限公司融资融券可充抵保证金证券及标的证券管理细则》的相关规定，自2016年8月18日，对公司标的证券保证金比例调整如下：序号证券代码证券简称原融资保证金比例（%）现融资保证金比例(%)原融券保证金比例（%）现融券保证金比例(%)100004...","region":"","person":"","weight":"96.00","cpp_is_neg2":"0","neu_ent":"","sitename":"","sitelogo":"","neg2_ent":"","neg1_ent":"","sourcename":"湘财证券","dredate":"1471802769","cpp_neu_ent":"","publishdate":"2016-08-18 00:00:00","org":"","drecontent":"","id":"1269330","author":"","sourceinfo":"湘财证券","title":"关于标的证券保证金比例调整公告（20160818）","cpp_neg1_ent":"","sitedomain":"","storetime":"1471802240","filetype":"","industry":"","combinecount":"1","sourceregion":"","links":"","sourcebigkind":"","combinevalue":"10219346","database":"VMONTH_NEWS","reference":"http%3A%2F%2Fwww.xcsc.com%2Fservlet%2Fnews%2FArticle%3FarticleId%3D1003719212","cpp_neg2_ent":"","cpp_is_neg":"0","is_neg2":"0","create_time":"","zjj":"","is_neg":"0","samecount":"0"},{"summary":"根据《湘财证券股份有限公司融资融券可充抵保证金证券及标的证券管理细则》的相关规定，自2016年8月18日，我公司可充抵保证金证券名单减少6只证券，详情如下：1、因上交所调出可充抵保证金证券122091（11重机债）,我公司同步调出；2、因深交所调出可充抵保证金...","region":"","person":"","weight":"96.00","cpp_is_neg2":"0","neu_ent":"","sitename":"","sitelogo":"","neg2_ent":"","neg1_ent":"","sourcename":"湘财证券","dredate":"1471802769","cpp_neu_ent":"","publishdate":"2016-08-18 00:00:00","org":"","drecontent":"","id":"1269329","author":"","sourceinfo":"湘财证券","title":"关于减少6只可充抵保证金证券的公告（20160818）","cpp_neg1_ent":"","sitedomain":"","storetime":"1471802240","filetype":"","industry":"","combinecount":"1","sourceregion":"","links":"","sourcebigkind":"","combinevalue":"10219344","database":"VMONTH_NEWS","reference":"http%3A%2F%2Fwww.xcsc.com%2Fservlet%2Fnews%2FArticle%3FarticleId%3D1003719213","cpp_neg2_ent":"","cpp_is_neg":"0","is_neg2":"0","create_time":"","zjj":"","is_neg":"0","samecount":"0"},{"summary":"1、我公司发布了《关于湘财华夏幸福永清鼎泰园区1号集合资产管理计划资产管理合同按照证券期货经营机构私募资产管理业务运作管理暂行规定办理的公告》，请投资者认购本产品第4期前认真阅读此公告并进行确认。湘财证券股份有限公司风险提示：湘财证券依照诚实信用、勤勉尽职的原...","region":"","person":"","weight":"96.00","cpp_is_neg2":"0","neu_ent":"","sitename":"","sitelogo":"","neg2_ent":"","neg1_ent":"","sourcename":"湘财证券","dredate":"1471802769","cpp_neu_ent":"","publishdate":"2016-08-16 00:00:00","org":"","drecontent":"","id":"1269328","author":"","sourceinfo":"湘财证券","title":"关于湘财华夏幸福永清鼎泰园区1号集合资产管理计划3个月期限产品第3期结束暨第4期发行的公告","cpp_neg1_ent":"","sitedomain":"","storetime":"1471802240","filetype":"","industry":"","combinecount":"1","sourceregion":"","links":"","sourcebigkind":"","combinevalue":"10219339","database":"VMONTH_NEWS","reference":"http%3A%2F%2Fwww.xcsc.com%2Fservlet%2Fnews%2FArticle%3FarticleId%3D1003702393","cpp_neg2_ent":"","cpp_is_neg":"0","is_neg2":"0","create_time":"","zjj":"","is_neg":"0","samecount":"0"},{"summary":"湘财证券天业股份集合资产管理计划（以下简称本集合计划）于2016年8月15日开始发售，并于2016年8月15日结束推广活动。按单位份额面值人民币1.00元计算，本集合计划推广期共参与199,000,000.00份，已分别计入相应委托人的集合计划账户。推广期认购...","region":"","person":"","weight":"96.00","cpp_is_neg2":"0","neu_ent":"","sitename":"","sitelogo":"","neg2_ent":"","neg1_ent":"","sourcename":"湘财证券","dredate":"1471802769","cpp_neu_ent":"","publishdate":"2016-08-17 00:00:00","org":"","drecontent":"","id":"1269327","author":"","sourceinfo":"湘财证券","title":"湘财证券天业股份集合资产管理计划成立公告","cpp_neg1_ent":"","sitedomain":"","storetime":"1471802240","filetype":"","industry":"","combinecount":"1","sourceregion":"","links":"","sourcebigkind":"","combinevalue":"10219333","database":"VMONTH_NEWS","reference":"http%3A%2F%2Fwww.xcsc.com%2Fservlet%2Fnews%2FArticle%3FarticleId%3D1003712276","cpp_neg2_ent":"","cpp_is_neg":"0","is_neg2":"0","create_time":"","zjj":"","is_neg":"0","samecount":"0"},{"summary":"海尔施生物医药股份有限公司（以下简称“发行人”）首次公开发行股票总量不超过6,900万股人民币普通股（A股）（以下简称“本次发行”）的申请已获得中国证券监督管理委员会证监许可[2016]1755号文核准。附公告链接:http://static.sse.com....","region":"","person":"","weight":"96.00","cpp_is_neg2":"0","neu_ent":"","sitename":"","sitelogo":"","neg2_ent":"","neg1_ent":"","sourcename":"湘财证券","dredate":"1471802769","cpp_neu_ent":"","publishdate":"2016-08-17 00:00:00","org":"","drecontent":"","id":"1269321","author":"","sourceinfo":"湘财证券","title":"关于“海尔施”(601206）暂缓首次公开发行股票的提示性公告","cpp_neg1_ent":"","sitedomain":"","storetime":"1471802240","filetype":"","industry":"","combinecount":"1","sourceregion":"","links":"","sourcebigkind":"","combinevalue":"10219328","database":"VMONTH_NEWS","reference":"http%3A%2F%2Fwww.xcsc.com%2Fservlet%2Fnews%2FArticle%3FarticleId%3D1003712904","cpp_neg2_ent":"","cpp_is_neg":"0","is_neg2":"0","create_time":"","zjj":"","is_neg":"0","samecount":"0"},{"summary":"该批期权合约将于2016年8月24日到期并行权，合约代码到期后将被注销，请投资者密切关注上述合约的交易及行权事项，及时做好相关交易或行权准备（请特别关注价格波动，义务仓投资者注意保证金变化通知并提前准备足额保证金）。最后交易日、行权日、到期日湘财证券股份有限公...","region":"","person":"","weight":"96.00","cpp_is_neg2":"0","neu_ent":"","sitename":"","sitelogo":"","neg2_ent":"","neg1_ent":"","sourcename":"湘财证券","dredate":"1471802769","cpp_neu_ent":"","publishdate":"2016-08-17 00:00:00","org":"","drecontent":"","id":"1269320","author":"","sourceinfo":"湘财证券","title":"关于2016年8月到期期权合约最后交易日、行权日、到期日的特别提醒公告","cpp_neg1_ent":"","sitedomain":"","storetime":"1471802240","filetype":"","industry":"","combinecount":"1","sourceregion":"","links":"","sourcebigkind":"","combinevalue":"10219322","database":"VMONTH_NEWS","reference":"http%3A%2F%2Fwww.xcsc.com%2Fservlet%2Fnews%2FArticle%3FarticleId%3D1003710658","cpp_neg2_ent":"","cpp_is_neg":"0","is_neg2":"0","create_time":"","zjj":"","is_neg":"0","samecount":"0"},{"summary":"具体联系方式如下：联系电话：010-59013948、010-59013949联系人：资本市场部4发行人：江苏花王园艺股份有限公司保荐人（主承销商）：中泰证券股份有限公司2016年8月16日附表：网下投资者初步配售明细配售对象申购数量获配数量序号投资者名称配售...","region":"","person":"","weight":"96.00","cpp_is_neg2":"0","neu_ent":"","sitename":"","sitelogo":"","neg2_ent":"","neg1_ent":"","sourcename":"湘财证券","dredate":"1471822934","cpp_neu_ent":"","publishdate":"2016-08-16 00:00:00","org":"","drecontent":"","id":"1269312","author":"","sourceinfo":"湘财证券","title":"花王股份(603007)首次公开发行股票网下发行初步配售结果及网上中签结果公告","cpp_neg1_ent":"","sitedomain":"","storetime":"1471802240","filetype":"","industry":"","combinecount":"1","sourceregion":"","links":"","sourcebigkind":"","combinevalue":"10219318","database":"VMONTH_NEWS","reference":"http%3A%2F%2Fwww.xcsc.com%2Fservlet%2Fnews%2FArticle%3FarticleId%3D1003698017","cpp_neg2_ent":"","cpp_is_neg":"0","is_neg2":"0","create_time":"","zjj":"","is_neg":"0","samecount":"0"},{"summary":"2006年11月第一只QDII产品试点，至今恰逢10周年。过去，最惧怕对外宣布要发行的产品是QDII，然而从2015年开始，众多投资者主动寻求QDII产品的信息。在众多基金公司中，易方达旗下QDII指数基金产品布局最全面。不过，诸多接受采访的基金从业人士坦言，...","region":"","person":"","weight":"96.00","cpp_is_neg2":"0","neu_ent":"","sitename":"","sitelogo":"","neg2_ent":"","neg1_ent":"","sourcename":"上海证券报","dredate":"1471802769","cpp_neu_ent":"","publishdate":"2016-08-17 00:00:00","org":"","drecontent":"","id":"1269270","author":"","sourceinfo":"湘财证券","title":"QDII资产荒下再度火爆 近半产品暂停申购","cpp_neg1_ent":"","sitedomain":"","storetime":"1471802240","filetype":"","industry":"","combinecount":"1","sourceregion":"","links":"","sourcebigkind":"","combinevalue":"10219281","database":"VMONTH_NEWS","reference":"http%3A%2F%2Fwww.xcsc.com%2Fservlet%2Fnews%2FArticle%3FarticleId%3D1003718939","cpp_neg2_ent":"","cpp_is_neg":"0","is_neg2":"0","create_time":"","zjj":"","is_neg":"0","samecount":"0"}],"__elapse":"146","NORMALIZE_AS_Q":"dreall   status:cpp","count_num":"50913","NORMALIZED_MAP":{"as_q":"dreall  ","db":"vnews","get_reply":"0","is_hl":"1","is_sum":"1","s_date":"-7","samecount":"false","status":"cpp","totalresults":"1"}}
-0    DEBUG [2016-08-22 08:50:07]  accessor token:net.oauth.OAuthAccessor@19fc0d6c[consumer=net.oauth.OAuthConsumer@2f1b03b7,requestToken=<null>,accessToken=7bc29efc0227aa5b9191bd730c099b11,tokenSecret=433a0bc958c3673371e1b2db8c951121,properties={}]
-6    DEBUG [2016-08-22 08:50:07]  request:OAuthMessage(POST, http://1.85.59.245/gdsp/v1/public-opinion/topN, [p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D, q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D, oauth_token=7bc29efc0227aa5b9191bd730c099b11, oauth_consumer_key=egoandroid, oauth_signature_method=HMAC-SHA1, oauth_timestamp=1471827007, oauth_nonce=953131992469040, oauth_version=1.0, oauth_signature=iK%2Ba%2FSlxCUBM83d%2BhNt9kVFFvGU%3D])
-5148 ERROR [2016-08-22 08:50:12]  OAuthException
+288939 INFO  [2016-08-25 15:11:16]  重新从OAUTH服务器获取TOKEN.次数:0
+289026 DEBUG [2016-08-25 15:11:16]  accessor token:net.oauth.OAuthAccessor@20ca0c9[consumer=net.oauth.OAuthConsumer@b0fed2c,requestToken=<null>,accessToken=54e8ab2f3da0237b0581f122fff627b7,tokenSecret=4f9652c09951e20947c409d790106b08,properties={}]
+289027 DEBUG [2016-08-25 15:11:16]  request:OAuthMessage(POST, http://1.85.59.245/gdsp/v1/public-opinion/topN, [p=%5BcurrentPageNo%3A1%3BpageSize%3A30%5D, q=%5Bcodes%3A000001%5D, oauth_token=54e8ab2f3da0237b0581f122fff627b7, oauth_consumer_key=egoandroid, oauth_signature_method=HMAC-SHA1, oauth_timestamp=1472109076, oauth_nonce=1235194055944761, oauth_version=1.0, oauth_signature=CHPD%2FtVJzCzQ8CMzck1smcMcdVw%3D])
+294081 ERROR [2016-08-25 15:11:21]  OAuthException
 net.oauth.OAuthProblemException: HTTP/1.1 401 Unauthorized
-URL: http://1.85.59.245/gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D&q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D
-oauth_signature base string: POST&http%3A%2F%2F1.85.59.245%2Fgdsp%2Fv1%2Fpublic-opinion%2FtopN&oauth_consumer_key%3Degoandroid%26oauth_nonce%3D953131992469040%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1471827007%26oauth_token%3D7bc29efc0227aa5b9191bd730c099b11%26oauth_version%3D1.0%26p%3D%255BcurrentPageNo%253A1%253BpageSize%253A3000%255D%26q%3D%255Bcodes%253A000001%252C000002%252C600000%252C399001%252C000004%252C000005%252C000006%252C000007%252C000008%252C000009%252C000010%252C000011%252C000012%252C000014%252C000016%252C000017%252C000018%252C000019%252C000416%252C000421%252C000422%252C000423%252C000411%255D
+URL: http://1.85.59.245/gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A30%5D&q=%5Bcodes%3A000001%5D
+oauth_signature base string: POST&http%3A%2F%2F1.85.59.245%2Fgdsp%2Fv1%2Fpublic-opinion%2FtopN&oauth_consumer_key%3Degoandroid%26oauth_nonce%3D1235194055944761%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1472109076%26oauth_token%3D54e8ab2f3da0237b0581f122fff627b7%26oauth_version%3D1.0%26p%3D%255BcurrentPageNo%253A1%253BpageSize%253A30%255D%26q%3D%255Bcodes%253A000001%255D
 >>>>>>>> HTTP request:
-POST /gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D&q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D
+POST /gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A30%5D&q=%5Bcodes%3A000001%5D
 Content-Type: application/json;charset=utf-8
-Authorization: OAuth oauth_token="7bc29efc0227aa5b9191bd730c099b11", oauth_consumer_key="egoandroid", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1471827007", oauth_nonce="953131992469040", oauth_version="1.0", oauth_signature="iK%2Ba%2FSlxCUBM83d%2BhNt9kVFFvGU%3D"
+Authorization: OAuth oauth_token="54e8ab2f3da0237b0581f122fff627b7", oauth_consumer_key="egoandroid", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1472109076", oauth_nonce="1235194055944761", oauth_version="1.0", oauth_signature="CHPD%2FtVJzCzQ8CMzck1smcMcdVw%3D"
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: 1.85.59.245
+Cookie: $Version=0; WEB=20111124; $Path=/
+Content-Length: 0
+
+
+<<<<<<<< HTTP response:
+HTTP/1.1 401 Unauthorized
+Date: Thu, 25 Aug 2016 07:10:57 GMT
+Server: Apache/2.0.64 (Unix) DAV/2 mod_jk/1.2.31
+Content-Length: 0
+Content-Type: text/plain
+
+
+	at net.oauth.client.OAuthResponseMessage.toOAuthProblemException(OAuthResponseMessage.java:83)
+	at net.oauth.client.OAuthClient.invoke(OAuthClient.java:308)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:136)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at com.yetthin.web.dao.Opinionpost.getContent(Opinionpost.java:56)
+	at com.yetthin.web.dao.Opinionpost.main(Opinionpost.java:154)
+294282 INFO  [2016-08-25 15:11:21]  重新从OAUTH服务器获取TOKEN.次数:0
+294374 DEBUG [2016-08-25 15:11:21]  accessor token:net.oauth.OAuthAccessor@9f6bfca[consumer=net.oauth.OAuthConsumer@26a96be2,requestToken=<null>,accessToken=966912803ae72ccbe86a348c6af30ea1,tokenSecret=37cd3ecd7e7e1196237e5739fb9f2982,properties={}]
+294375 DEBUG [2016-08-25 15:11:21]  request:OAuthMessage(POST, http://1.85.59.245/gdsp/v1/public-opinion/topN, [p=%5BcurrentPageNo%3A1%3BpageSize%3A30%5D, q=%5Bcodes%3A000001%5D, oauth_token=966912803ae72ccbe86a348c6af30ea1, oauth_consumer_key=egoandroid, oauth_signature_method=HMAC-SHA1, oauth_timestamp=1472109081, oauth_nonce=1235199403744050, oauth_version=1.0, oauth_signature=iVJcVjwg6Ednud0%2F%2FqYrsWOkeAU%3D])
+0    ERROR [2016-08-25 15:22:39]  
+java.net.NoRouteToHostException: No route to host: connect
+	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:339)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:200)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:182)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:579)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.commons.httpclient.protocol.ReflectionSocketFactory.createSocket(ReflectionSocketFactory.java:140)
+	at org.apache.commons.httpclient.protocol.DefaultProtocolSocketFactory.createSocket(DefaultProtocolSocketFactory.java:125)
+	at org.apache.commons.httpclient.HttpConnection.open(HttpConnection.java:707)
+	at org.apache.commons.httpclient.MultiThreadedHttpConnectionManager$HttpConnectionAdapter.open(MultiThreadedHttpConnectionManager.java:1361)
+	at org.apache.commons.httpclient.HttpMethodDirector.executeWithRetry(HttpMethodDirector.java:387)
+	at org.apache.commons.httpclient.HttpMethodDirector.executeMethod(HttpMethodDirector.java:171)
+	at org.apache.commons.httpclient.HttpClient.executeMethod(HttpClient.java:397)
+	at org.apache.commons.httpclient.HttpClient.executeMethod(HttpClient.java:323)
+	at net.oauth.client.httpclient3.HttpClient3.execute(HttpClient3.java:97)
+	at net.oauth.client.OAuthClient.access(OAuthClient.java:325)
+	at net.oauth.client.OAuthClient.invoke(OAuthClient.java:306)
+	at net.oauth.client.OAuthClient.invoke(OAuthClient.java:262)
+	at net.oauth.client.OAuthClient.getAccessToken(OAuthClient.java:231)
+	at net.p5w.gdsp.client.base.OauthCommonClient.getAccess(OauthCommonClient.java:81)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:121)
+	at com.yetthin.web.dao.Cmspost.getContent(Cmspost.java:152)
+	at com.yetthin.web.dao.Cmspost.main(Cmspost.java:214)
+0    ERROR [2016-08-25 15:23:09]  
+java.net.NoRouteToHostException: No route to host: connect
+	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:339)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:200)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:182)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:579)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.commons.httpclient.protocol.ReflectionSocketFactory.createSocket(ReflectionSocketFactory.java:140)
+	at org.apache.commons.httpclient.protocol.DefaultProtocolSocketFactory.createSocket(DefaultProtocolSocketFactory.java:125)
+	at org.apache.commons.httpclient.HttpConnection.open(HttpConnection.java:707)
+	at org.apache.commons.httpclient.MultiThreadedHttpConnectionManager$HttpConnectionAdapter.open(MultiThreadedHttpConnectionManager.java:1361)
+	at org.apache.commons.httpclient.HttpMethodDirector.executeWithRetry(HttpMethodDirector.java:387)
+	at org.apache.commons.httpclient.HttpMethodDirector.executeMethod(HttpMethodDirector.java:171)
+	at org.apache.commons.httpclient.HttpClient.executeMethod(HttpClient.java:397)
+	at org.apache.commons.httpclient.HttpClient.executeMethod(HttpClient.java:323)
+	at net.oauth.client.httpclient3.HttpClient3.execute(HttpClient3.java:97)
+	at net.oauth.client.OAuthClient.access(OAuthClient.java:325)
+	at net.oauth.client.OAuthClient.invoke(OAuthClient.java:306)
+	at net.oauth.client.OAuthClient.invoke(OAuthClient.java:262)
+	at net.oauth.client.OAuthClient.getAccessToken(OAuthClient.java:231)
+	at net.p5w.gdsp.client.base.OauthCommonClient.getAccess(OauthCommonClient.java:81)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:121)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:99)
+	at com.yetthin.web.dao.Opinionget.main(Opinionget.java:160)
+0    INFO  [2016-08-25 15:25:02]  I/O exception (java.net.ConnectException) caught when processing request: Connection timed out: connect
+0    INFO  [2016-08-25 15:25:02]  Retrying request
+121  DEBUG [2016-08-25 15:25:02]  accessor token:net.oauth.OAuthAccessor@6a7c49e3[consumer=net.oauth.OAuthConsumer@151d2dc5,requestToken=<null>,accessToken=eee261a8a18de98113701401e226c363,tokenSecret=fae3c9b7d0566393808d5f2f83e64f4b,properties={}]
+124  DEBUG [2016-08-25 15:25:02]  request:OAuthMessage(GET, http://1.85.59.245/gdsp/v1/000002/opinion-index, [oauth_token=eee261a8a18de98113701401e226c363, oauth_consumer_key=egoandroid, oauth_signature_method=HMAC-SHA1, oauth_timestamp=1472109902, oauth_nonce=1236019683104293, oauth_version=1.0, oauth_signature=Vqq5AaMNGcgfqOgJ0s40%2BLhBY6E%3D])
+225  DEBUG [2016-08-25 15:25:02]  responsebody:{"status":"505","info":"cn.com.cninfo.framework.app.intergration.dao.FrameworkDAOException: org.springframework.jdbc.UncategorizedSQLException: SqlMapClient operation; uncategorized SQLException for SQL []; SQL state [HY000]; error code [1449];   \n--- The error occurred in ibatis/sqlmap-opinion.xml.  \n--- The error occurred while applying a parameter map.  \n--- Check the opinion.findResultDetailByStockcode-InlineParameterMap.  \n--- Check the statement (query failed).  \n--- Cause: java.sql.SQLException: The user specified as a definer ('root'@'%') does not exist; nested exception is com.ibatis.common.jdbc.exception.NestedSQLException:   \n--- The error occurred in ibatis/sqlmap-opinion.xml.  \n--- The error occurred while applying a parameter map.  \n--- Check the opinion.findResultDetailByStockcode-InlineParameterMap.  \n--- Check the statement (query failed).  \n--- Cause: java.sql.SQLException: The user specified as a definer ('root'@'%') does not exist"}
+0    DEBUG [2016-08-25 15:25:37]  accessor token:net.oauth.OAuthAccessor@3f6f1ea2[consumer=net.oauth.OAuthConsumer@2c210805,requestToken=<null>,accessToken=9459f5613615ed53054eefe22fe3d740,tokenSecret=0a9751382d1360b33e9c48b374b84c60,properties={}]
+4    DEBUG [2016-08-25 15:25:37]  request:OAuthMessage(GET, http://1.85.59.245/gdsp/v1/000002/opinion-index, [oauth_token=9459f5613615ed53054eefe22fe3d740, oauth_consumer_key=egoandroid, oauth_signature_method=HMAC-SHA1, oauth_timestamp=1472109937, oauth_nonce=1236054795820610, oauth_version=1.0, oauth_signature=GZonIv6%2BlYaxny14TfDnKkSTRfk%3D])
+98   DEBUG [2016-08-25 15:25:37]  responsebody:{"status":"505","info":"cn.com.cninfo.framework.app.intergration.dao.FrameworkDAOException: org.springframework.jdbc.UncategorizedSQLException: SqlMapClient operation; uncategorized SQLException for SQL []; SQL state [HY000]; error code [1449];   \n--- The error occurred in ibatis/sqlmap-opinion.xml.  \n--- The error occurred while applying a parameter map.  \n--- Check the opinion.findResultDetailByStockcode-InlineParameterMap.  \n--- Check the statement (query failed).  \n--- Cause: java.sql.SQLException: The user specified as a definer ('root'@'%') does not exist; nested exception is com.ibatis.common.jdbc.exception.NestedSQLException:   \n--- The error occurred in ibatis/sqlmap-opinion.xml.  \n--- The error occurred while applying a parameter map.  \n--- Check the opinion.findResultDetailByStockcode-InlineParameterMap.  \n--- Check the statement (query failed).  \n--- Cause: java.sql.SQLException: The user specified as a definer ('root'@'%') does not exist"}
+0    DEBUG [2016-08-25 15:26:06]  accessor token:net.oauth.OAuthAccessor@4c4f7cf7[consumer=net.oauth.OAuthConsumer@42a0e4a6,requestToken=<null>,accessToken=0bc7bbf5ba72cd14d5830acf645f9f05,tokenSecret=34f905926a932de649d37904c9adcc1d,properties={}]
+5    DEBUG [2016-08-25 15:26:06]  request:OAuthMessage(GET, http://1.85.59.245/gdsp/v1/opinion/cms, [q=%5Bpara_name%3Aorg%3Bpara_value%3A000001%2C000002%3Bcate%3Aall%3Bs_date%3A2016-08-18%2015%3A26%3A05%3Bfcount%3A1%3Bstatus%3Acpp%3B%5D, p=%5BcurrentPageNo%3A1%3BpageSize%3A10%5D, o=%5Bpublishdate%3Adecreasing%5D, oauth_token=0bc7bbf5ba72cd14d5830acf645f9f05, oauth_consumer_key=egoandroid, oauth_signature_method=HMAC-SHA1, oauth_timestamp=1472109966, oauth_nonce=1236083948382535, oauth_version=1.0, oauth_signature=B%2FxZ2a5pf7raRw0FWQfrzxxwqms%3D])
+1084 DEBUG [2016-08-25 15:26:07]  responsebody:{"status":"200","items":[{"author":"","combinevalue":"10463423","content":"","coprsource":"财华智库网","cppNeg1Ent":"","cppNeg2Ent":"","cppNeuEnt":"","documentUrl":"","entity":"","id":"http://www.finet.com.cn/news/caihuaxianggang/2016/0825/3472365.html","imgUrl":"","publishedAt":"2016-08-25 15:04:00","reprintTimes":0,"source":"财华网","stkType":"stock","stkcode":"000001,000002","stkname":"","storeTime":"1472109440","summary":"有投资者在全景网互动平台向万科A(000002-CN)求证，请问公司管理层去年停牌前集体精准减持公司股份，涉嫌内幕交易吗。万科A回应，不存在管理层停牌前集体减持的情况。更多精彩内容请登录财华智库网(http://www.finet.com.cn)财华香港网(h...","title":"万科A(000002-CN)否认管理层去年停牌前集体减持股票","url":"http://www.finet.com.cn/news/caihuaxianggang/2016/0825/3472365.html","ztFlag":"","zxType":""},{"author":"","combinevalue":"10462762","content":"","coprsource":"挖贝网","cppNeg1Ent":"","cppNeg2Ent":"","cppNeuEnt":"","documentUrl":"","entity":"","id":"http://www.wabei.cn/p/201608/1702301.html","imgUrl":"","publishedAt":"2016-08-25 14:53:00","reprintTimes":1,"source":"挖贝网","stkType":"stock","stkcode":"000001,000002","stkname":"","storeTime":"1472108928","summary":"挖贝网讯8月25日消息，近日树业环保科技股份有限公司（证券简称：树业环保证券代码：430462）股东林树光向平安银行股份有限公司广州分行质押1100万股，用于公司向银行贷款提供担保。据了解，董事长兼总经理林树光为树业环保控股股东，持有树业环保3326.60万股...","title":"树业环保股东质押1100万股 用于贷款担保","url":"http://www.wabei.cn/p/201608/1702301.html","ztFlag":"","zxType":""},{"author":"","combinevalue":"10462362","content":"","coprsource":"齐鲁壹点","cppNeg1Ent":"","cppNeg2Ent":"","cppNeuEnt":"","documentUrl":"","entity":"","id":"http://news.ifeng.com/a/20160825/49837836_0.shtml","imgUrl":"","publishedAt":"2016-08-25 14:26:00","reprintTimes":0,"source":"凤凰网","stkType":"stock","stkcode":"000001,000002","stkname":"","storeTime":"1472108544","summary":"作为济南城区的老工业区，药山片区的房价一直不温不火。济南万科房地产开发有限公司总经理黄运林认为，2015年是天桥区药山片区的崛起之年，万科所开发的项目万科金色悦城的亮相，拉开了药山片区开发建设的大幕。三箭地产、力高地产和荣盛发展等地产品牌也先后进驻药山片区。药...","title":"五大房企扎堆洼地效应初显 药山片区将成楼市稳定器","url":"http://news.ifeng.com/a/20160825/49837836_0.shtml","ztFlag":"","zxType":""},{"author":"","combinevalue":"10460432","content":"","coprsource":"","cppNeg1Ent":"","cppNeg2Ent":"","cppNeuEnt":"","documentUrl":"","entity":"","id":"http://finance.sina.com.cn/stock/hyyj/2016-08-25/doc-ifxvixer7229173.shtml","imgUrl":"","publishedAt":"2016-08-25 13:52:00","reprintTimes":0,"source":"新浪财经","stkType":"stock","stkcode":"000001,000002","stkname":"","storeTime":"1472106880","summary":"多家机构将此轮地产股行情归因于“资产荒”的推动。兴业证券甚至在近日断言，资产荒有望引爆地产股超级行情。国海证券认为，地产股的启动背后还包含另一层面的资产荒——即拥有存量优质土地资产的地产企业极为稀缺，当前板块的催化核心逻辑即为资产重估。兴业证券认为，银行、保险...","title":"机构：银行保险等三方面资产荒将推动地产股继续上行","url":"http://finance.sina.com.cn/stock/hyyj/2016-08-25/doc-ifxvixer7229173.shtml","ztFlag":"","zxType":""},{"author":"","combinevalue":"10458466","content":"","coprsource":"","cppNeg1Ent":"","cppNeg2Ent":"","cppNeuEnt":"","documentUrl":"","entity":"","id":"http://ty.house.qq.com/a/20160825/027014.htm","imgUrl":"","publishedAt":"2016-08-25 13:37:59","reprintTimes":0,"source":"腾讯","stkType":"stock","stkcode":"000001,000002","stkname":"","storeTime":"1472104320","summary":"事实上，早在省职工医学院原址楼面地价之王出炉之前，省城今年结束的土地拍卖会上就已多次出现高价地块。5月24日，太原市国土局对原华北广电学院旧校区地块进行公开拍卖，最终太原万科以10.2亿元力压竞争对手中海地产，获得地块，该地块楼面地价逼近4000元/平方米。","title":"太原新地王诞生！楼面地价8075元/平方米","url":"http://ty.house.qq.com/a/20160825/027014.htm","ztFlag":"","zxType":""},{"author":"","combinevalue":"10457871","content":"","coprsource":"中国投资网","cppNeg1Ent":"","cppNeg2Ent":"","cppNeuEnt":"","documentUrl":"","entity":"","id":"http://forex.stockstar.com/FB2016082500001425.shtml","imgUrl":"","publishedAt":"2016-08-25 13:35:36","reprintTimes":0,"source":"证券之星","stkType":"stock","stkcode":"000001,000002","stkname":"","storeTime":"1472103552","summary":"这不，近期在国内最大的互联网理财平台陆金所上已经上线了一款挂钩苹果股票产品，获得平台首页推荐，据称最高预期年化收益可达12.5%。整体而言，这种“固定收益+浮动收益”的收益形式，比较适合看好苹果股票未来一段时期在区间内小幅震荡的投资人，而且在多方行情下会获得相...","title":"上陆金所理财 玩转苹果股票 博最高12.5%预期年化收益","url":"http://forex.stockstar.com/FB2016082500001425.shtml","ztFlag":"","zxType":""},{"author":"","combinevalue":"10460000","content":"","coprsource":"","cppNeg1Ent":"","cppNeg2Ent":"","cppNeuEnt":"","documentUrl":"","entity":"","id":"http://tech.china.com.cn/it/20160825/240044.shtml","imgUrl":"","publishedAt":"2016-08-25 13:24:00","reprintTimes":0,"source":"中国网","stkType":"stock","stkcode":"000001,000002","stkname":"","storeTime":"1472106240","summary":"华为控股有限公司荣登榜首，山东魏桥挤进前三甲，联想连退三位排至第四。据榜单，华为控股有限公司以营收总额3590.09亿元排名第一，苏宁控股、山东魏桥集团分别以3502.88亿、3332.38亿分列二三位。2016中国民营500强企业营业收入总额达161568....","title":"华为超联想登中国民企500强榜首 总营收3590亿元","url":"http://tech.china.com.cn/it/20160825/240044.shtml","ztFlag":"","zxType":""},{"author":"","combinevalue":"10459245","content":"","coprsource":"和讯网","cppNeg1Ent":"","cppNeg2Ent":"","cppNeuEnt":"","documentUrl":"","entity":"","id":"http://gz.house.163.com/16/0825/13/BVAO3PDE00873C6D.html","imgUrl":"","publishedAt":"2016-08-25 13:21:34","reprintTimes":1,"source":"网易房产","stkType":"stock","stkcode":"000001,000002","stkname":"","storeTime":"1472105344","summary":"和讯房产消息，8月24日，万科A公布2016年半年度报告和摘要的更正。公告称，此前公告的2016年6月末股东总数填写有误。公告显示，公司2016年6月末股东总数由此前披露的“479，264户（其中A股479，246户，H股18户）”更正为“272，027户（其...","title":"万科A：更正半年报披露股东户数","url":"http://gz.house.163.com/16/0825/13/BVAO3PDE00873C6D.html","ztFlag":"","zxType":""},{"author":"作者:随心","combinevalue":"10457179","content":"","coprsource":"快科技","cppNeg1Ent":"","cppNeg2Ent":"","cppNeuEnt":"","documentUrl":"","entity":"","id":"http://www.techweb.com.cn/it/2016-08-25/2380203.shtml","imgUrl":"","publishedAt":"2016-08-25 13:16:19","reprintTimes":0,"source":"TechWeb","stkType":"stock","stkcode":"000001,000002","stkname":"","storeTime":"1472102272","summary":"今日，全国工商联发布了“2016中国民营企业500强”榜单，华为超越联想成为榜首，苏宁和山东魏桥分获第二、第三名。其中华为投资控股有限公司以3950.09亿元的年营业收入成为500强榜首。前十五名分别是：华为、苏宁、魏桥、联想、正威国际、大连万达、中国华信、恒...","title":"华为年收入3900亿 超越联想问鼎中国民营企业500强","url":"http://www.techweb.com.cn/it/2016-08-25/2380203.shtml","ztFlag":"","zxType":""},{"author":"作者:麻晓超","combinevalue":"10456746","content":"","coprsource":"TechWeb.com.cn","cppNeg1Ent":"","cppNeg2Ent":"","cppNeuEnt":"","documentUrl":"","entity":"","id":"http://www.techweb.com.cn/internet/2016-08-25/2380201.shtml","imgUrl":"","publishedAt":"2016-08-25 13:03:29","reprintTimes":2,"source":"TechWeb","stkType":"stock","stkcode":"000001,000002","stkname":"","storeTime":"1472101376","summary":"【TechWeb报道】8月25日消息，在行业整顿未结束的背景下，互联网金融公司今年扎堆宣传公司融资进展，自称由20多家上市公司联手打造的鹏金所最新宣布，获A股房企万科3亿元投资，后者成其第一大股东。鹏金所称，万科入股鹏金所，既是万科发力互联网金融的重要举措，更...","title":"万科3亿元投资P2P平台鹏金所 成第一大股东","url":"http://www.techweb.com.cn/internet/2016-08-25/2380201.shtml","ztFlag":"","zxType":""}],"page":{"currentPageNo":1,"pageSize":10,"totalCount":802}}
+1148 DEBUG [2016-08-25 15:26:07]  accessor token:net.oauth.OAuthAccessor@3c5cc430[consumer=net.oauth.OAuthConsumer@6e544a45,requestToken=<null>,accessToken=9185e9a1328dccdec9b7baa456a642d4,tokenSecret=80971591c7f18bba9e391fc265eb91ba,properties={}]
+1151 DEBUG [2016-08-25 15:26:07]  request:OAuthMessage(GET, http://1.85.59.245/gdsp/v1/opinion/cms, [q=%5Bpara_name%3Aorg%3Bpara_value%3A000001%2C000002%3Bcate%3Aall%3Bs_date%3A2016-08-18%2015%3A26%3A05%3Bfcount%3A1%3Bstatus%3Acpp%3B%5D, p=%5BcurrentPageNo%3A2%3BpageSize%3A10%5D, o=%5Bpublishdate%3Adecreasing%5D, oauth_token=9185e9a1328dccdec9b7baa456a642d4, oauth_consumer_key=egoandroid, oauth_signature_method=HMAC-SHA1, oauth_timestamp=1472109967, oauth_nonce=1236085095868216, oauth_version=1.0, oauth_signature=dOcfgSV25cOBoeEmnlnaYpjlXbA%3D])
+2927 DEBUG [2016-08-25 15:26:09]  responsebody:{"status":"200","items":[{"author":"","combinevalue":"10457980","content":"","coprsource":"搜狐焦点网","cppNeg1Ent":"","cppNeg2Ent":"","cppNeuEnt":"","documentUrl":"","entity":"","id":"http://news.focus.cn/xa/2016-08-25/11099105.html","imgUrl":"","publishedAt":"2016-08-25 13:03:00","reprintTimes":0,"source":"搜狐焦点网","stkType":"stock","stkcode":"000001,000002","stkname":"","storeTime":"1472103808","summary":"万科“曲线”拿地扩张版图从万科新地城到万科金域曲江、万科城、万科金域华府、万科金色悦城、万科大明宫、万科金域东郡、万科幸福里、万科高新华府、万科金域国际、万科东方传奇、万科城市之光、万科蜜柚、中国铁建万科翡翠国际、万科翡翠天誉，盘盘勘称区域标杆。2016年2月...","title":"8月西安土地市场上演“圈地运动” 万科再扩版图","url":"http://news.focus.cn/xa/2016-08-25/11099105.html","ztFlag":"","zxType":""},{"author":"","combinevalue":"10458104","content":"","coprsource":"搜狐焦点网","cppNeg1Ent":"","cppNeg2Ent":"","cppNeuEnt":"","documentUrl":"","entity":"","id":"http://news.focus.cn/sjz/2016-08-25/11099104.html","imgUrl":"","publishedAt":"2016-08-25 13:01:00","reprintTimes":0,"source":"搜狐焦点网","stkType":"stock","stkcode":"000001,000002","stkname":"","storeTime":"1472103936","summary":"NO.1海尔U-home牵手蘑菇公寓。将智能家居“入住”蘑菇公寓，开启公寓与智能家居的结合。NO.2新派公寓。公寓市场前景又有多大呢。公寓出租市场的崛起与我们息息相关公寓出租市场所带来的财富风暴公寓市场前景一片大好，该怎么办？恒大精装公寓优势惹人注目最新精装公...","title":"公寓市场成新热门 隐藏的秘密你看懂了吗","url":"http://news.focus.cn/sjz/2016-08-25/11099104.html","ztFlag":"","zxType":""},{"author":"","combinevalue":"10457204","content":"","coprsource":"","cppNeg1Ent":"","cppNeg2Ent":"","cppNeuEnt":"","documentUrl":"","entity":"","id":"http://laoyaoba.com/ss6/html/27/n-612427.html","imgUrl":"","publishedAt":"2016-08-25 12:55:00","reprintTimes":1,"source":"老杳吧","stkType":"stock","stkcode":"000001,000002","stkname":"","storeTime":"1472102272","summary":"今日，全国工商联发布了“2016中国民营企业500强”榜单，华为超越联想成为榜首，苏宁和山东魏桥分获第二、第三名。其中华为投资控股有限公司以3950.09亿元的年营业收入成为500强榜首。去年的冠军——联想控股股份有限公司，则以3098.26亿元退居第四位。2...","title":"中国民营企业500强出炉：华为超联想夺冠","url":"http://laoyaoba.com/ss6/html/27/n-612427.html","ztFlag":"","zxType":""},{"author":"","combinevalue":"10456086","content":"","coprsource":"","cppNeg1Ent":"","cppNeg2Ent":"","cppNeuEnt":"","documentUrl":"","entity":"","id":"http://www.c114.net/news/16/a969322.html","imgUrl":"","publishedAt":"2016-08-25 12:27:00","reprintTimes":1,"source":"中国通信网","stkType":"stock","stkcode":"000001,000002","stkname":"","storeTime":"1472100480","summary":"全国政协副主席、全国工商联主席王钦敏出席并致辞。据榜单显示，华为控股以营收总额3590.09亿排名第一，苏宁控股、山东魏桥集团分别以3502.88亿、3332.38亿分列二三位。本次民企500强入围门槛为101.75亿，比去年的95.09亿元增加6.66亿元，...","title":"中国民营企业500强榜单揭晓：华为苏宁山东魏桥位列前三","url":"http://www.c114.net/news/16/a969322.html","ztFlag":"","zxType":""},{"author":"","combinevalue":"10452366","content":"","coprsource":"中国房地产金融","cppNeg1Ent":"","cppNeg2Ent":"","cppNeuEnt":"","documentUrl":"","entity":"","id":"http://www.cbngold.com/newsdetial.aspx?id=5801","imgUrl":"","publishedAt":"2016-08-25 11:35:00","reprintTimes":0,"source":"中国房地产金融服务","stkType":"stock","stkcode":"000001,000002","stkname":"","storeTime":"1472096896","summary":"日前，国家统计局发布了“2016年1-7月全国房地产开发投资和销售情况”。","title":"乾立基金：地产多项指标出现回落，各方资本“逆势”搅动地产股","url":"http://www.cbngold.com/newsdetial.aspx?id=5801","ztFlag":"","zxType":""},{"author":"","combinevalue":"10452557","content":"","coprsource":"新浪财经","cppNeg1Ent":"","cppNeg2Ent":"","cppNeuEnt":"","documentUrl":"","entity":"","id":"http://www.caijingol.com/money/news/2016-08-25/47254.htm","imgUrl":"","publishedAt":"2016-08-25 11:33:05","reprintTimes":0,"source":"中国财经在线","stkType":"stock","stkcode":"000001,000002","stkname":"","storeTime":"1472097024","summary":"新浪财经汇总8月24日在售高收益银行理财产品：今日在售预期年化收益率在6%（含）以上的银行理财产品共3款。平安银行发行的“平安财富-私行专享和盈资产管理类2016年229期人民币理财产品(承接90保本)”预期年化收益率最高，为6%。","title":"8月24日在售高收益银行理财产品一览","url":"http://www.caijingol.com/money/news/2016-08-25/47254.htm","ztFlag":"","zxType":""},{"author":"","combinevalue":"10453538","content":"","coprsource":"","cppNeg1Ent":"","cppNeg2Ent":"","cppNeuEnt":"","documentUrl":"","entity":"","id":"http://www.100ec.cn/detail--6353979.html","imgUrl":"","publishedAt":"2016-08-25 11:32:00","reprintTimes":0,"source":"中国电子商务研究中心","stkType":"stock","stkcode":"000001,000002","stkname":"","storeTime":"1472097664","summary":"账户分类直销银行功能补全虽然建设直销银行的意图之一是打破中小银行商业经营的地域限制，但此前直销银行的体验并不便利。中小银行一直是直销银行平台建设的主力，而由于起步早，多家银行直销银行平台的差异化建设也已初步成型。平安银行直销银行“平安橙子银行”的差异化体现在客...","title":"直销银行的差异化时代加速到来","url":"http://www.100ec.cn/detail--6353979.html","ztFlag":"","zxType":""},{"author":"","combinevalue":"10452676","content":"","coprsource":"全景网","cppNeg1Ent":"","cppNeg2Ent":"","cppNeuEnt":"","documentUrl":"","entity":"","id":"http://www.p5w.net/kuaixun/201608/t20160825_1564196.htm","imgUrl":"","publishedAt":"2016-08-25 11:29:00","reprintTimes":4,"source":"全景网","stkType":"stock","stkcode":"000001,000002","stkname":"","storeTime":"1472097024","summary":"全景网8月25日讯 有投资者在全景网互动平台向万科A（000002）求证，请问公司管理层去年停牌前集体精准减持公司股份，涉嫌内幕交易吗？万科A回应，不存在管理层停牌前集体减持的情况。","title":"万科A否认管理层去年停牌前集体减持股票","url":"http://www.p5w.net/kuaixun/201608/t20160825_1564196.htm","ztFlag":"","zxType":""},{"author":"","combinevalue":"10452965","content":"","coprsource":"第一财经","cppNeg1Ent":"","cppNeg2Ent":"","cppNeuEnt":"","documentUrl":"","entity":"","id":"http://finance.jrj.com.cn/2016/08/25112521368224.shtml","imgUrl":"","publishedAt":"2016-08-25 11:25:33","reprintTimes":4,"source":"金融界","stkType":"stock","stkcode":"000001,000002","stkname":"","storeTime":"1472097280","summary":"8月25日，全国工商联发布2016中国民营企业500强榜单，华为投资控股有限公司以3950.09亿元的年营业收入成为500强榜首。去年的冠军联想控股股份有限公司，则以3098.26亿元退居第四位。联想、正威国际、大连万达、中国华信、恒力集团、江苏沙钢、万科，分...","title":"2016中国民企500强榜单发布 华为夺冠联想退居第四","url":"http://finance.jrj.com.cn/2016/08/25112521368224.shtml","ztFlag":"","zxType":""},{"author":"","combinevalue":"10454293","content":"","coprsource":"","cppNeg1Ent":"","cppNeg2Ent":"","cppNeuEnt":"","documentUrl":"","entity":"","id":"http://stock.591hx.com/article/2016-08-25/0001013227s.shtml","imgUrl":"","publishedAt":"2016-08-25 11:19:00","reprintTimes":0,"source":"华讯财经网","stkType":"stock","stkcode":"000001,000002","stkname":"","storeTime":"1472098176","summary":"隐秘万丰系曝光：万科第二平台浮现。隐秘万丰系曝光：万科第二平台浮现。关于万丰公司和万科有什么关联。这一问题，万科董秘朱旭回应称上海万丰与深圳市万科企业股资产管理中心（下称企业股中心）相互100%持股。▲图片来源：万科网络沟通会截图万科A7月股东人数暴增一倍","title":"王石现身亚布力！万科第二平台浮出水面？散户或成接盘侠","url":"http://stock.591hx.com/article/2016-08-25/0001013227s.shtml","ztFlag":"","zxType":""}],"page":{"currentPageNo":2,"pageSize":10,"totalCount":802}}
+0    DEBUG [2016-08-25 15:27:26]  accessor token:net.oauth.OAuthAccessor@78a84ac2[consumer=net.oauth.OAuthConsumer@261ae209,requestToken=<null>,accessToken=06bf4359e03b7a6fd5a2f504ea0e8d8f,tokenSecret=d3464b5c28f32f5d7ddfec4556c13018,properties={}]
+5    DEBUG [2016-08-25 15:27:26]  request:OAuthMessage(POST, http://1.85.59.245/gdsp/v1/public-opinion/topN, [p=%5BcurrentPageNo%3A1%3BpageSize%3A30%5D, q=%5Bcodes%3A000001%5D, oauth_token=06bf4359e03b7a6fd5a2f504ea0e8d8f, oauth_consumer_key=egoandroid, oauth_signature_method=HMAC-SHA1, oauth_timestamp=1472110046, oauth_nonce=1236164456299945, oauth_version=1.0, oauth_signature=U%2ByL1IpzHUO4rkBospB03vCSJzQ%3D])
+0    DEBUG [2016-08-25 15:27:30]  accessor token:net.oauth.OAuthAccessor@4cdc1165[consumer=net.oauth.OAuthConsumer@2977cbf7,requestToken=<null>,accessToken=89a56be52c04e3835221677dd1bcd5e3,tokenSecret=d48e1a8d07e6806557f2f6b76aa8f9ca,properties={}]
+4    DEBUG [2016-08-25 15:27:31]  request:OAuthMessage(POST, http://1.85.59.245/gdsp/v1/public-opinion/topN, [p=%5BcurrentPageNo%3A1%3BpageSize%3A30%5D, q=%5Bcodes%3A000001%5D, oauth_token=89a56be52c04e3835221677dd1bcd5e3, oauth_consumer_key=egoandroid, oauth_signature_method=HMAC-SHA1, oauth_timestamp=1472110050, oauth_nonce=1236168489114604, oauth_version=1.0, oauth_signature=fOE1VLo8MI1sQ%2FfFD6veY0KE%2BrU%3D])
+5108 ERROR [2016-08-25 15:27:32]  OAuthException
+net.oauth.OAuthProblemException: HTTP/1.1 500 Internal Server Error
+URL: http://1.85.59.245/gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A30%5D&q=%5Bcodes%3A000001%5D
+oauth_signature base string: POST&http%3A%2F%2F1.85.59.245%2Fgdsp%2Fv1%2Fpublic-opinion%2FtopN&oauth_consumer_key%3Degoandroid%26oauth_nonce%3D1236164456299945%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1472110046%26oauth_token%3D06bf4359e03b7a6fd5a2f504ea0e8d8f%26oauth_version%3D1.0%26p%3D%255BcurrentPageNo%253A1%253BpageSize%253A30%255D%26q%3D%255Bcodes%253A000001%255D
+>>>>>>>> HTTP request:
+POST /gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A30%5D&q=%5Bcodes%3A000001%5D
+Content-Type: application/json;charset=utf-8
+Authorization: OAuth oauth_token="06bf4359e03b7a6fd5a2f504ea0e8d8f", oauth_consumer_key="egoandroid", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1472110046", oauth_nonce="1236164456299945", oauth_version="1.0", oauth_signature="U%2ByL1IpzHUO4rkBospB03vCSJzQ%3D"
 User-Agent: Jakarta Commons-HttpClient/3.1
 Host: 1.85.59.245
 Content-Length: 11
 
-{"did":"4"}
+{"did":"2"}
+<<<<<<<< HTTP response:
+HTTP/1.1 500 Internal Server Error
+Date: Thu, 25 Aug 2016 07:27:08 GMT
+Server: Apache/2.0.64 (Unix) DAV/2 mod_jk/1.2.31
+Content-Length: 2079
+Connection: close
+Content-Type: text/html;charset=utf-8
+Set-Cookie: WEB=20111124; path=/
+
+<html><head><title>Apache Tomcat/6.0.37 - Error report</title><style><!--H1 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:22px;} H2 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:16px;} H3 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:14px;} BODY {font-family:Tahoma,Arial,sans-serif;color:black;background-color:white;} B {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;} P {font-family:Tahoma,Arial,sans-serif;background:white;color:black;font-size:12px;}A {color : black;}A.name {color : black;}HR {color : #525D76;}--></style> </head><body><h1>HTTP Status 500 - java.lang.NullPointerException</h1><HR size="1" noshade="noshade"><p><b>type</b> Exception report</p><p><b>message</b> <u>java.lang.NullPointerException</u></p><p><b>description</b> <u>The server encountered an internal error that prevented it from fulfilling this request.</u></p><p><b>exception</b> <pre>org.jboss.res ...
+	at net.oauth.client.OAuthResponseMessage.toOAuthProblemException(OAuthResponseMessage.java:83)
+	at net.oauth.client.OAuthClient.invoke(OAuthClient.java:308)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:136)
+	at com.yetthin.web.dao.Opinionpost.getContent(Opinionpost.java:56)
+	at com.yetthin.web.dao.Opinionpost.main(Opinionpost.java:154)
+5106 ERROR [2016-08-25 15:27:36]  OAuthException
+net.oauth.OAuthProblemException: HTTP/1.1 401 Unauthorized
+URL: http://1.85.59.245/gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A30%5D&q=%5Bcodes%3A000001%5D
+oauth_signature base string: POST&http%3A%2F%2F1.85.59.245%2Fgdsp%2Fv1%2Fpublic-opinion%2FtopN&oauth_consumer_key%3Degoandroid%26oauth_nonce%3D1236168489114604%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1472110050%26oauth_token%3D89a56be52c04e3835221677dd1bcd5e3%26oauth_version%3D1.0%26p%3D%255BcurrentPageNo%253A1%253BpageSize%253A30%255D%26q%3D%255Bcodes%253A000001%255D
+>>>>>>>> HTTP request:
+POST /gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A30%5D&q=%5Bcodes%3A000001%5D
+Content-Type: application/json;charset=utf-8
+Authorization: OAuth oauth_token="89a56be52c04e3835221677dd1bcd5e3", oauth_consumer_key="egoandroid", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1472110050", oauth_nonce="1236168489114604", oauth_version="1.0", oauth_signature="fOE1VLo8MI1sQ%2FfFD6veY0KE%2BrU%3D"
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: 1.85.59.245
+Content-Length: 11
+
+{"did":"2"}
 <<<<<<<< HTTP response:
 HTTP/1.1 401 Unauthorized
-Date: Mon, 22 Aug 2016 00:49:52 GMT
+Date: Thu, 25 Aug 2016 07:27:12 GMT
 Server: Apache/2.0.64 (Unix) DAV/2 mod_jk/1.2.31
 Content-Length: 0
 Content-Type: text/plain
@@ -31,19 +218,19 @@ Set-Cookie: WEB=20111124; path=/
 	at net.oauth.client.OAuthResponseMessage.toOAuthProblemException(OAuthResponseMessage.java:83)
 	at net.oauth.client.OAuthClient.invoke(OAuthClient.java:308)
 	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:136)
-	at com.util.gdsp.Opinionpost.getYJNews(Opinionpost.java:237)
-	at com.util.gdsp.Opinionpost.main(Opinionpost.java:253)
-5352 INFO  [2016-08-22 08:50:12]  重新从OAUTH服务器获取TOKEN.次数:0
-5449 DEBUG [2016-08-22 08:50:12]  accessor token:net.oauth.OAuthAccessor@67579bd8[consumer=net.oauth.OAuthConsumer@28b8b6e9,requestToken=<null>,accessToken=8b8ce9881fe58bbcb885040af89d57a6,tokenSecret=e6a3b684c57fae22457ea8dac1ba3785,properties={}]
-5452 DEBUG [2016-08-22 08:50:12]  request:OAuthMessage(POST, http://1.85.59.245/gdsp/v1/public-opinion/topN, [p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D, q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D, oauth_token=8b8ce9881fe58bbcb885040af89d57a6, oauth_consumer_key=egoandroid, oauth_signature_method=HMAC-SHA1, oauth_timestamp=1471827012, oauth_nonce=953137440694386, oauth_version=1.0, oauth_signature=DwqToDpC1wTrzJgsEmwGkT2n02g%3D])
-10517 ERROR [2016-08-22 08:50:18]  OAuthException
+	at com.yetthin.web.dao.Opinionpost.getContent(Opinionpost.java:56)
+	at com.yetthin.web.dao.Opinionpost.main(Opinionpost.java:154)
+5308 INFO  [2016-08-25 15:27:36]  重新从OAUTH服务器获取TOKEN.次数:0
+5411 DEBUG [2016-08-25 15:27:36]  accessor token:net.oauth.OAuthAccessor@3681a4db[consumer=net.oauth.OAuthConsumer@796e41d1,requestToken=<null>,accessToken=9fe35ce7da1deaba42bcbd50b0be81e1,tokenSecret=f94ec67b77c8c76d7f8b2fb461a50a62,properties={}]
+5413 DEBUG [2016-08-25 15:27:36]  request:OAuthMessage(POST, http://1.85.59.245/gdsp/v1/public-opinion/topN, [p=%5BcurrentPageNo%3A1%3BpageSize%3A30%5D, q=%5Bcodes%3A000001%5D, oauth_token=9fe35ce7da1deaba42bcbd50b0be81e1, oauth_consumer_key=egoandroid, oauth_signature_method=HMAC-SHA1, oauth_timestamp=1472110056, oauth_nonce=1236173898714214, oauth_version=1.0, oauth_signature=1eZ1BFfF7gGfHBFnYNyo2Ec8LHA%3D])
+10477 ERROR [2016-08-25 15:27:41]  OAuthException
 net.oauth.OAuthProblemException: HTTP/1.1 401 Unauthorized
-URL: http://1.85.59.245/gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D&q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D
-oauth_signature base string: POST&http%3A%2F%2F1.85.59.245%2Fgdsp%2Fv1%2Fpublic-opinion%2FtopN&oauth_consumer_key%3Degoandroid%26oauth_nonce%3D953137440694386%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1471827012%26oauth_token%3D8b8ce9881fe58bbcb885040af89d57a6%26oauth_version%3D1.0%26p%3D%255BcurrentPageNo%253A1%253BpageSize%253A3000%255D%26q%3D%255Bcodes%253A000001%252C000002%252C600000%252C399001%252C000004%252C000005%252C000006%252C000007%252C000008%252C000009%252C000010%252C000011%252C000012%252C000014%252C000016%252C000017%252C000018%252C000019%252C000416%252C000421%252C000422%252C000423%252C000411%255D
+URL: http://1.85.59.245/gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A30%5D&q=%5Bcodes%3A000001%5D
+oauth_signature base string: POST&http%3A%2F%2F1.85.59.245%2Fgdsp%2Fv1%2Fpublic-opinion%2FtopN&oauth_consumer_key%3Degoandroid%26oauth_nonce%3D1236173898714214%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1472110056%26oauth_token%3D9fe35ce7da1deaba42bcbd50b0be81e1%26oauth_version%3D1.0%26p%3D%255BcurrentPageNo%253A1%253BpageSize%253A30%255D%26q%3D%255Bcodes%253A000001%255D
 >>>>>>>> HTTP request:
-POST /gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D&q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D
+POST /gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A30%5D&q=%5Bcodes%3A000001%5D
 Content-Type: application/json;charset=utf-8
-Authorization: OAuth oauth_token="8b8ce9881fe58bbcb885040af89d57a6", oauth_consumer_key="egoandroid", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1471827012", oauth_nonce="953137440694386", oauth_version="1.0", oauth_signature="DwqToDpC1wTrzJgsEmwGkT2n02g%3D"
+Authorization: OAuth oauth_token="9fe35ce7da1deaba42bcbd50b0be81e1", oauth_consumer_key="egoandroid", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1472110056", oauth_nonce="1236173898714214", oauth_version="1.0", oauth_signature="1eZ1BFfF7gGfHBFnYNyo2Ec8LHA%3D"
 User-Agent: Jakarta Commons-HttpClient/3.1
 Host: 1.85.59.245
 Cookie: $Version=0; WEB=20111124; $Path=/
@@ -52,7 +239,7 @@ Content-Length: 0
 
 <<<<<<<< HTTP response:
 HTTP/1.1 401 Unauthorized
-Date: Mon, 22 Aug 2016 00:49:58 GMT
+Date: Thu, 25 Aug 2016 07:27:17 GMT
 Server: Apache/2.0.64 (Unix) DAV/2 mod_jk/1.2.31
 Content-Length: 0
 Content-Type: text/plain
@@ -62,19 +249,19 @@ Content-Type: text/plain
 	at net.oauth.client.OAuthClient.invoke(OAuthClient.java:308)
 	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:136)
 	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at com.util.gdsp.Opinionpost.getYJNews(Opinionpost.java:237)
-	at com.util.gdsp.Opinionpost.main(Opinionpost.java:253)
-10719 INFO  [2016-08-22 08:50:18]  重新从OAUTH服务器获取TOKEN.次数:0
-10810 DEBUG [2016-08-22 08:50:18]  accessor token:net.oauth.OAuthAccessor@4ceda5b[consumer=net.oauth.OAuthConsumer@28618ed4,requestToken=<null>,accessToken=f8bf5eeb57eeae2655e8ff3eb1d53280,tokenSecret=e76663972cae2b978f73d3fb4b71e1f4,properties={}]
-10813 DEBUG [2016-08-22 08:50:18]  request:OAuthMessage(POST, http://1.85.59.245/gdsp/v1/public-opinion/topN, [p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D, q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D, oauth_token=f8bf5eeb57eeae2655e8ff3eb1d53280, oauth_consumer_key=egoandroid, oauth_signature_method=HMAC-SHA1, oauth_timestamp=1471827018, oauth_nonce=953142802111594, oauth_version=1.0, oauth_signature=FNpfTX9O%2FE8D2G%2FVdNsy%2FBa%2B6nY%3D])
-15876 ERROR [2016-08-22 08:50:23]  OAuthException
+	at com.yetthin.web.dao.Opinionpost.getContent(Opinionpost.java:56)
+	at com.yetthin.web.dao.Opinionpost.main(Opinionpost.java:154)
+10678 INFO  [2016-08-25 15:27:41]  重新从OAUTH服务器获取TOKEN.次数:0
+10769 DEBUG [2016-08-25 15:27:41]  accessor token:net.oauth.OAuthAccessor@5176f87c[consumer=net.oauth.OAuthConsumer@59b3beac,requestToken=<null>,accessToken=184c07c9add17dbcbfdcc841fbe031a7,tokenSecret=430d7c67cef78d7b2cbcf5d3163049ad,properties={}]
+10772 DEBUG [2016-08-25 15:27:41]  request:OAuthMessage(POST, http://1.85.59.245/gdsp/v1/public-opinion/topN, [p=%5BcurrentPageNo%3A1%3BpageSize%3A30%5D, q=%5Bcodes%3A000001%5D, oauth_token=184c07c9add17dbcbfdcc841fbe031a7, oauth_consumer_key=egoandroid, oauth_signature_method=HMAC-SHA1, oauth_timestamp=1472110061, oauth_nonce=1236179257661736, oauth_version=1.0, oauth_signature=G9baNGgX6lN97clsdFaaVkg8RTM%3D])
+15834 ERROR [2016-08-25 15:27:46]  OAuthException
 net.oauth.OAuthProblemException: HTTP/1.1 401 Unauthorized
-URL: http://1.85.59.245/gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D&q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D
-oauth_signature base string: POST&http%3A%2F%2F1.85.59.245%2Fgdsp%2Fv1%2Fpublic-opinion%2FtopN&oauth_consumer_key%3Degoandroid%26oauth_nonce%3D953142802111594%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1471827018%26oauth_token%3Df8bf5eeb57eeae2655e8ff3eb1d53280%26oauth_version%3D1.0%26p%3D%255BcurrentPageNo%253A1%253BpageSize%253A3000%255D%26q%3D%255Bcodes%253A000001%252C000002%252C600000%252C399001%252C000004%252C000005%252C000006%252C000007%252C000008%252C000009%252C000010%252C000011%252C000012%252C000014%252C000016%252C000017%252C000018%252C000019%252C000416%252C000421%252C000422%252C000423%252C000411%255D
+URL: http://1.85.59.245/gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A30%5D&q=%5Bcodes%3A000001%5D
+oauth_signature base string: POST&http%3A%2F%2F1.85.59.245%2Fgdsp%2Fv1%2Fpublic-opinion%2FtopN&oauth_consumer_key%3Degoandroid%26oauth_nonce%3D1236179257661736%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1472110061%26oauth_token%3D184c07c9add17dbcbfdcc841fbe031a7%26oauth_version%3D1.0%26p%3D%255BcurrentPageNo%253A1%253BpageSize%253A30%255D%26q%3D%255Bcodes%253A000001%255D
 >>>>>>>> HTTP request:
-POST /gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D&q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D
+POST /gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A30%5D&q=%5Bcodes%3A000001%5D
 Content-Type: application/json;charset=utf-8
-Authorization: OAuth oauth_token="f8bf5eeb57eeae2655e8ff3eb1d53280", oauth_consumer_key="egoandroid", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1471827018", oauth_nonce="953142802111594", oauth_version="1.0", oauth_signature="FNpfTX9O%2FE8D2G%2FVdNsy%2FBa%2B6nY%3D"
+Authorization: OAuth oauth_token="184c07c9add17dbcbfdcc841fbe031a7", oauth_consumer_key="egoandroid", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1472110061", oauth_nonce="1236179257661736", oauth_version="1.0", oauth_signature="G9baNGgX6lN97clsdFaaVkg8RTM%3D"
 User-Agent: Jakarta Commons-HttpClient/3.1
 Host: 1.85.59.245
 Cookie: $Version=0; WEB=20111124; $Path=/
@@ -83,7 +270,7 @@ Content-Length: 0
 
 <<<<<<<< HTTP response:
 HTTP/1.1 401 Unauthorized
-Date: Mon, 22 Aug 2016 00:50:03 GMT
+Date: Thu, 25 Aug 2016 07:27:22 GMT
 Server: Apache/2.0.64 (Unix) DAV/2 mod_jk/1.2.31
 Content-Length: 0
 Content-Type: text/plain
@@ -94,51 +281,19 @@ Content-Type: text/plain
 	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:136)
 	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
 	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at com.util.gdsp.Opinionpost.getYJNews(Opinionpost.java:237)
-	at com.util.gdsp.Opinionpost.main(Opinionpost.java:253)
-16076 INFO  [2016-08-22 08:50:23]  重新从OAUTH服务器获取TOKEN.次数:0
-16166 DEBUG [2016-08-22 08:50:23]  accessor token:net.oauth.OAuthAccessor@48bb4521[consumer=net.oauth.OAuthConsumer@7eb79ed4,requestToken=<null>,accessToken=6b3d9c8964a1bfba00f1aa4f14bb575c,tokenSecret=16882cb843af666188d7833d0749e699,properties={}]
-16168 DEBUG [2016-08-22 08:50:23]  request:OAuthMessage(POST, http://1.85.59.245/gdsp/v1/public-opinion/topN, [p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D, q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D, oauth_token=6b3d9c8964a1bfba00f1aa4f14bb575c, oauth_consumer_key=egoandroid, oauth_signature_method=HMAC-SHA1, oauth_timestamp=1471827023, oauth_nonce=953148156494431, oauth_version=1.0, oauth_signature=2qCfSFQmZQaMs%2FKm9UuolEWyOR8%3D])
-1    DEBUG [2016-08-22 08:50:31]  accessor token:net.oauth.OAuthAccessor@467d8ddd[consumer=net.oauth.OAuthConsumer@d0619b7,requestToken=<null>,accessToken=541c8e7365a42b1e8f653d6c362d0962,tokenSecret=a4da40647577436863c96afcb1d86e4a,properties={}]
-6    DEBUG [2016-08-22 08:50:31]  request:OAuthMessage(POST, http://1.85.59.245/gdsp/v1/public-opinion/topN, [p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D, q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D, oauth_token=541c8e7365a42b1e8f653d6c362d0962, oauth_consumer_key=egoandroid, oauth_signature_method=HMAC-SHA1, oauth_timestamp=1471827031, oauth_nonce=953155573254164, oauth_version=1.0, oauth_signature=G5KkBXmKlAH4tAnjUD4UicyyoOU%3D])
-5108 ERROR [2016-08-22 08:50:36]  OAuthException
+	at com.yetthin.web.dao.Opinionpost.getContent(Opinionpost.java:56)
+	at com.yetthin.web.dao.Opinionpost.main(Opinionpost.java:154)
+16035 INFO  [2016-08-25 15:27:47]  重新从OAUTH服务器获取TOKEN.次数:0
+16141 DEBUG [2016-08-25 15:27:47]  accessor token:net.oauth.OAuthAccessor@5afe1192[consumer=net.oauth.OAuthConsumer@5e33b6e9,requestToken=<null>,accessToken=38b6849305eec4235b008f69f79389ed,tokenSecret=a021c817dfcd0bc31da73ae5145bf014,properties={}]
+16143 DEBUG [2016-08-25 15:27:47]  request:OAuthMessage(POST, http://1.85.59.245/gdsp/v1/public-opinion/topN, [p=%5BcurrentPageNo%3A1%3BpageSize%3A30%5D, q=%5Bcodes%3A000001%5D, oauth_token=38b6849305eec4235b008f69f79389ed, oauth_consumer_key=egoandroid, oauth_signature_method=HMAC-SHA1, oauth_timestamp=1472110067, oauth_nonce=1236184629463260, oauth_version=1.0, oauth_signature=WsrzSooV%2BmXz8%2FxVGHZ3ttHP00w%3D])
+21202 ERROR [2016-08-25 15:27:52]  OAuthException
 net.oauth.OAuthProblemException: HTTP/1.1 401 Unauthorized
-URL: http://1.85.59.245/gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D&q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D
-oauth_signature base string: POST&http%3A%2F%2F1.85.59.245%2Fgdsp%2Fv1%2Fpublic-opinion%2FtopN&oauth_consumer_key%3Degoandroid%26oauth_nonce%3D953155573254164%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1471827031%26oauth_token%3D541c8e7365a42b1e8f653d6c362d0962%26oauth_version%3D1.0%26p%3D%255BcurrentPageNo%253A1%253BpageSize%253A3000%255D%26q%3D%255Bcodes%253A000001%252C000002%252C600000%252C399001%252C000004%252C000005%252C000006%252C000007%252C000008%252C000009%252C000010%252C000011%252C000012%252C000014%252C000016%252C000017%252C000018%252C000019%252C000416%252C000421%252C000422%252C000423%252C000411%255D
+URL: http://1.85.59.245/gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A30%5D&q=%5Bcodes%3A000001%5D
+oauth_signature base string: POST&http%3A%2F%2F1.85.59.245%2Fgdsp%2Fv1%2Fpublic-opinion%2FtopN&oauth_consumer_key%3Degoandroid%26oauth_nonce%3D1236184629463260%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1472110067%26oauth_token%3D38b6849305eec4235b008f69f79389ed%26oauth_version%3D1.0%26p%3D%255BcurrentPageNo%253A1%253BpageSize%253A30%255D%26q%3D%255Bcodes%253A000001%255D
 >>>>>>>> HTTP request:
-POST /gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D&q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D
+POST /gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A30%5D&q=%5Bcodes%3A000001%5D
 Content-Type: application/json;charset=utf-8
-Authorization: OAuth oauth_token="541c8e7365a42b1e8f653d6c362d0962", oauth_consumer_key="egoandroid", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1471827031", oauth_nonce="953155573254164", oauth_version="1.0", oauth_signature="G5KkBXmKlAH4tAnjUD4UicyyoOU%3D"
-User-Agent: Jakarta Commons-HttpClient/3.1
-Host: 1.85.59.245
-Content-Length: 11
-
-{"did":"4"}
-<<<<<<<< HTTP response:
-HTTP/1.1 401 Unauthorized
-Date: Mon, 22 Aug 2016 00:50:16 GMT
-Server: Apache/2.0.64 (Unix) DAV/2 mod_jk/1.2.31
-Content-Length: 0
-Content-Type: text/plain
-Set-Cookie: WEB=20111124; path=/
-
-
-	at net.oauth.client.OAuthResponseMessage.toOAuthProblemException(OAuthResponseMessage.java:83)
-	at net.oauth.client.OAuthClient.invoke(OAuthClient.java:308)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:136)
-	at com.util.gdsp.Opinionpost.getYJNews(Opinionpost.java:237)
-	at com.util.gdsp.Opinionpost.main(Opinionpost.java:253)
-5312 INFO  [2016-08-22 08:50:36]  重新从OAUTH服务器获取TOKEN.次数:0
-5408 DEBUG [2016-08-22 08:50:36]  accessor token:net.oauth.OAuthAccessor@61b4607f[consumer=net.oauth.OAuthConsumer@92b63f6,requestToken=<null>,accessToken=67e868f9c12f7ed633a47df60fd844be,tokenSecret=eb259ddda493b6a9efb5979f72f3159a,properties={}]
-5411 DEBUG [2016-08-22 08:50:36]  request:OAuthMessage(POST, http://1.85.59.245/gdsp/v1/public-opinion/topN, [p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D, q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D, oauth_token=67e868f9c12f7ed633a47df60fd844be, oauth_consumer_key=egoandroid, oauth_signature_method=HMAC-SHA1, oauth_timestamp=1471827036, oauth_nonce=953160980804115, oauth_version=1.0, oauth_signature=fTm57zq07GrRgqDDIVebLsz2MkY%3D])
-10471 ERROR [2016-08-22 08:50:41]  OAuthException
-net.oauth.OAuthProblemException: HTTP/1.1 401 Unauthorized
-URL: http://1.85.59.245/gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D&q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D
-oauth_signature base string: POST&http%3A%2F%2F1.85.59.245%2Fgdsp%2Fv1%2Fpublic-opinion%2FtopN&oauth_consumer_key%3Degoandroid%26oauth_nonce%3D953160980804115%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1471827036%26oauth_token%3D67e868f9c12f7ed633a47df60fd844be%26oauth_version%3D1.0%26p%3D%255BcurrentPageNo%253A1%253BpageSize%253A3000%255D%26q%3D%255Bcodes%253A000001%252C000002%252C600000%252C399001%252C000004%252C000005%252C000006%252C000007%252C000008%252C000009%252C000010%252C000011%252C000012%252C000014%252C000016%252C000017%252C000018%252C000019%252C000416%252C000421%252C000422%252C000423%252C000411%255D
->>>>>>>> HTTP request:
-POST /gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D&q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D
-Content-Type: application/json;charset=utf-8
-Authorization: OAuth oauth_token="67e868f9c12f7ed633a47df60fd844be", oauth_consumer_key="egoandroid", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1471827036", oauth_nonce="953160980804115", oauth_version="1.0", oauth_signature="fTm57zq07GrRgqDDIVebLsz2MkY%3D"
+Authorization: OAuth oauth_token="38b6849305eec4235b008f69f79389ed", oauth_consumer_key="egoandroid", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1472110067", oauth_nonce="1236184629463260", oauth_version="1.0", oauth_signature="WsrzSooV%2BmXz8%2FxVGHZ3ttHP00w%3D"
 User-Agent: Jakarta Commons-HttpClient/3.1
 Host: 1.85.59.245
 Cookie: $Version=0; WEB=20111124; $Path=/
@@ -147,7 +302,7 @@ Content-Length: 0
 
 <<<<<<<< HTTP response:
 HTTP/1.1 401 Unauthorized
-Date: Mon, 22 Aug 2016 00:50:21 GMT
+Date: Thu, 25 Aug 2016 07:27:28 GMT
 Server: Apache/2.0.64 (Unix) DAV/2 mod_jk/1.2.31
 Content-Length: 0
 Content-Type: text/plain
@@ -157,19 +312,21 @@ Content-Type: text/plain
 	at net.oauth.client.OAuthClient.invoke(OAuthClient.java:308)
 	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:136)
 	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at com.util.gdsp.Opinionpost.getYJNews(Opinionpost.java:237)
-	at com.util.gdsp.Opinionpost.main(Opinionpost.java:253)
-10672 INFO  [2016-08-22 08:50:41]  重新从OAUTH服务器获取TOKEN.次数:0
-10762 DEBUG [2016-08-22 08:50:41]  accessor token:net.oauth.OAuthAccessor@473f3437[consumer=net.oauth.OAuthConsumer@67d2b6c,requestToken=<null>,accessToken=00fe4aba0ab6cc8ee50e2467be81c99b,tokenSecret=0e95b0bd5ad7be39bfbcc2ba0165a395,properties={}]
-10764 DEBUG [2016-08-22 08:50:41]  request:OAuthMessage(POST, http://1.85.59.245/gdsp/v1/public-opinion/topN, [p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D, q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D, oauth_token=00fe4aba0ab6cc8ee50e2467be81c99b, oauth_consumer_key=egoandroid, oauth_signature_method=HMAC-SHA1, oauth_timestamp=1471827041, oauth_nonce=953166333685636, oauth_version=1.0, oauth_signature=bD9RjDLt2N3QOYrhp4NtKsja%2Fr8%3D])
-15822 ERROR [2016-08-22 08:50:46]  OAuthException
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
+	at com.yetthin.web.dao.Opinionpost.getContent(Opinionpost.java:56)
+	at com.yetthin.web.dao.Opinionpost.main(Opinionpost.java:154)
+21403 INFO  [2016-08-25 15:27:52]  重新从OAUTH服务器获取TOKEN.次数:0
+21506 DEBUG [2016-08-25 15:27:52]  accessor token:net.oauth.OAuthAccessor@778dd5[consumer=net.oauth.OAuthConsumer@29009b30,requestToken=<null>,accessToken=d45e8c3415925cbfd17375143c2631f7,tokenSecret=171ca948fbd364d6c8175a349678af4e,properties={}]
+21508 DEBUG [2016-08-25 15:27:52]  request:OAuthMessage(POST, http://1.85.59.245/gdsp/v1/public-opinion/topN, [p=%5BcurrentPageNo%3A1%3BpageSize%3A30%5D, q=%5Bcodes%3A000001%5D, oauth_token=d45e8c3415925cbfd17375143c2631f7, oauth_consumer_key=egoandroid, oauth_signature_method=HMAC-SHA1, oauth_timestamp=1472110072, oauth_nonce=1236189993706449, oauth_version=1.0, oauth_signature=OavRQfS05jJln7uIXtL73U89zbk%3D])
+26563 ERROR [2016-08-25 15:27:57]  OAuthException
 net.oauth.OAuthProblemException: HTTP/1.1 401 Unauthorized
-URL: http://1.85.59.245/gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D&q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D
-oauth_signature base string: POST&http%3A%2F%2F1.85.59.245%2Fgdsp%2Fv1%2Fpublic-opinion%2FtopN&oauth_consumer_key%3Degoandroid%26oauth_nonce%3D953166333685636%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1471827041%26oauth_token%3D00fe4aba0ab6cc8ee50e2467be81c99b%26oauth_version%3D1.0%26p%3D%255BcurrentPageNo%253A1%253BpageSize%253A3000%255D%26q%3D%255Bcodes%253A000001%252C000002%252C600000%252C399001%252C000004%252C000005%252C000006%252C000007%252C000008%252C000009%252C000010%252C000011%252C000012%252C000014%252C000016%252C000017%252C000018%252C000019%252C000416%252C000421%252C000422%252C000423%252C000411%255D
+URL: http://1.85.59.245/gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A30%5D&q=%5Bcodes%3A000001%5D
+oauth_signature base string: POST&http%3A%2F%2F1.85.59.245%2Fgdsp%2Fv1%2Fpublic-opinion%2FtopN&oauth_consumer_key%3Degoandroid%26oauth_nonce%3D1236189993706449%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1472110072%26oauth_token%3Dd45e8c3415925cbfd17375143c2631f7%26oauth_version%3D1.0%26p%3D%255BcurrentPageNo%253A1%253BpageSize%253A30%255D%26q%3D%255Bcodes%253A000001%255D
 >>>>>>>> HTTP request:
-POST /gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D&q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D
+POST /gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A30%5D&q=%5Bcodes%3A000001%5D
 Content-Type: application/json;charset=utf-8
-Authorization: OAuth oauth_token="00fe4aba0ab6cc8ee50e2467be81c99b", oauth_consumer_key="egoandroid", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1471827041", oauth_nonce="953166333685636", oauth_version="1.0", oauth_signature="bD9RjDLt2N3QOYrhp4NtKsja%2Fr8%3D"
+Authorization: OAuth oauth_token="d45e8c3415925cbfd17375143c2631f7", oauth_consumer_key="egoandroid", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1472110072", oauth_nonce="1236189993706449", oauth_version="1.0", oauth_signature="OavRQfS05jJln7uIXtL73U89zbk%3D"
 User-Agent: Jakarta Commons-HttpClient/3.1
 Host: 1.85.59.245
 Cookie: $Version=0; WEB=20111124; $Path=/
@@ -178,72 +335,7 @@ Content-Length: 0
 
 <<<<<<<< HTTP response:
 HTTP/1.1 401 Unauthorized
-Date: Mon, 22 Aug 2016 00:50:26 GMT
-Server: Apache/2.0.64 (Unix) DAV/2 mod_jk/1.2.31
-Content-Length: 0
-Content-Type: text/plain
-
-
-	at net.oauth.client.OAuthResponseMessage.toOAuthProblemException(OAuthResponseMessage.java:83)
-	at net.oauth.client.OAuthClient.invoke(OAuthClient.java:308)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:136)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at com.util.gdsp.Opinionpost.getYJNews(Opinionpost.java:237)
-	at com.util.gdsp.Opinionpost.main(Opinionpost.java:253)
-16022 INFO  [2016-08-22 08:50:47]  重新从OAUTH服务器获取TOKEN.次数:0
-16120 DEBUG [2016-08-22 08:50:47]  accessor token:net.oauth.OAuthAccessor@4ceda5b[consumer=net.oauth.OAuthConsumer@28618ed4,requestToken=<null>,accessToken=f8c7eda07077468fea6e0ecf08570ddb,tokenSecret=2c25801672290d7e52fd035af0c9b9a0,properties={}]
-16122 DEBUG [2016-08-22 08:50:47]  request:OAuthMessage(POST, http://1.85.59.245/gdsp/v1/public-opinion/topN, [p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D, q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D, oauth_token=f8c7eda07077468fea6e0ecf08570ddb, oauth_consumer_key=egoandroid, oauth_signature_method=HMAC-SHA1, oauth_timestamp=1471827047, oauth_nonce=953171691721675, oauth_version=1.0, oauth_signature=yNuQdLFznzmSk7Unkp8Pv%2FqT1DY%3D])
-21179 ERROR [2016-08-22 08:50:52]  OAuthException
-net.oauth.OAuthProblemException: HTTP/1.1 401 Unauthorized
-URL: http://1.85.59.245/gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D&q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D
-oauth_signature base string: POST&http%3A%2F%2F1.85.59.245%2Fgdsp%2Fv1%2Fpublic-opinion%2FtopN&oauth_consumer_key%3Degoandroid%26oauth_nonce%3D953171691721675%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1471827047%26oauth_token%3Df8c7eda07077468fea6e0ecf08570ddb%26oauth_version%3D1.0%26p%3D%255BcurrentPageNo%253A1%253BpageSize%253A3000%255D%26q%3D%255Bcodes%253A000001%252C000002%252C600000%252C399001%252C000004%252C000005%252C000006%252C000007%252C000008%252C000009%252C000010%252C000011%252C000012%252C000014%252C000016%252C000017%252C000018%252C000019%252C000416%252C000421%252C000422%252C000423%252C000411%255D
->>>>>>>> HTTP request:
-POST /gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D&q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D
-Content-Type: application/json;charset=utf-8
-Authorization: OAuth oauth_token="f8c7eda07077468fea6e0ecf08570ddb", oauth_consumer_key="egoandroid", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1471827047", oauth_nonce="953171691721675", oauth_version="1.0", oauth_signature="yNuQdLFznzmSk7Unkp8Pv%2FqT1DY%3D"
-User-Agent: Jakarta Commons-HttpClient/3.1
-Host: 1.85.59.245
-Cookie: $Version=0; WEB=20111124; $Path=/
-Content-Length: 0
-
-
-<<<<<<<< HTTP response:
-HTTP/1.1 401 Unauthorized
-Date: Mon, 22 Aug 2016 00:50:32 GMT
-Server: Apache/2.0.64 (Unix) DAV/2 mod_jk/1.2.31
-Content-Length: 0
-Content-Type: text/plain
-
-
-	at net.oauth.client.OAuthResponseMessage.toOAuthProblemException(OAuthResponseMessage.java:83)
-	at net.oauth.client.OAuthClient.invoke(OAuthClient.java:308)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:136)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at com.util.gdsp.Opinionpost.getYJNews(Opinionpost.java:237)
-	at com.util.gdsp.Opinionpost.main(Opinionpost.java:253)
-21380 INFO  [2016-08-22 08:50:52]  重新从OAUTH服务器获取TOKEN.次数:0
-21479 DEBUG [2016-08-22 08:50:52]  accessor token:net.oauth.OAuthAccessor@7eb79ed4[consumer=net.oauth.OAuthConsumer@491cb14a,requestToken=<null>,accessToken=e7417aa890bc88fdb1ca2068aea41c64,tokenSecret=535d231f9019f214628a1eec01319033,properties={}]
-21481 DEBUG [2016-08-22 08:50:52]  request:OAuthMessage(POST, http://1.85.59.245/gdsp/v1/public-opinion/topN, [p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D, q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D, oauth_token=e7417aa890bc88fdb1ca2068aea41c64, oauth_consumer_key=egoandroid, oauth_signature_method=HMAC-SHA1, oauth_timestamp=1471827052, oauth_nonce=953177050556705, oauth_version=1.0, oauth_signature=f192aIZEcwpzgP1uw05KAGI3jAU%3D])
-26539 ERROR [2016-08-22 08:50:57]  OAuthException
-net.oauth.OAuthProblemException: HTTP/1.1 401 Unauthorized
-URL: http://1.85.59.245/gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D&q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D
-oauth_signature base string: POST&http%3A%2F%2F1.85.59.245%2Fgdsp%2Fv1%2Fpublic-opinion%2FtopN&oauth_consumer_key%3Degoandroid%26oauth_nonce%3D953177050556705%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1471827052%26oauth_token%3De7417aa890bc88fdb1ca2068aea41c64%26oauth_version%3D1.0%26p%3D%255BcurrentPageNo%253A1%253BpageSize%253A3000%255D%26q%3D%255Bcodes%253A000001%252C000002%252C600000%252C399001%252C000004%252C000005%252C000006%252C000007%252C000008%252C000009%252C000010%252C000011%252C000012%252C000014%252C000016%252C000017%252C000018%252C000019%252C000416%252C000421%252C000422%252C000423%252C000411%255D
->>>>>>>> HTTP request:
-POST /gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D&q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D
-Content-Type: application/json;charset=utf-8
-Authorization: OAuth oauth_token="e7417aa890bc88fdb1ca2068aea41c64", oauth_consumer_key="egoandroid", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1471827052", oauth_nonce="953177050556705", oauth_version="1.0", oauth_signature="f192aIZEcwpzgP1uw05KAGI3jAU%3D"
-User-Agent: Jakarta Commons-HttpClient/3.1
-Host: 1.85.59.245
-Cookie: $Version=0; WEB=20111124; $Path=/
-Content-Length: 0
-
-
-<<<<<<<< HTTP response:
-HTTP/1.1 401 Unauthorized
-Date: Mon, 22 Aug 2016 00:50:37 GMT
+Date: Thu, 25 Aug 2016 07:27:33 GMT
 Server: Apache/2.0.64 (Unix) DAV/2 mod_jk/1.2.31
 Content-Length: 0
 Content-Type: text/plain
@@ -256,586 +348,35 @@ Content-Type: text/plain
 	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
 	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
 	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at com.util.gdsp.Opinionpost.getYJNews(Opinionpost.java:237)
-	at com.util.gdsp.Opinionpost.main(Opinionpost.java:253)
-26740 INFO  [2016-08-22 08:50:57]  重新从OAUTH服务器获取TOKEN.次数:0
-26830 DEBUG [2016-08-22 08:50:57]  accessor token:net.oauth.OAuthAccessor@31a79e76[consumer=net.oauth.OAuthConsumer@73946e71,requestToken=<null>,accessToken=b3e6b484f3ab3a20082dd474b1063c7a,tokenSecret=80d2417ac8bc4de49bcf9ba14a33a712,properties={}]
-26832 DEBUG [2016-08-22 08:50:57]  request:OAuthMessage(POST, http://1.85.59.245/gdsp/v1/public-opinion/topN, [p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D, q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D, oauth_token=b3e6b484f3ab3a20082dd474b1063c7a, oauth_consumer_key=egoandroid, oauth_signature_method=HMAC-SHA1, oauth_timestamp=1471827057, oauth_nonce=953182401409526, oauth_version=1.0, oauth_signature=pmJ%2BA9Xdp8llNaw21a2BO8e51WA%3D])
-31889 ERROR [2016-08-22 08:51:02]  OAuthException
-net.oauth.OAuthProblemException: HTTP/1.1 401 Unauthorized
-URL: http://1.85.59.245/gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D&q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D
-oauth_signature base string: POST&http%3A%2F%2F1.85.59.245%2Fgdsp%2Fv1%2Fpublic-opinion%2FtopN&oauth_consumer_key%3Degoandroid%26oauth_nonce%3D953182401409526%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1471827057%26oauth_token%3Db3e6b484f3ab3a20082dd474b1063c7a%26oauth_version%3D1.0%26p%3D%255BcurrentPageNo%253A1%253BpageSize%253A3000%255D%26q%3D%255Bcodes%253A000001%252C000002%252C600000%252C399001%252C000004%252C000005%252C000006%252C000007%252C000008%252C000009%252C000010%252C000011%252C000012%252C000014%252C000016%252C000017%252C000018%252C000019%252C000416%252C000421%252C000422%252C000423%252C000411%255D
->>>>>>>> HTTP request:
-POST /gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D&q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D
-Content-Type: application/json;charset=utf-8
-Authorization: OAuth oauth_token="b3e6b484f3ab3a20082dd474b1063c7a", oauth_consumer_key="egoandroid", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1471827057", oauth_nonce="953182401409526", oauth_version="1.0", oauth_signature="pmJ%2BA9Xdp8llNaw21a2BO8e51WA%3D"
-User-Agent: Jakarta Commons-HttpClient/3.1
-Host: 1.85.59.245
-Cookie: $Version=0; WEB=20111124; $Path=/
-Content-Length: 0
-
-
-<<<<<<<< HTTP response:
-HTTP/1.1 401 Unauthorized
-Date: Mon, 22 Aug 2016 00:50:43 GMT
-Server: Apache/2.0.64 (Unix) DAV/2 mod_jk/1.2.31
-Content-Length: 0
-Content-Type: text/plain
-
-
-	at net.oauth.client.OAuthResponseMessage.toOAuthProblemException(OAuthResponseMessage.java:83)
-	at net.oauth.client.OAuthClient.invoke(OAuthClient.java:308)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:136)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at com.util.gdsp.Opinionpost.getYJNews(Opinionpost.java:237)
-	at com.util.gdsp.Opinionpost.main(Opinionpost.java:253)
-32089 INFO  [2016-08-22 08:51:03]  重新从OAUTH服务器获取TOKEN.次数:0
-32187 DEBUG [2016-08-22 08:51:03]  accessor token:net.oauth.OAuthAccessor@506f2775[consumer=net.oauth.OAuthConsumer@31879b94,requestToken=<null>,accessToken=d8b1646e420c26a1caf34270673b9a31,tokenSecret=1fbc1e114f40f102b3ce145076062139,properties={}]
-32189 DEBUG [2016-08-22 08:51:03]  request:OAuthMessage(POST, http://1.85.59.245/gdsp/v1/public-opinion/topN, [p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D, q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D, oauth_token=d8b1646e420c26a1caf34270673b9a31, oauth_consumer_key=egoandroid, oauth_signature_method=HMAC-SHA1, oauth_timestamp=1471827063, oauth_nonce=953187758367697, oauth_version=1.0, oauth_signature=MypElrALBz4U%2FMUjVJKqsCOE534%3D])
-37246 ERROR [2016-08-22 08:51:08]  OAuthException
-net.oauth.OAuthProblemException: HTTP/1.1 401 Unauthorized
-URL: http://1.85.59.245/gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D&q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D
-oauth_signature base string: POST&http%3A%2F%2F1.85.59.245%2Fgdsp%2Fv1%2Fpublic-opinion%2FtopN&oauth_consumer_key%3Degoandroid%26oauth_nonce%3D953187758367697%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1471827063%26oauth_token%3Dd8b1646e420c26a1caf34270673b9a31%26oauth_version%3D1.0%26p%3D%255BcurrentPageNo%253A1%253BpageSize%253A3000%255D%26q%3D%255Bcodes%253A000001%252C000002%252C600000%252C399001%252C000004%252C000005%252C000006%252C000007%252C000008%252C000009%252C000010%252C000011%252C000012%252C000014%252C000016%252C000017%252C000018%252C000019%252C000416%252C000421%252C000422%252C000423%252C000411%255D
->>>>>>>> HTTP request:
-POST /gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D&q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D
-Content-Type: application/json;charset=utf-8
-Authorization: OAuth oauth_token="d8b1646e420c26a1caf34270673b9a31", oauth_consumer_key="egoandroid", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1471827063", oauth_nonce="953187758367697", oauth_version="1.0", oauth_signature="MypElrALBz4U%2FMUjVJKqsCOE534%3D"
-User-Agent: Jakarta Commons-HttpClient/3.1
-Host: 1.85.59.245
-Cookie: $Version=0; WEB=20111124; $Path=/
-Content-Length: 0
-
-
-<<<<<<<< HTTP response:
-HTTP/1.1 401 Unauthorized
-Date: Mon, 22 Aug 2016 00:50:48 GMT
-Server: Apache/2.0.64 (Unix) DAV/2 mod_jk/1.2.31
-Content-Length: 0
-Content-Type: text/plain
-
-
-	at net.oauth.client.OAuthResponseMessage.toOAuthProblemException(OAuthResponseMessage.java:83)
-	at net.oauth.client.OAuthClient.invoke(OAuthClient.java:308)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:136)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at com.util.gdsp.Opinionpost.getYJNews(Opinionpost.java:237)
-	at com.util.gdsp.Opinionpost.main(Opinionpost.java:253)
-37447 INFO  [2016-08-22 08:51:08]  重新从OAUTH服务器获取TOKEN.次数:0
-37537 DEBUG [2016-08-22 08:51:08]  accessor token:net.oauth.OAuthAccessor@2e24d74d[consumer=net.oauth.OAuthConsumer@74b317e5,requestToken=<null>,accessToken=192fd20d85df3ec9ae0e89892e0662e2,tokenSecret=c8e0dc6ace147cf3b772529b3c05d3da,properties={}]
-37540 DEBUG [2016-08-22 08:51:08]  request:OAuthMessage(POST, http://1.85.59.245/gdsp/v1/public-opinion/topN, [p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D, q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D, oauth_token=192fd20d85df3ec9ae0e89892e0662e2, oauth_consumer_key=egoandroid, oauth_signature_method=HMAC-SHA1, oauth_timestamp=1471827068, oauth_nonce=953193108416821, oauth_version=1.0, oauth_signature=VI2eJ7%2BtVyt6Ihqmu8Q0PUN%2BFB0%3D])
-42598 ERROR [2016-08-22 08:51:13]  OAuthException
-net.oauth.OAuthProblemException: HTTP/1.1 401 Unauthorized
-URL: http://1.85.59.245/gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D&q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D
-oauth_signature base string: POST&http%3A%2F%2F1.85.59.245%2Fgdsp%2Fv1%2Fpublic-opinion%2FtopN&oauth_consumer_key%3Degoandroid%26oauth_nonce%3D953193108416821%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1471827068%26oauth_token%3D192fd20d85df3ec9ae0e89892e0662e2%26oauth_version%3D1.0%26p%3D%255BcurrentPageNo%253A1%253BpageSize%253A3000%255D%26q%3D%255Bcodes%253A000001%252C000002%252C600000%252C399001%252C000004%252C000005%252C000006%252C000007%252C000008%252C000009%252C000010%252C000011%252C000012%252C000014%252C000016%252C000017%252C000018%252C000019%252C000416%252C000421%252C000422%252C000423%252C000411%255D
->>>>>>>> HTTP request:
-POST /gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D&q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D
-Content-Type: application/json;charset=utf-8
-Authorization: OAuth oauth_token="192fd20d85df3ec9ae0e89892e0662e2", oauth_consumer_key="egoandroid", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1471827068", oauth_nonce="953193108416821", oauth_version="1.0", oauth_signature="VI2eJ7%2BtVyt6Ihqmu8Q0PUN%2BFB0%3D"
-User-Agent: Jakarta Commons-HttpClient/3.1
-Host: 1.85.59.245
-Cookie: $Version=0; WEB=20111124; $Path=/
-Content-Length: 0
-
-
-<<<<<<<< HTTP response:
-HTTP/1.1 401 Unauthorized
-Date: Mon, 22 Aug 2016 00:50:53 GMT
-Server: Apache/2.0.64 (Unix) DAV/2 mod_jk/1.2.31
-Content-Length: 0
-Content-Type: text/plain
-
-
-	at net.oauth.client.OAuthResponseMessage.toOAuthProblemException(OAuthResponseMessage.java:83)
-	at net.oauth.client.OAuthClient.invoke(OAuthClient.java:308)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:136)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at com.util.gdsp.Opinionpost.getYJNews(Opinionpost.java:237)
-	at com.util.gdsp.Opinionpost.main(Opinionpost.java:253)
-42799 INFO  [2016-08-22 08:51:13]  重新从OAUTH服务器获取TOKEN.次数:0
-42888 DEBUG [2016-08-22 08:51:13]  accessor token:net.oauth.OAuthAccessor@57e75713[consumer=net.oauth.OAuthConsumer@1505cd7b,requestToken=<null>,accessToken=8ee0efc240d5c096753ed3c2b17dcb34,tokenSecret=f388c6781cb0078053b9d32958a262a6,properties={}]
-42889 DEBUG [2016-08-22 08:51:13]  request:OAuthMessage(POST, http://1.85.59.245/gdsp/v1/public-opinion/topN, [p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D, q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D, oauth_token=8ee0efc240d5c096753ed3c2b17dcb34, oauth_consumer_key=egoandroid, oauth_signature_method=HMAC-SHA1, oauth_timestamp=1471827073, oauth_nonce=953198458346610, oauth_version=1.0, oauth_signature=%2BMAYy%2F%2Fg9Srt9O%2F1arSb5ICglPM%3D])
-47945 ERROR [2016-08-22 08:51:19]  OAuthException
-net.oauth.OAuthProblemException: HTTP/1.1 401 Unauthorized
-URL: http://1.85.59.245/gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D&q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D
-oauth_signature base string: POST&http%3A%2F%2F1.85.59.245%2Fgdsp%2Fv1%2Fpublic-opinion%2FtopN&oauth_consumer_key%3Degoandroid%26oauth_nonce%3D953198458346610%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1471827073%26oauth_token%3D8ee0efc240d5c096753ed3c2b17dcb34%26oauth_version%3D1.0%26p%3D%255BcurrentPageNo%253A1%253BpageSize%253A3000%255D%26q%3D%255Bcodes%253A000001%252C000002%252C600000%252C399001%252C000004%252C000005%252C000006%252C000007%252C000008%252C000009%252C000010%252C000011%252C000012%252C000014%252C000016%252C000017%252C000018%252C000019%252C000416%252C000421%252C000422%252C000423%252C000411%255D
->>>>>>>> HTTP request:
-POST /gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D&q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D
-Content-Type: application/json;charset=utf-8
-Authorization: OAuth oauth_token="8ee0efc240d5c096753ed3c2b17dcb34", oauth_consumer_key="egoandroid", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1471827073", oauth_nonce="953198458346610", oauth_version="1.0", oauth_signature="%2BMAYy%2F%2Fg9Srt9O%2F1arSb5ICglPM%3D"
-User-Agent: Jakarta Commons-HttpClient/3.1
-Host: 1.85.59.245
-Cookie: $Version=0; WEB=20111124; $Path=/
-Content-Length: 0
-
-
-<<<<<<<< HTTP response:
-HTTP/1.1 401 Unauthorized
-Date: Mon, 22 Aug 2016 00:50:59 GMT
-Server: Apache/2.0.64 (Unix) DAV/2 mod_jk/1.2.31
-Content-Length: 0
-Content-Type: text/plain
-
-
-	at net.oauth.client.OAuthResponseMessage.toOAuthProblemException(OAuthResponseMessage.java:83)
-	at net.oauth.client.OAuthClient.invoke(OAuthClient.java:308)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:136)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at com.util.gdsp.Opinionpost.getYJNews(Opinionpost.java:237)
-	at com.util.gdsp.Opinionpost.main(Opinionpost.java:253)
-48146 INFO  [2016-08-22 08:51:19]  重新从OAUTH服务器获取TOKEN.次数:0
-48235 DEBUG [2016-08-22 08:51:19]  accessor token:net.oauth.OAuthAccessor@129a37dc[consumer=net.oauth.OAuthConsumer@4ac9560e,requestToken=<null>,accessToken=802a095f95507c8e6de037da940f12c9,tokenSecret=04892ecdb340d9730ca1b104de2c9717,properties={}]
-48236 DEBUG [2016-08-22 08:51:19]  request:OAuthMessage(POST, http://1.85.59.245/gdsp/v1/public-opinion/topN, [p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D, q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D, oauth_token=802a095f95507c8e6de037da940f12c9, oauth_consumer_key=egoandroid, oauth_signature_method=HMAC-SHA1, oauth_timestamp=1471827079, oauth_nonce=953203805454267, oauth_version=1.0, oauth_signature=Qlvc11ZYKgDMJNZm8EkLWpH%2Fo%2BE%3D])
-53292 ERROR [2016-08-22 08:51:24]  OAuthException
-net.oauth.OAuthProblemException: HTTP/1.1 401 Unauthorized
-URL: http://1.85.59.245/gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D&q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D
-oauth_signature base string: POST&http%3A%2F%2F1.85.59.245%2Fgdsp%2Fv1%2Fpublic-opinion%2FtopN&oauth_consumer_key%3Degoandroid%26oauth_nonce%3D953203805454267%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1471827079%26oauth_token%3D802a095f95507c8e6de037da940f12c9%26oauth_version%3D1.0%26p%3D%255BcurrentPageNo%253A1%253BpageSize%253A3000%255D%26q%3D%255Bcodes%253A000001%252C000002%252C600000%252C399001%252C000004%252C000005%252C000006%252C000007%252C000008%252C000009%252C000010%252C000011%252C000012%252C000014%252C000016%252C000017%252C000018%252C000019%252C000416%252C000421%252C000422%252C000423%252C000411%255D
->>>>>>>> HTTP request:
-POST /gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D&q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D
-Content-Type: application/json;charset=utf-8
-Authorization: OAuth oauth_token="802a095f95507c8e6de037da940f12c9", oauth_consumer_key="egoandroid", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1471827079", oauth_nonce="953203805454267", oauth_version="1.0", oauth_signature="Qlvc11ZYKgDMJNZm8EkLWpH%2Fo%2BE%3D"
-User-Agent: Jakarta Commons-HttpClient/3.1
-Host: 1.85.59.245
-Cookie: $Version=0; WEB=20111124; $Path=/
-Content-Length: 0
-
-
-<<<<<<<< HTTP response:
-HTTP/1.1 401 Unauthorized
-Date: Mon, 22 Aug 2016 00:51:04 GMT
-Server: Apache/2.0.64 (Unix) DAV/2 mod_jk/1.2.31
-Content-Length: 0
-Content-Type: text/plain
-
-
-	at net.oauth.client.OAuthResponseMessage.toOAuthProblemException(OAuthResponseMessage.java:83)
-	at net.oauth.client.OAuthClient.invoke(OAuthClient.java:308)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:136)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at com.util.gdsp.Opinionpost.getYJNews(Opinionpost.java:237)
-	at com.util.gdsp.Opinionpost.main(Opinionpost.java:253)
-53493 INFO  [2016-08-22 08:51:24]  重新从OAUTH服务器获取TOKEN.次数:0
-53585 DEBUG [2016-08-22 08:51:24]  accessor token:net.oauth.OAuthAccessor@5e9384fb[consumer=net.oauth.OAuthConsumer@26ffab3f,requestToken=<null>,accessToken=ed18f65900e6922992418b2939448df5,tokenSecret=758f9b83519655a9663bca375a35ebe4,properties={}]
-53586 DEBUG [2016-08-22 08:51:24]  request:OAuthMessage(POST, http://1.85.59.245/gdsp/v1/public-opinion/topN, [p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D, q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D, oauth_token=ed18f65900e6922992418b2939448df5, oauth_consumer_key=egoandroid, oauth_signature_method=HMAC-SHA1, oauth_timestamp=1471827084, oauth_nonce=953209155513229, oauth_version=1.0, oauth_signature=rG29SsyLtPSDDh%2B9nZWRIQMSZmI%3D])
-58642 ERROR [2016-08-22 08:51:29]  OAuthException
-net.oauth.OAuthProblemException: HTTP/1.1 401 Unauthorized
-URL: http://1.85.59.245/gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D&q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D
-oauth_signature base string: POST&http%3A%2F%2F1.85.59.245%2Fgdsp%2Fv1%2Fpublic-opinion%2FtopN&oauth_consumer_key%3Degoandroid%26oauth_nonce%3D953209155513229%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1471827084%26oauth_token%3Ded18f65900e6922992418b2939448df5%26oauth_version%3D1.0%26p%3D%255BcurrentPageNo%253A1%253BpageSize%253A3000%255D%26q%3D%255Bcodes%253A000001%252C000002%252C600000%252C399001%252C000004%252C000005%252C000006%252C000007%252C000008%252C000009%252C000010%252C000011%252C000012%252C000014%252C000016%252C000017%252C000018%252C000019%252C000416%252C000421%252C000422%252C000423%252C000411%255D
->>>>>>>> HTTP request:
-POST /gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D&q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D
-Content-Type: application/json;charset=utf-8
-Authorization: OAuth oauth_token="ed18f65900e6922992418b2939448df5", oauth_consumer_key="egoandroid", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1471827084", oauth_nonce="953209155513229", oauth_version="1.0", oauth_signature="rG29SsyLtPSDDh%2B9nZWRIQMSZmI%3D"
-User-Agent: Jakarta Commons-HttpClient/3.1
-Host: 1.85.59.245
-Cookie: $Version=0; WEB=20111124; $Path=/
-Content-Length: 0
-
-
-<<<<<<<< HTTP response:
-HTTP/1.1 401 Unauthorized
-Date: Mon, 22 Aug 2016 00:51:09 GMT
-Server: Apache/2.0.64 (Unix) DAV/2 mod_jk/1.2.31
-Content-Length: 0
-Content-Type: text/plain
-
-
-	at net.oauth.client.OAuthResponseMessage.toOAuthProblemException(OAuthResponseMessage.java:83)
-	at net.oauth.client.OAuthClient.invoke(OAuthClient.java:308)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:136)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at com.util.gdsp.Opinionpost.getYJNews(Opinionpost.java:237)
-	at com.util.gdsp.Opinionpost.main(Opinionpost.java:253)
-58844 INFO  [2016-08-22 08:51:29]  重新从OAUTH服务器获取TOKEN.次数:0
-58940 DEBUG [2016-08-22 08:51:30]  accessor token:net.oauth.OAuthAccessor@3f47b71e[consumer=net.oauth.OAuthConsumer@7d473306,requestToken=<null>,accessToken=e0dadba29ed1a1e725a07b54ad32dd8c,tokenSecret=36e7bf3a396a6b37f42262e148184e05,properties={}]
-58941 DEBUG [2016-08-22 08:51:30]  request:OAuthMessage(POST, http://1.85.59.245/gdsp/v1/public-opinion/topN, [p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D, q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D, oauth_token=e0dadba29ed1a1e725a07b54ad32dd8c, oauth_consumer_key=egoandroid, oauth_signature_method=HMAC-SHA1, oauth_timestamp=1471827090, oauth_nonce=953214510071862, oauth_version=1.0, oauth_signature=5dkhqeyplkfnAAgI2l0%2FbxW473g%3D])
-63997 ERROR [2016-08-22 08:51:35]  OAuthException
-net.oauth.OAuthProblemException: HTTP/1.1 401 Unauthorized
-URL: http://1.85.59.245/gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D&q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D
-oauth_signature base string: POST&http%3A%2F%2F1.85.59.245%2Fgdsp%2Fv1%2Fpublic-opinion%2FtopN&oauth_consumer_key%3Degoandroid%26oauth_nonce%3D953214510071862%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1471827090%26oauth_token%3De0dadba29ed1a1e725a07b54ad32dd8c%26oauth_version%3D1.0%26p%3D%255BcurrentPageNo%253A1%253BpageSize%253A3000%255D%26q%3D%255Bcodes%253A000001%252C000002%252C600000%252C399001%252C000004%252C000005%252C000006%252C000007%252C000008%252C000009%252C000010%252C000011%252C000012%252C000014%252C000016%252C000017%252C000018%252C000019%252C000416%252C000421%252C000422%252C000423%252C000411%255D
->>>>>>>> HTTP request:
-POST /gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D&q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D
-Content-Type: application/json;charset=utf-8
-Authorization: OAuth oauth_token="e0dadba29ed1a1e725a07b54ad32dd8c", oauth_consumer_key="egoandroid", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1471827090", oauth_nonce="953214510071862", oauth_version="1.0", oauth_signature="5dkhqeyplkfnAAgI2l0%2FbxW473g%3D"
-User-Agent: Jakarta Commons-HttpClient/3.1
-Host: 1.85.59.245
-Cookie: $Version=0; WEB=20111124; $Path=/
-Content-Length: 0
-
-
-<<<<<<<< HTTP response:
-HTTP/1.1 401 Unauthorized
-Date: Mon, 22 Aug 2016 00:51:15 GMT
-Server: Apache/2.0.64 (Unix) DAV/2 mod_jk/1.2.31
-Content-Length: 0
-Content-Type: text/plain
-
-
-	at net.oauth.client.OAuthResponseMessage.toOAuthProblemException(OAuthResponseMessage.java:83)
-	at net.oauth.client.OAuthClient.invoke(OAuthClient.java:308)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:136)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at com.util.gdsp.Opinionpost.getYJNews(Opinionpost.java:237)
-	at com.util.gdsp.Opinionpost.main(Opinionpost.java:253)
-64198 INFO  [2016-08-22 08:51:35]  重新从OAUTH服务器获取TOKEN.次数:0
-64289 DEBUG [2016-08-22 08:51:35]  accessor token:net.oauth.OAuthAccessor@2914f7c0[consumer=net.oauth.OAuthConsumer@1f957352,requestToken=<null>,accessToken=af936f1201bff6cf5fe59697bd8acad6,tokenSecret=7c99560e07524fb2cf28c7a360900a15,properties={}]
-64290 DEBUG [2016-08-22 08:51:35]  request:OAuthMessage(POST, http://1.85.59.245/gdsp/v1/public-opinion/topN, [p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D, q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D, oauth_token=af936f1201bff6cf5fe59697bd8acad6, oauth_consumer_key=egoandroid, oauth_signature_method=HMAC-SHA1, oauth_timestamp=1471827095, oauth_nonce=953219858780495, oauth_version=1.0, oauth_signature=f9GpVeFqRnt991WcKSZEcd8Z3HE%3D])
-69345 ERROR [2016-08-22 08:51:40]  OAuthException
-net.oauth.OAuthProblemException: HTTP/1.1 401 Unauthorized
-URL: http://1.85.59.245/gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D&q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D
-oauth_signature base string: POST&http%3A%2F%2F1.85.59.245%2Fgdsp%2Fv1%2Fpublic-opinion%2FtopN&oauth_consumer_key%3Degoandroid%26oauth_nonce%3D953219858780495%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1471827095%26oauth_token%3Daf936f1201bff6cf5fe59697bd8acad6%26oauth_version%3D1.0%26p%3D%255BcurrentPageNo%253A1%253BpageSize%253A3000%255D%26q%3D%255Bcodes%253A000001%252C000002%252C600000%252C399001%252C000004%252C000005%252C000006%252C000007%252C000008%252C000009%252C000010%252C000011%252C000012%252C000014%252C000016%252C000017%252C000018%252C000019%252C000416%252C000421%252C000422%252C000423%252C000411%255D
->>>>>>>> HTTP request:
-POST /gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D&q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D
-Content-Type: application/json;charset=utf-8
-Authorization: OAuth oauth_token="af936f1201bff6cf5fe59697bd8acad6", oauth_consumer_key="egoandroid", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1471827095", oauth_nonce="953219858780495", oauth_version="1.0", oauth_signature="f9GpVeFqRnt991WcKSZEcd8Z3HE%3D"
-User-Agent: Jakarta Commons-HttpClient/3.1
-Host: 1.85.59.245
-Cookie: $Version=0; WEB=20111124; $Path=/
-Content-Length: 0
-
-
-<<<<<<<< HTTP response:
-HTTP/1.1 401 Unauthorized
-Date: Mon, 22 Aug 2016 00:51:20 GMT
-Server: Apache/2.0.64 (Unix) DAV/2 mod_jk/1.2.31
-Content-Length: 0
-Content-Type: text/plain
-
-
-	at net.oauth.client.OAuthResponseMessage.toOAuthProblemException(OAuthResponseMessage.java:83)
-	at net.oauth.client.OAuthClient.invoke(OAuthClient.java:308)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:136)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at com.util.gdsp.Opinionpost.getYJNews(Opinionpost.java:237)
-	at com.util.gdsp.Opinionpost.main(Opinionpost.java:253)
-69546 INFO  [2016-08-22 08:51:40]  重新从OAUTH服务器获取TOKEN.次数:0
-69639 DEBUG [2016-08-22 08:51:40]  accessor token:net.oauth.OAuthAccessor@5b63280a[consumer=net.oauth.OAuthConsumer@4ad9d765,requestToken=<null>,accessToken=f31b5de42af7a6d3378e74c77aa507ce,tokenSecret=09068ca2839757247b2ed1a14cd34ec6,properties={}]
-69641 DEBUG [2016-08-22 08:51:40]  request:OAuthMessage(POST, http://1.85.59.245/gdsp/v1/public-opinion/topN, [p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D, q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D, oauth_token=f31b5de42af7a6d3378e74c77aa507ce, oauth_consumer_key=egoandroid, oauth_signature_method=HMAC-SHA1, oauth_timestamp=1471827100, oauth_nonce=953225209643153, oauth_version=1.0, oauth_signature=IwSEWVufrkbTzJ3OOHLlYKlEZTg%3D])
-74697 ERROR [2016-08-22 08:51:45]  OAuthException
-net.oauth.OAuthProblemException: HTTP/1.1 401 Unauthorized
-URL: http://1.85.59.245/gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D&q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D
-oauth_signature base string: POST&http%3A%2F%2F1.85.59.245%2Fgdsp%2Fv1%2Fpublic-opinion%2FtopN&oauth_consumer_key%3Degoandroid%26oauth_nonce%3D953225209643153%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1471827100%26oauth_token%3Df31b5de42af7a6d3378e74c77aa507ce%26oauth_version%3D1.0%26p%3D%255BcurrentPageNo%253A1%253BpageSize%253A3000%255D%26q%3D%255Bcodes%253A000001%252C000002%252C600000%252C399001%252C000004%252C000005%252C000006%252C000007%252C000008%252C000009%252C000010%252C000011%252C000012%252C000014%252C000016%252C000017%252C000018%252C000019%252C000416%252C000421%252C000422%252C000423%252C000411%255D
->>>>>>>> HTTP request:
-POST /gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D&q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D
-Content-Type: application/json;charset=utf-8
-Authorization: OAuth oauth_token="f31b5de42af7a6d3378e74c77aa507ce", oauth_consumer_key="egoandroid", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1471827100", oauth_nonce="953225209643153", oauth_version="1.0", oauth_signature="IwSEWVufrkbTzJ3OOHLlYKlEZTg%3D"
-User-Agent: Jakarta Commons-HttpClient/3.1
-Host: 1.85.59.245
-Cookie: $Version=0; WEB=20111124; $Path=/
-Content-Length: 0
-
-
-<<<<<<<< HTTP response:
-HTTP/1.1 401 Unauthorized
-Date: Mon, 22 Aug 2016 00:51:25 GMT
-Server: Apache/2.0.64 (Unix) DAV/2 mod_jk/1.2.31
-Content-Length: 0
-Content-Type: text/plain
-
-
-	at net.oauth.client.OAuthResponseMessage.toOAuthProblemException(OAuthResponseMessage.java:83)
-	at net.oauth.client.OAuthClient.invoke(OAuthClient.java:308)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:136)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at com.util.gdsp.Opinionpost.getYJNews(Opinionpost.java:237)
-	at com.util.gdsp.Opinionpost.main(Opinionpost.java:253)
-74898 INFO  [2016-08-22 08:51:45]  重新从OAUTH服务器获取TOKEN.次数:0
-74991 DEBUG [2016-08-22 08:51:46]  accessor token:net.oauth.OAuthAccessor@208dcd41[consumer=net.oauth.OAuthConsumer@3d9e7719,requestToken=<null>,accessToken=1d13fcce952126b753bb5cb64deca64c,tokenSecret=c9c56360f57087109d07dc4ca401cfb4,properties={}]
-74992 DEBUG [2016-08-22 08:51:46]  request:OAuthMessage(POST, http://1.85.59.245/gdsp/v1/public-opinion/topN, [p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D, q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D, oauth_token=1d13fcce952126b753bb5cb64deca64c, oauth_consumer_key=egoandroid, oauth_signature_method=HMAC-SHA1, oauth_timestamp=1471827106, oauth_nonce=953230561323194, oauth_version=1.0, oauth_signature=0iW2pg13W%2FesGDmUhTCaEUZ8MpA%3D])
-80049 ERROR [2016-08-22 08:51:51]  OAuthException
-net.oauth.OAuthProblemException: HTTP/1.1 401 Unauthorized
-URL: http://1.85.59.245/gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D&q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D
-oauth_signature base string: POST&http%3A%2F%2F1.85.59.245%2Fgdsp%2Fv1%2Fpublic-opinion%2FtopN&oauth_consumer_key%3Degoandroid%26oauth_nonce%3D953230561323194%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1471827106%26oauth_token%3D1d13fcce952126b753bb5cb64deca64c%26oauth_version%3D1.0%26p%3D%255BcurrentPageNo%253A1%253BpageSize%253A3000%255D%26q%3D%255Bcodes%253A000001%252C000002%252C600000%252C399001%252C000004%252C000005%252C000006%252C000007%252C000008%252C000009%252C000010%252C000011%252C000012%252C000014%252C000016%252C000017%252C000018%252C000019%252C000416%252C000421%252C000422%252C000423%252C000411%255D
->>>>>>>> HTTP request:
-POST /gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D&q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D
-Content-Type: application/json;charset=utf-8
-Authorization: OAuth oauth_token="1d13fcce952126b753bb5cb64deca64c", oauth_consumer_key="egoandroid", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1471827106", oauth_nonce="953230561323194", oauth_version="1.0", oauth_signature="0iW2pg13W%2FesGDmUhTCaEUZ8MpA%3D"
-User-Agent: Jakarta Commons-HttpClient/3.1
-Host: 1.85.59.245
-Cookie: $Version=0; WEB=20111124; $Path=/
-Content-Length: 0
-
-
-<<<<<<<< HTTP response:
-HTTP/1.1 401 Unauthorized
-Date: Mon, 22 Aug 2016 00:51:31 GMT
-Server: Apache/2.0.64 (Unix) DAV/2 mod_jk/1.2.31
-Content-Length: 0
-Content-Type: text/plain
-
-
-	at net.oauth.client.OAuthResponseMessage.toOAuthProblemException(OAuthResponseMessage.java:83)
-	at net.oauth.client.OAuthClient.invoke(OAuthClient.java:308)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:136)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at com.util.gdsp.Opinionpost.getYJNews(Opinionpost.java:237)
-	at com.util.gdsp.Opinionpost.main(Opinionpost.java:253)
-80250 INFO  [2016-08-22 08:51:51]  重新从OAUTH服务器获取TOKEN.次数:0
-80338 DEBUG [2016-08-22 08:51:51]  accessor token:net.oauth.OAuthAccessor@102ab8bb[consumer=net.oauth.OAuthConsumer@64c60547,requestToken=<null>,accessToken=53cbcdd25bae9c5bb8144dfe391fa65c,tokenSecret=11f68e7d5ccfcf3a9261ba3ab4600a09,properties={}]
-80339 DEBUG [2016-08-22 08:51:51]  request:OAuthMessage(POST, http://1.85.59.245/gdsp/v1/public-opinion/topN, [p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D, q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D, oauth_token=53cbcdd25bae9c5bb8144dfe391fa65c, oauth_consumer_key=egoandroid, oauth_signature_method=HMAC-SHA1, oauth_timestamp=1471827111, oauth_nonce=953235907654529, oauth_version=1.0, oauth_signature=et6MXkuhuZ7GZVAMrPsrR2aVpfk%3D])
-85395 ERROR [2016-08-22 08:51:56]  OAuthException
-net.oauth.OAuthProblemException: HTTP/1.1 401 Unauthorized
-URL: http://1.85.59.245/gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D&q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D
-oauth_signature base string: POST&http%3A%2F%2F1.85.59.245%2Fgdsp%2Fv1%2Fpublic-opinion%2FtopN&oauth_consumer_key%3Degoandroid%26oauth_nonce%3D953235907654529%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1471827111%26oauth_token%3D53cbcdd25bae9c5bb8144dfe391fa65c%26oauth_version%3D1.0%26p%3D%255BcurrentPageNo%253A1%253BpageSize%253A3000%255D%26q%3D%255Bcodes%253A000001%252C000002%252C600000%252C399001%252C000004%252C000005%252C000006%252C000007%252C000008%252C000009%252C000010%252C000011%252C000012%252C000014%252C000016%252C000017%252C000018%252C000019%252C000416%252C000421%252C000422%252C000423%252C000411%255D
->>>>>>>> HTTP request:
-POST /gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D&q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D
-Content-Type: application/json;charset=utf-8
-Authorization: OAuth oauth_token="53cbcdd25bae9c5bb8144dfe391fa65c", oauth_consumer_key="egoandroid", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1471827111", oauth_nonce="953235907654529", oauth_version="1.0", oauth_signature="et6MXkuhuZ7GZVAMrPsrR2aVpfk%3D"
-User-Agent: Jakarta Commons-HttpClient/3.1
-Host: 1.85.59.245
-Cookie: $Version=0; WEB=20111124; $Path=/
-Content-Length: 0
-
-
-<<<<<<<< HTTP response:
-HTTP/1.1 401 Unauthorized
-Date: Mon, 22 Aug 2016 00:51:36 GMT
-Server: Apache/2.0.64 (Unix) DAV/2 mod_jk/1.2.31
-Content-Length: 0
-Content-Type: text/plain
-
-
-	at net.oauth.client.OAuthResponseMessage.toOAuthProblemException(OAuthResponseMessage.java:83)
-	at net.oauth.client.OAuthClient.invoke(OAuthClient.java:308)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:136)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at com.util.gdsp.Opinionpost.getYJNews(Opinionpost.java:237)
-	at com.util.gdsp.Opinionpost.main(Opinionpost.java:253)
-85596 INFO  [2016-08-22 08:51:56]  重新从OAUTH服务器获取TOKEN.次数:0
-85687 DEBUG [2016-08-22 08:51:56]  accessor token:net.oauth.OAuthAccessor@223877f8[consumer=net.oauth.OAuthConsumer@294c4c55,requestToken=<null>,accessToken=e81bd1d3c7ad4937667228073ae77d8f,tokenSecret=d044a9944f986752e6443de968860349,properties={}]
-85688 DEBUG [2016-08-22 08:51:56]  request:OAuthMessage(POST, http://1.85.59.245/gdsp/v1/public-opinion/topN, [p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D, q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D, oauth_token=e81bd1d3c7ad4937667228073ae77d8f, oauth_consumer_key=egoandroid, oauth_signature_method=HMAC-SHA1, oauth_timestamp=1471827116, oauth_nonce=953241256872583, oauth_version=1.0, oauth_signature=eISy9YiXWrp%2F4nEpbDtA6M4psYs%3D])
-90745 ERROR [2016-08-22 08:52:01]  OAuthException
-net.oauth.OAuthProblemException: HTTP/1.1 401 Unauthorized
-URL: http://1.85.59.245/gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D&q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D
-oauth_signature base string: POST&http%3A%2F%2F1.85.59.245%2Fgdsp%2Fv1%2Fpublic-opinion%2FtopN&oauth_consumer_key%3Degoandroid%26oauth_nonce%3D953241256872583%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1471827116%26oauth_token%3De81bd1d3c7ad4937667228073ae77d8f%26oauth_version%3D1.0%26p%3D%255BcurrentPageNo%253A1%253BpageSize%253A3000%255D%26q%3D%255Bcodes%253A000001%252C000002%252C600000%252C399001%252C000004%252C000005%252C000006%252C000007%252C000008%252C000009%252C000010%252C000011%252C000012%252C000014%252C000016%252C000017%252C000018%252C000019%252C000416%252C000421%252C000422%252C000423%252C000411%255D
->>>>>>>> HTTP request:
-POST /gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D&q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D
-Content-Type: application/json;charset=utf-8
-Authorization: OAuth oauth_token="e81bd1d3c7ad4937667228073ae77d8f", oauth_consumer_key="egoandroid", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1471827116", oauth_nonce="953241256872583", oauth_version="1.0", oauth_signature="eISy9YiXWrp%2F4nEpbDtA6M4psYs%3D"
-User-Agent: Jakarta Commons-HttpClient/3.1
-Host: 1.85.59.245
-Cookie: $Version=0; WEB=20111124; $Path=/
-Content-Length: 0
-
-
-<<<<<<<< HTTP response:
-HTTP/1.1 401 Unauthorized
-Date: Mon, 22 Aug 2016 00:51:41 GMT
-Server: Apache/2.0.64 (Unix) DAV/2 mod_jk/1.2.31
-Content-Length: 0
-Content-Type: text/plain
-
-
-	at net.oauth.client.OAuthResponseMessage.toOAuthProblemException(OAuthResponseMessage.java:83)
-	at net.oauth.client.OAuthClient.invoke(OAuthClient.java:308)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:136)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at com.util.gdsp.Opinionpost.getYJNews(Opinionpost.java:237)
-	at com.util.gdsp.Opinionpost.main(Opinionpost.java:253)
-90946 INFO  [2016-08-22 08:52:02]  重新从OAUTH服务器获取TOKEN.次数:0
-91038 DEBUG [2016-08-22 08:52:02]  accessor token:net.oauth.OAuthAccessor@4e9bc623[consumer=net.oauth.OAuthConsumer@54ed4c26,requestToken=<null>,accessToken=ab473878f2c26d12a0592bda14a3a0ff,tokenSecret=b271219b7a5a128e37a5513d854a165d,properties={}]
-91039 DEBUG [2016-08-22 08:52:02]  request:OAuthMessage(POST, http://1.85.59.245/gdsp/v1/public-opinion/topN, [p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D, q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D, oauth_token=ab473878f2c26d12a0592bda14a3a0ff, oauth_consumer_key=egoandroid, oauth_signature_method=HMAC-SHA1, oauth_timestamp=1471827122, oauth_nonce=953246607828913, oauth_version=1.0, oauth_signature=wN9PCDrRzKn%2BjxaHvF9e9YXeJ9k%3D])
-96096 ERROR [2016-08-22 08:52:07]  OAuthException
-net.oauth.OAuthProblemException: HTTP/1.1 401 Unauthorized
-URL: http://1.85.59.245/gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D&q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D
-oauth_signature base string: POST&http%3A%2F%2F1.85.59.245%2Fgdsp%2Fv1%2Fpublic-opinion%2FtopN&oauth_consumer_key%3Degoandroid%26oauth_nonce%3D953246607828913%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1471827122%26oauth_token%3Dab473878f2c26d12a0592bda14a3a0ff%26oauth_version%3D1.0%26p%3D%255BcurrentPageNo%253A1%253BpageSize%253A3000%255D%26q%3D%255Bcodes%253A000001%252C000002%252C600000%252C399001%252C000004%252C000005%252C000006%252C000007%252C000008%252C000009%252C000010%252C000011%252C000012%252C000014%252C000016%252C000017%252C000018%252C000019%252C000416%252C000421%252C000422%252C000423%252C000411%255D
->>>>>>>> HTTP request:
-POST /gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D&q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D
-Content-Type: application/json;charset=utf-8
-Authorization: OAuth oauth_token="ab473878f2c26d12a0592bda14a3a0ff", oauth_consumer_key="egoandroid", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1471827122", oauth_nonce="953246607828913", oauth_version="1.0", oauth_signature="wN9PCDrRzKn%2BjxaHvF9e9YXeJ9k%3D"
-User-Agent: Jakarta Commons-HttpClient/3.1
-Host: 1.85.59.245
-Cookie: $Version=0; WEB=20111124; $Path=/
-Content-Length: 0
-
-
-<<<<<<<< HTTP response:
-HTTP/1.1 401 Unauthorized
-Date: Mon, 22 Aug 2016 00:51:47 GMT
-Server: Apache/2.0.64 (Unix) DAV/2 mod_jk/1.2.31
-Content-Length: 0
-Content-Type: text/plain
-
-
-	at net.oauth.client.OAuthResponseMessage.toOAuthProblemException(OAuthResponseMessage.java:83)
-	at net.oauth.client.OAuthClient.invoke(OAuthClient.java:308)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:136)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at com.util.gdsp.Opinionpost.getYJNews(Opinionpost.java:237)
-	at com.util.gdsp.Opinionpost.main(Opinionpost.java:253)
-96297 INFO  [2016-08-22 08:52:07]  重新从OAUTH服务器获取TOKEN.次数:0
-96392 DEBUG [2016-08-22 08:52:07]  accessor token:net.oauth.OAuthAccessor@49951921[consumer=net.oauth.OAuthConsumer@5ba4eb44,requestToken=<null>,accessToken=92c2c19b2d7600a9ab1c9282006ac1f9,tokenSecret=e86e6e58642b356f31434aaf29368de7,properties={}]
-96394 DEBUG [2016-08-22 08:52:07]  request:OAuthMessage(POST, http://1.85.59.245/gdsp/v1/public-opinion/topN, [p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D, q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D, oauth_token=92c2c19b2d7600a9ab1c9282006ac1f9, oauth_consumer_key=egoandroid, oauth_signature_method=HMAC-SHA1, oauth_timestamp=1471827127, oauth_nonce=953251961729276, oauth_version=1.0, oauth_signature=Q34%2FaiWx2wcvFbAPqSlVnwxTlXo%3D])
-101449 ERROR [2016-08-22 08:52:12]  OAuthException
-net.oauth.OAuthProblemException: HTTP/1.1 401 Unauthorized
-URL: http://1.85.59.245/gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D&q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D
-oauth_signature base string: POST&http%3A%2F%2F1.85.59.245%2Fgdsp%2Fv1%2Fpublic-opinion%2FtopN&oauth_consumer_key%3Degoandroid%26oauth_nonce%3D953251961729276%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1471827127%26oauth_token%3D92c2c19b2d7600a9ab1c9282006ac1f9%26oauth_version%3D1.0%26p%3D%255BcurrentPageNo%253A1%253BpageSize%253A3000%255D%26q%3D%255Bcodes%253A000001%252C000002%252C600000%252C399001%252C000004%252C000005%252C000006%252C000007%252C000008%252C000009%252C000010%252C000011%252C000012%252C000014%252C000016%252C000017%252C000018%252C000019%252C000416%252C000421%252C000422%252C000423%252C000411%255D
->>>>>>>> HTTP request:
-POST /gdsp/v1/public-opinion/topN?p=%5BcurrentPageNo%3A1%3BpageSize%3A3000%5D&q=%5Bcodes%3A000001%2C000002%2C600000%2C399001%2C000004%2C000005%2C000006%2C000007%2C000008%2C000009%2C000010%2C000011%2C000012%2C000014%2C000016%2C000017%2C000018%2C000019%2C000416%2C000421%2C000422%2C000423%2C000411%5D
-Content-Type: application/json;charset=utf-8
-Authorization: OAuth oauth_token="92c2c19b2d7600a9ab1c9282006ac1f9", oauth_consumer_key="egoandroid", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1471827127", oauth_nonce="953251961729276", oauth_version="1.0", oauth_signature="Q34%2FaiWx2wcvFbAPqSlVnwxTlXo%3D"
-User-Agent: Jakarta Commons-HttpClient/3.1
-Host: 1.85.59.245
-Cookie: $Version=0; WEB=20111124; $Path=/
-Content-Length: 0
-
-
-<<<<<<<< HTTP response:
-HTTP/1.1 401 Unauthorized
-Date: Mon, 22 Aug 2016 00:51:52 GMT
-Server: Apache/2.0.64 (Unix) DAV/2 mod_jk/1.2.31
-Content-Length: 0
-Content-Type: text/plain
-
-
-	at net.oauth.client.OAuthResponseMessage.toOAuthProblemException(OAuthResponseMessage.java:83)
-	at net.oauth.client.OAuthClient.invoke(OAuthClient.java:308)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:136)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at net.p5w.gdsp.client.base.OauthCommonClient.invoke(OauthCommonClient.java:157)
-	at com.util.gdsp.Opinionpost.getYJNews(Opinionpost.java:237)
-	at com.util.gdsp.Opinionpost.main(Opinionpost.java:253)
+	at com.yetthin.web.dao.Opinionpost.getContent(Opinionpost.java:56)
+	at com.yetthin.web.dao.Opinionpost.main(Opinionpost.java:154)
+26763 INFO  [2016-08-25 15:27:57]  重新从OAUTH服务器获取TOKEN.次数:0
+26860 DEBUG [2016-08-25 15:27:57]  accessor token:net.oauth.OAuthAccessor@7c3fab7a[consumer=net.oauth.OAuthConsumer@38131650,requestToken=<null>,accessToken=e3f34b72e59ddcdc70433936cfef8ef4,tokenSecret=bf8137e86006d9509f9be599a17a2278,properties={}]
+26861 DEBUG [2016-08-25 15:27:57]  request:OAuthMessage(POST, http://1.85.59.245/gdsp/v1/public-opinion/topN, [p=%5BcurrentPageNo%3A1%3BpageSize%3A30%5D, q=%5Bcodes%3A000001%5D, oauth_token=e3f34b72e59ddcdc70433936cfef8ef4, oauth_consumer_key=egoandroid, oauth_signature_method=HMAC-SHA1, oauth_timestamp=1472110077, oauth_nonce=1236195347210739, oauth_version=1.0, oauth_signature=cE1ZFQSFltuxOFD7SscHqaofbBo%3D])
+0    DEBUG [2016-08-25 16:30:06]  accessor token:net.oauth.OAuthAccessor@41288b76[consumer=net.oauth.OAuthConsumer@3e9504f2,requestToken=<null>,accessToken=d582db8b25c91c95095cc2a26269905f,tokenSecret=f6dba6acf48b04c83cda20028e73b664,properties={}]
+3    DEBUG [2016-08-25 16:30:06]  request:OAuthMessage(POST, http://1.85.59.245/gdsp/v1/public-opinion/topN, [oauth_token=d582db8b25c91c95095cc2a26269905f, oauth_consumer_key=egoandroid, oauth_signature_method=HMAC-SHA1, oauth_timestamp=1472113806, oauth_nonce=1239923784248073, oauth_version=1.0, oauth_signature=74kVfamplBTt8e9JQQrfHVQQDv8%3D])
+201  DEBUG [2016-08-25 16:30:06]  responsebody:{"status":"200","items":[{"val":45.7522,"statime":"2016-08-25 00:00:00","val_rank_last":2121,"lastmodtime":"2016-08-25 15:07:30","stkname":"平安银行","val_diff":45.7522,"stkcode":"10100002220","val_rank_now":11}],"page":{"currentPageNo":1,"pageSize":20,"totalCount":0}}
+0    DEBUG [2016-08-25 16:30:28]  accessor token:net.oauth.OAuthAccessor@29defa49[consumer=net.oauth.OAuthConsumer@a6d006c,requestToken=<null>,accessToken=c1ca21204d29a09b76f4f4f86288f961,tokenSecret=60888842e3e115eb2d1499cfe09ccaf3,properties={}]
+4    DEBUG [2016-08-25 16:30:28]  request:OAuthMessage(POST, http://1.85.59.245/gdsp/v1/public-opinion/topN, [oauth_token=c1ca21204d29a09b76f4f4f86288f961, oauth_consumer_key=egoandroid, oauth_signature_method=HMAC-SHA1, oauth_timestamp=1472113828, oauth_nonce=1239946014987923, oauth_version=1.0, oauth_signature=DcIbA%2BTw7hq9s2e6QTDUTdnnHVM%3D])
+147  DEBUG [2016-08-25 16:30:28]  responsebody:{"status":"200","items":[{"val":45.7522,"statime":"2016-08-25 00:00:00","val_rank_last":2121,"lastmodtime":"2016-08-25 15:07:30","stkname":"平安银行","val_diff":45.7522,"stkcode":"10100002220","val_rank_now":11}],"page":{"currentPageNo":1,"pageSize":20,"totalCount":0}}
+0    DEBUG [2016-08-25 16:38:23]  accessor token:net.oauth.OAuthAccessor@1e5cf0c3[consumer=net.oauth.OAuthConsumer@4ccdd309,requestToken=<null>,accessToken=95004c473603c8330259bd8a80619e9f,tokenSecret=ede16e733be126c88be6b63a33904cd5,properties={}]
+3    DEBUG [2016-08-25 16:38:23]  request:OAuthMessage(POST, http://1.85.59.245/gdsp/v1/opinion/cmsproxy, [oauth_token=95004c473603c8330259bd8a80619e9f, oauth_consumer_key=egoandroid, oauth_signature_method=HMAC-SHA1, oauth_timestamp=1472114303, oauth_nonce=1240420634625477, oauth_version=1.0, oauth_signature=3KCiDglcbU990hocVVtklEWQaDM%3D])
+347  DEBUG [2016-08-25 16:38:23]  responsebody:{"response":"success","antn_action_text":"http://192.168.65.131:19000/action\u003dquery\u0026text\u003ddreall\u0026databasematch\u003dvmonth_news\u0026sort\u003drelevance\u0026starttag\u003d\u003cfont color\u003d#FF6600\u003e\u0026highlight\u003dterms,summaryterms\u0026totalresults\u003dtrue\u0026print\u003dfields\u0026xmlmeta\u003dtrue\u0026maxresults\u003d10\u0026printfields\u003dpublishdate,sourceinfo,DRETITLE,COMBINEVALUE,AUTHOR,COMBINECOUNT,sourcename,auto_summary,summary,storetime,forward_count,AUTO_SUMMARY\u0026start\u003d1\u0026fieldtext\u003d((EQUAL{1,2,3}:CPP_STATE))+AND+RANGE{-7,.}:publishdate\u0026predict\u003dfalse\u0026matchallterms\u003dtrue\u0026timeoutms\u003d","as_q2":"","OTHER_MAP":{"db":"vnews","get_reply":"0","is_hl":"1","is_sum":"1","s_date":"-7","totalresults":"1"},"action":"QUERY","normalized_string":"dreall   db:vnews get_reply:0 is_hl:1 is_sum:1 s_date:-7  status:cpp totalresults:1","__KEY_DATAS":[{"summary":"PassengersofeasyJetandBritishAirways,andtheUK’sbiggestpackageholidayoperators,couldbecharged£25iftheymakeacomplaintaboutdelays,can...","region":"","person":"","weight":"96.00","cpp_is_neg2":"0","neu_ent":"","sitename":"","sitelogo":"","neg2_ent":"","neg1_ent":"","sourcename":"","dredate":"1472114080","cpp_neu_ent":"","publishdate":"2016-08-22 00:00:00","org":"","drecontent":"","id":"1335059","author":"","sourceinfo":"英国卫报","title":"Passengers could be charged £25 for failed claims against airlines","cpp_neg1_ent":"","sitedomain":"","storetime":"1472113792","filetype":"","industry":"","combinecount":"1","sourceregion":"","links":"","sourcebigkind":"","combinevalue":"10469178","database":"VMONTH_NEWS","reference":"https%3A%2F%2Fwww.theguardian.com%2Fbusiness%2F2016%2Faug%2F22%2Fairline-passengers-charged-fee-unsuccessful-claims-delays-cancellations","cpp_neg2_ent":"","cpp_is_neg":"0","is_neg2":"0","create_time":"","zjj":"","is_neg":"0","samecount":"0"},{"summary":"但五常大米也有烦恼，而且很大。假货多了，真的五常大米自然卖不到应有的价格。有道是“五常大米假天下，天下大米乱五常”。在终端消费者能看到的是，在天猫销售的五常大米都会带有一个五常市有关部门发售的“大米防伪码”，并限定在天猫平台销售，“大米防伪码”其实很平常，现在...","region":"","person":"","weight":"96.00","cpp_is_neg2":"0","neu_ent":"","sitename":"","sitelogo":"","neg2_ent":"","neg1_ent":"","sourcename":"新财界股票","dredate":"1472114080","cpp_neu_ent":"","publishdate":"2016-08-22 08:06:21","org":"","drecontent":"","id":"1335056","author":"","sourceinfo":"新财界","title":"从2元到50元，“五常大米”的互联网实验能成功吗？","cpp_neg1_ent":"","sitedomain":"","storetime":"1472113792","filetype":"","industry":"","combinecount":"1","sourceregion":"","links":"","sourcebigkind":"","combinevalue":"10469167","database":"VMONTH_NEWS","reference":"http%3A%2F%2Ffinance.xincaijie.com%2Fxfzn%2F1374827.html","cpp_neg2_ent":"","cpp_is_neg":"0","is_neg2":"0","create_time":"","zjj":"","is_neg":"0","samecount":"0"},{"summary":"为进一步巩固两加强两遏制前期成果，按照上级行及监管部门的工作要求，该行近日决定在全行开展两加强两遏制回头看自查工作。为强力推动本次自查工作，确保取得实效，该行成立了以行长为组长、副行长为副组长，各部门经理为成员的自查工作领导小组，领导小组下设办公室，由风险管理...","region":"","person":"","weight":"96.00","cpp_is_neg2":"0","neu_ent":"","sitename":"","sitelogo":"","neg2_ent":"","neg1_ent":"","sourcename":"永州新闻网","dredate":"1472114080","cpp_neu_ent":"","publishdate":"2016-08-22 14:32:00","org":"","drecontent":"","id":"1334836","author":"","sourceinfo":"永州新闻网","title":"建行永州分行积极开展“两加强两遏制”回头看自查工作","cpp_neg1_ent":"","sitedomain":"","storetime":"1472113536","filetype":"","industry":"","combinecount":"1","sourceregion":"","links":"","sourcebigkind":"","combinevalue":"10468734","database":"VMONTH_NEWS","reference":"http%3A%2F%2Fmoney.yongzhou.gov.cn%2F2016%2F0822%2F401815.html","cpp_neg2_ent":"","cpp_is_neg":"0","is_neg2":"0","create_time":"","zjj":"","is_neg":"0","samecount":"0"},{"summary":"科技创新的竞争，本质是人才的竞争。总之，科技人才尤其是高端人才匮乏依然是制约我市科技创新的短板。总之，我市要贯彻落实“用效益体现价值、用财富回报才智”的人才工作观，用政策引人才、平台聚人才、产业兴人才、环境留人才，加快构建创新人才和产业技能人才“双支撑”的人才...","region":"","person":"","weight":"96.00","cpp_is_neg2":"0","neu_ent":"","sitename":"","sitelogo":"","neg2_ent":"","neg1_ent":"","sourcename":"德州新闻网","dredate":"1472114080","cpp_neu_ent":"","publishdate":"2016-08-24 08:59:00","org":"","drecontent":"","id":"1334739","author":"","sourceinfo":"德州新闻网","title":"记者观察：科技创新，须过“三道坎”","cpp_neg1_ent":"","sitedomain":"","storetime":"1472113280","filetype":"","industry":"","combinecount":"1","sourceregion":"","links":"","sourcebigkind":"","combinevalue":"10468517","database":"VMONTH_NEWS","reference":"http%3A%2F%2Fwww.dezhoudaily.com%2Fnews%2Fdezhou%2Ffolder134%2F2016%2F08%2F2016-08-241218519.html","cpp_neg2_ent":"","cpp_is_neg":"0","is_neg2":"0","create_time":"","zjj":"","is_neg":"0","samecount":"0"},{"summary":"TeamGBmayhavebroughtbackdozensofmedalsfromRio,butastheytoucheddownatHeathrowairportitwasteamsponsorBritishAirwaysthatseemedtohaves...","region":"","person":"","weight":"96.00","cpp_is_neg2":"0","neu_ent":"","sitename":"","sitelogo":"","neg2_ent":"","neg1_ent":"","sourcename":"","dredate":"1472113960","cpp_neu_ent":"","publishdate":"2016-08-23 00:00:00","org":"","drecontent":"","id":"1334655","author":"","sourceinfo":"英国卫报","title":"British Airways strikes gold with Team GB praise on Twitter","cpp_neg1_ent":"","sitedomain":"","storetime":"1472113792","filetype":"","industry":"","combinecount":"1","sourceregion":"","links":"","sourcebigkind":"","combinevalue":"10469035","database":"VMONTH_NEWS","reference":"https%3A%2F%2Fwww.theguardian.com%2Fsport%2F2016%2Faug%2F23%2Fbritish-airways-strikes-gold-with-team-gb-praise-on-twitter","cpp_neg2_ent":"","cpp_is_neg":"0","is_neg2":"0","create_time":"","zjj":"","is_neg":"0","samecount":"0"},{"summary":"OnTwitterthisweekthemysteryofJeremyCorbyn’strainseatquicklybecamesimply#traingate,trailingcloudsofspeculation,witandinvectiveacros...","region":"","person":"","weight":"96.00","cpp_is_neg2":"0","neu_ent":"","sitename":"","sitelogo":"","neg2_ent":"","neg1_ent":"","sourcename":"","dredate":"1472113960","cpp_neu_ent":"","publishdate":"2016-08-24 00:00:00","org":"","drecontent":"","id":"1334646","author":"","sourceinfo":"英国卫报","title":"The Guardian view on traingate: Jeremy Corbyn’s search for standing | Editorial","cpp_neg1_ent":"","sitedomain":"","storetime":"1472113792","filetype":"","industry":"","combinecount":"1","sourceregion":"","links":"","sourcebigkind":"","combinevalue":"10469007","database":"VMONTH_NEWS","reference":"https%3A%2F%2Fwww.theguardian.com%2Fcommentisfree%2F2016%2Faug%2F24%2Fthe-guardian-view-on-traingate-jeremy-corbyns-search-for-standing","cpp_neg2_ent":"","cpp_is_neg":"0","is_neg2":"0","create_time":"","zjj":"","is_neg":"0","samecount":"0"},{"summary":"2016年8月22日下午，市旅游局局长严明、副局长陈义周以及管理科科长黎国梁一行琅琊区督查文明创建工作，区旅游局局长刘付玲陪同。对照旅行社文明创建工作需遵守的八条规定，严局长一行先后对阳光旅行社、晨光旅行社、颐和旅行社、百事通旅游等单位文明创建工作进行了详细检...","region":"","person":"","weight":"96.00","cpp_is_neg2":"0","neu_ent":"","sitename":"","sitelogo":"","neg2_ent":"","neg1_ent":"","sourcename":"市旅游局","dredate":"1472113960","cpp_neu_ent":"","publishdate":"2016-08-23 17:02:34","org":"","drecontent":"","id":"1334532","author":"","sourceinfo":"永州新闻网","title":"市旅游局来琅琊区督查文明创建工作","cpp_neg1_ent":"","sitedomain":"","storetime":"1472113536","filetype":"","industry":"","combinecount":"1","sourceregion":"","links":"","sourcebigkind":"","combinevalue":"10468763","database":"VMONTH_NEWS","reference":"http%3A%2F%2Ftour.yongzhou.gov.cn%2F2016%2F0823%2F401809.html","cpp_neg2_ent":"","cpp_is_neg":"0","is_neg2":"0","create_time":"","zjj":"","is_neg":"0","samecount":"0"},{"summary":"目前，恒丰集团产能已达153万纱锭。期待更多企业张开臂膀，实现开放合作发展据市经信部门介绍，目前我市企业在对外合作方面主要包括扩张性收购、被并购、非上市股权融资、项目合作、研发合作、市场合作等6种形式。通过合作，这些企业绝大部分都实现了较快发展。...","region":"","person":"","weight":"96.00","cpp_is_neg2":"0","neu_ent":"","sitename":"","sitelogo":"","neg2_ent":"","neg1_ent":"","sourcename":"德州新闻网","dredate":"1472113960","cpp_neu_ent":"","publishdate":"2016-08-24 08:52:00","org":"","drecontent":"","id":"1334423","author":"","sourceinfo":"德州新闻网","title":"德州企业以融合开放谋发展 有容乃大合作图强","cpp_neg1_ent":"","sitedomain":"","storetime":"1472113280","filetype":"","industry":"","combinecount":"1","sourceregion":"","links":"","sourcebigkind":"","combinevalue":"10468518","database":"VMONTH_NEWS","reference":"http%3A%2F%2Fwww.dezhoudaily.com%2Fnews%2Fdezhou%2Ffolder134%2F2016%2F08%2F2016-08-241218508.html","cpp_neg2_ent":"","cpp_is_neg":"0","is_neg2":"0","create_time":"","zjj":"","is_neg":"0","samecount":"0"},{"summary":"作为一家互联网创业公司，乐车邦的官方域名选得非常恰当，三拼.COM价格亲民，应用价值颇高。不仅懂得保护域名，乐车邦的发展前景也相当乐观。创业初期，乐车邦获得红杉资本2600万元种子轮融资；同一个月内融资两次，而且都是重量级的，可见资本对乐车邦非常看好。","region":"","person":"","weight":"96.00","cpp_is_neg2":"0","neu_ent":"","sitename":"","sitelogo":"","neg2_ent":"","neg1_ent":"","sourcename":"","dredate":"1472113960","cpp_neu_ent":"","publishdate":"2016-08-24 12:58:00","org":"","drecontent":"","id":"1334380","author":"","sourceinfo":"易名中国","title":"乐车邦迄今为止融资超2亿元 官方域名系三拼","cpp_neg1_ent":"","sitedomain":"","storetime":"1472113280","filetype":"","industry":"","combinecount":"1","sourceregion":"","links":"","sourcebigkind":"","combinevalue":"10468378","database":"VMONTH_NEWS","reference":"http%3A%2F%2Fnews.ename.cn%2Fyuming_20160825_105778_1.html","cpp_neg2_ent":"","cpp_is_neg":"0","is_neg2":"0","create_time":"","zjj":"","is_neg":"0","samecount":"0"},{"summary":"一、市场动态单位：元/吨区域牌号8.228.19涨跌华北4045M（中石化三井）155001550004045（吉化）衡水地区140001400003960Q、9650Q（朗盛）19500-2000019500-200000512/552/5890F（宁波SK...","region":"","person":"","weight":"96.00","cpp_is_neg2":"0","neu_ent":"","sitename":"","sitelogo":"","neg2_ent":"","neg1_ent":"","sourcename":"","dredate":"1472113705","cpp_neu_ent":"","publishdate":"2016-08-22 16:56:00","org":"","drecontent":"","id":"1334353","author":"","sourceinfo":"隆众石化网","title":"支撑有限 弱势整理","cpp_neg1_ent":"","sitedomain":"","storetime":"1472113280","filetype":"","industry":"","combinecount":"1","sourceregion":"","links":"","sourcebigkind":"","combinevalue":"10468389","database":"VMONTH_NEWS","reference":"http%3A%2F%2Fnewx.oilchem.net%2Fx%2F554%2F110%2F4%2F3%2F564752.htm","cpp_neg2_ent":"","cpp_is_neg":"0","is_neg2":"0","create_time":"","zjj":"","is_neg":"0","samecount":"0"}],"__elapse":"108","NORMALIZE_AS_Q":"dreall   status:cpp","count_num":"53598","NORMALIZED_MAP":{"as_q":"dreall  ","db":"vnews","get_reply":"0","is_hl":"1","is_sum":"1","s_date":"-7","samecount":"false","status":"cpp","totalresults":"1"}}
+0    DEBUG [2016-08-25 16:39:20]  accessor token:net.oauth.OAuthAccessor@41288b76[consumer=net.oauth.OAuthConsumer@3e9504f2,requestToken=<null>,accessToken=e2322e60dc4c09df08ab5ec24c0d1ca2,tokenSecret=2e5394353523d8e4a7cb554539e230cb,properties={}]
+3    DEBUG [2016-08-25 16:39:20]  request:OAuthMessage(POST, http://1.85.59.245/gdsp/v1/public-opinion/topN, [oauth_token=e2322e60dc4c09df08ab5ec24c0d1ca2, oauth_consumer_key=egoandroid, oauth_signature_method=HMAC-SHA1, oauth_timestamp=1472114360, oauth_nonce=1240477871572048, oauth_version=1.0, oauth_signature=7vhY0RapoNM6rXq2VxVXMMCTNRA%3D])
+146  DEBUG [2016-08-25 16:39:20]  responsebody:{"status":"200","items":[{"val":45.7522,"statime":"2016-08-25 00:00:00","val_rank_last":2121,"lastmodtime":"2016-08-25 15:07:30","stkname":"平安银行","val_diff":45.7522,"stkcode":"10100002220","val_rank_now":11}],"page":{"currentPageNo":1,"pageSize":20,"totalCount":0}}
+0    DEBUG [2016-08-25 16:39:33]  accessor token:net.oauth.OAuthAccessor@1e5cf0c3[consumer=net.oauth.OAuthConsumer@4ccdd309,requestToken=<null>,accessToken=39ed4997ac8a9ea38f3662e48bd5549f,tokenSecret=b5f45a4d42fd90223b452caa5e1ed585,properties={}]
+3    DEBUG [2016-08-25 16:39:33]  request:OAuthMessage(POST, http://1.85.59.245/gdsp/v1/opinion/cmsproxy, [oauth_token=39ed4997ac8a9ea38f3662e48bd5549f, oauth_consumer_key=egoandroid, oauth_signature_method=HMAC-SHA1, oauth_timestamp=1472114373, oauth_nonce=1240490881807515, oauth_version=1.0, oauth_signature=EE4D%2BXpJPfh4Xu1GTuDCLZfb4Ww%3D])
+219  DEBUG [2016-08-25 16:39:33]  responsebody:{"response":"success","antn_action_text":"http://192.168.65.131:19000/action\u003dquery\u0026text\u003ddreall\u0026databasematch\u003dvmonth_news\u0026sort\u003drelevance\u0026starttag\u003d\u003cfont color\u003d#FF6600\u003e\u0026highlight\u003dterms,summaryterms\u0026totalresults\u003dtrue\u0026print\u003dfields\u0026xmlmeta\u003dtrue\u0026maxresults\u003d10\u0026printfields\u003dpublishdate,sourceinfo,DRETITLE,COMBINEVALUE,AUTHOR,COMBINECOUNT,sourcename,auto_summary,summary,storetime,forward_count,AUTO_SUMMARY\u0026start\u003d1\u0026fieldtext\u003d((EQUAL{1,2,3}:CPP_STATE))+AND+RANGE{-7,.}:publishdate\u0026predict\u003dfalse\u0026matchallterms\u003dtrue\u0026timeoutms\u003d","as_q2":"","OTHER_MAP":{"db":"vnews","get_reply":"0","is_hl":"1","is_sum":"1","s_date":"-7","totalresults":"1"},"action":"QUERY","normalized_string":"dreall   db:vnews get_reply:0 is_hl:1 is_sum:1 s_date:-7  status:cpp totalresults:1","__KEY_DATAS":[{"summary":"PassengersofeasyJetandBritishAirways,andtheUK’sbiggestpackageholidayoperators,couldbecharged£25iftheymakeacomplaintaboutdelays,can...","region":"","person":"","weight":"96.00","cpp_is_neg2":"0","neu_ent":"","sitename":"","sitelogo":"","neg2_ent":"","neg1_ent":"","sourcename":"","dredate":"1472114080","cpp_neu_ent":"","publishdate":"2016-08-22 00:00:00","org":"","drecontent":"","id":"1335059","author":"","sourceinfo":"英国卫报","title":"Passengers could be charged £25 for failed claims against airlines","cpp_neg1_ent":"","sitedomain":"","storetime":"1472113792","filetype":"","industry":"","combinecount":"1","sourceregion":"","links":"","sourcebigkind":"","combinevalue":"10469178","database":"VMONTH_NEWS","reference":"https%3A%2F%2Fwww.theguardian.com%2Fbusiness%2F2016%2Faug%2F22%2Fairline-passengers-charged-fee-unsuccessful-claims-delays-cancellations","cpp_neg2_ent":"","cpp_is_neg":"0","is_neg2":"0","create_time":"","zjj":"","is_neg":"0","samecount":"0"},{"summary":"但五常大米也有烦恼，而且很大。假货多了，真的五常大米自然卖不到应有的价格。有道是“五常大米假天下，天下大米乱五常”。在终端消费者能看到的是，在天猫销售的五常大米都会带有一个五常市有关部门发售的“大米防伪码”，并限定在天猫平台销售，“大米防伪码”其实很平常，现在...","region":"","person":"","weight":"96.00","cpp_is_neg2":"0","neu_ent":"","sitename":"","sitelogo":"","neg2_ent":"","neg1_ent":"","sourcename":"新财界股票","dredate":"1472114080","cpp_neu_ent":"","publishdate":"2016-08-22 08:06:21","org":"","drecontent":"","id":"1335056","author":"","sourceinfo":"新财界","title":"从2元到50元，“五常大米”的互联网实验能成功吗？","cpp_neg1_ent":"","sitedomain":"","storetime":"1472113792","filetype":"","industry":"","combinecount":"1","sourceregion":"","links":"","sourcebigkind":"","combinevalue":"10469167","database":"VMONTH_NEWS","reference":"http%3A%2F%2Ffinance.xincaijie.com%2Fxfzn%2F1374827.html","cpp_neg2_ent":"","cpp_is_neg":"0","is_neg2":"0","create_time":"","zjj":"","is_neg":"0","samecount":"0"},{"summary":"为进一步巩固两加强两遏制前期成果，按照上级行及监管部门的工作要求，该行近日决定在全行开展两加强两遏制回头看自查工作。为强力推动本次自查工作，确保取得实效，该行成立了以行长为组长、副行长为副组长，各部门经理为成员的自查工作领导小组，领导小组下设办公室，由风险管理...","region":"","person":"","weight":"96.00","cpp_is_neg2":"0","neu_ent":"","sitename":"","sitelogo":"","neg2_ent":"","neg1_ent":"","sourcename":"永州新闻网","dredate":"1472114080","cpp_neu_ent":"","publishdate":"2016-08-22 14:32:00","org":"","drecontent":"","id":"1334836","author":"","sourceinfo":"永州新闻网","title":"建行永州分行积极开展“两加强两遏制”回头看自查工作","cpp_neg1_ent":"","sitedomain":"","storetime":"1472113536","filetype":"","industry":"","combinecount":"1","sourceregion":"","links":"","sourcebigkind":"","combinevalue":"10468734","database":"VMONTH_NEWS","reference":"http%3A%2F%2Fmoney.yongzhou.gov.cn%2F2016%2F0822%2F401815.html","cpp_neg2_ent":"","cpp_is_neg":"0","is_neg2":"0","create_time":"","zjj":"","is_neg":"0","samecount":"0"},{"summary":"科技创新的竞争，本质是人才的竞争。总之，科技人才尤其是高端人才匮乏依然是制约我市科技创新的短板。总之，我市要贯彻落实“用效益体现价值、用财富回报才智”的人才工作观，用政策引人才、平台聚人才、产业兴人才、环境留人才，加快构建创新人才和产业技能人才“双支撑”的人才...","region":"","person":"","weight":"96.00","cpp_is_neg2":"0","neu_ent":"","sitename":"","sitelogo":"","neg2_ent":"","neg1_ent":"","sourcename":"德州新闻网","dredate":"1472114080","cpp_neu_ent":"","publishdate":"2016-08-24 08:59:00","org":"","drecontent":"","id":"1334739","author":"","sourceinfo":"德州新闻网","title":"记者观察：科技创新，须过“三道坎”","cpp_neg1_ent":"","sitedomain":"","storetime":"1472113280","filetype":"","industry":"","combinecount":"1","sourceregion":"","links":"","sourcebigkind":"","combinevalue":"10468517","database":"VMONTH_NEWS","reference":"http%3A%2F%2Fwww.dezhoudaily.com%2Fnews%2Fdezhou%2Ffolder134%2F2016%2F08%2F2016-08-241218519.html","cpp_neg2_ent":"","cpp_is_neg":"0","is_neg2":"0","create_time":"","zjj":"","is_neg":"0","samecount":"0"},{"summary":"TeamGBmayhavebroughtbackdozensofmedalsfromRio,butastheytoucheddownatHeathrowairportitwasteamsponsorBritishAirwaysthatseemedtohaves...","region":"","person":"","weight":"96.00","cpp_is_neg2":"0","neu_ent":"","sitename":"","sitelogo":"","neg2_ent":"","neg1_ent":"","sourcename":"","dredate":"1472113960","cpp_neu_ent":"","publishdate":"2016-08-23 00:00:00","org":"","drecontent":"","id":"1334655","author":"","sourceinfo":"英国卫报","title":"British Airways strikes gold with Team GB praise on Twitter","cpp_neg1_ent":"","sitedomain":"","storetime":"1472113792","filetype":"","industry":"","combinecount":"1","sourceregion":"","links":"","sourcebigkind":"","combinevalue":"10469035","database":"VMONTH_NEWS","reference":"https%3A%2F%2Fwww.theguardian.com%2Fsport%2F2016%2Faug%2F23%2Fbritish-airways-strikes-gold-with-team-gb-praise-on-twitter","cpp_neg2_ent":"","cpp_is_neg":"0","is_neg2":"0","create_time":"","zjj":"","is_neg":"0","samecount":"0"},{"summary":"OnTwitterthisweekthemysteryofJeremyCorbyn’strainseatquicklybecamesimply#traingate,trailingcloudsofspeculation,witandinvectiveacros...","region":"","person":"","weight":"96.00","cpp_is_neg2":"0","neu_ent":"","sitename":"","sitelogo":"","neg2_ent":"","neg1_ent":"","sourcename":"","dredate":"1472113960","cpp_neu_ent":"","publishdate":"2016-08-24 00:00:00","org":"","drecontent":"","id":"1334646","author":"","sourceinfo":"英国卫报","title":"The Guardian view on traingate: Jeremy Corbyn’s search for standing | Editorial","cpp_neg1_ent":"","sitedomain":"","storetime":"1472113792","filetype":"","industry":"","combinecount":"1","sourceregion":"","links":"","sourcebigkind":"","combinevalue":"10469007","database":"VMONTH_NEWS","reference":"https%3A%2F%2Fwww.theguardian.com%2Fcommentisfree%2F2016%2Faug%2F24%2Fthe-guardian-view-on-traingate-jeremy-corbyns-search-for-standing","cpp_neg2_ent":"","cpp_is_neg":"0","is_neg2":"0","create_time":"","zjj":"","is_neg":"0","samecount":"0"},{"summary":"2016年8月22日下午，市旅游局局长严明、副局长陈义周以及管理科科长黎国梁一行琅琊区督查文明创建工作，区旅游局局长刘付玲陪同。对照旅行社文明创建工作需遵守的八条规定，严局长一行先后对阳光旅行社、晨光旅行社、颐和旅行社、百事通旅游等单位文明创建工作进行了详细检...","region":"","person":"","weight":"96.00","cpp_is_neg2":"0","neu_ent":"","sitename":"","sitelogo":"","neg2_ent":"","neg1_ent":"","sourcename":"市旅游局","dredate":"1472113960","cpp_neu_ent":"","publishdate":"2016-08-23 17:02:34","org":"","drecontent":"","id":"1334532","author":"","sourceinfo":"永州新闻网","title":"市旅游局来琅琊区督查文明创建工作","cpp_neg1_ent":"","sitedomain":"","storetime":"1472113536","filetype":"","industry":"","combinecount":"1","sourceregion":"","links":"","sourcebigkind":"","combinevalue":"10468763","database":"VMONTH_NEWS","reference":"http%3A%2F%2Ftour.yongzhou.gov.cn%2F2016%2F0823%2F401809.html","cpp_neg2_ent":"","cpp_is_neg":"0","is_neg2":"0","create_time":"","zjj":"","is_neg":"0","samecount":"0"},{"summary":"目前，恒丰集团产能已达153万纱锭。期待更多企业张开臂膀，实现开放合作发展据市经信部门介绍，目前我市企业在对外合作方面主要包括扩张性收购、被并购、非上市股权融资、项目合作、研发合作、市场合作等6种形式。通过合作，这些企业绝大部分都实现了较快发展。...","region":"","person":"","weight":"96.00","cpp_is_neg2":"0","neu_ent":"","sitename":"","sitelogo":"","neg2_ent":"","neg1_ent":"","sourcename":"德州新闻网","dredate":"1472113960","cpp_neu_ent":"","publishdate":"2016-08-24 08:52:00","org":"","drecontent":"","id":"1334423","author":"","sourceinfo":"德州新闻网","title":"德州企业以融合开放谋发展 有容乃大合作图强","cpp_neg1_ent":"","sitedomain":"","storetime":"1472113280","filetype":"","industry":"","combinecount":"1","sourceregion":"","links":"","sourcebigkind":"","combinevalue":"10468518","database":"VMONTH_NEWS","reference":"http%3A%2F%2Fwww.dezhoudaily.com%2Fnews%2Fdezhou%2Ffolder134%2F2016%2F08%2F2016-08-241218508.html","cpp_neg2_ent":"","cpp_is_neg":"0","is_neg2":"0","create_time":"","zjj":"","is_neg":"0","samecount":"0"},{"summary":"作为一家互联网创业公司，乐车邦的官方域名选得非常恰当，三拼.COM价格亲民，应用价值颇高。不仅懂得保护域名，乐车邦的发展前景也相当乐观。创业初期，乐车邦获得红杉资本2600万元种子轮融资；同一个月内融资两次，而且都是重量级的，可见资本对乐车邦非常看好。","region":"","person":"","weight":"96.00","cpp_is_neg2":"0","neu_ent":"","sitename":"","sitelogo":"","neg2_ent":"","neg1_ent":"","sourcename":"","dredate":"1472113960","cpp_neu_ent":"","publishdate":"2016-08-24 12:58:00","org":"","drecontent":"","id":"1334380","author":"","sourceinfo":"易名中国","title":"乐车邦迄今为止融资超2亿元 官方域名系三拼","cpp_neg1_ent":"","sitedomain":"","storetime":"1472113280","filetype":"","industry":"","combinecount":"1","sourceregion":"","links":"","sourcebigkind":"","combinevalue":"10468378","database":"VMONTH_NEWS","reference":"http%3A%2F%2Fnews.ename.cn%2Fyuming_20160825_105778_1.html","cpp_neg2_ent":"","cpp_is_neg":"0","is_neg2":"0","create_time":"","zjj":"","is_neg":"0","samecount":"0"},{"summary":"一、市场动态单位：元/吨区域牌号8.228.19涨跌华北4045M（中石化三井）155001550004045（吉化）衡水地区140001400003960Q、9650Q（朗盛）19500-2000019500-200000512/552/5890F（宁波SK...","region":"","person":"","weight":"96.00","cpp_is_neg2":"0","neu_ent":"","sitename":"","sitelogo":"","neg2_ent":"","neg1_ent":"","sourcename":"","dredate":"1472113705","cpp_neu_ent":"","publishdate":"2016-08-22 16:56:00","org":"","drecontent":"","id":"1334353","author":"","sourceinfo":"隆众石化网","title":"支撑有限 弱势整理","cpp_neg1_ent":"","sitedomain":"","storetime":"1472113280","filetype":"","industry":"","combinecount":"1","sourceregion":"","links":"","sourcebigkind":"","combinevalue":"10468389","database":"VMONTH_NEWS","reference":"http%3A%2F%2Fnewx.oilchem.net%2Fx%2F554%2F110%2F4%2F3%2F564752.htm","cpp_neg2_ent":"","cpp_is_neg":"0","is_neg2":"0","create_time":"","zjj":"","is_neg":"0","samecount":"0"}],"__elapse":"108","NORMALIZE_AS_Q":"dreall   status:cpp","count_num":"53598","NORMALIZED_MAP":{"as_q":"dreall  ","db":"vnews","get_reply":"0","is_hl":"1","is_sum":"1","s_date":"-7","samecount":"false","status":"cpp","totalresults":"1"}}
+0    DEBUG [2016-08-25 16:50:14]  accessor token:net.oauth.OAuthAccessor@2977cbf7[consumer=net.oauth.OAuthConsumer@6e01e418,requestToken=<null>,accessToken=1f1b3173ad2d36ef5b966657aa02954e,tokenSecret=6aaa749b10aa958f02ac2c6f58998e20,properties={}]
+3    DEBUG [2016-08-25 16:50:14]  request:OAuthMessage(POST, http://1.85.59.245/gdsp/v1/public-opinion/topN, [oauth_token=1f1b3173ad2d36ef5b966657aa02954e, oauth_consumer_key=egoandroid, oauth_signature_method=HMAC-SHA1, oauth_timestamp=1472115014, oauth_nonce=1241131633038188, oauth_version=1.0, oauth_signature=rFMZV0GFtbZtaRKF2W0ANjTo0hc%3D])
+211  DEBUG [2016-08-25 16:50:14]  responsebody:{"status":"200","items":[{"val":46.6501,"statime":"2016-08-25 00:00:00","val_rank_last":2121,"lastmodtime":"2016-08-25 16:07:31","stkname":"平安银行","val_diff":46.6501,"stkcode":"10100002220","val_rank_now":14}],"page":{"currentPageNo":1,"pageSize":20,"totalCount":0}}
+0    DEBUG [2016-08-25 16:50:28]  accessor token:net.oauth.OAuthAccessor@18443e37[consumer=net.oauth.OAuthConsumer@2c9596e5,requestToken=<null>,accessToken=65a57c4b12628fd9e87f0eef97c5e5b1,tokenSecret=dce697a16aa736e0713828c335a4e3a4,properties={}]
+4    DEBUG [2016-08-25 16:50:28]  request:OAuthMessage(GET, http://1.85.59.245/gdsp/v1/000002/opinion-index, [oauth_token=65a57c4b12628fd9e87f0eef97c5e5b1, oauth_consumer_key=egoandroid, oauth_signature_method=HMAC-SHA1, oauth_timestamp=1472115028, oauth_nonce=1241145446822835, oauth_version=1.0, oauth_signature=%2BWugH8DKfQF3rrIbXQ9XxzP3yQE%3D])
+142  DEBUG [2016-08-25 16:50:28]  responsebody:{"status":"505","info":"cn.com.cninfo.framework.app.intergration.dao.FrameworkDAOException: org.springframework.jdbc.UncategorizedSQLException: SqlMapClient operation; uncategorized SQLException for SQL []; SQL state [HY000]; error code [1449];   \n--- The error occurred in ibatis/sqlmap-opinion.xml.  \n--- The error occurred while applying a parameter map.  \n--- Check the opinion.findResultDetailByStockcode-InlineParameterMap.  \n--- Check the statement (query failed).  \n--- Cause: java.sql.SQLException: The user specified as a definer ('root'@'%') does not exist; nested exception is com.ibatis.common.jdbc.exception.NestedSQLException:   \n--- The error occurred in ibatis/sqlmap-opinion.xml.  \n--- The error occurred while applying a parameter map.  \n--- Check the opinion.findResultDetailByStockcode-InlineParameterMap.  \n--- Check the statement (query failed).  \n--- Cause: java.sql.SQLException: The user specified as a definer ('root'@'%') does not exist"}
+0    DEBUG [2016-08-25 16:54:47]  accessor token:net.oauth.OAuthAccessor@1e5cf0c3[consumer=net.oauth.OAuthConsumer@4ccdd309,requestToken=<null>,accessToken=b3c56cc01f3626a8908bc6fe516b981b,tokenSecret=686fb1ce3b09cce76b2f8ff7f51be50e,properties={}]
+3    DEBUG [2016-08-25 16:54:47]  request:OAuthMessage(POST, http://1.85.59.245/gdsp/v1/opinion/cmsproxy, [oauth_token=b3c56cc01f3626a8908bc6fe516b981b, oauth_consumer_key=egoandroid, oauth_signature_method=HMAC-SHA1, oauth_timestamp=1472115287, oauth_nonce=1241405140473124, oauth_version=1.0, oauth_signature=UVIcw2id9XlB0Sw43QDFENRMPzk%3D])
+332  DEBUG [2016-08-25 16:54:48]  responsebody:{"response":"success","antn_action_text":"http://192.168.65.132:19000/action\u003dquery\u0026text\u003ddreall\u0026databasematch\u003dvmonth_news\u0026sort\u003drelevance\u0026starttag\u003d\u003cfont color\u003d#FF6600\u003e\u0026highlight\u003dterms,summaryterms\u0026totalresults\u003dtrue\u0026print\u003dfields\u0026xmlmeta\u003dtrue\u0026maxresults\u003d10\u0026printfields\u003dpublishdate,sourceinfo,DRETITLE,COMBINEVALUE,AUTHOR,COMBINECOUNT,sourcename,auto_summary,summary,storetime,forward_count,AUTO_SUMMARY\u0026start\u003d1\u0026fieldtext\u003d((EQUAL{1,2,3}:CPP_STATE))+AND+RANGE{-7,.}:publishdate\u0026predict\u003dfalse\u0026matchallterms\u003dtrue\u0026timeoutms\u003d","as_q2":"","OTHER_MAP":{"db":"vnews","get_reply":"0","is_hl":"1","is_sum":"1","s_date":"-7","totalresults":"1"},"action":"QUERY","normalized_string":"dreall   db:vnews get_reply:0 is_hl:1 is_sum:1 s_date:-7  status:cpp totalresults:1","__KEY_DATAS":[{"summary":"芝加哥期货交易所(CBOT)大豆期货周一上升，指标11月大豆合约触及一个月高位，交易商表示，美国大豆出口需求支持市场。美国农业部报告，上周出口验验美国大豆96.1414万吨，高于市场预估区间65-85万吨。油价周一收低超过3%，从上周触及的两个月高位回落，因担...","region":"","person":"","weight":"96.00","cpp_is_neg2":"0","neu_ent":"","sitename":"","sitelogo":"","neg2_ent":"","neg1_ent":"","sourcename":"中国国际期货","dredate":"1472115248","cpp_neu_ent":"","publishdate":"2016-08-23 09:32:00","org":"","drecontent":"","id":"1336586","author":"","sourceinfo":"网上中期","title":"玲龍观外盘2016.08.23","cpp_neg1_ent":"","sitedomain":"","storetime":"1472114816","filetype":"","industry":"","combinecount":"1","sourceregion":"","links":"","sourcebigkind":"","combinevalue":"10476906","database":"VMONTH_NEWS","reference":"http%3A%2F%2Fshandong.cifco.net%2Fregion%2Fshow.shtml%3Fid%3D417286-70313%26key1%3D%26key2%3D12%2C13%26type%3D10","cpp_neg2_ent":"","cpp_is_neg":"0","is_neg2":"0","create_time":"","zjj":"","is_neg":"0","samecount":"0"},{"summary":"单位产品上一周报价上周均价名称型号2016-08-152016-08-162016-08-172016-08-182016-08-19均价北海石化-￥:2000￥:2000￥:2000￥:2000￥:2000￥:2000滨阳燃化70#￥:2050￥:2050￥...","region":"","person":"","weight":"96.00","cpp_is_neg2":"0","neu_ent":"","sitename":"","sitelogo":"","neg2_ent":"","neg1_ent":"","sourcename":"中国沥青网","dredate":"1472115248","cpp_neu_ent":"","publishdate":"2016-08-22 09:48:38","org":"","drecontent":"","id":"1336279","author":"","sourceinfo":"中国沥青网","title":"一周重交沥青价格汇总 (2016-08-15到2016-08-19)","cpp_neg1_ent":"","sitedomain":"","storetime":"1472114432","filetype":"","industry":"","combinecount":"1","sourceregion":"","links":"","sourcebigkind":"","combinevalue":"10470531","database":"VMONTH_NEWS","reference":"http%3A%2F%2Fwww.sinoasphalt.com%2Fmarket%2Fchart_zj_list%282016-08-15%E5%88%B02016-08-19%29.htm","cpp_neg2_ent":"","cpp_is_neg":"0","is_neg2":"0","create_time":"","zjj":"","is_neg":"0","samecount":"0"},{"summary":"借力“一带一路”战略实施，三一集团一方面成立“一带一路”战略小组，推进风电、矿产、港口、住宅工业化、油气化工五类优势项目“出海”；一方面与中建、中国铁建等大型中资公司合作，“抱团出海”参与“一带一路”国家重大项目建设。事实上，三一在“一带一路”早有布局。“国家...","region":"","person":"","weight":"96.00","cpp_is_neg2":"0","neu_ent":"","sitename":"","sitelogo":"","neg2_ent":"","neg1_ent":"","sourcename":"湖南新闻网","dredate":"1472115110","cpp_neu_ent":"","publishdate":"2016-08-22 09:52:00","org":"","drecontent":"","id":"1336150","author":"","sourceinfo":"中新网地方新闻","title":"中国民企三一集团弄潮\u0026quot;一带一路\u0026quot; 开凿海外成长新领地","cpp_neg1_ent":"","sitedomain":"","storetime":"1472114944","filetype":"","industry":"","combinecount":"1","sourceregion":"","links":"","sourcebigkind":"","combinevalue":"10479233","database":"VMONTH_NEWS","reference":"http%3A%2F%2Fwww.hn.chinanews.com%2Fnews%2F0822%2Fcjxx%2F2016%2F280582.html","cpp_neg2_ent":"","cpp_is_neg":"0","is_neg2":"0","create_time":"","zjj":"","is_neg":"0","samecount":"0"},{"summary":"标普500指数收涨4.26点，涨幅0.20%，报2186.90点，其中原材料指数涨0.79%、能源指数涨0.44%。英国富时100指数收涨0.59%，报6868.51点。伊朗释放信号，可能支持联合行动，油价上涨。芝加哥期货交易所(CBOT)大豆期货周二收低，盘...","region":"","person":"","weight":"96.00","cpp_is_neg2":"0","neu_ent":"","sitename":"","sitelogo":"","neg2_ent":"","neg1_ent":"","sourcename":"中国国际期货","dredate":"1472115110","cpp_neu_ent":"","publishdate":"2016-08-24 09:13:00","org":"","drecontent":"","id":"1336068","author":"","sourceinfo":"网上中期","title":"玲龍观外盘2016.08.24","cpp_neg1_ent":"","sitedomain":"","storetime":"1472114816","filetype":"","industry":"","combinecount":"1","sourceregion":"","links":"","sourcebigkind":"","combinevalue":"10476867","database":"VMONTH_NEWS","reference":"http%3A%2F%2Fshandong.cifco.net%2Fregion%2Fshow.shtml%3Fid%3D417310-70313%26key1%3D%26key2%3D12%2C13%26type%3D10","cpp_neg2_ent":"","cpp_is_neg":"0","is_neg2":"0","create_time":"","zjj":"","is_neg":"0","samecount":"0"},{"summary":"8月19日下午，长沙经开区人才交流服务中心组织园区内28家企业的人力资源负责人举办了第一期企业人力资源负责人学习交流会，提升管理水平，实现互利共赢。本期学习交流活动围绕“互联网+新形势下的招聘创新”、“企业如何让内训做到实处”两个方面展开，采用先学习后交流的方...","region":"","person":"","weight":"96.00","cpp_is_neg2":"0","neu_ent":"","sitename":"","sitelogo":"","neg2_ent":"","neg1_ent":"","sourcename":"","dredate":"1472115110","cpp_neu_ent":"","publishdate":"2016-08-24 08:46:00","org":"","drecontent":"","id":"1336003","author":"","sourceinfo":"中新网地方新闻","title":"长沙经开区举办第一期企业人力资源负责人交流会","cpp_neg1_ent":"","sitedomain":"","storetime":"1472114816","filetype":"","industry":"","combinecount":"1","sourceregion":"","links":"","sourcebigkind":"","combinevalue":"10474038","database":"VMONTH_NEWS","reference":"http%3A%2F%2Fwww.hn.chinanews.com%2Fhnjjdy%2Fqyjw%2F2016%2F0824%2F12865.html","cpp_neg2_ent":"","cpp_is_neg":"0","is_neg2":"0","create_time":"","zjj":"","is_neg":"0","samecount":"0"},{"summary":"在众多儿童机器人中，功能基本类似，外形也都很萌。其中有一款名叫“小武”智能机器人，表现非凡。机器人小武外观小武由深圳市寒武纪智能科技有限公司2016年6月率先推出了全球首款全自主智能机器人，寒武纪智能是国内首批专注于智能家庭服务机器人、集产品研发和营销为一体的...","region":"","person":"","weight":"96.00","cpp_is_neg2":"0","neu_ent":"","sitename":"","sitelogo":"","neg2_ent":"","neg1_ent":"","sourcename":"新浪深圳科技频道","dredate":"1472115110","cpp_neu_ent":"","publishdate":"2016-08-24 00:00:00","org":"","drecontent":"","id":"1335710","author":"","sourceinfo":"新浪","title":"全球首款儿童智能机器人问世 给孩子最好的伙伴","cpp_neg1_ent":"","sitedomain":"","storetime":"1472114432","filetype":"","industry":"","combinecount":"1","sourceregion":"","links":"","sourcebigkind":"","combinevalue":"10470287","database":"VMONTH_NEWS","reference":"http%3A%2F%2Fgd.sina.com.cn%2Fsztech%2Fsmjd%2F2016-08-24%2Fdetailsz-ifxvcsrn9119066.shtml","cpp_neg2_ent":"","cpp_is_neg":"0","is_neg2":"0","create_time":"","zjj":"","is_neg":"0","samecount":"0"},{"summary":"中国经济结构化改革攻坚战阶段，去库存已成为市场与政策意见共识，作为支柱性产业的房地产如何去库存。经济学家、中国社科院研究生院城乡建设经济系主任陈淮建议，去库存化要和城市结构调整、发展租赁市场、合理配置风险相结合，同时鼓励中低收入群体、中低端群体合理改善住房需求...","region":"","person":"","weight":"96.00","cpp_is_neg2":"0","neu_ent":"","sitename":"","sitelogo":"","neg2_ent":"","neg1_ent":"","sourcename":"中新网海南","dredate":"1472114425","cpp_neu_ent":"","publishdate":"2016-08-22 09:19:00","org":"","drecontent":"","id":"1335294","author":"","sourceinfo":"中新网地方新闻","title":"博鳌房地产论坛“把脉”稳增长去库存","cpp_neg1_ent":"","sitedomain":"","storetime":"1472114304","filetype":"","industry":"","combinecount":"1","sourceregion":"","links":"","sourcebigkind":"","combinevalue":"10469812","database":"VMONTH_NEWS","reference":"http%3A%2F%2Fwww.hi.chinanews.com%2Fhnnew%2F2016-08-22%2F421976.html","cpp_neg2_ent":"","cpp_is_neg":"0","is_neg2":"0","create_time":"","zjj":"","is_neg":"0","samecount":"0"},{"summary":"新财界财经8月22日讯：无人机“空中互娱时代”来了!日前，雪莱特曼塔智能科技公司在北京召开新品发布会，正式推出了新一代无人机——曼塔S6。与其说是智能无人机，倒不如称之为“空中相机”，航拍成了无人机最重要甚至唯一的用途。功能单一使得无人机使用场景受限，据了解，...","region":"","person":"","weight":"96.00","cpp_is_neg2":"0","neu_ent":"","sitename":"","sitelogo":"","neg2_ent":"","neg1_ent":"","sourcename":"新财界股票","dredate":"1472114425","cpp_neu_ent":"","publishdate":"2016-08-22 08:07:55","org":"","drecontent":"","id":"1335102","author":"","sourceinfo":"新财界","title":"不只便携！雪莱特曼塔S6“空中互娱”成亮点","cpp_neg1_ent":"","sitedomain":"","storetime":"1472113792","filetype":"","industry":"","combinecount":"1","sourceregion":"","links":"","sourcebigkind":"","combinevalue":"10469161","database":"VMONTH_NEWS","reference":"http%3A%2F%2Ffinance.xincaijie.com%2Fxfzn%2F1374831.html","cpp_neg2_ent":"","cpp_is_neg":"0","is_neg2":"0","create_time":"","zjj":"","is_neg":"0","samecount":"0"},{"summary":"PassengersofeasyJetandBritishAirways,andtheUK’sbiggestpackageholidayoperators,couldbecharged£25iftheymakeacomplaintaboutdelays,can...","region":"","person":"","weight":"96.00","cpp_is_neg2":"0","neu_ent":"","sitename":"","sitelogo":"","neg2_ent":"","neg1_ent":"","sourcename":"","dredate":"1472114080","cpp_neu_ent":"","publishdate":"2016-08-22 00:00:00","org":"","drecontent":"","id":"1335059","author":"","sourceinfo":"英国卫报","title":"Passengers could be charged £25 for failed claims against airlines","cpp_neg1_ent":"","sitedomain":"","storetime":"1472113792","filetype":"","industry":"","combinecount":"1","sourceregion":"","links":"","sourcebigkind":"","combinevalue":"10469178","database":"VMONTH_NEWS","reference":"https%3A%2F%2Fwww.theguardian.com%2Fbusiness%2F2016%2Faug%2F22%2Fairline-passengers-charged-fee-unsuccessful-claims-delays-cancellations","cpp_neg2_ent":"","cpp_is_neg":"0","is_neg2":"0","create_time":"","zjj":"","is_neg":"0","samecount":"0"},{"summary":"但五常大米也有烦恼，而且很大。假货多了，真的五常大米自然卖不到应有的价格。有道是“五常大米假天下，天下大米乱五常”。在终端消费者能看到的是，在天猫销售的五常大米都会带有一个五常市有关部门发售的“大米防伪码”，并限定在天猫平台销售，“大米防伪码”其实很平常，现在...","region":"","person":"","weight":"96.00","cpp_is_neg2":"0","neu_ent":"","sitename":"","sitelogo":"","neg2_ent":"","neg1_ent":"","sourcename":"新财界股票","dredate":"1472114080","cpp_neu_ent":"","publishdate":"2016-08-22 08:06:21","org":"","drecontent":"","id":"1335056","author":"","sourceinfo":"新财界","title":"从2元到50元，“五常大米”的互联网实验能成功吗？","cpp_neg1_ent":"","sitedomain":"","storetime":"1472113792","filetype":"","industry":"","combinecount":"1","sourceregion":"","links":"","sourcebigkind":"","combinevalue":"10469167","database":"VMONTH_NEWS","reference":"http%3A%2F%2Ffinance.xincaijie.com%2Fxfzn%2F1374827.html","cpp_neg2_ent":"","cpp_is_neg":"0","is_neg2":"0","create_time":"","zjj":"","is_neg":"0","samecount":"0"}],"__elapse":"108","NORMALIZE_AS_Q":"dreall   status:cpp","count_num":"53670","NORMALIZED_MAP":{"as_q":"dreall  ","db":"vnews","get_reply":"0","is_hl":"1","is_sum":"1","s_date":"-7","samecount":"false","status":"cpp","totalresults":"1"}}
+0    DEBUG [2016-08-25 16:55:23]  accessor token:net.oauth.OAuthAccessor@6521beab[consumer=net.oauth.OAuthConsumer@1b0b4509,requestToken=<null>,accessToken=079ad9c6cf8363debf35f471c24ffbb3,tokenSecret=84b68635438e6f5359f3ebb861cc0965,properties={}]
+3    DEBUG [2016-08-25 16:55:23]  request:OAuthMessage(POST, http://1.85.59.245/gdsp/v1/opinion/cmsproxy, [oauth_token=079ad9c6cf8363debf35f471c24ffbb3, oauth_consumer_key=egoandroid, oauth_signature_method=HMAC-SHA1, oauth_timestamp=1472115323, oauth_nonce=1241441222823936, oauth_version=1.0, oauth_signature=vnk9n4Xon%2BrSFQEGSW2pGaYqbJI%3D])
+216  DEBUG [2016-08-25 16:55:24]  responsebody:{"response":"success","antn_action_text":"http://192.168.65.132:19000/action\u003dquery\u0026text\u003ddreall\u0026databasematch\u003dvmonth_news\u0026sort\u003drelevance\u0026starttag\u003d\u003cfont color\u003d#FF6600\u003e\u0026highlight\u003dterms,summaryterms\u0026totalresults\u003dtrue\u0026print\u003dfields\u0026xmlmeta\u003dtrue\u0026maxresults\u003d10\u0026printfields\u003dpublishdate,sourceinfo,DRETITLE,COMBINEVALUE,AUTHOR,COMBINECOUNT,sourcename,auto_summary,summary,storetime,forward_count,AUTO_SUMMARY\u0026start\u003d1\u0026fieldtext\u003d((EQUAL{1,2,3}:CPP_STATE))+AND+RANGE{-7,.}:publishdate\u0026predict\u003dfalse\u0026matchallterms\u003dtrue\u0026timeoutms\u003d","as_q2":"","OTHER_MAP":{"db":"vnews","get_reply":"0","is_hl":"1","is_sum":"1","s_date":"-7","totalresults":"1"},"action":"QUERY","normalized_string":"dreall   db:vnews get_reply:0 is_hl:1 is_sum:1 s_date:-7  status:cpp totalresults:1","__KEY_DATAS":[{"summary":"芝加哥期货交易所(CBOT)大豆期货周一上升，指标11月大豆合约触及一个月高位，交易商表示，美国大豆出口需求支持市场。美国农业部报告，上周出口验验美国大豆96.1414万吨，高于市场预估区间65-85万吨。油价周一收低超过3%，从上周触及的两个月高位回落，因担...","region":"","person":"","weight":"96.00","cpp_is_neg2":"0","neu_ent":"","sitename":"","sitelogo":"","neg2_ent":"","neg1_ent":"","sourcename":"中国国际期货","dredate":"1472115248","cpp_neu_ent":"","publishdate":"2016-08-23 09:32:00","org":"","drecontent":"","id":"1336586","author":"","sourceinfo":"网上中期","title":"玲龍观外盘2016.08.23","cpp_neg1_ent":"","sitedomain":"","storetime":"1472114816","filetype":"","industry":"","combinecount":"1","sourceregion":"","links":"","sourcebigkind":"","combinevalue":"10476906","database":"VMONTH_NEWS","reference":"http%3A%2F%2Fshandong.cifco.net%2Fregion%2Fshow.shtml%3Fid%3D417286-70313%26key1%3D%26key2%3D12%2C13%26type%3D10","cpp_neg2_ent":"","cpp_is_neg":"0","is_neg2":"0","create_time":"","zjj":"","is_neg":"0","samecount":"0"},{"summary":"单位产品上一周报价上周均价名称型号2016-08-152016-08-162016-08-172016-08-182016-08-19均价北海石化-￥:2000￥:2000￥:2000￥:2000￥:2000￥:2000滨阳燃化70#￥:2050￥:2050￥...","region":"","person":"","weight":"96.00","cpp_is_neg2":"0","neu_ent":"","sitename":"","sitelogo":"","neg2_ent":"","neg1_ent":"","sourcename":"中国沥青网","dredate":"1472115248","cpp_neu_ent":"","publishdate":"2016-08-22 09:48:38","org":"","drecontent":"","id":"1336279","author":"","sourceinfo":"中国沥青网","title":"一周重交沥青价格汇总 (2016-08-15到2016-08-19)","cpp_neg1_ent":"","sitedomain":"","storetime":"1472114432","filetype":"","industry":"","combinecount":"1","sourceregion":"","links":"","sourcebigkind":"","combinevalue":"10470531","database":"VMONTH_NEWS","reference":"http%3A%2F%2Fwww.sinoasphalt.com%2Fmarket%2Fchart_zj_list%282016-08-15%E5%88%B02016-08-19%29.htm","cpp_neg2_ent":"","cpp_is_neg":"0","is_neg2":"0","create_time":"","zjj":"","is_neg":"0","samecount":"0"},{"summary":"借力“一带一路”战略实施，三一集团一方面成立“一带一路”战略小组，推进风电、矿产、港口、住宅工业化、油气化工五类优势项目“出海”；一方面与中建、中国铁建等大型中资公司合作，“抱团出海”参与“一带一路”国家重大项目建设。事实上，三一在“一带一路”早有布局。“国家...","region":"","person":"","weight":"96.00","cpp_is_neg2":"0","neu_ent":"","sitename":"","sitelogo":"","neg2_ent":"","neg1_ent":"","sourcename":"湖南新闻网","dredate":"1472115110","cpp_neu_ent":"","publishdate":"2016-08-22 09:52:00","org":"","drecontent":"","id":"1336150","author":"","sourceinfo":"中新网地方新闻","title":"中国民企三一集团弄潮\u0026quot;一带一路\u0026quot; 开凿海外成长新领地","cpp_neg1_ent":"","sitedomain":"","storetime":"1472114944","filetype":"","industry":"","combinecount":"1","sourceregion":"","links":"","sourcebigkind":"","combinevalue":"10479233","database":"VMONTH_NEWS","reference":"http%3A%2F%2Fwww.hn.chinanews.com%2Fnews%2F0822%2Fcjxx%2F2016%2F280582.html","cpp_neg2_ent":"","cpp_is_neg":"0","is_neg2":"0","create_time":"","zjj":"","is_neg":"0","samecount":"0"},{"summary":"标普500指数收涨4.26点，涨幅0.20%，报2186.90点，其中原材料指数涨0.79%、能源指数涨0.44%。英国富时100指数收涨0.59%，报6868.51点。伊朗释放信号，可能支持联合行动，油价上涨。芝加哥期货交易所(CBOT)大豆期货周二收低，盘...","region":"","person":"","weight":"96.00","cpp_is_neg2":"0","neu_ent":"","sitename":"","sitelogo":"","neg2_ent":"","neg1_ent":"","sourcename":"中国国际期货","dredate":"1472115110","cpp_neu_ent":"","publishdate":"2016-08-24 09:13:00","org":"","drecontent":"","id":"1336068","author":"","sourceinfo":"网上中期","title":"玲龍观外盘2016.08.24","cpp_neg1_ent":"","sitedomain":"","storetime":"1472114816","filetype":"","industry":"","combinecount":"1","sourceregion":"","links":"","sourcebigkind":"","combinevalue":"10476867","database":"VMONTH_NEWS","reference":"http%3A%2F%2Fshandong.cifco.net%2Fregion%2Fshow.shtml%3Fid%3D417310-70313%26key1%3D%26key2%3D12%2C13%26type%3D10","cpp_neg2_ent":"","cpp_is_neg":"0","is_neg2":"0","create_time":"","zjj":"","is_neg":"0","samecount":"0"},{"summary":"8月19日下午，长沙经开区人才交流服务中心组织园区内28家企业的人力资源负责人举办了第一期企业人力资源负责人学习交流会，提升管理水平，实现互利共赢。本期学习交流活动围绕“互联网+新形势下的招聘创新”、“企业如何让内训做到实处”两个方面展开，采用先学习后交流的方...","region":"","person":"","weight":"96.00","cpp_is_neg2":"0","neu_ent":"","sitename":"","sitelogo":"","neg2_ent":"","neg1_ent":"","sourcename":"","dredate":"1472115110","cpp_neu_ent":"","publishdate":"2016-08-24 08:46:00","org":"","drecontent":"","id":"1336003","author":"","sourceinfo":"中新网地方新闻","title":"长沙经开区举办第一期企业人力资源负责人交流会","cpp_neg1_ent":"","sitedomain":"","storetime":"1472114816","filetype":"","industry":"","combinecount":"1","sourceregion":"","links":"","sourcebigkind":"","combinevalue":"10474038","database":"VMONTH_NEWS","reference":"http%3A%2F%2Fwww.hn.chinanews.com%2Fhnjjdy%2Fqyjw%2F2016%2F0824%2F12865.html","cpp_neg2_ent":"","cpp_is_neg":"0","is_neg2":"0","create_time":"","zjj":"","is_neg":"0","samecount":"0"},{"summary":"在众多儿童机器人中，功能基本类似，外形也都很萌。其中有一款名叫“小武”智能机器人，表现非凡。机器人小武外观小武由深圳市寒武纪智能科技有限公司2016年6月率先推出了全球首款全自主智能机器人，寒武纪智能是国内首批专注于智能家庭服务机器人、集产品研发和营销为一体的...","region":"","person":"","weight":"96.00","cpp_is_neg2":"0","neu_ent":"","sitename":"","sitelogo":"","neg2_ent":"","neg1_ent":"","sourcename":"新浪深圳科技频道","dredate":"1472115110","cpp_neu_ent":"","publishdate":"2016-08-24 00:00:00","org":"","drecontent":"","id":"1335710","author":"","sourceinfo":"新浪","title":"全球首款儿童智能机器人问世 给孩子最好的伙伴","cpp_neg1_ent":"","sitedomain":"","storetime":"1472114432","filetype":"","industry":"","combinecount":"1","sourceregion":"","links":"","sourcebigkind":"","combinevalue":"10470287","database":"VMONTH_NEWS","reference":"http%3A%2F%2Fgd.sina.com.cn%2Fsztech%2Fsmjd%2F2016-08-24%2Fdetailsz-ifxvcsrn9119066.shtml","cpp_neg2_ent":"","cpp_is_neg":"0","is_neg2":"0","create_time":"","zjj":"","is_neg":"0","samecount":"0"},{"summary":"中国经济结构化改革攻坚战阶段，去库存已成为市场与政策意见共识，作为支柱性产业的房地产如何去库存。经济学家、中国社科院研究生院城乡建设经济系主任陈淮建议，去库存化要和城市结构调整、发展租赁市场、合理配置风险相结合，同时鼓励中低收入群体、中低端群体合理改善住房需求...","region":"","person":"","weight":"96.00","cpp_is_neg2":"0","neu_ent":"","sitename":"","sitelogo":"","neg2_ent":"","neg1_ent":"","sourcename":"中新网海南","dredate":"1472114425","cpp_neu_ent":"","publishdate":"2016-08-22 09:19:00","org":"","drecontent":"","id":"1335294","author":"","sourceinfo":"中新网地方新闻","title":"博鳌房地产论坛“把脉”稳增长去库存","cpp_neg1_ent":"","sitedomain":"","storetime":"1472114304","filetype":"","industry":"","combinecount":"1","sourceregion":"","links":"","sourcebigkind":"","combinevalue":"10469812","database":"VMONTH_NEWS","reference":"http%3A%2F%2Fwww.hi.chinanews.com%2Fhnnew%2F2016-08-22%2F421976.html","cpp_neg2_ent":"","cpp_is_neg":"0","is_neg2":"0","create_time":"","zjj":"","is_neg":"0","samecount":"0"},{"summary":"新财界财经8月22日讯：无人机“空中互娱时代”来了!日前，雪莱特曼塔智能科技公司在北京召开新品发布会，正式推出了新一代无人机——曼塔S6。与其说是智能无人机，倒不如称之为“空中相机”，航拍成了无人机最重要甚至唯一的用途。功能单一使得无人机使用场景受限，据了解，...","region":"","person":"","weight":"96.00","cpp_is_neg2":"0","neu_ent":"","sitename":"","sitelogo":"","neg2_ent":"","neg1_ent":"","sourcename":"新财界股票","dredate":"1472114425","cpp_neu_ent":"","publishdate":"2016-08-22 08:07:55","org":"","drecontent":"","id":"1335102","author":"","sourceinfo":"新财界","title":"不只便携！雪莱特曼塔S6“空中互娱”成亮点","cpp_neg1_ent":"","sitedomain":"","storetime":"1472113792","filetype":"","industry":"","combinecount":"1","sourceregion":"","links":"","sourcebigkind":"","combinevalue":"10469161","database":"VMONTH_NEWS","reference":"http%3A%2F%2Ffinance.xincaijie.com%2Fxfzn%2F1374831.html","cpp_neg2_ent":"","cpp_is_neg":"0","is_neg2":"0","create_time":"","zjj":"","is_neg":"0","samecount":"0"},{"summary":"PassengersofeasyJetandBritishAirways,andtheUK’sbiggestpackageholidayoperators,couldbecharged£25iftheymakeacomplaintaboutdelays,can...","region":"","person":"","weight":"96.00","cpp_is_neg2":"0","neu_ent":"","sitename":"","sitelogo":"","neg2_ent":"","neg1_ent":"","sourcename":"","dredate":"1472114080","cpp_neu_ent":"","publishdate":"2016-08-22 00:00:00","org":"","drecontent":"","id":"1335059","author":"","sourceinfo":"英国卫报","title":"Passengers could be charged £25 for failed claims against airlines","cpp_neg1_ent":"","sitedomain":"","storetime":"1472113792","filetype":"","industry":"","combinecount":"1","sourceregion":"","links":"","sourcebigkind":"","combinevalue":"10469178","database":"VMONTH_NEWS","reference":"https%3A%2F%2Fwww.theguardian.com%2Fbusiness%2F2016%2Faug%2F22%2Fairline-passengers-charged-fee-unsuccessful-claims-delays-cancellations","cpp_neg2_ent":"","cpp_is_neg":"0","is_neg2":"0","create_time":"","zjj":"","is_neg":"0","samecount":"0"},{"summary":"但五常大米也有烦恼，而且很大。假货多了，真的五常大米自然卖不到应有的价格。有道是“五常大米假天下，天下大米乱五常”。在终端消费者能看到的是，在天猫销售的五常大米都会带有一个五常市有关部门发售的“大米防伪码”，并限定在天猫平台销售，“大米防伪码”其实很平常，现在...","region":"","person":"","weight":"96.00","cpp_is_neg2":"0","neu_ent":"","sitename":"","sitelogo":"","neg2_ent":"","neg1_ent":"","sourcename":"新财界股票","dredate":"1472114080","cpp_neu_ent":"","publishdate":"2016-08-22 08:06:21","org":"","drecontent":"","id":"1335056","author":"","sourceinfo":"新财界","title":"从2元到50元，“五常大米”的互联网实验能成功吗？","cpp_neg1_ent":"","sitedomain":"","storetime":"1472113792","filetype":"","industry":"","combinecount":"1","sourceregion":"","links":"","sourcebigkind":"","combinevalue":"10469167","database":"VMONTH_NEWS","reference":"http%3A%2F%2Ffinance.xincaijie.com%2Fxfzn%2F1374827.html","cpp_neg2_ent":"","cpp_is_neg":"0","is_neg2":"0","create_time":"","zjj":"","is_neg":"0","samecount":"0"}],"__elapse":"108","NORMALIZE_AS_Q":"dreall   status:cpp","count_num":"53670","NORMALIZED_MAP":{"as_q":"dreall  ","db":"vnews","get_reply":"0","is_hl":"1","is_sum":"1","s_date":"-7","samecount":"false","status":"cpp","totalresults":"1"}}

@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -198,12 +199,12 @@ public class Cmspost {
 			maplist.add(rltmap);
 		}
 
-		/*
-		 * Iterator<Map<String, String>> mapit=maplist.iterator(); int i=0;
-		 * while(mapit.hasNext()) { Map<String, String>
-		 * tmpmp=((Map<String,String>)mapit.next());
-		 * System.out.println((i++)+":"+tmpmp.get("summary").trim()); }
-		 */
+		
+		 Iterator<Map<String, String>> mapit=maplist.iterator(); int i=0;
+		 while(mapit.hasNext()) { Map<String, String>
+		  tmpmp=((Map<String,String>)mapit.next());
+		  System.out.println((i++)+":"+tmpmp.get("summary").trim()); }
+		 
 	}
 
 	public static void main(String[] args) {
