@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-import java.util.TreeSet;
 
 import org.springframework.stereotype.Service;
 
@@ -254,19 +253,33 @@ public class JtdoaDao implements ValueFormatUtil,JtdoaValueMarket,QQMarketLevelU
 		 Map<String, Set<Tuple>> mapTuple=new HashMap<>();
 		jedis_S.select(1);
 			for (int i=0;i<params.length;++i) {
-				int index= Integer.parseInt(params[i])+1;
-				String string =MARKET[huShen][0]+":"+MARKET[huShen][index];
+				int index= Integer.parseInt(params[i]);
+				String string=null;
+				if(index ==0||index==1)
+				 string=MARKET[huShen][0]+":"+MARKET[huShen][1];
+				else
+					string=MARKET[huShen][0]+":"+MARKET[huShen][index+1];
+				if(string!=null){	
 				if(jedis_S.zcard(string)<=end){
 					end =jedis_S.zcard(string)-1;
 				}
-				
-				Set<Tuple> range=jedis_S.zrevrangeWithScores(string, begin,end);
-				
-				if(MARKET[huShen][index].equals("1"))
+				Set<Tuple> range=null;
+				switch(index){
+				case 0:
+					range=jedis_S.zrevrangeWithScores(string, begin,end);
+					break;
+				case 1:
 					range=jedis_S.zrangeWithScores(string, begin,end); 
+					break;
+				case 2:
+					range=jedis_S.zrevrangeWithScores(string, begin,end);
+					break;
+				}
 				
-				mapTuple.put(string, range);
 				
+				 if(range!=null)
+				mapTuple.put(MARKET[huShen][0]+":"+index, range);
+				}
 			}
 		jedis_S.select(0);
 		

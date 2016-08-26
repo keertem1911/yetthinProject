@@ -46,6 +46,7 @@ public class Opinionpost {
 		JSONObject json=new JSONObject();
 		json.put("codes", codes);
 		json.put("did", did);
+		json.put("p","[currentPageNo:1,pageSize:30]");
 		try {
 				//第一个参数是App名,第二个参数是App密码,第三个参数是用户名,第四个参数是用户的密码, 
 				client=new GdspClient("egoandroid", "nkwMjrCq7F272w", "", "");
@@ -148,23 +149,23 @@ public void orgniseRlt() {
 
 		Opinionpost op=new Opinionpost();
 
+//		op.setCodes("000001");
 		op.setCodes("000001");
-		//op.setCodes("000001");
 		op.setDid("2");
 		op.getContent();
 	    System.out.println(op.strRtn);
 		op.orgniseRlt();
-//		op.setDid("3");
-//		op.getContent();
-//		op.orgniseRlt();
-//		op.setDid("4");
-//		op.getContent();
-//		op.orgniseRlt();
-//		op.setDid("1");
-//		//op.setCodes("600000,601288");
-//		op.getContent();
-//		System.out.println(op.strRtn);
-//		op.orgniseRlt();	
+		op.setDid("3");
+		op.getContent();
+		op.orgniseRlt();
+		op.setDid("4");
+		op.getContent();
+		op.orgniseRlt();
+		op.setDid("1");
+		op.setCodes("600000,601288");
+		op.getContent();
+		System.out.println(op.strRtn);
+		op.orgniseRlt();	
 		
 	}
 

@@ -74,7 +74,7 @@
 						 html+="<tr style='widhth:50px' class='active'>";
 						 
 						 html+="<td colspan='6'>"+msg.item[i]["group"]+"</td>";
-						 
+						 var index1 = msg.item[i]["marketId"].split(":")[1];
 						 html+="</tr>";
 						 
 						 var color="red";
@@ -85,14 +85,24 @@
 							if(msg.item[i].index[j].increase=="false"){
 								color="green";
 								plus="-";
+							}else{
+								color="red";
+								plus="+";
 							}
 						 html+="<tr colspan='6' style='widhth:30px' class='active'>";
 						 
 						 html+="<td colspan='2'><span  >"+msg.item[i].index[j].name+":"+msg.item[i].index[j].stockID+"</span></td>";
 						 html+="<td colspan='2'><span style='color:"+color+"' >"+msg.item[i].index[j].price+"</span></td>";
+						 if(index1=="1"||index1=="0"){
 						 html+="<td colspan='2'><span style='color:"+color+"' >"+msg.item[i].index[j].updown+"</span></td>";
 						
 						 html+="<td colspan='1'><span style='color:"+color+"' >"+plus+msg.item[i].index[j].rate+"%</span></td>";
+						 }else{
+							 html+="<td colspan='3'><span style='color:"+color+"' >+"+msg.item[i].index[j].exchange+"%</span></td>";
+								
+						 }
+						
+						 
 						 html+="<td colspan='1'><input type='hidden' value='"+msg.item[i].index[j].stockID+"'/><a href='javascript:void(0)' >详情</a></td>";
 						 
 						 html+="</tr>";

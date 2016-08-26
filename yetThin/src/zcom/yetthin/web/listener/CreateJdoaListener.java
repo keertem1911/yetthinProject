@@ -2,9 +2,7 @@ package zcom.yetthin.web.listener;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -36,7 +34,6 @@ SinaMarketIndex,JtdoaValueMarket{
 	private  String FILE_NAME_PATH;
 	private UrlRequestDao urlRequestDao=new UrlRequestDao();
 	private final static long SECOND=1000;
-	private final static long MINUTE=SECOND*60;
 	private boolean initFlag;
 //	private JTdoa jtdoa;
 //	private JHdboa jhdboa;
@@ -119,7 +116,7 @@ SinaMarketIndex,JtdoaValueMarket{
 				 List<String> values=	urlRequestDao.readContentFromGet(QQ_M_REQUEST_URL+sb.toString());
 				 
 				 jtdoaAPIDao.saveQQ_M_REQUEST_URL(values,false);
-						Thread.sleep(SECOND*20);
+						Thread.sleep(SECOND*10);
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -173,7 +170,7 @@ SinaMarketIndex,JtdoaValueMarket{
 					e1.printStackTrace();
 				}	
 		    	try {
-					Thread.sleep(SECOND*20);
+					Thread.sleep(SECOND*10);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

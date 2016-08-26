@@ -145,27 +145,33 @@ public class JtdoaServiceImp implements JtdoaValueMarket,ValueFormatUtil,JtdoaSe
 			subSb.append("\"marketId\":\""+entry2.getKey()+"\",");
 			subSb.append("\"index\":[");
 			List<String> tu1=entry2.getValue();
+			
+			//属性  下标分类 0涨幅 1跌幅 2换手率 
+			int marketValue=Integer.parseInt(entry2.getKey().split(":")[1]);
+			 
 			for (String tuple : tu1) {
 				String []values = tuple.split(SPLIT_STR);//  股票代码:名称:价格:涨跌幅率
 				 
 				subSb.append(  "{\"name\":\""+values[NAME]+"\","+ 
 		                    "\"stockID\":\" "+values[values.length-1]+"\",");
 				boolean plus =true;
-				if(values[UP_DOWN_PRICE_RATE].indexOf("-")!=-1){
-					plus=false;
-					values[UP_DOWN_PRICE_RATE]=values[UP_DOWN_PRICE_RATE].substring(1);
-				}
+			 
+					if(values[UP_DOWN_PRICE_RATE].indexOf("-")!=-1){
+						plus=false;
+						values[UP_DOWN_PRICE_RATE]=values[UP_DOWN_PRICE_RATE].substring(1);
+					}
 				subSb.append("\"increase\":\""+plus+"\","+ 
 		                    "\"updown\": \""+values[UP_DOWN_PRICE]+"\","+
 		                    "\"price\": \""+values[LAST_PRICE_INDEX]+"\","+
-		                    "\"rate\": \""+values[UP_DOWN_PRICE_RATE]+"\"");
+		                    "\"rate\": \""+values[UP_DOWN_PRICE_RATE]+"\","+
+		                    "\"exchange\":\""+values[EXCHANGE_RATE]+"\"");
 				if(master){
 					 
 					String lastDone=null;
-					System.out.println(values[LAST_DONE]);
+//					System.out.println(values[LAST_DONE]);
 					if(values[LAST_DONE]!=null&&!"".equals(values[LAST_DONE])){
 					  String []subStr2= values[LAST_DONE].split("[/]");
-					System.out.println(Arrays.asList(subStr2));
+//					System.out.println(Arrays.asList(subStr2));
 					lastDone=subStr2[2];
 					}else 
 						lastDone="0";
@@ -558,7 +564,7 @@ public class JtdoaServiceImp implements JtdoaValueMarket,ValueFormatUtil,JtdoaSe
 				 currenyTime=ALL_format.format(new Date(closeTime));
 			 else if(currenyLong<openTime)
 				 currenyTime=ALL_format.format(new Date(closeTime-(1000*60*60*24)));
-				System.out.println(currenyTime); 
+//				System.out.println(currenyTime); 
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

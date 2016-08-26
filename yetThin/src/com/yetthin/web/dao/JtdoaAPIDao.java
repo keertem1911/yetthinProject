@@ -130,12 +130,26 @@ public class JtdoaAPIDao implements
 			marketName=HU_SHEN;
 		}
 		//涨跌幅
-		if(desc_reate>0)
+	 
 			jedis.zadd(MARKET[marketName][0]+":"+MARKET[marketName][1],desc_reate,symbol+"."+exchange.toUpperCase());
-		else
-			jedis.zadd(MARKET[marketName][0]+":"+MARKET[marketName][2],desc_reate,symbol+"."+exchange.toUpperCase());
+		 
+			 
 		//换手率
 		jedis.zadd(MARKET[marketName][0]+":"+MARKET[marketName][3], Double.parseDouble(subStr[QQ_M_EXCHANGE]),symbol+"."+exchange.toUpperCase());
+//		Set<Tuple> keys = jedis.zrevrangeWithScores("0:0", 0, 10);
+//		for (Tuple tuple : keys) {
+//			System.out.println(tuple.getElement()+ " -------"+tuple.getScore());
+//		}
+//		System.out.println("-----------------------");
+//		System.out.println("-----------------------");
+//		System.out.println("-----------------------");
+//		System.out.println("-----------------------");
+//		try {
+//			Thread.sleep(5000);
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		jedis.select(0);
 		RedisUtil.RealseJedis_M(jedis);
 	}
