@@ -181,18 +181,4 @@ public class JTdoaController extends BaseController implements JtdoaValueMarket 
 		String [] subStr= jtdoaService.getHistoryBar(symbol,barNum,currenyTime,type,cycNum);
 		return putReturnValue1(subStr[0], subStr[2], subStr[1]);
 	}
-	@ResponseBody
-	@RequestMapping(value="getLevel1MarketNum",method=RequestMethod.POST,
-	produces={"application/json;charset=utf-8"})
-	public String getLevel1MarketNum(@RequestParam(value="marketCode")String marketCode){
-		String [] subStr= jtdoaService.getLevel1MarketNum(marketCode);
-		return putReturnValue1(subStr[0], subStr[2], subStr[1]);
-		
-	}
-	
-	
-	
-	
-	
-	
 }

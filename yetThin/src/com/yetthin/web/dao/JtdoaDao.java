@@ -292,9 +292,7 @@ public class JtdoaDao implements ValueFormatUtil,JtdoaValueMarket,QQMarketLevelU
 			List<String> symbolList=new ArrayList<>();
 			Set<Tuple> tupleSet=entry.getValue();
 			for (Tuple tuple : tupleSet) {
-				StringBuffer sb=new StringBuffer();
 				String symbol=tuple.getElement();
-				double rate=tuple.getScore();
 				String redisValue = jedis_S.get(symbol);
 				symbolList.add(redisValue+":"+symbol);
 			}
@@ -475,7 +473,7 @@ public class JtdoaDao implements ValueFormatUtil,JtdoaValueMarket,QQMarketLevelU
 					cal.set(Calendar.MINUTE, cal.get(Calendar.MINUTE)-(barNum*cycNum+1));
 					break;
 				case 2:  
-					 cal.set(Calendar.HOUR, 15);
+					 cal.set(Calendar.HOUR_OF_DAY, 15);
 					 cal.set(Calendar.MINUTE, 15);
 					 cal.set(Calendar.SECOND, 15);
 					 longDate=cal.getTimeInMillis();
@@ -503,7 +501,7 @@ public class JtdoaDao implements ValueFormatUtil,JtdoaValueMarket,QQMarketLevelU
 				case 5: //season
 				{
 					int cnt = SEASONS.length-1;
-					 cal.set(Calendar.HOUR, 15);
+					 cal.set(Calendar.HOUR_OF_DAY, 15);
 					 cal.set(Calendar.MINUTE, 15);
 					 cal.set(Calendar.SECOND, 15);
 					 int index=0;
@@ -523,7 +521,7 @@ public class JtdoaDao implements ValueFormatUtil,JtdoaValueMarket,QQMarketLevelU
 					 cal.set(Calendar.YEAR, yeartemp-yearcnt);
 					 cal.set(Calendar.MONDAY, SEASONS[index][0]-1);
 					 cal.set(Calendar.DAY_OF_MONTH, SEASONS[index][1]);
-					 cal.set(Calendar.HOUR, 9);
+					 cal.set(Calendar.HOUR_OF_DAY, 9);
 					 cal.set(Calendar.MINUTE, 00);
 					 cal.set(Calendar.SECOND, 00);
 					 }
@@ -532,7 +530,7 @@ public class JtdoaDao implements ValueFormatUtil,JtdoaValueMarket,QQMarketLevelU
 					{
 						int [] halfYear=HalfYears[cycNum];
 					int index=0;
-					cal.set(Calendar.HOUR, 15);
+					cal.set(Calendar.HOUR_OF_DAY, 15);
 					 cal.set(Calendar.MINUTE, 15);
 					 cal.set(Calendar.SECOND, 15);
 					for(int i=0;i<HalfYears.length;++i){
@@ -552,7 +550,7 @@ public class JtdoaDao implements ValueFormatUtil,JtdoaValueMarket,QQMarketLevelU
 					 cal.set(Calendar.YEAR, yeartemp-yearcnt);
 					 cal.set(Calendar.MONDAY, HalfYears[index][0]-1);
 					 cal.set(Calendar.DAY_OF_MONTH, HalfYears[index][1]);
-					 cal.set(Calendar.HOUR, 9);
+					 cal.set(Calendar.HOUR_OF_DAY, 9);
 					 cal.set(Calendar.MINUTE, 00);
 					 cal.set(Calendar.SECOND, 00);
 					}
@@ -560,7 +558,7 @@ public class JtdoaDao implements ValueFormatUtil,JtdoaValueMarket,QQMarketLevelU
 				case 7://year
 					 cal.set(Calendar.MONDAY, 11);
 					 cal.set(Calendar.DAY_OF_MONTH, 31);
-					 cal.set(Calendar.HOUR, 16);
+					 cal.set(Calendar.HOUR_OF_DAY, 16);
 					 cal.set(Calendar.MINUTE, 00);
 					 cal.set(Calendar.SECOND, 00);
 					 longDate=cal.getTimeInMillis();
@@ -682,7 +680,21 @@ public class JtdoaDao implements ValueFormatUtil,JtdoaValueMarket,QQMarketLevelU
 		// TODO Auto-generated method stub
 		Jedis  jedis = poolM.getResource();
 		jedis.select(1);
-		String num=Long.toString(jedis.zcard(marketCode));
+		String num="0";
+		int index =Integer.parseInt(marketCode.split("[:]")[1]);
+		if(marketCode.split("[:]")[1].equals("0")||marketCode.split(":")[1].equals("1")){
+			marketCode=marketCode.split("[:]")[0]+":0";
+			Set<String> tupless;
+			if(index==0)
+				tupless =jedis.zrangeByScore(marketCode, 0, 200);
+			else
+				tupless =jedis.zrangeByScore(marketCode, -100, 0);
+				
+			num =Integer.toString(tupless.size());
+		}else{
+			num=Long.toString(jedis.zcard(marketCode));
+			
+		}
 		RedisUtil.RealseJedis_M(jedis);
 		return num;
 	}

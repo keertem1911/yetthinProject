@@ -13,11 +13,11 @@
    </listener>
    <context-param>
    	<param-name>path</param-name>
-   	<param-value>e:/symbol.txt</param-value>
+   	<param-value>d:/symbol.txt</param-value>
    </context-param>
    <context-param>
    		<param-name>initFlag</param-name>
-   		<param-value>true</param-value>
+   		<param-value>false</param-value>
    </context-param>
   	<listener>
   		<listener-class>zcom.yetthin.web.listener.CreateJdoaListener</listener-class>

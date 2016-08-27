@@ -2,7 +2,7 @@ package com.yetthin.web.serviceImp;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
+ 
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -143,6 +143,7 @@ public class JtdoaServiceImp implements JtdoaValueMarket,ValueFormatUtil,JtdoaSe
 			StringBuffer subSb=new StringBuffer();
 			subSb.append("{\"group\":\""+NAME_MARKET[Integer.parseInt(entry2.getKey().split(JTDOA_SPLIT_STR)[1])]+"\",");
 			subSb.append("\"marketId\":\""+entry2.getKey()+"\",");
+			subSb.append("\"totleSum\":\""+jtdoaDao.getLevel1MarketNum(entry2.getKey())+"\",");
 			subSb.append("\"index\":[");
 			List<String> tu1=entry2.getValue();
 			
@@ -172,7 +173,10 @@ public class JtdoaServiceImp implements JtdoaValueMarket,ValueFormatUtil,JtdoaSe
 					if(values[LAST_DONE]!=null&&!"".equals(values[LAST_DONE])){
 					  String []subStr2= values[LAST_DONE].split("[/]");
 //					System.out.println(Arrays.asList(subStr2));
+					  if(subStr2.length>2)
 					lastDone=subStr2[2];
+					  else
+						  lastDone="0";
 					}else 
 						lastDone="0";
 					 subSb.append(",\"lastDone\":\""+lastDone+"\"");

@@ -1,7 +1,7 @@
 package zcom.yetthin.web.listener;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -27,16 +27,15 @@ SinaMarketIndex,JtdoaValueMarket{
 
 	private JtdoaAPIDao jtdoaAPIDao=new JtdoaAPIDao();
 	
-	private static final SimpleDateFormat dateFormat=new SimpleDateFormat("HH:mm");
-	private static final String END_TIME ="21:30";
-	private static final String START_TIME="07:45";
+	private static final int [] START_END_TIME={9,20,16,30};
+	private static final int [] END_START_MIDDLE={11,00,13,00};
+	
 	private static final int dev_num=20;
 	private  String FILE_NAME_PATH;
 	private UrlRequestDao urlRequestDao=new UrlRequestDao();
 	private final static long SECOND=1000;
 	private boolean initFlag;
-//	private JTdoa jtdoa;
-//	private JHdboa jhdboa;
+ 
 	public CreateJdoaListener() {
 		// TODO Auto-generated constructor stub
 	}
@@ -47,24 +46,28 @@ SinaMarketIndex,JtdoaValueMarket{
 	public void contextDestroyed(ServletContextEvent arg0) {
 		// TODO Auto-generated method stub
 	}
-	private boolean  AfterTimeCompared(String current,String target){
-		boolean aftercompared=false;
-		// 09:31  09:30
-		if(current.split(":")[0].compareTo(target.split(":")[0])>0){
-			aftercompared=true;
-		}else{
-			if(current.split(":")[0].compareTo(target.split(":")[0])==0){
-				if(current.split(":")[1].compareTo(target.split(":")[1])>0){
-					aftercompared=true;
-				}
-			}
-		}
-		return aftercompared;
-	}
+	 private boolean isTimeOut(Calendar cal){
+		 boolean timeOut=true;
+		 if(cal.get(Calendar.HOUR_OF_DAY)>START_END_TIME[0]&&
+				 cal.get(Calendar.MINUTE)>START_END_TIME[1]&&
+				 	cal.get(Calendar.HOUR_OF_DAY)<END_START_MIDDLE[0]&&
+				 		cal.get(Calendar.MINUTE)<END_START_MIDDLE[1]&&
+				 			cal.get(Calendar.HOUR_OF_DAY)>END_START_MIDDLE[2]&&
+				 				cal.get(Calendar.MINUTE)>END_START_MIDDLE[3]&&
+				 					cal.get(Calendar.HOUR_OF_DAY)<START_END_TIME[2]&&
+				 						cal.get(Calendar.MINUTE)<START_END_TIME[3]&&
+				 							cal.get(Calendar.DAY_OF_WEEK)>Calendar.SUNDAY&&
+				 								cal.get(Calendar.DAY_OF_WEEK)<Calendar.SATURDAY
+				 )
+			 timeOut=false;
+		 return timeOut;
+	 }
 	private void init() {
 //		 jtdoa = JtdoaUtil.getInstanceJTdoa();
 //		jhdboa =JtdoaUtil.getInstanceJHdboa();
 		System.out.println("come into --------------------");
+		
+		
 		executor.execute(new Runnable() {
 			 
 			public void run() {
@@ -75,11 +78,11 @@ SinaMarketIndex,JtdoaValueMarket{
 				if(initFlag)
    				RedisOfReader.initReadInredisKeyLevel1(list);
 				 //股票 更新 详细信息   开盘价  收盘价 摆单情况
-				
+				Calendar calStock1=Calendar.getInstance();
+								
 				while(true){
-				
-				String currentTime = dateFormat.format(System.currentTimeMillis());
-				if(AfterTimeCompared(currentTime, START_TIME)&&!AfterTimeCompared(currentTime, END_TIME)){
+				calStock1.setTimeInMillis(System.currentTimeMillis());
+				if(!isTimeOut(calStock1)){
 				for(int j=0;j<symbols.size()/dev_num;++j){
 					StringBuffer sb=new StringBuffer();
 					int cnt=dev_num;
@@ -108,7 +111,6 @@ SinaMarketIndex,JtdoaValueMarket{
 				for (int i = 0; i < symbols.size()%dev_num; i++) {
 					  
 					sb.append(symbols.get((symbols.size()/dev_num)*dev_num+i));
-//				 	System.out.println((symbols.size()/dev_num)*dev_num+i);
 					if(i!=symbols.size()-1)
 						sb.append(",");
 				}
@@ -145,15 +147,16 @@ SinaMarketIndex,JtdoaValueMarket{
 		 */
 		executor.execute(new Runnable() {
 			public void run() {
-				System.currentTimeMillis();
+				Calendar calStock2=Calendar.getInstance();
+				
 				
 				String [] [] husheng=HU_SHEN_STOCK_INDEX;
 				if(initFlag)
 					RedisOfReader.initReadInredisKeyLevel1Index(HU_SHEN_STOCK_INDEX);
 
 				while(true){
-					String currentTime = dateFormat.format(System.currentTimeMillis());
-					if(AfterTimeCompared(currentTime, START_TIME)&&!AfterTimeCompared(currentTime, END_TIME)){
+					calStock2.setTimeInMillis(System.currentTimeMillis());
+					if(!isTimeOut(calStock2)){
 				
 		    	StringBuffer sb=new StringBuffer();
 		    	for (int i = 0; i < husheng.length; i++) {
@@ -163,7 +166,6 @@ SinaMarketIndex,JtdoaValueMarket{
 		    	}
 		    	try {
 					List<String> values=urlRequestDao.readContentFromGet(QQ_M_REQUEST_URL+sb.toString());
-//					jtdoaAPIDao.saveSina_REQUEST_URL_INDEX(values);
 				    jtdoaAPIDao.saveQQ_M_REQUEST_URL(values,true);
 		    	} catch (IOException e1) {
 					// TODO Auto-generated catch block

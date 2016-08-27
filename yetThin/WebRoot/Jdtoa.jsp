@@ -300,16 +300,7 @@
  		   </select>
 		<input type="submit" value="get" />
 	</form><br/>
-	<form action="${pageContext.request.contextPath }/jtdoa/getLevel1MarketNum" method="post">
-		 <label>/jtdoa/getLevel1MarketNum  level1更多 数量查询 </label>
-		 <label>属性代码 例0:1</label>
-		 <select name="marketCode" >
-		 	<option value="0:0">涨幅榜数量</option>
-		 	<option value="0:1">跌幅榜数量</option>
-		 	 <option value="0:2">换手率数量</option>
- 		   </select>
-		<input type="submit" value="get" />
-	</form><br/>
+ 
 	
 	</div>
 	<div class="display">
