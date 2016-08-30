@@ -46,28 +46,46 @@ SinaMarketIndex,JtdoaValueMarket{
 	public void contextDestroyed(ServletContextEvent arg0) {
 		// TODO Auto-generated method stub
 	}
-	 private boolean isTimeOut(Calendar cal){
+	 private boolean isTimeOut(Calendar cal1,Calendar [] cals){
 		 boolean timeOut=true;
-		 if(cal.get(Calendar.HOUR_OF_DAY)>START_END_TIME[0]&&
-				 cal.get(Calendar.MINUTE)>START_END_TIME[1]&&
-				 	cal.get(Calendar.HOUR_OF_DAY)<END_START_MIDDLE[0]&&
-				 		cal.get(Calendar.MINUTE)<END_START_MIDDLE[1]&&
-				 			cal.get(Calendar.HOUR_OF_DAY)>END_START_MIDDLE[2]&&
-				 				cal.get(Calendar.MINUTE)>END_START_MIDDLE[3]&&
-				 					cal.get(Calendar.HOUR_OF_DAY)<START_END_TIME[2]&&
-				 						cal.get(Calendar.MINUTE)<START_END_TIME[3]&&
-				 							cal.get(Calendar.DAY_OF_WEEK)>Calendar.SUNDAY&&
-				 								cal.get(Calendar.DAY_OF_WEEK)<Calendar.SATURDAY
-				 )
+		 	//START_END_TIME={9,20,16,30};
+		    //END_START_MIDDLE={11,00,13,00};
+		 
+		 if(((cal1.after(cals[0])&&cal1.before(cals[1]))||(cal1.before(cals[2])&&cal1.before(cals[3])))){
 			 timeOut=false;
+			 
+		 }
 		 return timeOut;
 	 }
+	private Calendar [] getTimeEndAndBegin(){
+		Calendar calTimeout1=Calendar.getInstance();				
+		Calendar calTimeout2=Calendar.getInstance();				
+		Calendar calTimeout3=Calendar.getInstance();				
+		Calendar calTimeout4=Calendar.getInstance();				
+
+		//设置小时
+		calTimeout1.set(Calendar.HOUR_OF_DAY,START_END_TIME[0]);
+		calTimeout2.set(Calendar.HOUR_OF_DAY,END_START_MIDDLE[0]);
+		calTimeout3.set(Calendar.HOUR_OF_DAY,END_START_MIDDLE[2]);
+		calTimeout4.set(Calendar.HOUR_OF_DAY,START_END_TIME[2]);
+		//设置分钟
+		calTimeout1.set(Calendar.MINUTE,START_END_TIME[1]);
+		calTimeout2.set(Calendar.MINUTE,END_START_MIDDLE[1]);
+		calTimeout3.set(Calendar.MINUTE,END_START_MIDDLE[3]);
+		calTimeout4.set(Calendar.MINUTE,START_END_TIME[3]);
+		Calendar [] cals=new Calendar[4];
+		cals[0]=calTimeout1;
+		cals[1]=calTimeout2;
+		cals[2]=calTimeout3;
+		cals[3]=calTimeout4;
+		return  cals;
+	}
 	private void init() {
 //		 jtdoa = JtdoaUtil.getInstanceJTdoa();
 //		jhdboa =JtdoaUtil.getInstanceJHdboa();
 		System.out.println("come into --------------------");
 		
-		
+		final Calendar [] cals= getTimeEndAndBegin();
 		executor.execute(new Runnable() {
 			 
 			public void run() {
@@ -79,10 +97,10 @@ SinaMarketIndex,JtdoaValueMarket{
    				RedisOfReader.initReadInredisKeyLevel1(list);
 				 //股票 更新 详细信息   开盘价  收盘价 摆单情况
 				Calendar calStock1=Calendar.getInstance();
-								
 				while(true){
 				calStock1.setTimeInMillis(System.currentTimeMillis());
-				if(!isTimeOut(calStock1)){
+				 
+				if(!isTimeOut(calStock1,cals)){
 				for(int j=0;j<symbols.size()/dev_num;++j){
 					StringBuffer sb=new StringBuffer();
 					int cnt=dev_num;
@@ -156,7 +174,7 @@ SinaMarketIndex,JtdoaValueMarket{
 
 				while(true){
 					calStock2.setTimeInMillis(System.currentTimeMillis());
-					if(!isTimeOut(calStock2)){
+					if(!isTimeOut(calStock2,cals)){
 				
 		    	StringBuffer sb=new StringBuffer();
 		    	for (int i = 0; i < husheng.length; i++) {

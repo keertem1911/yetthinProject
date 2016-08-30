@@ -41,18 +41,18 @@ public class TickSort implements Comparable<TickSort>{
 	@Override
 	public int compareTo(TickSort o) {
 		// TODO Auto-generated method stub
-	 		int plus=-1;
+	 		int plus=1;
 			// 09:31  09:30
 			if(o.getDateTime().split("-")[0].compareTo(this.getDateTime().split("-")[0])>0){
-				plus=1;
+				plus=-1;
 			}else{
 				if(o.getDateTime().split("-")[0].compareTo(this.getDateTime().split("-")[0])==0){
 					if(o.getDateTime().split("-")[1].compareTo(this.getDateTime().split("-")[1])>0){
-						plus=1;
+						plus=-1;
 					}else{
 						if(o.getDateTime().split("-")[1].compareTo(this.getDateTime().split("-")[1])==0){
 							if(o.getDateTime().split("-")[2].compareTo(this.getDateTime().split("-")[2])>0){
-								plus=1;
+								plus=-1;
 							}
 						
 					}

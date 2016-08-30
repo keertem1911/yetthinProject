@@ -25,7 +25,7 @@ public class StockLevelTset implements JtdoaValueMarket{
 
       
 
-        URL getUrl = new URL("http://table.finance.yahoo.com/table.csv?s=300533.SZ&d=8&e=22&f=2016&g=d&a=08&b=16&c=2000&ignore=.csv");   
+        URL getUrl = new URL("http://qt.gtimg.cn/q=886024");   
 
         // 根据拼凑的URL，打开连接，URL.openConnection()函数会根据 URL的类型，返回不同的URLConnection子类的对象，在这里我们的URL是一个http，因此它实际上返回的是HttpURLConnection   
 

@@ -28,9 +28,9 @@ public class BarData implements Comparable<BarData>{
 	public int compareTo(BarData o) {
 		// TODO Auto-generated method stub
 		if(o.dateTime>this.dateTime)
-			return 1;
-		else
 			return -1;
+		else
+			return 1;
 	}
 
 }
