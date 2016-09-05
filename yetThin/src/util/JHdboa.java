@@ -144,7 +144,7 @@ public class JHdboa implements ValueFormatUtil{
 		 SimpleDateFormat ALL_format =new SimpleDateFormat("yyyy:MM:dd HH:mm:ss");
 		 List<TickSort> list=null;
 		 Contract contract=new Contract();
-		 contract.symbol="002362";
+		 contract.symbol="000022";
 		 contract.currency="CNY";
 		 contract.exchange="SZ";
 		 contract.secType="STK";
@@ -201,7 +201,7 @@ public class JHdboa implements ValueFormatUtil{
 //			 e.printStackTrace();
 //		 } 
 		 
-		 String [] params={"50","2016:08:22 11:00:00","0","2"};
+		 String [] params={"10","2016:08:22 11:00:00","0","2"};
 //		 [barNum,currenyTime,cycType,cycNum]
 		 if(params.length>3){
 			 int barNum=Integer.parseInt(params[0]);

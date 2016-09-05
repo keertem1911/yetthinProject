@@ -1,9 +1,18 @@
 package com.yetthin.web.dao;
 
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.Map.Entry;
 
 import org.springframework.stereotype.Repository;
 
+import com.sun.corba.se.impl.oa.poa.ActiveObjectMap.Key;
 import com.yetthin.web.commit.JtdoaValueMarket;
 import com.yetthin.web.commit.QQMarketLevelUtilByMaster;
 import com.yetthin.web.commit.QQMarketLevelUtilBySimple;
@@ -11,6 +20,7 @@ import com.yetthin.web.commit.RedisUtil;
 import com.yetthin.web.commit.SinaMarketIndex;
 import com.yetthin.web.commit.ValueFormatUtil;
 
+import freemarker.template.SimpleNumber;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
@@ -163,6 +173,97 @@ public class JtdoaAPIDao implements
 			String  subValue =values.get(i).split("&")[0];
 			jedis.set(sybmol, subValue); 
 		}
+		RedisUtil.RealseJedis_M(jedis);
+	}
+	/**
+	 * 获取行业数据
+	 * @author keerte
+	 * return Map  K ->行业代码  V -> 行业排序集合 及 Zset
+	 */
+ 
+	private Map<String, Set<String>> getStock(){
+		Jedis jedis=jedispool.getResource();
+		jedis.select(2);
+		/**
+		 * 获取行业的排序集合
+		 */
+		Set<String> names = jedis.keys("*z");
+		Map<String, Set<String>> map=new HashMap<String,Set<String>>();
+		for (String string : names) {
+			
+			Set<String> str = jedis.zrange(string, 0, -1);
+			map.put(string.substring(0,string.length()-1), str);
+		}
+		Set<Entry<String, Set<String>>> entry = map.entrySet();
+//		Iterator<Entry<String, Set<String>>> it =entry.iterator();
+//		while(it.hasNext()){
+//			Entry<String, Set<String>> entry1 = it.next();
+//			System.out.println(jedis.get(entry1.getKey()+"n")+" "+Arrays.asList(entry1.getValue()));
+//		}
+		RedisUtil.RealseJedis_M(jedis);
+		return map;
+	}
+	private Map<String, String> getAllSymbolValueList(){
+		Jedis jedis=jedispool.getResource();
+		jedis.select(0);
+		Map<String, String> map =new HashMap<String,String>();
+		Set<String> symbols = jedis.keys("*");
+		for (String string : symbols) {
+			String []arraysSymbols=jedis.get(string).split(SPLIT_STR);
+			map.put(string, arraysSymbols[LAST_PRICE_INDEX]+SPLIT_STR+arraysSymbols[VOLUME_INDEX]+SPLIT_STR+arraysSymbols[UP_DOWN_PRICE]+SPLIT_STR+arraysSymbols[UP_DOWN_PRICE_RATE]);
+			
+		}
+		RedisUtil.RealseJedis_M(jedis);
+		return map;
+	}
+	private static final DecimalFormat df=new DecimalFormat("#.00");
+	private static final SimpleDateFormat dateFormat=new SimpleDateFormat("HH-mm");
+	public void updateMinuteKandIndex() {
+		// TODO Auto-generated method stub
+		Map<String, String> mapValue=getAllSymbolValueList();
+		Jedis jedis=jedispool.getResource();
+		jedis.select(4);
+		Map<String, Set<String>> map = getStock();
+		Set<Entry<String, Set<String>>> set = map.entrySet();
+		Iterator<Entry<String, Set<String>>> it= set.iterator();
+		Map<String, Double> Indexvalue= new HashMap<String,Double>();
+		Set<String> sset = mapValue.keySet();
+//		for (String string : sset) {
+//			System.out.println(string+" =>"+mapValue.get(string));
+//		}
+		while(it.hasNext()){
+			Entry<String, Set<String>> entrys = it.next();
+			String name =entrys.getKey();
+			double sum = 0;
+			Set<String> value = entrys.getValue();
+			for (String string : value) {
+				String va=mapValue.get(string);
+//				System.out.println(string);
+				if(va!=null&&!"".equals(va.trim())){
+				jedis.select(2);
+				jedis.zadd(name, Double.parseDouble(va.split(SPLIT_STR)[3]), string);
+				sum+=(Double.parseDouble(mapValue.get(string).split(SPLIT_STR)[0])*Double.parseDouble(mapValue.get(string).split(SPLIT_STR)[1]));
+				jedis.select(4);
+				}
+				}
+			Long length =jedis.llen(name+".val");
+			double lastIndex=1000;
+			System.out.println("sum ="+sum);
+			if(length!=0){
+				double preIndex=Double.parseDouble(jedis.lrange(name+".val", length-1, length-1).get(0).split(SPLIT_STR)[2]);
+				double preVal = Double.parseDouble(jedis.lrange(name+".val", length-1, length-1).get(0).split(SPLIT_STR)[1]);
+				 if(sum!=0)
+					   lastIndex=(sum/preVal)*preIndex;
+			}else{
+				lastIndex=1000;
+			}
+			if(sum!=0&&lastIndex!=0){
+				jedis.lpush(name+".val",dateFormat.format(System.currentTimeMillis())+SPLIT_STR+df.format(sum)+SPLIT_STR+df.format(lastIndex));
+//				System.out.println(name+".val"+ "  --------  "+sum+SPLIT_STR+lastIndex);
+			}
+		}
+		
+		
 		RedisUtil.RealseJedis_M(jedis);
 	}
 }

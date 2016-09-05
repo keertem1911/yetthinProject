@@ -1,7 +1,12 @@
 package com.html.main;
 
 public class RuleException extends RuntimeException{
-	 public RuleException()  
+	 /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public RuleException()  
 	    {  
 	        super();  
 	        // TODO Auto-generated constructor stub  

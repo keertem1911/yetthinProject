@@ -225,9 +225,11 @@ public class JtdoaDao implements ValueFormatUtil,JtdoaValueMarket,QQMarketLevelU
 		for (int i = begin; i < size; i++) {
 		String value=jedis_S.get(HU_SHEN_STOCK_INDEX[i][0]);
 		String [] subStr=value.split(SPLIT_STR);
+		if(subStr.length>5){
 		StockIndexs[i]=HU_SHEN_STOCK_INDEX[i][0]+":"+HU_SHEN_STOCK_INDEX[i][1]+":"+subStr[LAST_PRICE_INDEX]+":"+subStr[UP_DOWN_PRICE]+":"+subStr[UP_DOWN_PRICE_RATE];
 		if(master)
 			StockIndexs[i]+=":"+subStr[STOCK_AMPLITUPE]+":"+subStr[TOTLE_SUM_INDEX]+":"+subStr[VOLUME_INDEX];
+		}
 		}
 	 	return StockIndexs;
 	}
