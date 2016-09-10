@@ -2,25 +2,29 @@ package com.yetthin.web.dao;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import javax.annotation.Resource;
+
 import java.util.Map.Entry;
 
 import org.springframework.stereotype.Repository;
 
-import com.sun.corba.se.impl.oa.poa.ActiveObjectMap.Key;
+import com.sun.org.apache.xalan.internal.xsltc.runtime.Hashtable;
 import com.yetthin.web.commit.JtdoaValueMarket;
 import com.yetthin.web.commit.QQMarketLevelUtilByMaster;
 import com.yetthin.web.commit.QQMarketLevelUtilBySimple;
 import com.yetthin.web.commit.RedisUtil;
 import com.yetthin.web.commit.SinaMarketIndex;
 import com.yetthin.web.commit.ValueFormatUtil;
+import com.yetthin.web.domain.BarDataNS;
+import com.yetthin.web.persistence.StockIndexValueDMapper;
 
-import freemarker.template.SimpleNumber;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
@@ -28,6 +32,8 @@ import redis.clients.jedis.JedisPool;
 public class JtdoaAPIDao implements 
 	QQMarketLevelUtilByMaster,QQMarketLevelUtilBySimple,SinaMarketIndex,ValueFormatUtil,JtdoaValueMarket{
 	
+	@Resource
+	private StockIndexValueDMapper stockIndexValueDMapper;
 	private static JedisPool jedispool=RedisUtil.getInstanceMsater();
 	 
 	
@@ -58,9 +64,9 @@ public class JtdoaAPIDao implements
 			// 保存的值
 			 if(redisValue!=null){
 			String [] subStr= redisValue.split(SPLIT_STR);
-			if(symbol.equals("603515")){
-				System.out.println(subStr);
-			}
+//			if(symbol.equals("603515")){
+//				System.out.println(subStr);
+//			}
 			//更新操作
 			subStr[DATE_INDEX]=subValue[QQ_M_UP_DOWN_TIME];
 			subStr[PRE_CLOSE_INDEX]=subValue[QQ_M_YST_CLOSE];// 前收盘价
@@ -203,6 +209,10 @@ public class JtdoaAPIDao implements
 		RedisUtil.RealseJedis_M(jedis);
 		return map;
 	}
+	/**
+	 * 返回 当前价 成交量 
+	 * @return
+	 */
 	private Map<String, String> getAllSymbolValueList(){
 		Jedis jedis=jedispool.getResource();
 		jedis.select(0);
@@ -216,25 +226,179 @@ public class JtdoaAPIDao implements
 		RedisUtil.RealseJedis_M(jedis);
 		return map;
 	}
+	private Map<String, List<String>> getKValueByType(String type,int begin,int end){
+		Map<String, List<String>> map =new HashMap<>();
+		Jedis jedis =jedispool.getResource();
+		int dbIndex=0;
+		if(type!=null){
+			if("S".equals(type.trim()))
+				dbIndex=5;
+			else if("M".equals(type.trim()))
+				dbIndex=4;
+		}
+		if(end!=-1&&begin>end){
+			int temp =end;
+			end= begin;
+			begin=temp;
+		}
+		jedis.select(dbIndex);
+		Set<String> setKey = jedis.keys("*.K"+type);
+		for (String string : setKey) {
+			List<String> list = jedis.lrange(string, begin, end);
+			map.put(string.split("[.]")[0], list);
+		}
+		RedisUtil.RealseJedis_M(jedis);
+		return map;
+	}
 	private static final DecimalFormat df=new DecimalFormat("#.00");
 	private static final SimpleDateFormat dateFormat=new SimpleDateFormat("HH-mm");
+	private void flushdbKS(){
+		Jedis jedis=jedispool.getResource();
+		jedis.select(5);
+		jedis.flushDB();
+		RedisUtil.RealseJedis_M(jedis);
+		
+	}
+	/**
+	 * K线的分钟线为   时间:开:收:最高:最低:涨跌值:涨跌幅
+	 */
 	public void updateMinuteKandIndex() {
-		// TODO Auto-generated method stub
-		Map<String, String> mapValue=getAllSymbolValueList();
 		Jedis jedis=jedispool.getResource();
 		jedis.select(4);
+		Map<String, List<String>> mapKS = getKValueByType("S",0,-1);
+		Set<Entry<String, List<String>>> entrySet = mapKS.entrySet();
+		for (Entry<String, List<String>> entry : entrySet) {
+			double min;
+			double max;
+			String KSname =entry.getKey();
+			List<String> KSValue= entry.getValue();
+			double close =Double.parseDouble(KSValue.get(KSValue.size()-1).split(SPLIT_STR)[2]);
+			double open =0;
+			open = Double.parseDouble(KSValue.get(0).split(SPLIT_STR)[2]);
+			max  = Double.parseDouble(KSValue.get(0).split(SPLIT_STR)[3]);
+			min  = Double.parseDouble(KSValue.get(0).split(SPLIT_STR)[4]);
+//			for (int i = 1; i < KSValue.size(); i++) {
+//				double temp=Double.parseDouble(KSValue.get(i).split(SPLIT_STR)[2]);
+//				if(temp>max) max = temp;
+//				if(temp<min) min = temp;
+//			}
+			long length= jedis.llen(KSname+".KM");
+			double preLast=0,updownValue=0,updownValueRate=0;
+			
+			if(length>0){
+				String pre =jedis.lrange(KSname+".KM", 0, 0).get(0);
+//				 时间:开:收:最高:最低:涨跌值:涨跌幅
+				preLast=Double.parseDouble(pre.split(SPLIT_STR)[2]);
+				updownValue =preLast-close;
+				updownValueRate= (preLast-close)/close;
+				
+			} 
+			jedis.lpush(KSname+".KM", dateFormat.format(System.currentTimeMillis())+SPLIT_STR
+					+open+SPLIT_STR+close+SPLIT_STR+updownValue+SPLIT_STR+updownValueRate);
+			
+		}
+		flushdbKS();
+		RedisUtil.RealseJedis_M(jedis);
+	}
+	/**
+	 * 在每次新的一秒 开始时获取 上一分钟的KM线中的 指数值就 收益
+	 * @param key
+	 * @return
+	 */
+	private String[]  getMinutePre1(String key){
+		Jedis jedis= jedispool.getResource();
+		jedis.select(4);
+		String []value =new String[2];
+		long  length = jedis.llen(key);
+		if(length!=0){
+		value[0]=jedis.lrange(key, 0, 0).get(0).split(SPLIT_STR)[1];
+		value[1]=jedis.lrange(key, 0, 0).get(0).split(SPLIT_STR)[2];
+		}else{
+			value[0]= "0";
+			value[0]= "1000";
+		}
+		RedisUtil.RealseJedis_M(jedis);
+		return value;
+	}
+	/**
+	 * 返回 收盘价:开盘价:最高价:最低价:成交量
+	 * 分钟线格式
+	 * 日期:上一次的成交额:指数值
+	 * @return
+	 */
+	/*private Map<String, String> getMinuteKAndDeal(){
+		Jedis jedis = jedispool.getResource();
+		Map<String, List<Contract>> map =new HashMap<String,List<Contract>>();
+		jedis.select(4);
+		
+		Set<String> setNames=jedis.keys("*");
+		for (String string : setNames) {
+			StringBuffer sb=new StringBuffer();
+			List<String> list = jedis.lrange(string, 0, -1);
+			sb.append(list.get(0).split("[,]")[2]+SPLIT_STR);
+			sb.append(list.get(list.size()-1).split("[,]")[2]+SPLIT_STR);
+			int max=0;
+			int min=0;
+			max = min =Integer.parseInt(list.get(0).split("[,]")[2]);
+			for (int i = 1; i < list.size(); i++) {
+				int  value = Integer.parseInt((list.get(i).split("[,]")[2]);
+				if(value>max) max =value;
+				if(value<min) min = value;
+			}
+			sb.append(max+SPLIT_STR+min+SPLIT_STR);
+			sb.append(list.get(0).split("[,]")[2]);
+		}
+		RedisUtil.RealseJedis_M(jedis);
+	}*/
+	/**
+	 * 保存日 K线清除 分钟K 线
+	 */
+	 public void clearMSvaeD() {
+		// TODO Auto-generated method stub
+		Jedis jedis =jedispool.getResource();
+		jedis.select(4);
+		Map<String, List<String>> mapKM = getKValueByType("M",0,0);
+		java.util.Hashtable<K, V>
+		List<BarDataNS> barMlist =new ArrayList<>();
+		Set<Entry<String, List<String>>> setentry= mapKM.entrySet();
+		for (Entry<String, List<String>> entry : setentry) {
+			
+		}
+		RedisUtil.RealseJedis_M(jedis);
+	} 
+	private SimpleDateFormat Secondformat= new  SimpleDateFormat("mm:ss");
+	/**
+	 * 存秒线
+	 */
+	public void updateSecondK() {
+		/**
+		 * 获取行业名称
+		 */
+		Map<String, String> mapValue=getAllSymbolValueList();
+		Jedis jedis=jedispool.getResource();
+		jedis.select(5);
+		/**
+		 *  返回Map  K ->行业代码  V -> 行业排序集合 及 Zset
+		 */
 		Map<String, Set<String>> map = getStock();
 		Set<Entry<String, Set<String>>> set = map.entrySet();
 		Iterator<Entry<String, Set<String>>> it= set.iterator();
-		Map<String, Double> Indexvalue= new HashMap<String,Double>();
-		Set<String> sset = mapValue.keySet();
+	 
 //		for (String string : sset) {
 //			System.out.println(string+" =>"+mapValue.get(string));
 //		}
 		while(it.hasNext()){
 			Entry<String, Set<String>> entrys = it.next();
+			/**
+			 * 行业代码
+			 */
 			String name =entrys.getKey();
+			double max = 1000;
+			double min = 1000;
 			double sum = 0;
+			/**
+			 * 行业子股票
+			 */
 			Set<String> value = entrys.getValue();
 			for (String string : value) {
 				String va=mapValue.get(string);
@@ -243,27 +407,49 @@ public class JtdoaAPIDao implements
 				jedis.select(2);
 				jedis.zadd(name, Double.parseDouble(va.split(SPLIT_STR)[3]), string);
 				sum+=(Double.parseDouble(mapValue.get(string).split(SPLIT_STR)[0])*Double.parseDouble(mapValue.get(string).split(SPLIT_STR)[1]));
-				jedis.select(4);
+				jedis.select(5);
 				}
 				}
-			Long length =jedis.llen(name+".val");
+			Long length =jedis.llen(name+".KS");
 			double lastIndex=1000;
-			System.out.println("sum ="+sum);
+//			System.out.println("sum ="+sum);
+			System.out.println("length = "+length);
 			if(length!=0){
-				double preIndex=Double.parseDouble(jedis.lrange(name+".val", length-1, length-1).get(0).split(SPLIT_STR)[2]);
-				double preVal = Double.parseDouble(jedis.lrange(name+".val", length-1, length-1).get(0).split(SPLIT_STR)[1]);
-				 if(sum!=0)
+				String value1 =jedis.lrange(name+".KS", 0, 0).get(0);
+				double preIndex=Double.parseDouble(value1.split(SPLIT_STR)[2]);
+				double preVal = Double.parseDouble(value1.split(SPLIT_STR)[1]);
+				 max = Double.parseDouble(value1.split(SPLIT_STR)[2]);
+				 min = Double.parseDouble(value1.split(SPLIT_STR)[3]);
+				 
+				 if(sum!=0){
 					   lastIndex=(sum/preVal)*preIndex;
+					   if(lastIndex < min) min = lastIndex;
+					   if(lastIndex > max) max = lastIndex;
+				 }
 			}else{
+				// preMimutevalue 0 为 之前的收益  1为之前的指数值
+				String [] preMimutevalue= getMinutePre1(name+".KM");
+				if(!"0".equals(preMimutevalue[0])){
+					double preVal=Double.parseDouble(preMimutevalue[0]);
+					double preIndex= Double.parseDouble(preMimutevalue[1]);
+					   lastIndex=(sum/preVal)*preIndex;
+					   if(lastIndex < min) min = lastIndex;
+					   if(lastIndex > max) max = lastIndex;
+				}else{
 				lastIndex=1000;
+				max =1000;
+				min =1000;
+				}
 			}
-			if(sum!=0&&lastIndex!=0){
-				jedis.lpush(name+".val",dateFormat.format(System.currentTimeMillis())+SPLIT_STR+df.format(sum)+SPLIT_STR+df.format(lastIndex));
+			if(sum!=0){
+				jedis.lpush(name+".KS",dateFormat.format(System.currentTimeMillis())+SPLIT_STR+df.format(sum)+SPLIT_STR+df.format(lastIndex)+SPLIT_STR+max+SPLIT_STR+min);
 //				System.out.println(name+".val"+ "  --------  "+sum+SPLIT_STR+lastIndex);
 			}
 		}
 		
-		
+		System.out.println("ss");
 		RedisUtil.RealseJedis_M(jedis);
+		
 	}
+	 
 }

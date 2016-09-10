@@ -29,24 +29,20 @@ SinaMarketIndex,JtdoaValueMarket{
 
 	private JtdoaAPIDao jtdoaAPIDao=new JtdoaAPIDao();
 	
-	private static final int [] START_END_TIME={9,20,16,30};
-	private static final int [] END_START_MIDDLE={11,00,13,00};
-	
+	 
 	private static final int dev_num=20;
 	private  String FILE_NAME_PATH;
 	private UrlRequestDao urlRequestDao=new UrlRequestDao();
 	private final static long SECOND=1000;
 	private boolean initFlag;
- 
+	
 	public CreateJdoaListener() {
 		// TODO Auto-generated constructor stub
 	}
 	private Executor executor = Executors.newFixedThreadPool(200);
-	private  List<Contract> list;
-	private static final String END_TIME_1 ="11:00";
-	private static final String START_TIME_1="08:45";  
-	private static final String END_TIME_2 ="15:00";
-	private static final String START_TIME_2="13:05";  
+	private static final String [] TIME1 ={"09:20","11:00"};
+	private static final String [] TIME2={"13:05","15:45"};  
+	private static final String [] SAVE_DAY_K={"08:30","08:31"};
 	@Override
 	public void contextDestroyed(ServletContextEvent arg0) {
 		// TODO Auto-generated method stub
@@ -66,17 +62,25 @@ SinaMarketIndex,JtdoaValueMarket{
 		return aftercompared;
 	}
 	private static final SimpleDateFormat dateFormat=new SimpleDateFormat("HH:mm");
-	 private boolean isTimeOut(){
+	 private boolean isTimeOut(String [] data1,String []data2){
 		 boolean timeOut=true;
 		 	//START_END_TIME={9,20,16,30};
 		    //END_START_MIDDLE={11,00,13,00};
 		 Calendar cal = Calendar.getInstance();
 		 String currentTime = dateFormat.format(System.currentTimeMillis());
-		if(AfterTimeCompared(currentTime, START_TIME_1)&&!AfterTimeCompared(currentTime, END_TIME_1)
-				||AfterTimeCompared(currentTime, START_TIME_2)&&!AfterTimeCompared(currentTime, END_TIME_2)){
+		 if(data2!=null){
+		if(AfterTimeCompared(currentTime, data1[0])&&!AfterTimeCompared(currentTime, data1[1])
+				||AfterTimeCompared(currentTime, data2[0])&&!AfterTimeCompared(currentTime, data2[1])){
 			 if(cal.get(Calendar.DAY_OF_WEEK)>1&&cal.get(Calendar.DAY_OF_WEEK)<7){
 				 timeOut=false;
-			 }
+			 	}
+			}
+		}else{
+			if(AfterTimeCompared(currentTime, data1[0])&&!AfterTimeCompared(currentTime, data1[1])
+					) 
+				 if(cal.get(Calendar.DAY_OF_WEEK)>1&&cal.get(Calendar.DAY_OF_WEEK)<7){
+					 timeOut=false;
+				 	}
 		}
 		 return timeOut;
 	 }
@@ -100,18 +104,19 @@ SinaMarketIndex,JtdoaValueMarket{
 				if(initFlag)
    				RedisOfReader.initReadInredisKeyLevel1(list);
 				 //股票 更新 详细信息   开盘价  收盘价 摆单情况
-				Calendar calStock1=Calendar.getInstance();
-				 
+				
 				 
 				while(true){
-//					System.out.println(" begin ===========");
+					System.out.println(" begin ===========");
 					if(beforeB)
 						currency =before=System.currentTimeMillis();
 					beforeB=false;
 					list=test.readTextByContract(FILE_NAME_PATH);
 				  
-				if(!isTimeOut()){
-				for(int j=0;j<symbols.size()/dev_num;++j){
+				if(!isTimeOut(TIME1,TIME2)){
+					 try {	
+//				for(int j=0;j<symbols.size()/dev_num;++j){
+				for(int j=0;j<10;++j){
 					StringBuffer sb=new StringBuffer();
 					int cnt=dev_num;
 					if(j==((symbols.size()/dev_num))&&symbols.size()%1000!=0)
@@ -125,17 +130,13 @@ SinaMarketIndex,JtdoaValueMarket{
 						sb.append(",");
 				}
 				 
-				 try {
+				
 					 List<String> values=urlRequestDao.readContentFromGet(QQ_M_REQUEST_URL+sb.toString());
 					 
 					 jtdoaAPIDao.saveQQ_M_REQUEST_URL(values,false);
-				 } catch (IOException e) {
-					 // TODO Auto-generated catch block
-					 e.printStackTrace();
-				 }
 				}// end in  for(int j=0;j<symbols.size()/dev_num;++j){ 股票更新完成 一轮
 				//余数更新
-				try {
+			 
 				StringBuffer sb=new StringBuffer(); 
 				for (int i = 0; i < symbols.size()%dev_num; i++) {
 					  
@@ -148,23 +149,34 @@ SinaMarketIndex,JtdoaValueMarket{
 				 
 				 jtdoaAPIDao.saveQQ_M_REQUEST_URL(values,false);
 				 
-						Thread.sleep(SECOND*12);
+						Thread.sleep(SECOND*9);
 				/**
 				 * 行业板块更新	
 				 */
+						System.out.println("save sss");
+						jtdoaAPIDao.updateSecondK();
+						currency=System.currentTimeMillis();
+						System.out.println("curreny:"+dateFormat.format(currency)+" before:"+new Date(before)+" =>"+ (currency-before)/1000+"    cnt ========");
+						if((currency-before)/1000>(timerCnt-5)){
+							before=currency;
+							System.out.println(new Date(currency)+" ==========================");
+							jtdoaAPIDao.updateMinuteKandIndex();
+						} 
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-				currency=System.currentTimeMillis();
-//				System.out.println("curreny:"+dateFormat.format(currency)+" before:"+new Date(before)+" =>"+ (currency-before)/1000+"    cnt ========");
-				if((currency-before)/1000>(timerCnt-5)){
-					before=currency;
-//					System.out.println(new Date(currency)+" ==========================");
-					jtdoaAPIDao.updateMinuteKandIndex();
-				}
  				 }else{//if timeOut
- 					
+ 					 if(!isTimeOut(SAVE_DAY_K, null)){
+ 						jtdoaAPIDao.clearMSvaeD();
+ 					} 
+ 					 System.out.println("time out ");
+ 					 try {
+						Thread.sleep(1000*60*30);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
  					}
 				}//while
 			}
@@ -180,7 +192,7 @@ SinaMarketIndex,JtdoaValueMarket{
 
 				while(true){
 
-					if(!isTimeOut()){
+					if(!isTimeOut(TIME1,TIME2)){
 		    	StringBuffer sb=new StringBuffer();
 		    	for (int i = 0; i < husheng.length; i++) {
 					sb.append(""+husheng[i][0].substring(7).toLowerCase()+husheng[i][0].substring(0, 6));
@@ -200,8 +212,15 @@ SinaMarketIndex,JtdoaValueMarket{
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-					} //if
-						 
+					}else{ //if
+						System.out.println("time out ");
+						 try {
+								Thread.sleep(1000*60*30);
+							} catch (InterruptedException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+					}
 					 
 			}//while 
 				 

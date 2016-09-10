@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yetthin.web.persistence.StockIndexValueD" >
+  <resultMap id="BaseResultMap" type="com.yetthin.web.domain.BarDataNS" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="dateTime" property="dateTime" jdbcType="VARCHAR" /> 
+	     <result column="open" property="open" jdbcType="VARCHAR" /> 
+	     <result column="high" property="high" jdbcType="VARCHAR" /> 
+	     <result column="low" property="low" jdbcType="VARCHAR" /> 
+	     <result column="close" property="close" jdbcType="VARCHAR" /> 
+	     <result column="ystClose" property="ystClose" jdbcType="VARCHAR" />  
+	     <result column="volume" property="volume" jdbcType="VARCHAR" /> 
+	     <result column="matchItems" property="matchItems" jdbcType="VARCHAR" /> 
+  </resultMap>
+  <sql id="Base_Column_List" >
+      dateTime,open,high,low,close,ystClose,volume,matchItemscam
+  </sql>
+  <select id="selectByPrimaryKeyBetween" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select 
+    <include refid="Base_Column_List" />
+    from barDataD b,symbolIndex s 
+    where s.id =#{symbolId} 
+  	and s.id=b.sId
+  </select>
+  <select id="selectByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from barDataD
+    where dateTime = #{dateTime,jdbcType=VARCHAR} limit 1
+  </select>
+   <select id="getAll" resultMap="BaseResultMap"  >
+    select 
+    <include refid="Base_Column_List" />
+    from barDataD
+  </select>
+  
+  
+  <insert id="insert" parameterType="com.yetthin.web.domain.BarDataNS" >
+     
+    insert into barDataD (dateTime,open,high,low,close,ystClose,volume,matchItems)
+    values 
+    <foreach open="(" close=")" separator="," collection="#{barMlist}" item="bar">
+     #{bar.dateTime,jdbcType=VARCHAR}, #{bar.open,jdbcType=VARCHAR}, 
+      #{bar.high,jdbcType=INTEGER},#{bar.low,jdbcType=INTEGER},
+      #{bar.close,jdbcType=INTEGER},#{bar.ystClose,jdbcType=INTEGER},
+      #{bar.volume,jdbcType=INTEGER},#{bar.matchItems,jdbcType=INTEGER}
+      </foreach>
+  </insert>
+    <insert id="insertSelective" parameterType="com.yetthin.web.domain.BarDataNS" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into barDataD
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      id,
+      <if test="dateTime != null" >
+        dateTime,
+      </if>
+      <if test="open != null" >
+        open,
+      </if>
+      <if test="high != null" >
+        high,
+      </if>
+      <if test="low != null" >
+        low,
+      </if>
+      <if test="close != null" >
+        close,
+      </if>
+      <if test="ystClose != null" >
+        ystClose,
+      </if>
+      <if test="volume != null" >
+        volume,
+      </if>
+       <if test="matchItems != null" >
+        matchItems
+      </if>
+    </trim> 
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{id,jdbcType=INTEGER},
+      <if test="dateTime != null" >
+        #{dateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="open != null" >
+        #{open,jdbcType=VARCHAR},
+      </if>
+      <if test="high != null" >
+        #{high,jdbcType=VARCHAR},
+      </if> 
+        <if test="low != null" >
+        #{low,jdbcType=VARCHAR},
+      </if>
+      <if test="close != null" >
+        #{close,jdbcType=VARCHAR},
+      </if>  
+      <if test="ystClose != null" >
+        #{ystClose,jdbcType=VARCHAR},
+      </if>
+      <if test="volume != null" >
+        #{volume,jdbcType=VARCHAR},
+      </if>
+       <if test="matchItems != null" >
+        #{matchItems,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert> 
+  
+</mapper>

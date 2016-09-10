@@ -11,6 +11,7 @@ import java.util.Set;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.httpclient.methods.PutMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -54,9 +55,10 @@ public class JtdoaServiceImp implements JtdoaValueMarket,ValueFormatUtil,JtdoaSe
 	 * @param index
 	 * @return
 	 */
-	private String putIndex(String [] index){
+	private String putIndex(String [] index,boolean master){
 		StringBuffer sb=new StringBuffer();
 		sb.append("[");
+		if(index.length!=0&&index!=null){
 		for (int i = 0; i < index.length; i++) {
 			String [] subStr=index[i].split(JTDOA_SPLIT_STR);
 			sb.append("{\"name\":\"" +subStr[1]+"\","+ 
@@ -71,11 +73,19 @@ public class JtdoaServiceImp implements JtdoaValueMarket,ValueFormatUtil,JtdoaSe
 			
 			sb.append("\"increase\":\""+plus+"\","+
 		            "\"growth\":\""+subStr[3]+"\","+ 
-		            "\"growthRate\": \""+subStr[4]+"\"}");
+		            "\"growthRate\": \""+subStr[4]+"\"");
+			if(master){
+				 sb.append(",\"stockAmplitupe\":\""+subStr[5]+"\"");
+				 sb.append(",\"totleMarketValue\":\""+subStr[6]+"\"");
+				 sb.append(",\"totleNetWorth\":\""+subStr[7]+"\"");
+				 
+
+			}
+			sb.append("}");
 			if(i<index.length-1)
 				sb.append(",");
 		}
-		
+		}// if nullopint
 		sb.append("]");
 		
 		return sb.toString();
@@ -255,17 +265,26 @@ public class JtdoaServiceImp implements JtdoaValueMarket,ValueFormatUtil,JtdoaSe
 	@Transactional
 	public String []  getL1(int id,long begin,long end,String market,
 			boolean indexMarket,boolean master){
-		String [] subMarket=market.split(SPLIT_STR);
+		if(market.equals("null")) market="0:0,1,2";
+		System.out.println("mat " +market);
+		String [] subMarket=market.split("["+SPLIT_STR+"]");
+		
+		String [] subStr=new String [4];
+		if(subMarket[0].equals("null")||subMarket[0]==null) 
+			subMarket[0]="0";
+		
+		if(!subMarket[0].equals("null")){
 		int marketIndex=Integer.parseInt(subMarket[0]);
 		// level1 属性 涨跌幅及换手率等
-		String [] params= subMarket[1].split(",");
-		String [] subStr=new String [4];
+		String [] params= subMarket[1].split("[,]");
 		if(begin<end&&begin>=0&&end>0){
 		switch(id){
 		case HU_SHEN: 
 			if(indexMarket){
 			String [] index= jtdoaDao.getStockIndex(marketIndex,0,5,false);
-			subStr[1]=putIndex(index);// 指数解析
+			if(index!=null&&index.length!=0)
+			subStr[1]=putIndex(index,false);// 指数解析
+			
 			}else{
 				subStr[1]="{}";
 			}
@@ -279,6 +298,11 @@ public class JtdoaServiceImp implements JtdoaValueMarket,ValueFormatUtil,JtdoaSe
 				subStr[3]=" ";
 			}
 			break;
+		}
+		}else{
+			subStr[0]="502";
+			subStr[1]="[]";
+			subStr[2]="输入错误";
 		}
 		}else{
 			subStr[0]="502";
@@ -506,7 +530,7 @@ public class JtdoaServiceImp implements JtdoaValueMarket,ValueFormatUtil,JtdoaSe
 				sb.append("{\"index"+i+"\":");
 				int index= Integer.parseInt(indexes[i]);
 					String [] index1= jtdoaDao.getStockIndex(index,begin,end,master);
-					String returnValue=putIndex(index1);
+					String returnValue=putIndex(index1,master);
 					sb.append(returnValue);
 					switch(index){
 					case 0:

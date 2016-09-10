@@ -39,18 +39,18 @@ public class JTdoaController extends BaseController implements JtdoaValueMarket 
  	 */
 	@ResponseBody
 	@RequestMapping(value="/shenzhen",method=RequestMethod.POST,produces = {"application/json;charset=UTF-8"})
-	public String shenzhen(@RequestParam(value="begin",required=false,defaultValue="0")String begin,
-			@RequestParam(value="end",required=false,defaultValue="9")String end,
-			@RequestParam(value="marketCode",defaultValue="0:0,1,2",required=false)String market,
-			@RequestParam(value="indexMarket",defaultValue="true",required=false)boolean indexMarket,
-			@RequestParam(value="master",defaultValue="true",required=false)boolean master){
-		if("".equals(begin)){
+	public String shenzhen(@RequestParam(value="begin",required=false)String begin,
+			@RequestParam(value="end",required=false)String end,
+			@RequestParam(value="marketCode",required=false)String market,
+			@RequestParam(value="indexMarket",required=false)boolean indexMarket,
+			@RequestParam(value="master",required=false)boolean master){
+		if(begin==null){
 			begin="0";
 		}
-		if("".equals(end)){
+		if(end==null){
 			end="9";
 		}
-		if("".equals(market)){
+		if(market==null){
 			market="0:0,1,2";
 		}
 		long beginIndex=Long.parseLong(begin);
@@ -161,11 +161,12 @@ public class JTdoaController extends BaseController implements JtdoaValueMarket 
 	@ResponseBody
 	@RequestMapping(value="/getStockIndexList",method=RequestMethod.POST,
 	produces = {"application/json;charset=utf-8"})
-	 public String getStockIndexList(@RequestParam(value="begin",defaultValue="0")int begin,
-			 @RequestParam(value="end",defaultValue="6")int end,
-			 @RequestParam(value="marketCode",defaultValue="0",required=false)String marketCode,
-			 @RequestParam(value="master",defaultValue="false",required=false)boolean master){
-		
+	 public String getStockIndexList(@RequestParam(value="begin")int begin,
+			 @RequestParam(value="end")int end,
+			 @RequestParam(value="marketCode",required=false)String marketCode,
+			 @RequestParam(value="master",required=false)boolean master){
+		if(end ==0) end =6;
+		if(marketCode==null) marketCode="0";
 		 String [] subStr=jtdoaService.getStockIndexList(begin,end,marketCode,master);
 		 return putReturnValue1(subStr[0], subStr[2], subStr[1]);
 	 }
