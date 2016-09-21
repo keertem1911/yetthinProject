@@ -11,6 +11,7 @@ import java.util.concurrent.Executors;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
+
 import com.yetthin.web.commit.JtdoaValueMarket;
 import com.yetthin.web.commit.QQMarketLevelUtilByMaster;
 import com.yetthin.web.commit.QQMarketLevelUtilBySimple;
@@ -26,7 +27,7 @@ import util.Contract;
 public class CreateJdoaListener implements ServletContextListener,
 QQMarketLevelUtilBySimple,QQMarketLevelUtilByMaster,
 SinaMarketIndex,JtdoaValueMarket{
-
+	
 	private JtdoaAPIDao jtdoaAPIDao=new JtdoaAPIDao();
 	
 	 
@@ -41,8 +42,9 @@ SinaMarketIndex,JtdoaValueMarket{
 	}
 	private Executor executor = Executors.newFixedThreadPool(200);
 	private static final String [] TIME1 ={"09:20","11:00"};
-	private static final String [] TIME2={"13:05","15:45"};  
-	private static final String [] SAVE_DAY_K={"08:30","08:31"};
+	private static final String [] MIDDLE_TIME= {"11:01","12:59"};
+	private static final String [] TIME2={"13:05","15:00"};  
+	private static final String [] SAVE_DAY_K={"06:59","07:01"};
 	@Override
 	public void contextDestroyed(ServletContextEvent arg0) {
 		// TODO Auto-generated method stub
@@ -64,8 +66,6 @@ SinaMarketIndex,JtdoaValueMarket{
 	private static final SimpleDateFormat dateFormat=new SimpleDateFormat("HH:mm");
 	 private boolean isTimeOut(String [] data1,String []data2){
 		 boolean timeOut=true;
-		 	//START_END_TIME={9,20,16,30};
-		    //END_START_MIDDLE={11,00,13,00};
 		 Calendar cal = Calendar.getInstance();
 		 String currentTime = dateFormat.format(System.currentTimeMillis());
 		 if(data2!=null){
@@ -86,8 +86,6 @@ SinaMarketIndex,JtdoaValueMarket{
 	 }
  
 	private void init() {
-//		 jtdoa = JtdoaUtil.getInstanceJTdoa();
-//		jhdboa =JtdoaUtil.getInstanceJHdboa();
 		System.out.println("come into --------------------");
 		
 		 
@@ -115,21 +113,16 @@ SinaMarketIndex,JtdoaValueMarket{
 				  
 				if(!isTimeOut(TIME1,TIME2)){
 					 try {	
-//				for(int j=0;j<symbols.size()/dev_num;++j){
 				for(int j=0;j<10;++j){
 					StringBuffer sb=new StringBuffer();
 					int cnt=dev_num;
 					if(j==((symbols.size()/dev_num))&&symbols.size()%1000!=0)
 						cnt=symbols.size()%dev_num;
 				 for (int i = 0; i < cnt; i++) {
-//					 if(cnt!=dev_num){
-//						 System.out.println(j*dev_num+i+":"+symbols.get(j*dev_num+i));
-//					 }
 					sb.append(symbols.get(j*dev_num+i));
 					 if(i!=symbols.size()-1)
 						sb.append(",");
 				}
-				 
 				
 					 List<String> values=urlRequestDao.readContentFromGet(QQ_M_REQUEST_URL+sb.toString());
 					 
@@ -167,9 +160,14 @@ SinaMarketIndex,JtdoaValueMarket{
 						e.printStackTrace();
 					}
  				 }else{//if timeOut
+ 					 System.out.println("time out ");
  					 if(!isTimeOut(SAVE_DAY_K, null)){
  						jtdoaAPIDao.clearMSvaeD();
  					} 
+ 					 if(isTimeOut(MIDDLE_TIME, null)){
+ 						 if(jtdoaAPIDao.getRedisLengthBySelect(5)!=0)
+ 						 jtdoaAPIDao.flushKS();
+ 					 }
  					 System.out.println("time out ");
  					 try {
 						Thread.sleep(1000*60*30);
@@ -189,7 +187,7 @@ SinaMarketIndex,JtdoaValueMarket{
 				String [] [] husheng=HU_SHEN_STOCK_INDEX;
 				if(initFlag)
 					RedisOfReader.initReadInredisKeyLevel1Index(HU_SHEN_STOCK_INDEX);
-
+				int single=0;
 				while(true){
 
 					if(!isTimeOut(TIME1,TIME2)){
@@ -201,7 +199,7 @@ SinaMarketIndex,JtdoaValueMarket{
 		    	}
 		    	try {
 					List<String> values=urlRequestDao.readContentFromGet(QQ_M_REQUEST_URL+sb.toString());
-				    jtdoaAPIDao.saveQQ_M_REQUEST_URL(values,true);
+				    single =jtdoaAPIDao.saveQQ_M_REQUEST_URL(values,true);
 		    	} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

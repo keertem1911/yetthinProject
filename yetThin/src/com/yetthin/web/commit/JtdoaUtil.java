@@ -1,5 +1,8 @@
 package com.yetthin.web.commit;
 
+import java.util.ArrayList;
+import java.util.ListIterator;
+
 import util.BarData;
 import util.Contract;
 import util.JHdboa;
@@ -9,10 +12,10 @@ import util.TickData;
 public class JtdoaUtil {
 	 
 	private JtdoaUtil(){
-		
+	 
 	};
 	private static volatile JTdoa jTdoa=null;
-
+	 
 	public static JTdoa getInstanceJTdoa(){
 		if(jTdoa==null){
 			synchronized(JtdoaUtil.class){

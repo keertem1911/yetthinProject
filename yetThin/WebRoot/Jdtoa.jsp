@@ -300,14 +300,35 @@
  		   </select>
 		<input type="submit" value="get" />
 	</form><br/>
- 
-	
+ 	<form action="${pageContext.request.contextPath }/jtdoa/getStockIndustryPlate"
+ 	method="post" 
+ 	>
+ 		<label>获取行情数据</label>
+		<input type="text" value="" placeholder="起始值" name="begin"/>
+		<input type="text" value="" placeholder="终止值" name="end"/>
+		<input type="text" value="" placeholder="起始时间" name="time"/>
+		<input type="text" value="" placeholder="持续天数" name="timeNum"/>
+		
+		<input type="submit" value="submits"/>
+		</form>
+ 	<form action="${pageContext.request.contextPath }/jtdoa/getStockIndustryDK"
+ 	method="post" 
+ 	>
+ 		<label>获取行情数据</label>
+ 		
+		<input type="text" value="" placeholder="行业代码" name="sid"/>
+		<input type="text" value="" placeholder="起始时间" name="time"/>
+		<input type="text" value="" placeholder="持续天数" name="timeNum"/>
+		
+		<input type="submit" value="submits"/>
+		</form>
 	</div>
 	<div class="display">
 		<div class="level1"></div>
 		<div class="level2"></div>
 		<div class="level2detail"></div>
 	</div>
+	
 	
 	
 	

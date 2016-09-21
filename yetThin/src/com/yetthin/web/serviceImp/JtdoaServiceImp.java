@@ -2,8 +2,9 @@ package com.yetthin.web.serviceImp;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
- 
+import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -19,6 +20,7 @@ import com.yetthin.web.commit.JtdoaValueMarket;
 import com.yetthin.web.commit.ValueFormatUtil;
 import com.yetthin.web.dao.JtdoaAPIDao;
 import com.yetthin.web.dao.JtdoaDao;
+import com.yetthin.web.domain.barData;
 import com.yetthin.web.service.JtdoaService;
 
 import util.BarData;
@@ -646,6 +648,29 @@ public class JtdoaServiceImp implements JtdoaValueMarket,ValueFormatUtil,JtdoaSe
 		}
 		subStr[1]="{\"marketCode\":\""+marketCode+"\",\"num\":\""+subStr[1]+"\"}";
 		return subStr;
+	}
+	/**
+	 * 获取行业指数集合
+	 * @return  0 stateCode 1 item 2 msg
+	 */
+	@Override
+	public String[] getStockIndustry(String beginIndex, String endIndex,String time,String size) {
+		// TODO Auto-generated method stub
+		List<barData> barList=jtdoaDao.getStockIndex(beginIndex,endIndex,time,size);
+		
+		System.out.println(Arrays.asList(barList));
+		return null;
+	}
+	@Override
+	public String[] getStockIndustryDK(String id, String time, String size) {
+		// TODO Auto-generated method stub
+		Map<String, String> map= new HashMap<>();
+		map.put("id", id);
+		map.put("time", time);
+		map.put("size", size);
+		List<barData> list =jtdoaDao.getStockIndustryDK(map);
+		System.out.println(Arrays.asList(list));
+		return null;
 	}
 }
 

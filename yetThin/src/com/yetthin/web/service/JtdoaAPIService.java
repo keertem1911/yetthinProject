@@ -1,5 +1,6 @@
 package com.yetthin.web.service;
 
-public interface JtdoaAPIService {
+import java.util.List;
 
+public interface JtdoaAPIService {
 }

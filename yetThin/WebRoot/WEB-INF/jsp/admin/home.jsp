@@ -8,13 +8,13 @@
 	href="${pageContext.request.contextPath }/css/bootstrap.css">
 <style type="text/css">
 body { padding-top: 70px; 
- 
+ background-color: white;
 }
 .maindiv {
-	background-color: gray;
+	background-color: white;
  	position: absolute;
  	top:6%;
- 	height: 90%;
+ 	height: auto;
  	width: 100%;
 }
 .formdiv{
@@ -105,6 +105,8 @@ body { padding-top: 70px;
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" 
           aria-haspopup="true" aria-expanded="false">后台管理<span class="caret"></span></a>
           <ul class="dropdown-menu">
+           <li><a href="javascript:void(0);" class="showRiskMinitor">风控监控</a></li>
+         
             <li><a href="javascript:void(0);" class="updateNewVersion">上传Andriod新版本</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="javascript:void(0);" class="lookfeedback">查看反馈</a></li>

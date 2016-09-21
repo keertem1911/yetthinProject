@@ -1,6 +1,9 @@
 package zcom.yetthin.web.controller;
 
 
+import java.util.HashMap;
+import java.util.Hashtable;
+
 import javax.annotation.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -182,4 +185,36 @@ public class JTdoaController extends BaseController implements JtdoaValueMarket 
 		String [] subStr= jtdoaService.getHistoryBar(symbol,barNum,currenyTime,type,cycNum);
 		return putReturnValue1(subStr[0], subStr[2], subStr[1]);
 	}
+	/**
+	 * 获取行业指数 预览
+	 * @param beginIndex
+	 * @param endIndex
+	 * @param time
+	 * @param size
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="/getStockIndustryPlate",method=RequestMethod.POST,
+	produces={"application/json;charset=utf-8"})
+	public String getStockIndustry(@RequestParam(value="begin")String beginIndex,
+			@RequestParam(value="end")String endIndex,
+			@RequestParam(value="time")String time,
+			@RequestParam(value="timeNum")String size
+			){
+		String [] subStr=jtdoaService.getStockIndustry(beginIndex,endIndex,time,size);
+		return putReturnValue1(subStr[0], subStr[2], subStr[1]);
+	}
+	@ResponseBody
+	@RequestMapping(value="/getStockIndustryDK",method=RequestMethod.POST,
+	produces={"application/json;charset=utf-8"})
+	public String getStockIndustryDK(@RequestParam(value="sid")String id,
+			@RequestParam(value="time")String time,
+			@RequestParam(value="timeNum")String size
+			){
+	 
+	
+		String [] subStr=jtdoaService.getStockIndustryDK(id,time,size);
+		return putReturnValue1(subStr[0], subStr[2], subStr[1]);
+	}
+	
 }

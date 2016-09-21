@@ -16,4 +16,7 @@ public interface JtdoaService {
 
 	String[] getLevel1MarketNum(String marketCode);
 
+	String[] getStockIndustry(String beginIndex, String endIndex,String time,String size);
+	
+	String [] getStockIndustryDK(String id,String time,String size);
 }

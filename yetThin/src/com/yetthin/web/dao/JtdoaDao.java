@@ -13,12 +13,15 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.yetthin.web.commit.JtdoaValueMarket;
 import com.yetthin.web.commit.QQMarketLevelUtilByMaster;
 import com.yetthin.web.commit.RedisUtil;
 import com.yetthin.web.commit.ValueFormatUtil;
+import com.yetthin.web.domain.barData;
+import com.yetthin.web.persistence.barDataMapper;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
@@ -36,6 +39,9 @@ public class JtdoaDao implements ValueFormatUtil,JtdoaValueMarket,QQMarketLevelU
 	private static JedisPool poolM=RedisUtil.getInstanceMsater();
 	
 	private static JedisPool poolS=RedisUtil.getInstanceSlave();
+	
+	@Autowired 
+	private barDataMapper barDataMapper;
 	
 	private static Jedis jedis_M=null;
 	private static Jedis jedis_S=null;
@@ -699,5 +705,25 @@ public class JtdoaDao implements ValueFormatUtil,JtdoaValueMarket,QQMarketLevelU
 		}
 		RedisUtil.RealseJedis_M(jedis);
 		return num;
+	}
+	/**
+	 * 获取指数集合
+	 */
+	public List<barData> getStockIndex(String begin,String end,String time,String size){
+		Map<String, String> map =new HashMap<>();
+		map.put("begin", begin);
+		map.put("end", end);
+		map.put("time", time);
+		map.put("size", size);
+		List<barData> lists= barDataMapper.getBetweenBeginAndEnd(map);
+		return lists;
+	}
+	/**
+	 * 获取单支股票的详细 日线值
+	 * 
+	 */
+	public List<barData> getStockIndustryDK(Map<String, String> map){
+		List<barData> lists =barDataMapper.selectByPrimaryKey(map);
+		return lists;
 	}
 }
