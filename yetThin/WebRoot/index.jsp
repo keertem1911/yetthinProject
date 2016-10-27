@@ -143,7 +143,37 @@
  		<input type="submit" value="save"/>
  	</form>
  	<img alt="aa" src="${pageContext.request.contextPath }/image/pic-1.jpg">
+ 	<img alt="aa" src="${pageContext.request.contextPath }/image/pic-2.jpg">
+ 	<img alt="aa" src="${pageContext.request.contextPath }/image/pic-3.jpg">
  	<br/>
+ 	<label>收益推荐表</label>
+ 	<form action="${pageContext.request.contextPath }/incomeRecommendList" method="post"> 
+ 			<label>收益类型</label>
+ 			<select name="IncomeType">
+ 				<option value="0">月收益</option>
+ 				<option value="1">年收益</option>
+ 				<option value="2">优选收益</option>
+ 				<option value="3">总收益</option>
+ 			</select><br/>
+ 			<label>请求页数</label>
+ 			<input type="text" name="pageNum"/><br/>
+ 			<label>页内数量</label>
+ 			<input type="text" name="pageSize"/>
+ 			<br/><input type="submit" value="提交"/>
+ 			</form>
+ 	<br/>
+ 	<label>英雄榜</label>
+ 	<form action="${pageContext.request.contextPath }/bestIncomeList" method="post"> 
+ 			 
+ 			<label>请求页数</label>
+ 			<input type="text" name="pageNum"/><br/>
+ 			<label>页内数量</label>
+ 			<input type="text" name="pageSize"/>
+ 			<br/><input type="submit" value="提交"/>
+ 			</form>
+ 	<br/>
+ 	<br/>
+ 	
   	<a href="Jdtoa.jsp">查看行情接口</a>
   </div>
 </body>
