@@ -722,7 +722,7 @@ public class JtdoaDao implements ValueFormatUtil,JtdoaValueMarket,QQMarketLevelU
 	 * 获取单支股票的详细 日线值
 	 * 
 	 */
-	public List<barData> getStockIndustryDK(Map<String, String> map){
+	public List<barData> getStockIndustryDK(Map map){
 		List<barData> lists =barDataMapper.selectByPrimaryKey(map);
 		return lists;
 	}

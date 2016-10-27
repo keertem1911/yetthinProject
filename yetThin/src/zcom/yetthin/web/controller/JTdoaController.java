@@ -29,6 +29,9 @@ public class JTdoaController extends BaseController implements JtdoaValueMarket 
 	private String putReturnValue1(String statusCode,String msg,String item){
 		return  "{\"status\":\""+statusCode+"\",\"msg\":\""+msg+"\",\"item\":"+item+"}";
 	}
+	private String putReturnValue3(String statusCode,String msg,String item){
+		return  "{\"status\":\""+statusCode+"\",\"msg\":"+msg+",\"item\":"+item+"}";
+	}
 	private String putReturnValue2(String statusCode,String index,String msg,String item){
 		return  "{\"status\":\""+statusCode+"\",\"index\":"+index+",\"msg\":\""+msg+"\",\"item\":"+item+"}";
 	}
@@ -214,7 +217,7 @@ public class JTdoaController extends BaseController implements JtdoaValueMarket 
 	 
 	
 		String [] subStr=jtdoaService.getStockIndustryDK(id,time,size);
-		return putReturnValue1(subStr[0], subStr[2], subStr[1]);
+		return putReturnValue3(subStr[0], subStr[2], subStr[1]);
 	}
 	
 }

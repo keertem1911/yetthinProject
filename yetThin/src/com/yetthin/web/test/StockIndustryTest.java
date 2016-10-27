@@ -35,7 +35,8 @@ public class StockIndustryTest {
 			StringBuffer sb=new StringBuffer();
 		        URL getUrl = null;
 				try {
-					getUrl = new URL("http://table.finance.yahoo.com/table.csv?"+url);
+					getUrl = new URL("http://biz.finance.sina.com.cn/stock/flash_hq/kline_data.php?&rand=random(10000)&symbol=sh600000&end_date=20150809&begin_date=20000101&type=plain");
+//					getUrl = new URL("http://q.stock.sohu.com/hisHq?code=cn_300228&start=20130930&end=20131231&stat=1&order=D&period=d&callback=historySearchHandler&rt=jsonp");
 				} catch (MalformedURLException e2) {
 					// TODO Auto-generated catch block
 					e2.printStackTrace();
@@ -78,7 +79,7 @@ public class StockIndustryTest {
 
 		        try {
 					while ((lines = reader.readLine()) != null) {   
-						sb.append(lines+"#");
+						System.out.println(lines);
 					}
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
@@ -162,7 +163,7 @@ public class StockIndustryTest {
 		double lastIndexVlaue=1000;
 		DecimalFormat    df   = new DecimalFormat("######0.00");   
 		System.out.println(Arrays.asList(historyDataSame));
-		System.out.println(Arrays.asList(historyDataSame));	
+		 	
 		for (int i = historyDataSame.length-2; i >-1 ; --i) {
 			String  [] lastsubValue= historyDataSame[i].split("[#]");
 			String  [] preValue= historyDataSame[i+1].split("[#]");
@@ -187,25 +188,22 @@ public class StockIndustryTest {
 			preIndexVlaue=(double)Math.round(lastIndexVlaue);
 			} 
 				
-			System.out.println(dataTime);
-			System.out.println("prevalue:="+preVlaue+"  lastVlaue:="+lastValue);
-			System.out.println((preIndexVlaue));
 		}
 	}
 	public static void main(String[] args) {
 	StockIndustryTest test=new StockIndustryTest();
 	String [] historySymbols=new String[symbols.length];
 	Map<String, String[] > map=new HashMap<>();
-	for (int i = 0; i < symbols.length; i++) {
+	//for (int i = 0; i < symbols.length; i++) {
 		 
-		System.out.println("------------------"+symbols[i]+"------------------------------");
-		 String tempSymbol=test.YaHooget("s="+symbols[i]+"&a=05&b=01&c=2016&d=07&e=22&f=2016&g=d&ignore=.csv");
-		map.put(symbols[i], tempSymbol.split("[#]"));
+		System.out.println("------------------"+symbols[0]+"------------------------------");//http://finance.yahoo.com/d/quotes.csv?s=600000.SS&f=npl1
+		 String tempSymbol=test.YaHooget("s="+symbols[0]+"&a=05&b=01&c=2016&d=07&e=22&f=2016&g=di&ignore=.csv");
+		map.put(symbols[0], tempSymbol.split("[#]"));
 		System.out.println("---------------------------------------------------");
 		System.out.println("---------------------------------------------------");
 		//		System.out.println(s);
-	}
-	test.countHistoryStockIndex(map);
+	//}
+	//test.countHistoryStockIndex(map);
 	 
 	}
 }

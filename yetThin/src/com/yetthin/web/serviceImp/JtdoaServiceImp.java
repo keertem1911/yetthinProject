@@ -661,16 +661,53 @@ public class JtdoaServiceImp implements JtdoaValueMarket,ValueFormatUtil,JtdoaSe
 		System.out.println(Arrays.asList(barList));
 		return null;
 	}
+	/**
+	 * K线 json 格式转换
+	 * {data:[{date:'',open:'',low:'',height:'',close:''},
+	 * 		{date:'',open:'',low:'',height:'',close:''}
+	 * ]}
+	 */
+	private String KMdata2String(List<barData> list){
+		StringBuffer sb=new StringBuffer();
+		sb.append("{\"data\":[");
+		for (int i = 0; i < list.size(); i++) {
+			barData bar=list.get(i);
+			sb.append("{");
+			sb.append("\"date\":\""+bar.getDatetime().toString()+"\",");
+			sb.append("\"open\":\""+bar.getOpen()+"\",");
+			sb.append("\"low\":\""+bar.getLow()+"\",");
+			sb.append("\"height\":\""+bar.getHeight()+"\",");
+			sb.append("\"close\":\""+bar.getClose()+"\"");
+			sb.append("}");
+			if(i<list.size()-1)
+				sb.append(",");
+		}
+		sb.append("]}");
+		
+		return sb.toString(); 
+	}
 	@Override
 	public String[] getStockIndustryDK(String id, String time, String size) {
 		// TODO Auto-generated method stub
-		Map<String, String> map= new HashMap<>();
-		map.put("id", id);
+		Map<String,Object> map= new HashMap<>();
+		map.put("id", Integer.parseInt(id));
 		map.put("time", time);
-		map.put("size", size);
+		map.put("size",Integer.parseInt(size));
 		List<barData> list =jtdoaDao.getStockIndustryDK(map);
 		System.out.println(Arrays.asList(list));
-		return null;
+		String str=KMdata2String(list);
+		String [] s=new String[3];
+		if(str!=null&&!"".equals(str.trim())){
+			s[2]=str;
+			s[0]="200";
+			s[1]="\"\"";
+		}else{
+			s[2]="\"\"";
+			s[0]="420";
+			s[1]="日K线错误";
+			
+		}
+		return s;
 	}
 }
 

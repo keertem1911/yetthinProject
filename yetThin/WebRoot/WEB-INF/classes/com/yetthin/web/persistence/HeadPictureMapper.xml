@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yetthin.web.persistence.HeadPictureMapper" >
+  
+ 	
+ 	<sql id="columns_select">id,hrefUrl</sql>
+ 	<select id="getPictureList" resultType="com.yetthin.web.domain.HeadPicture">
+ 	select <include refid="columns_select"/> from headpic
+ 	</select>
+ 	<update id="saveOrUpdate" parameterType="com.yetthin.web.domain.HeadPicture">
+ 		update headpic set hrefUrl=#{hrefUrl,jdbcType=VARCHAR} WHERE id =#{id,jdbcType=INTEGER}
+ 	</update>
+</mapper>

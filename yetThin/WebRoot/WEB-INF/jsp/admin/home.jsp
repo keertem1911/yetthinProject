@@ -108,6 +108,7 @@ body { padding-top: 70px;
            <li><a href="javascript:void(0);" class="showRiskMinitor">风控监控</a></li>
          
             <li><a href="javascript:void(0);" class="updateNewVersion">上传Andriod新版本</a></li>
+            <li><a href="javascript:void(0);" class="updateHeadPicture">上传头部图片</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="javascript:void(0);" class="lookfeedback">查看反馈</a></li>
              

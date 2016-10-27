@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -43,7 +44,7 @@ public class JtdoaAPIDao implements
 	private static final int KS_SELECT=5;
 	private static final int KM_SELECT=4;
 	
-	 
+	private static Map<Integer, String> lastMysqlDay=null; 
 	 
 	private static JedisPool jedispool=RedisUtil.getInstanceMsater();
 	 
@@ -282,6 +283,47 @@ public class JtdoaAPIDao implements
 		RedisUtil.RealseJedis_M(jedis);
 		
 	}
+	public void getMysqlLastDay(String userName,String passwd){
+//		lastMysqlDay;
+		Map<Integer, String> map=new HashMap<>();
+		Connection conn =null;
+		 
+			try {
+				Class.forName("com.mysql.jdbc.Driver");
+//			 时间:开:收:最高:最低: 
+				conn =DriverManager.getConnection("jdbc:mysql://localhost:3306/bardata",userName,passwd);
+				PreparedStatement pre =conn.prepareStatement("select s.sid,s.dateTime,s.open,s.close,s.height,s.low from"
+						+ "(select max(dateTime)as dateTime from bardata group by sid limit 1)t "
+						+ "left join bardata as s on s.dateTime =t.dateTime ");
+				ResultSet res = pre.executeQuery();
+				while(res.next()){
+					Date date = res.getDate("dateTime");
+					String open = res.getString("open");
+					String close= res.getString("close");
+					String  height = res.getString("height");
+					String low =res.getString("low");
+					Integer id =res.getInt("sid");
+					map.put(id, date.toString()+SPLIT_STR+open+SPLIT_STR+close+SPLIT_STR+height+SPLIT_STR+low);
+				}
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally{
+				
+				lastMysqlDay=map;
+				if(conn!=null){
+					try{
+						conn.close();
+					}catch(SQLException e1){
+						e1.printStackTrace();
+					}
+				}
+			}
+		 
+	}
 	/**
 	 * K线的分钟线为   时间:开:收:最高:最低:涨跌值:涨跌幅
 	 */
@@ -293,6 +335,7 @@ public class JtdoaAPIDao implements
 		for (Entry<String, List<String>> entry : entrySet) {
 			double min;
 			double max;
+		 
 			String KSname =entry.getKey();
 			List<String> KSValue= entry.getValue();
 			double close =Double.parseDouble(KSValue.get(0).split(SPLIT_STR)[2]);
@@ -308,15 +351,22 @@ public class JtdoaAPIDao implements
 //			}
 			long length= jedis.llen(KSname+".KM");
 			double preLast=0,updownValue=0,updownValueRate=0;
-			
+			String pre=null;
 			if(length>0){
-				String pre =jedis.lrange(KSname+".KM", 0, 0).get(0);
+				pre =jedis.lrange(KSname+".KM", 0, 0).get(0);
 //				 时间:开:收:最高:最低:涨跌值:涨跌幅
 				preLast=Double.parseDouble(pre.split(SPLIT_STR)[3]);
+				
+				
+			}else{
+//				 时间:开:收:最高:最低:
+				pre=lastMysqlDay.get(KSname);
+				preLast=Double.parseDouble(pre.split(SPLIT_STR)[2]);
+			}
+			if(preLast!=0){
 				updownValue =close-preLast;
 				updownValueRate= (updownValue)/close;
-				
-			} 
+			}
 			jedis.lpush(KSname+".KM", dateFormat.format(System.currentTimeMillis())+SPLIT_STR+preIndex+SPLIT_STR
 					+open+SPLIT_STR+close+SPLIT_STR+max+SPLIT_STR+min+SPLIT_STR+df.format(updownValue)+SPLIT_STR+df.format(updownValueRate*100));
 			
@@ -562,6 +612,15 @@ public class JtdoaAPIDao implements
 		RedisUtil.RealseJedis_M(jedis);
 		
 	}
+	/**
+	 * 返回查询的上一条记录
+	 * @param data
+	 * @return
+	 */
+//	public Map<String, barData> getBarDataByTimeFromSql(String data  ){                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+////	5kkj	Map<String, barData> map = new HashMap<>();
+//		return map;
+//	}
 	public int getRedisLengthBySelect(int n){
 		Jedis jedis = jedispool.getResource();
 		jedis.select(n);

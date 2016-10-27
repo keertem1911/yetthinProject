@@ -130,7 +130,19 @@
 			<input type="password" name="password" placeholder="密码"/>
 		<input type="submit" value="Submit"/>
 	</form>
-	
+	<br/>
+	<form action="${pageContext.request.contextPath}/picture/getHeadList" method="post">
+		<label>获取图片集合</label>
+		<input type="submit" value="send it"/>
+	</form>
+ 	<br/>
+ 	<form action="${pageContext.request.contextPath }/picture/upload" method="post" enctype="multipart/form-data">
+ 		图片顺序<input type="text" name="partNum"/>
+ 		图片点击链接<input type="text" name="href"/>
+ 		上传图片<input type="file" name="picture"/>
+ 		<input type="submit" value="save"/>
+ 	</form>
+ 	<img alt="aa" src="${pageContext.request.contextPath }/image/pic-1.jpg">
  	<br/>
   	<a href="Jdtoa.jsp">查看行情接口</a>
   </div>

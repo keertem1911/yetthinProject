@@ -30,7 +30,8 @@ SinaMarketIndex,JtdoaValueMarket{
 	
 	private JtdoaAPIDao jtdoaAPIDao=new JtdoaAPIDao();
 	
-	 
+	private String userName=null;
+	private String passwd=null;
 	private static final int dev_num=20;
 	private  String FILE_NAME_PATH;
 	private UrlRequestDao urlRequestDao=new UrlRequestDao();
@@ -165,8 +166,10 @@ SinaMarketIndex,JtdoaValueMarket{
  						jtdoaAPIDao.clearMSvaeD();
  					} 
  					 if(isTimeOut(MIDDLE_TIME, null)){
- 						 if(jtdoaAPIDao.getRedisLengthBySelect(5)!=0)
+ 						 if(jtdoaAPIDao.getRedisLengthBySelect(5)!=0){
  						 jtdoaAPIDao.flushKS();
+ 						 jtdoaAPIDao.getMysqlLastDay(userName,passwd);
+ 						 }
  					 }
  					 System.out.println("time out ");
  					 try {
@@ -230,6 +233,8 @@ SinaMarketIndex,JtdoaValueMarket{
 	public void contextInitialized(ServletContextEvent arg0) {
 		String path=arg0.getServletContext().getInitParameter("path");
 		String initFlag=(arg0.getServletContext().getInitParameter("initFlag"));
+		userName =arg0.getServletContext().getInitParameter("username");
+		passwd= arg0.getServletContext().getInitParameter("passwd");
 		this.initFlag=Boolean.parseBoolean(initFlag);
 		FILE_NAME_PATH=path;
 		// TODO Auto-generated method stub

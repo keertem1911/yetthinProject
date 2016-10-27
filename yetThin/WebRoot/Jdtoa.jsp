@@ -213,13 +213,14 @@
 						 });
 					});
 				}
-				$("#shenzhen-sub").click(function(){
-					shenzhenFun();
-				});
-				
-				//$('body').everyTime('6s',function(){
-					//shenzhenFun();
-				//});
+			/* 	$("#shenzhen-sub").click(function(){
+						 shenzhenFun();
+					
+				}); */
+				$('body').everyTime('6s',function(){
+					 shenzhenFun();
+				 });
+				 
 			})
 	</script>
 </head>
@@ -228,19 +229,19 @@
 	<br/>
 	<form action="${pageContext.request.contextPath }/jtdoa/shenzhen" method="post" id="shenzhen">
 		 <label>/jtdoa/shenzhen  沪深股市接口 </label>
-		 <input class="shenzhen1" name="begin" type="text" value="" placeholder="起始位置  start with 0 默认为0 可不选"/>
-		 <input class="shenzhen1" name="end" type="text" value="" placeholder="结束位置   默认为9 可不选"/>
+		 <input class="shenzhen1" name="begin" type="text" value="0" placeholder="起始位置  start with 0 默认为0 可不选"/>
+		 <input class="shenzhen1" name="end" type="text" value="9" placeholder="结束位置   默认为9 可不选"/>
 		 <input class="shenzhen1" type="input" name="indexMarket" value="true" id="Level1indexMarket"/> 
 		 <input class="shenzhen1" type="input" name="master" value="true" id="Level1Master"/> 
 		
 		 <label>股市选择及属性 可不选 默认为沪深 的 涨幅,跌幅,换手率</label>
 		 <select name="marketCode"  class="shenzhen1">
-		 	<option value="">默认(0:0,1,2)</option>
-		 	<option value="0:0">沪深:涨幅(0:0)</option>
+		 	 
+		 	<option value="0:0" >沪深:涨幅(0:0)</option>
 		 	<option value="0:1">沪深:跌幅(0:1)</option>
 		 	<option value="0:2">沪深:换手率(0:2)</option>
 		 	<option value="0:0,1">沪深:涨幅,跌幅(0:0,1)</option>
-		 	<option value="0:0,1,2">沪深:涨幅,跌幅,换手率(0:0,1,2)</option>
+		 	<option value="0:0,1,2" selected="selected">沪深:涨幅,跌幅,换手率(0:0,1,2)</option>
 		 </select>
 		<input type="button" value="get" id="shenzhen-sub"/>
 	</form><br/>
@@ -303,9 +304,9 @@
  	<form action="${pageContext.request.contextPath }/jtdoa/getStockIndustryPlate"
  	method="post" 
  	>
- 		<label>获取行情数据</label>
-		<input type="text" value="" placeholder="起始值" name="begin"/>
-		<input type="text" value="" placeholder="终止值" name="end"/>
+ 		<label>获取行情数据预览型</label>
+		<input type="text" value="0" placeholder="起始值" name="begin"/>
+		<input type="text" value="10" placeholder="终止值" name="end"/>
 		<input type="text" value="" placeholder="起始时间" name="time"/>
 		<input type="text" value="" placeholder="持续天数" name="timeNum"/>
 		
@@ -314,9 +315,9 @@
  	<form action="${pageContext.request.contextPath }/jtdoa/getStockIndustryDK"
  	method="post" 
  	>
- 		<label>获取行情数据</label>
+ 		<label>获取行情数据K日k线</label>
  		
-		<input type="text" value="" placeholder="行业代码" name="sid"/>
+		<input type="text" value="1" placeholder="行业代码" name="sid"/>
 		<input type="text" value="" placeholder="起始时间" name="time"/>
 		<input type="text" value="" placeholder="持续天数" name="timeNum"/>
 		

@@ -12,7 +12,7 @@ public interface barDataMapper {
 
     int insertSelective( barData  record);
 
-    List<barData> selectByPrimaryKey(Map<String, String> map);
+    List<barData> selectByPrimaryKey(Map map);
 
     int updateByPrimaryKeySelective(barData record);
 
