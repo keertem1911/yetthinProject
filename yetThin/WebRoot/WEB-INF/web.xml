@@ -13,7 +13,7 @@
   </listener>
   <context-param>
     <param-name>path</param-name>
-    <param-value>e:/symbol.txt</param-value>
+    <param-value>f:/stock/symbol.txt</param-value>
   </context-param>
   <context-param>
     <param-name>initFlag</param-name>

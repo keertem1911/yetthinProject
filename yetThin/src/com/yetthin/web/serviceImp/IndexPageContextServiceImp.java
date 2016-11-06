@@ -6,6 +6,7 @@ import java.lang.reflect.Method;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -14,88 +15,39 @@ import javax.annotation.Resource;
 import org.apache.tomcat.jni.Buffer;
 import org.springframework.stereotype.Service;
 
+import com.alibaba.fastjson.JSON;
+import com.yetthin.web.domain.CurrentIncome;
+import com.yetthin.web.domain.CurrentValue;
 import com.yetthin.web.domain.HeroIncome;
 import com.yetthin.web.domain.RecommendList;
+import com.yetthin.web.domain.UserGroups;
 import com.yetthin.web.persistence.IndexPageContextMapper;
 import com.yetthin.web.service.IndexPageContextService;
 @Service("IndexPageContextService")
-public class IndexPageContextServiceImp implements IndexPageContextService{
+public class IndexPageContextServiceImp extends BaseService implements IndexPageContextService{
 	
 	@Resource
 	private IndexPageContextMapper indexPageContextMapper;
 	
-	private <E>String tojson(List<E> list){
-		
-		StringBuffer buffer =new StringBuffer();
-		buffer.append("\"value\":[");
-		Class clazz =list.get(0).getClass();
-		Field[] fiedls = clazz.getDeclaredFields();
-		final String [] fiedlsName=new String [fiedls.length];
-		for (int i = 0; i < fiedls.length; i++) {
-			String name =fiedls[i].getName();
-			fiedlsName[i] =name.substring(0, 1).toUpperCase()+name.substring(1);
-		}
-		for (int i = 0; i < list.size(); i++) {
-			buffer.append("{");
-			for(int j=0;j<fiedlsName.length;++j){
-				try{
-			Method method = clazz.getDeclaredMethod("get"+fiedlsName[j]);
-			Object value = method.invoke(list.get(i));
-			String name =fiedlsName[j].substring(0, 1).toLowerCase()+fiedlsName[j].substring(1);
-			
-			buffer.append("\""+name+"\":\""+value+"\"");
-			
-			if(j!=fiedlsName.length-1)
-				buffer.append(",");
-				}catch(Exception e){
-					e.printStackTrace();
-					}
-				 
-			}
-			
-			buffer.append("}");
-			if(i!=list.size()-1)
-				buffer.append(",");
-		}
-		
-		buffer.append("]");
-		return buffer.toString();
-		
-	}
-	private static final SimpleDateFormat format =new SimpleDateFormat("yyyy/MM/dd");
-	private static final DecimalFormat   df=new   java.text.DecimalFormat("#.##");  
-	@Override
+	
+		@Override
 	public String getIncomeRecommendList(int type, int pageNum, int pageSize) {
 		// TODO Auto-generated method stub
 		int totlePageSize=2;
 //	 	int totlePage=indexPageContextMapper.getTotlePageIncome(type);
-//		int totlePageNum=totlePage/pageSize;
-//		if(pageNum>totlePageNum) pageSize=totlePageNum;
-//		if(pageNum<=0) pageNum=1;
-//		
-//		if(totlePage%pageSize!=0) 
-//			totlePageNum++;
-//		int begin=0;
-//		int end=0;
-//		if(pageNum==totlePageNum){
-//			begin =(totlePageNum-1)*pageSize+1;
-//			end=totlePage;
-//		}else{
-//		 begin=(pageSize-1)*pageSize+1;
-//		 end =(pageSize)*pageSize;
-//		}
-//		List<RecommendList> list =indexPageContextMapper.getIncomeRecommendList(type, begin, end);
+//		int []pageA=partitionPage(totlePage, pageNum, pageSize);
+//		List<RecommendList> list =indexPageContextMapper.getIncomeRecommendList(type, pageA[0], pageA[1]);
 		List<RecommendList> list =new ArrayList<RecommendList>();
 		for(int i=0;i<pageSize;++i){
 			RecommendList recommend=new RecommendList();
 			recommend.setGroupName("新能源汽车");
-			recommend.setIncomeRatio(df.format(10.0-0.1*i));
+			recommend.setIncomeRatio(format_double_2.format(10.0-0.1*i));
 			recommend.setIncomeType(type);
 			recommend.setUserName("王"+i);
 			recommend.setUserId("ea193c352fda49de8e34f319ec411960");
 			recommend.setRecommendReason("人工智能+智能算法");
 			recommend.setVipFlag(i%2);
-			recommend.setCreateTime(format.format(new Date()));
+			recommend.setCreateTime(format_yyyyMMdd.format(new Date()));
 			 
 			list.add(recommend);
 		}
@@ -104,6 +56,7 @@ public class IndexPageContextServiceImp implements IndexPageContextService{
 		totlePageSize+"\","+json+"}";
 		return json;
 	}
+	
 	/**
 	 * 
 	 * @param pageNum  每页的数目
@@ -111,37 +64,78 @@ public class IndexPageContextServiceImp implements IndexPageContextService{
 	 * @return
 	 */
 	@Override
-	public String getBestIncomeList(int pageNum,int pageSize) {
+	public String getBestIncomeList(int pageNum,int pageSize,String path) {
 		// TODO Auto-generated method stub
 		int totlePage=2;
 //		int totlePage=indexPageContextMapper.getTotlePageHero();
-//		int totlePageNum=totlePage/pageSize;
-//		if(pageNum>totlePageNum) pageSize=totlePageNum;
-//		if(pageNum<=0) pageNum=1;
-//		
-//		if(totlePage%pageSize!=0) 
-//			totlePageNum++;
-//		int begin=0;
-//		int end=0;
-//		if(pageNum==totlePageNum){
-//			begin =(totlePageNum-1)*pageSize+1;
-//			end=totlePage;
-//		}else{
-//		 begin=(pageSize-1)*pageSize+1;
-//		 end =(pageSize)*pageSize;
-//		}
-//		List<RecommendList> list =indexPageContextMapper.getIncomeRecommendList(type, begin, end);
+//		int []pageArr=partitionPage(totlePage, pageNum, pageSize);
 //		List<HeroIncome> list=indexPageContextMapper.getBestIncomeList();
 		List<HeroIncome> list =new ArrayList<HeroIncome>();
 		for(int i=0;i<pageSize;++i){
 			HeroIncome income=new HeroIncome();
 			income.setUserName("李"+i);
+			income.setUserId("w23w2dqwer12");
 			income.setVipFlag(i%2);
-			income.setNear3MonthIncome(df.format(10.2-0.1*i));
+			income.setUserImg(getRequestPath(path)+"/image/user-"+income.getUserId()+".jpg");
+			income.setNear3MonthIncome(format_double_2.format(10.2-0.1*i));
 			income.setBelongDepart("前景私募股份有限公司"+i);
 			 list.add(income);
 		}
 		String json =tojson(list);
+		json="{\"currentPage\":\""+pageNum+"\",\"totlePageSize\":\""+
+				totlePage+"\","+json+"}";
+		return json;
+	}
+	@Override
+	public String getCurrentIncomeList(String groupNameOrId, int pageNum, int pageSize, int type) {
+		// TODO Auto-generated method stub
+		int totlePage=2;
+//		int totlePage =indexPageContextMapper.getTotlePageCurrentIncome(type);
+//		int [] pageA=partitionPage(totlePage, pageNum, pageSize);
+//		List<CurrentValue> lists =indexPageContextMapper.getCurrentIncome(type, pageA[0],pageA[1]);
+		 
+		ArrayList<CurrentValue> lists = new ArrayList<CurrentValue>();
+
+		 Calendar cal=Calendar.getInstance();
+		cal.setTime(new Date());
+		cal.set(Calendar.DATE, 1); 
+		CurrentIncome income=new CurrentIncome();
+		income.setCurrentPage(Integer.toString(pageNum));
+		income.setTotlePageSize(Integer.toString(totlePage));
+		for (int i = 0; i < pageSize; i++) {
+			 CurrentValue value=new CurrentValue();
+			 value.setIncomeRate("12.2"+i);
+			 value.setIndexWaveRate("2.1"+i);
+			 value.setTime(format_yyyyMMdd.format(cal.getTime()));
+			 cal.set(Calendar.DATE,i+2);
+			 lists.add(value);
+		}
+		income.setCurrentValue(lists);
+		
+		String json =JSON.toJSONString(income);
+		return json;
+	}
+
+	@Override
+	public String getUserGroups(String userName, int pageNum, int pageSize) {
+		// TODO Auto-generated method stub
+		int totlePage=2;
+//		int totlePage =indexPageContextMapper.getTotlePageUserGroups(userName);
+//		int [] pageA=partitionPage(totlePage, pageNum, pageSize);
+//		List<UserGroups> lists =indexPageContextMapper.getUserGroups(userName,pageA[0],pageA[1]);
+//		String json =tojson(lists);
+		List<UserGroups> lists= new ArrayList<UserGroups>();
+		Calendar cal=Calendar.getInstance();
+		cal.setTime(new Date());
+		cal.set(Calendar.MONTH, cal.get(Calendar.MONTH)-1);
+		for (int i = 0; i < pageSize; i++) {
+			UserGroups user =new UserGroups();
+			user.setCreateTime(format_yyyyMMdd.format(cal.getTime()));
+			user.setGroupName("小韩"+i);
+			user.setImcomeRatio(format_double_2.format(8.4+i*0.11));
+			lists.add(user);
+		}
+		String json =tojson(lists);
 		json="{\"currentPage\":\""+pageNum+"\",\"totlePageSize\":\""+
 				totlePage+"\","+json+"}";
 		return json;

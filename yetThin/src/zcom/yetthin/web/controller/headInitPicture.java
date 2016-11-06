@@ -6,6 +6,7 @@ import java.io.IOException;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -52,6 +53,7 @@ public class headInitPicture {
 					pic.transferTo(new File(path));
 					HeadPicture entity= new HeadPicture();
 					entity.setId(partNum);
+					entity.setImgSrc("/image/"+name+"."+imagename);
 					entity.setHrefUrl(href);
 					int i =headInitPictureService.save(entity);
 					if(i==0)
@@ -69,13 +71,16 @@ public class headInitPicture {
 			return status;
 		}
 		 
+		@ResponseBody
 		@RequestMapping(value="/getHeadList",method=RequestMethod.POST,
 				produces={"application/json;charset=utf-8"})
-		@ResponseBody
-		public String getHeadList(){
-			String json =headInitPictureService.getPictureList();
-			System.out.println(json);
+		public String getHeadList(HttpServletRequest req){
+			StringBuffer path= req.getRequestURL();
+			
+			String json =headInitPictureService.getPictureList(path.toString());
+		//	System.out.println(json);
 			
 			return "{"+json+"}";
 		}
+		
 }

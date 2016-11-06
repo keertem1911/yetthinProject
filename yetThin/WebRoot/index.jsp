@@ -136,6 +136,9 @@
 		<input type="submit" value="send it"/>
 	</form>
  	<br/>
+ 	<a href="${pageContext.request.contextPath }/excl/interfacerequest.xls"><font size="20" color="red">请求接口说明下载</font></a>
+ 	
+ 	<br/>
  	<form action="${pageContext.request.contextPath }/picture/upload" method="post" enctype="multipart/form-data">
  		图片顺序<input type="text" name="partNum"/>
  		图片点击链接<input type="text" name="href"/>
@@ -172,9 +175,73 @@
  			<br/><input type="submit" value="提交"/>
  			</form>
  	<br/>
+ 	<label>用户组合列表</label>
+ 	<form action="${pageContext.request.contextPath }/userGroups" method="post"> 
+ 			
+ 			<label>用户名称</label>
+ 			<input type="text" name="userName"/><br/>
+ 			<label>请求页数</label>
+ 			<input type="text" name="pageNum"/><br/>
+ 			<label>页内数量</label>
+ 			<input type="text" name="pageSize"/>
+ 			<br/><input type="submit" value="提交"/>
+ 			</form>
  	<br/>
  	
+ 	<label>组合细节</label>
+  	<form action="${pageContext.request.contextPath }/group/Detail" method="post">
+ 		
+ 			<label>请求组合名称或者组合ID</label>
+ 			<input type="text" name="groupNameOrId"/><br/>
+ 			 
+ 			 <input type="submit" value="提交"/>
+ 	</form>
+ 	<br/>
+ 	<label>组合比例</label>
+  	<form action="${pageContext.request.contextPath }/group/Component" method="post">
+ 		
+ 			<label>请求组合名称或者组合ID</label>
+ 			<input type="text" name="groupNameOrId"/><br/>
+ 			 
+ 			 <input type="submit" value="提交"/>
+ 	</form>
+ 	<label>组合分析</label>
+  	<form action="${pageContext.request.contextPath }/group/Analyse" method="post">
+ 		
+ 			<label>请求组合名称或者组合ID</label>
+ 			<input type="text" name="groupNameOrId"/><br/>
+ 			 
+ 			 <input type="submit" value="提交"/>
+ 	</form>
+ 	<label>组合评论</label>
+  	<form action="${pageContext.request.contextPath }/group/Recommend" method="post">
+ 		
+ 			<label>请求组合名称或者组合ID</label>
+ 			<input type="text" name="groupNameOrId"/><br/>
+ 			 
+ 			 <input type="submit" value="提交"/>
+ 	</form>
+ 	<br/>
+ 	
+ 	<label>当前收益列表</label>
+ 	<form action="${pageContext.request.contextPath }/currentIncomeList" method="post">
+ 	<label>收益类型</label>
+ 			<select name="type">
+ 				<option value="0">本周</option>
+ 				<option value="1">本月</option>
+ 				<option value="2">本年</option>
+ 				<option value="3">创建以来</option>
+ 			</select><br/>
+ 			<label>请求组合名称或者组合ID</label>
+ 			<input type="text" name="groupNameOrId"/><br/>
+ 		<label>请求页数</label>
+ 			<input type="text" name="pageNum"/><br/>
+ 			<label>页内数量</label>
+ 			<input type="text" name="pageSize"/>
+ 			 <input type="submit" value="提交"/>
+ 	</form>
   	<a href="Jdtoa.jsp">查看行情接口</a>
+  	<a href="group.jsp">组合接口</a>
   </div>
 </body>
 </html>

@@ -72,12 +72,10 @@ $(function(){
  	</form> --%>
 <form id="form" action="${pageContext.request.contextPath }/picture/upload" method="post" enctype="multipart/form-data">
   <div class="form-group">
-    <label for="exampleInputEmail1">轮播图顺序</label>
-    <select class="form-control" name="partNum" id="partNum">
-    <option value="1">第一张</option>
-    <option value="2">第二张</option>
-    <option value="3">第三张</option>
-    </select>
+    <label for="exampleInputEmail1">轮播图次序</label>
+    	<input  type="text" class="form-control" name="partNum" id="partNum"/>
+    
+    
   </div>
   <div class="form-group">
     <label for="exampleInputPassword1">图片链接地址</label>

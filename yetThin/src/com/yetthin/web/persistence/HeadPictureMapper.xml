@@ -3,10 +3,16 @@
 <mapper namespace="com.yetthin.web.persistence.HeadPictureMapper" >
   
  	
- 	<sql id="columns_select">id,hrefUrl</sql>
+ 	<sql id="columns_select">id,imgSrc,hrefUrl</sql>
  	<select id="getPictureList" resultType="com.yetthin.web.domain.HeadPicture">
  	select <include refid="columns_select"/> from headpic
  	</select>
+ 	<select id="selectPicByid" parameterType="java.lang.Integer" resultType="com.yetthin.web.domain.HeadPicture">
+ 		select <include refid="columns_select"/> from headpic where id =#{id,jdbcType=INTEGER}
+ 	</select>
+ 	<insert id="insert" parameterType="com.yetthin.web.domain.HeadPicture" >
+ 		insert into headpic(id,imgSrc,hrefUrl) values(#{id,jdbcType=INTEGER},#{imgSrc,jdbcType=VARCHAR},#{hrefUrl,jdbcType=VARCHAR})
+ 	</insert>
  	<update id="saveOrUpdate" parameterType="com.yetthin.web.domain.HeadPicture">
  		update headpic set hrefUrl=#{hrefUrl,jdbcType=VARCHAR} WHERE id =#{id,jdbcType=INTEGER}
  	</update>

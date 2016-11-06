@@ -2,16 +2,21 @@ package com.yetthin.web.serviceImp;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.alibaba.fastjson.JSON;
 import com.yetthin.web.domain.HeadPicture;
 import com.yetthin.web.persistence.HeadPictureMapper;
 import com.yetthin.web.service.HeadInitPictureService;
+
+import zcom.yetthin.web.controller.headInitPicture;
 @Service("HeadInitPictureService")
-public class HeadInitPictureServiceImp implements HeadInitPictureService{
+public class HeadInitPictureServiceImp extends BaseService  implements HeadInitPictureService{
 	
 	@Resource
 	private HeadPictureMapper headPictureMapper;
@@ -24,7 +29,11 @@ public class HeadInitPictureServiceImp implements HeadInitPictureService{
 	@Override
 	public int save(HeadPicture entity) throws Exception {
 		// TODO Auto-generated method stub
-		return headPictureMapper.saveOrUpdate(entity);
+		int i=0;
+		HeadPicture pic =headPictureMapper.selectPicByid(entity.getId());
+		if(pic==null) i=headPictureMapper.insert(entity);
+		else i=headPictureMapper.saveOrUpdate(pic);
+		return i;
 	}
 
 	@Override
@@ -39,27 +48,16 @@ public class HeadInitPictureServiceImp implements HeadInitPictureService{
 		return null;
 	}
 
-	private String toJson(List<HeadPicture> list){
-		StringBuffer buffer =new StringBuffer();
-		buffer.append("\"value\": ");
-		buffer.append("[");
-		for (int i = 0; i < list.size(); i++) {
-			buffer.append("{");
-			buffer.append("\"id\":\""+list.get(i).getId()+"\",");
-			buffer.append("\"href\":\""+list.get(i).getHrefUrl()+"\"");
-			buffer.append("}");
-			if(i!=list.size()-1)
-				buffer.append(",");
-		}
-		buffer.append("]");
-		
-		return buffer.toString();
-	}
+	 
 	@Override
-	public String getPictureList() {
-		System.out.println();
+	public String getPictureList(String path) {
+		
 		List<HeadPicture> list1= headPictureMapper.getPictureList();
-		String json =toJson(list1);
+		
+		 
+		String json =tojson(list1);
+		
+		json =json.replace("/image/", getRequestPath(path)+"/image/");
 		// TODO Auto-generated method stub
 		return json;
 	}

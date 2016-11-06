@@ -1,10 +1,24 @@
 package com.yetthin.web.domain;
 
 public class HeroIncome {
+	private String userId;
 	private String userName;
 	private int vipFlag;
 	private String near3MonthIncome;
-	 
+	private String userImg;
+	
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+	public String getUserImg() {
+		return userImg;
+	}
+	public void setUserImg(String userImg) {
+		this.userImg = userImg;
+	}
 	private String belongDepart;
 	
 	public int getVipFlag() {
