@@ -1,6 +1,7 @@
 package com.yetthin.web.persistence;
 
 import java.util.List;
+import java.util.Map;
 
 import com.yetthin.web.domain.GroupAnalyse;
 import com.yetthin.web.domain.GroupComponent;
@@ -29,4 +30,5 @@ public interface GroupMapper {
 	 
 	List<StockType> getStockType();
 	List<Model2Info> getConpetType();
+	int saveRecommend(Map<String, String> map);
 }

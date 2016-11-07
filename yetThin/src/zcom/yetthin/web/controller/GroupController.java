@@ -56,6 +56,18 @@ public class GroupController {
 		return json ;
 	}
 	@ResponseBody
+	@RequestMapping(value="/saveRecommend",method=RequestMethod.POST,
+			produces={"application/json;charset=utf-8"})
+	public String saveRecommend(@RequestParam(value="groupNameOrId")String groupNameOrId,
+			@RequestParam(value="belongGroupId")String belongId,
+			@RequestParam(value="upRecommendUserId")String upRecommendUserId,
+			@RequestParam(value="repateContext")String context){
+		String json =null;
+		json =groupService.saveRecommend(groupNameOrId,belongId,upRecommendUserId,context);
+		return json;
+	}
+	
+	@ResponseBody
 	@RequestMapping(value="/Summarize",method=RequestMethod.POST,
 			produces={"application/json;charset=utf-8"})
 	public String getSummarize(@RequestParam(value="pageNum")int pageNum,

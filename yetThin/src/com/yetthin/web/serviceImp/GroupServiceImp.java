@@ -3,7 +3,9 @@ package com.yetthin.web.serviceImp;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -278,6 +280,20 @@ public class GroupServiceImp extends BaseService implements GroupService{
 		String json =tojson(list);
 		return "{"+json+"}";
 		
+	}
+	@Override
+	public String saveRecommend(String groupNameOrId, String belongId, String upRecommendUserId, String context) {
+		// TODO Auto-generated method stub
+		String json =null;
+		Map<String, String> map =new HashMap<>();
+		map.put("groupNameOrId", groupNameOrId);
+		map.put("belongId", belongId);
+		map.put("upRecommendUserId", context);
+//		int i =groupMapper.saveRecommend(map);
+		int i=1;
+		if(i!=0) json ="{\"status\":\"200\"}";
+		else json ="{\"status\":\"520\"}";
+		return json;
 	}
 
 	

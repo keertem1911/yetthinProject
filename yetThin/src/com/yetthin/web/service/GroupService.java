@@ -13,5 +13,6 @@ public interface GroupService {
 	String getStockTypeList(int stockType);
 	String getSummarize(int pageNum, int pageSize);
 	String getStockType();
+	String saveRecommend(String groupNameOrId, String belongId, String upRecommendUserId, String context);
 	
 }
